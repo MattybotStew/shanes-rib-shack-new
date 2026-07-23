@@ -3,7 +3,8 @@
 import { FormEvent, useEffect, useId, useRef, useState } from "react";
 import { asset } from "@/lib/asset";
 import { cateringFormEndpoint } from "@/lib/formEndpoint";
-import { desserts, menuItems, packageNames, sides } from "@/lib/menuData";
+import { desserts, menuItems, packageNames, sides, sideOptions, dessertOptions, getMenuItemByTitle } from "@/lib/menuData";
+import type { MenuItem } from "@/lib/menuData";
 
 const fieldClass =
   "h-11 w-full rounded-[8px] border border-[#d6d6d6] bg-brand-tan px-3 text-base font-semibold leading-[1.4] text-brand-black placeholder:text-[#6b6b6b] outline-none focus:border-brand-red focus-visible:ring-2 focus-visible:ring-brand-gold";
@@ -71,6 +72,259 @@ function Chevron() {
         aria-hidden
       />
     </span>
+  );
+}
+
+type PackageChoicesState = {
+  meat: string;
+  sides: string[];
+  dessert: string;
+  sandwich: string;
+  servedWith: string;
+};
+
+const emptyChoices: PackageChoicesState = {
+  meat: "",
+  sides: [],
+  dessert: "",
+  sandwich: "",
+  servedWith: "",
+};
+
+function choiceBtnClass(selected: boolean, disabled = false) {
+  if (disabled) {
+    return "cursor-not-allowed border-brand-black/10 bg-brand-black/[0.03] text-brand-black/35";
+  }
+  if (selected) {
+    return "border-brand-red bg-brand-red text-white";
+  }
+  return "border-brand-black/15 bg-white text-brand-black hover:border-brand-black/35";
+}
+
+function PackageCustomize({
+  item,
+  choices,
+  onChange,
+  onClear,
+}: {
+  item: MenuItem;
+  choices: PackageChoicesState;
+  onChange: (next: PackageChoicesState) => void;
+  onClear: () => void;
+}) {
+  const { choices: config } = item;
+  const needsBoxedSide =
+    item.kind === "boxed" &&
+    choices.servedWith === "One Side, Cookie, & Tea";
+  const sideLimit = needsBoxedSide ? 1 : config.sideCount;
+  const showSides = sideLimit > 0;
+
+  function toggleSide(side: string) {
+    const has = choices.sides.includes(side);
+    if (has) {
+      onChange({ ...choices, sides: choices.sides.filter((s) => s !== side) });
+      return;
+    }
+    if (choices.sides.length >= sideLimit) return;
+    onChange({ ...choices, sides: [...choices.sides, side] });
+  }
+
+  return (
+    <div className="rounded-[10px] border border-brand-black/10 bg-white p-4 sm:p-5">
+      <div className="mb-4 flex items-center justify-between gap-3 border-b border-brand-black/10 pb-3">
+        <h3 className="text-base font-extrabold uppercase leading-none text-brand-red">
+          {item.title}
+        </h3>
+        <button
+          type="button"
+          onClick={onClear}
+          className="inline-flex items-center rounded-[5px] border border-brand-black/20 px-2.5 py-1 text-xs font-bold uppercase tracking-wide text-brand-black transition-colors hover:border-brand-red hover:text-brand-red"
+        >
+          Clear
+        </button>
+      </div>
+
+      <input type="hidden" name="package" value={item.title} />
+
+      <div className="flex flex-col gap-5">
+        {config.fixedMeats?.length ? (
+          <p className="text-sm font-semibold text-brand-black/65">
+            Includes {config.fixedMeats.join(", ")}
+          </p>
+        ) : null}
+
+        {config.meatOptions?.length ? (
+          <fieldset className="flex flex-col gap-2 border-0 p-0">
+            <legend className="text-sm font-semibold text-brand-black">
+              Meat <span className="text-brand-red">*</span>
+            </legend>
+            <div className="grid grid-cols-2 gap-2">
+              {config.meatOptions.map((opt) => (
+                <label
+                  key={opt}
+                  className={`flex cursor-pointer items-center justify-center rounded-[8px] border px-3 py-2.5 text-center text-sm font-semibold transition-colors ${choiceBtnClass(choices.meat === opt)}`}
+                >
+                  <input
+                    type="radio"
+                    name="meat"
+                    value={opt}
+                    checked={choices.meat === opt}
+                    onChange={() => onChange({ ...choices, meat: opt })}
+                    className="sr-only"
+                    required
+                  />
+                  {opt}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        ) : null}
+
+        {config.sandwichOptions?.length ? (
+          <fieldset className="flex flex-col gap-2 border-0 p-0">
+            <legend className="text-sm font-semibold text-brand-black">
+              Sandwich <span className="text-brand-red">*</span>
+            </legend>
+            <div className="grid gap-2">
+              {config.sandwichOptions.map((opt) => (
+                <label
+                  key={opt}
+                  className={`flex cursor-pointer items-center justify-center rounded-[8px] border px-3 py-2.5 text-center text-sm font-semibold transition-colors ${choiceBtnClass(choices.sandwich === opt)}`}
+                >
+                  <input
+                    type="radio"
+                    name="sandwich"
+                    value={opt}
+                    checked={choices.sandwich === opt}
+                    onChange={() => onChange({ ...choices, sandwich: opt })}
+                    className="sr-only"
+                    required
+                  />
+                  {opt}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        ) : null}
+
+        {config.servedWithOptions?.length ? (
+          <fieldset className="flex flex-col gap-2 border-0 p-0">
+            <legend className="text-sm font-semibold text-brand-black">
+              Served with <span className="text-brand-red">*</span>
+            </legend>
+            <div className="grid gap-2">
+              {config.servedWithOptions.map((opt) => (
+                <label
+                  key={opt}
+                  className={`flex cursor-pointer items-center justify-center rounded-[8px] border px-3 py-2.5 text-center text-sm font-semibold transition-colors ${choiceBtnClass(choices.servedWith === opt)}`}
+                >
+                  <input
+                    type="radio"
+                    name="servedWith"
+                    value={opt}
+                    checked={choices.servedWith === opt}
+                    onChange={() =>
+                      onChange({
+                        ...choices,
+                        servedWith: opt,
+                        sides:
+                          opt === "One Side, Cookie, & Tea"
+                            ? choices.sides.slice(0, 1)
+                            : [],
+                      })
+                    }
+                    className="sr-only"
+                    required
+                  />
+                  {opt}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        ) : null}
+
+        {showSides ? (
+          <fieldset className="flex flex-col gap-2 border-0 p-0">
+            <legend className="text-sm font-semibold text-brand-black">
+              Sides{" "}
+              <span className="font-normal text-brand-black/55">
+                ({choices.sides.length} of {sideLimit})
+              </span>{" "}
+              <span className="text-brand-red">*</span>
+            </legend>
+            <div className="grid grid-cols-2 gap-2">
+              {sideOptions.map((side) => {
+                const checked = choices.sides.includes(side);
+                const disabled =
+                  !checked && choices.sides.length >= sideLimit;
+                return (
+                  <label
+                    key={side}
+                    className={`flex cursor-pointer items-center justify-center rounded-[8px] border px-2.5 py-2 text-center text-sm font-semibold transition-colors ${choiceBtnClass(checked, disabled)}`}
+                  >
+                    <input
+                      type="checkbox"
+                      name="side"
+                      value={side}
+                      checked={checked}
+                      disabled={disabled}
+                      onChange={() => toggleSide(side)}
+                      className="sr-only"
+                    />
+                    {side}
+                  </label>
+                );
+              })}
+            </div>
+            <input
+              type="hidden"
+              name="sides"
+              value={choices.sides.join(", ")}
+            />
+          </fieldset>
+        ) : null}
+
+        {item.kind === "package" ? (
+          <fieldset className="flex flex-col gap-2 border-0 p-0">
+            <legend className="text-sm font-semibold text-brand-black">
+              Dessert{" "}
+              <span className="font-normal text-brand-black/55">(optional)</span>
+            </legend>
+            <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
+              <label
+                className={`flex cursor-pointer items-center justify-center rounded-[8px] border px-2.5 py-2 text-center text-sm font-semibold transition-colors ${choiceBtnClass(choices.dessert === "")}`}
+              >
+                <input
+                  type="radio"
+                  name="dessert"
+                  value=""
+                  checked={choices.dessert === ""}
+                  onChange={() => onChange({ ...choices, dessert: "" })}
+                  className="sr-only"
+                />
+                None
+              </label>
+              {dessertOptions.map((opt) => (
+                <label
+                  key={opt}
+                  className={`flex cursor-pointer items-center justify-center rounded-[8px] border px-2.5 py-2 text-center text-sm font-semibold transition-colors ${choiceBtnClass(choices.dessert === opt)}`}
+                >
+                  <input
+                    type="radio"
+                    name="dessert"
+                    value={opt}
+                    checked={choices.dessert === opt}
+                    onChange={() => onChange({ ...choices, dessert: opt })}
+                    className="sr-only"
+                  />
+                  {opt.replace("Homemade ", "")}
+                </label>
+              ))}
+            </div>
+          </fieldset>
+        ) : null}
+      </div>
+    </div>
   );
 }
 
@@ -217,10 +471,23 @@ export default function CateringForm() {
   const [submitState, setSubmitState] = useState<SubmitState>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [packagePrefill, setPackagePrefill] = useState("");
+  const [packageChoices, setPackageChoices] =
+    useState<PackageChoicesState>(emptyChoices);
   const [showExtras, setShowExtras] = useState(false);
   const [minDate, setMinDate] = useState("");
   const formRef = useRef<HTMLFormElement>(null);
   const startedRef = useRef(false);
+  const selectedPackage = getMenuItemByTitle(packagePrefill);
+
+  function selectPackage(title: string) {
+    setPackagePrefill(title);
+    setPackageChoices(emptyChoices);
+    if (title) {
+      track("catering_package_selected", { package: title });
+    } else {
+      track("catering_package_cleared");
+    }
+  }
 
   useEffect(() => {
     setMinDate(todayPlusDays(2));
@@ -234,7 +501,7 @@ export default function CateringForm() {
       const fromQuery = params.get("package");
       if (fromQuery && packages.includes(fromQuery)) {
         setPackagePrefill(fromQuery);
-        setShowExtras(true);
+        setPackageChoices(emptyChoices);
       }
     };
 
@@ -253,6 +520,27 @@ export default function CateringForm() {
     track("catering_form_started", { path: "quote" });
   }
 
+  function validatePackageChoices(): string | null {
+    if (!selectedPackage) return null;
+    const config = selectedPackage.choices;
+    if (config.meatOptions?.length && !packageChoices.meat) {
+      return "Choose a meat for your package.";
+    }
+    if (config.sandwichOptions?.length && !packageChoices.sandwich) {
+      return "Choose a sandwich.";
+    }
+    if (config.servedWithOptions?.length && !packageChoices.servedWith) {
+      return "Choose how the boxed lunch is served.";
+    }
+    const needsBoxedSide =
+      packageChoices.servedWith === "One Side, Cookie, & Tea";
+    const sideLimit = needsBoxedSide ? 1 : config.sideCount;
+    if (sideLimit > 0 && packageChoices.sides.length !== sideLimit) {
+      return `Pick ${sideLimit} side${sideLimit === 1 ? "" : "s"}.`;
+    }
+    return null;
+  }
+
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setErrorMsg("");
@@ -267,6 +555,13 @@ export default function CateringForm() {
       );
       setSubmitState("error");
       document.getElementById("contact")?.focus();
+      return;
+    }
+
+    const choiceError = validatePackageChoices();
+    if (choiceError) {
+      setErrorMsg(choiceError);
+      setSubmitState("error");
       return;
     }
 
@@ -289,8 +584,7 @@ export default function CateringForm() {
       };
       data.forEach((value, key) => {
         if (typeof value !== "string") return;
-        // UX field only — map to FormSubmit email/phone below
-        if (key === "contact") return;
+        if (key === "contact" || key === "side") return;
         payload[key] = value;
       });
 
@@ -323,6 +617,7 @@ export default function CateringForm() {
       formRef.current?.reset();
       setDelivery("not-sure");
       setPackagePrefill("");
+      setPackageChoices(emptyChoices);
       setShowExtras(false);
     } catch {
       setErrorMsg(
@@ -506,6 +801,28 @@ export default function CateringForm() {
             </div>
           </div>
 
+          {selectedPackage ? (
+            <PackageCustomize
+              item={selectedPackage}
+              choices={packageChoices}
+              onChange={setPackageChoices}
+              onClear={() => selectPackage("")}
+            />
+          ) : (
+            <p className="rounded-[8px] border border-dashed border-brand-black/20 bg-brand-tan/40 px-3 py-2.5 text-center text-xs font-semibold text-brand-black/60 lg:text-left">
+              Pick a package from the{" "}
+              <span className="hidden lg:inline">menu rail</span>
+              <a
+                href="#catering-menu"
+                className="text-brand-red underline-offset-2 hover:underline lg:hidden"
+              >
+                catering menu
+              </a>{" "}
+              to choose meats, sides, and dessert — or skip and note preferences
+              in comments.
+            </p>
+          )}
+
           <div className="border-t border-brand-black/10">
             <button
               type="button"
@@ -513,19 +830,12 @@ export default function CateringForm() {
               onClick={() => setShowExtras((v) => !v)}
               className="flex w-full items-center justify-between gap-3 py-2.5 text-left text-xs font-bold uppercase tracking-wide text-brand-black/70"
             >
-              <span>
-                {showExtras ? "Hide" : "Add"} optional details
-                {packagePrefill ? ` · ${packagePrefill}` : ""}
-              </span>
+              <span>{showExtras ? "Hide" : "Add"} optional details</span>
               <span className="text-brand-red" aria-hidden>
                 {showExtras ? "−" : "+"}
               </span>
             </button>
 
-            {/* Keep selected values in FormData when optional extras are collapsed */}
-            {!showExtras && packagePrefill ? (
-              <input type="hidden" name="package" value={packagePrefill} />
-            ) : null}
             {!showExtras ? (
               <input type="hidden" name="deliveryMethod" value={delivery} />
             ) : null}
@@ -554,29 +864,6 @@ export default function CateringForm() {
                       placeholder="Company or group"
                       className={fieldClass}
                     />
-                  </div>
-                </div>
-
-                <div className="flex w-full flex-col gap-1.5">
-                  <label htmlFor="package" className={labelClass}>
-                    Catering package
-                  </label>
-                  <div className={selectWrap}>
-                    <select
-                      id="package"
-                      name="package"
-                      value={packagePrefill}
-                      onChange={(e) => setPackagePrefill(e.target.value)}
-                      className={selectClass}
-                    >
-                      <option value="">Not sure yet</option>
-                      {packages.map((pkg) => (
-                        <option key={pkg} value={pkg}>
-                          {pkg}
-                        </option>
-                      ))}
-                    </select>
-                    <Chevron />
                   </div>
                 </div>
 
@@ -680,15 +967,7 @@ export default function CateringForm() {
         <div className="lg:sticky lg:top-6">
           <MenuRail
             selected={packagePrefill}
-            onSelect={(title) => {
-              setPackagePrefill(title);
-              if (title) {
-                setShowExtras(true);
-                track("catering_package_selected", { package: title });
-              } else {
-                track("catering_package_cleared");
-              }
-            }}
+            onSelect={selectPackage}
           />
         </div>
       </div>
