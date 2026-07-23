@@ -1,5 +1,16 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Catering conversion env
+
+Static export — set at build time (see `.env.example`):
+
+| Variable | Purpose |
+| :--- | :--- |
+| `NEXT_PUBLIC_CATERING_FORM_ENDPOINT` | Formspree/Basin/CRM webhook for quote form POST |
+| `NEXT_PUBLIC_EZCATER_URL` | Live ezCater URL (UTMs appended in `lib/ezcater.ts`) |
+
+Without the form endpoint, submit shows a clear error and points users to phone/email.
+
 ## Getting Started
 
 First, run the development server:

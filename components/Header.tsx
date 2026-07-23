@@ -19,17 +19,24 @@ export default function Header() {
 
   return (
     <header className="flex w-full flex-col items-center">
-      {/* Alert banner — desktop HeadOut (6354:11945) */}
+      {/* Alert banner — soft catering trust line (no placeholder CMS copy) */}
       <div className="flex w-full items-center justify-center overflow-hidden bg-brand-black px-5 py-3">
-        <div className="flex w-full max-w-[1320px] items-center">
-          <p className="flex-1 text-[13px] leading-[1.5] text-white">
-            Unauthenticated Alert Banner Example...{" "}
+        <div className="flex w-full max-w-[1320px] items-center justify-center sm:justify-start">
+          <p className="flex-1 text-center text-[13px] leading-[1.5] text-white sm:text-left">
+            Catering available for offices, parties &amp; events.{" "}
             <Link
-              href="#"
+              href="/catering#catering-inquiry"
               className="text-brand-gold underline-offset-2 hover:underline"
             >
-              Link
+              Request a custom quote
             </Link>
+            {" · "}
+            <a
+              href="tel:7704166606"
+              className="text-brand-gold underline-offset-2 hover:underline"
+            >
+              (770) 416-6606
+            </a>
           </p>
         </div>
       </div>
