@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { asset } from "@/lib/asset";
 
 const title = "Submit a Catering Inquiry";
 const body =
@@ -14,7 +15,7 @@ export default function BigCta() {
       <div aria-hidden className="pointer-events-none absolute inset-0">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/big-cta-bg.jpg"
+          src={asset("/images/big-cta-bg.jpg")}
           alt=""
           className="absolute inset-0 size-full object-cover"
         />

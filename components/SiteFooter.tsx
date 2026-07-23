@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { asset } from "@/lib/asset";
 
 const col1 = [
   { label: "Catering & Catering Menu", href: "/catering" },
@@ -49,7 +50,7 @@ export default function SiteFooter() {
           <Link href="/" className="relative block size-32" aria-label="Home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/footer-logo.svg"
+              src={asset("/images/footer-logo.svg")}
               alt="Shane's Rib Shack"
               className="size-full"
             />
@@ -64,7 +65,7 @@ export default function SiteFooter() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/social-facebook.svg"
+                src={asset("/images/social-facebook.svg")}
                 alt=""
                 className="size-full"
               />
@@ -78,7 +79,7 @@ export default function SiteFooter() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/social-instagram.svg"
+                src={asset("/images/social-instagram.svg")}
                 alt=""
                 className="size-full"
               />
@@ -92,7 +93,7 @@ export default function SiteFooter() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/social-youtube.svg"
+                src={asset("/images/social-youtube.svg")}
                 alt=""
                 className="size-full"
               />

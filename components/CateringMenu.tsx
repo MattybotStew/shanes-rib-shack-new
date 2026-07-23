@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { asset } from "@/lib/asset";
 
 const introBody =
   "Get ready to sit back, relax and enjoy your next event or party by letting the professionals at Shane's Rib Shack take care of the food! We are proud to offer our signature barbecue and side dishes in four different catering packages to satisfy events of all sizes. Our catering packages were designed to allow flexibility and a great selection of choices that can be customized for your event.";
@@ -124,7 +125,7 @@ function PromoBanner() {
       <div className="relative flex min-h-[277px] flex-1 items-center justify-center overflow-hidden rounded-[10px] px-[60px] py-2">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/catering-menu-banner.jpg"
+          src={asset("/images/catering-menu-banner.jpg")}
           alt=""
           className="absolute inset-0 size-full object-cover"
         />

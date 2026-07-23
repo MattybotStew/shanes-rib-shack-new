@@ -1,6 +1,7 @@
 "use client";
 
 import { FormEvent, useState } from "react";
+import { asset } from "@/lib/asset";
 
 const fieldClass =
   "w-full rounded-[8px] border border-[#d6d6d6] bg-brand-tan px-3 py-3.5 text-[13px] font-semibold leading-[1.5] text-brand-black placeholder:text-[#808080] outline-none focus:border-brand-red";
@@ -77,7 +78,7 @@ export default function CateringForm() {
                 <span className="pointer-events-none absolute right-3 size-2.5">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/images/chevron-down.svg"
+                    src={asset("/images/chevron-down.svg")}
                     alt=""
                     className="size-full"
                     aria-hidden
@@ -240,7 +241,7 @@ export default function CateringForm() {
                 <span className="pointer-events-none absolute right-3 size-2.5">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/images/chevron-down.svg"
+                    src={asset("/images/chevron-down.svg")}
                     alt=""
                     className="size-full"
                     aria-hidden

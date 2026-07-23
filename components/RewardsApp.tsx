@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { asset } from "@/lib/asset";
 
 function AppleBadge({
   size = "desktop",
@@ -17,14 +18,14 @@ function AppleBadge({
     >
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
-        src={`/images/${prefix}-1.svg`}
+        src={asset(`/images/${prefix}-1.svg`)}
         alt=""
         className="absolute inset-0 size-full"
       />
       <div className="absolute inset-[21.78%_79.44%_23.85%_7.4%]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`/images/${prefix}-2.svg`}
+          src={asset(`/images/${prefix}-2.svg`)}
           alt=""
           className="absolute inset-0 size-full"
         />
@@ -32,7 +33,7 @@ function AppleBadge({
       <div className="absolute inset-[44.62%_12.93%_16.38%_31.35%]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`/images/${prefix}-3.svg`}
+          src={asset(`/images/${prefix}-3.svg`)}
           alt=""
           className="absolute inset-0 size-full"
         />
@@ -40,7 +41,7 @@ function AppleBadge({
       <div className="absolute inset-[21.05%_16.39%_63.06%_32.28%]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src={`/images/${prefix}-4.svg`}
+          src={asset(`/images/${prefix}-4.svg`)}
           alt=""
           className="absolute inset-0 size-full"
         />
@@ -80,7 +81,7 @@ export default function RewardsApp() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/badge-google-play.svg"
+                  src={asset("/images/badge-google-play.svg")}
                   alt="Get it on Google Play"
                   className="absolute inset-0 size-full object-contain object-left"
                 />
@@ -91,7 +92,7 @@ export default function RewardsApp() {
             <div className="absolute inset-0 overflow-hidden">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/rewards-phones.png"
+                src={asset("/images/rewards-phones.png")}
                 alt="Shane's Rib Shack rewards app on phones"
                 className="absolute left-[-6.54%] top-[6.74%] h-[99.53%] w-[107.37%] max-w-none"
               />
@@ -127,7 +128,7 @@ export default function RewardsApp() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/badge-google-play-mb.svg"
+                  src={asset("/images/badge-google-play-mb.svg")}
                   alt="Get it on Google Play"
                   className="absolute inset-0 size-full object-contain object-left"
                 />
@@ -137,7 +138,7 @@ export default function RewardsApp() {
               <div className="absolute inset-0 overflow-hidden">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/rewards-phones.png"
+                  src={asset("/images/rewards-phones.png")}
                   alt="Shane's Rib Shack rewards app on phones"
                   className="absolute left-[-3.71%] top-[0.23%] h-[99.53%] w-[107.37%] max-w-none"
                 />

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { asset } from "@/lib/asset";
 
 const navItems = [
   { label: "Menu", href: "/menu", hasDropdown: true },
@@ -44,7 +45,7 @@ export default function Header() {
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/images/logo-desktop.svg"
+                src={asset("/images/logo-desktop.svg")}
                 alt="Shane's Rib Shack"
                 className="block size-full object-contain object-left"
               />
@@ -69,7 +70,7 @@ export default function Header() {
                   <span className="relative ml-0.5 inline-block h-[5.5px] w-[9.5px] shrink-0 overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
-                      src="/images/chevron-down.svg"
+                      src={asset("/images/chevron-down.svg")}
                       alt=""
                       width={10}
                       height={6}
@@ -111,7 +112,7 @@ export default function Header() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/menu-icon.svg"
+              src={asset("/images/menu-icon.svg")}
               alt=""
               className="absolute inset-0 block size-full"
               aria-hidden
@@ -125,7 +126,7 @@ export default function Header() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/logo-mobile.svg"
+              src={asset("/images/logo-mobile.svg")}
               alt="Shane's Rib Shack"
               className="block size-full object-contain"
             />

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { asset } from "@/lib/asset";
 
 const headline = "Norcross Shack BBQ Catering for Groups and Events";
 const body =
@@ -19,7 +20,7 @@ export default function Hero() {
         <div className="relative flex w-full max-w-[1320px] flex-col items-center justify-center overflow-hidden rounded-[12px] px-[100px] py-[120px]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/hero-catering.jpg"
+            src={asset("/images/hero-catering.jpg")}
             alt="Shane's Rib Shack catering spread"
             className="pointer-events-none absolute inset-0 size-full rounded-[12px] object-cover"
           />
@@ -58,7 +59,7 @@ export default function Hero() {
           <div className="relative h-[290px] w-full overflow-hidden rounded-[12px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/images/hero-catering.jpg"
+              src={asset("/images/hero-catering.jpg")}
               alt="Shane's Rib Shack catering spread"
               className="absolute inset-0 size-full rounded-[12px] object-cover"
             />
