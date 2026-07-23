@@ -348,7 +348,7 @@ function MenuRail({
           Catering Packages
         </h3>
         <p className="text-xs font-semibold text-brand-black/60">
-          Pick one to add it to your quote — or leave it to us.
+          Browse details — pick a package in the form, or leave it to us.
         </p>
       </div>
 
@@ -800,6 +800,37 @@ export default function CateringForm() {
             </div>
           </div>
 
+          <div className="flex w-full flex-col gap-1.5">
+            <label htmlFor="packageSelect" className={labelClass}>
+              Package{" "}
+              <span className="font-semibold normal-case tracking-normal text-brand-black/50">
+                (optional)
+              </span>
+            </label>
+            <div className={selectWrap}>
+              <select
+                id="packageSelect"
+                value={packagePrefill}
+                onChange={(e) => selectPackage(e.target.value)}
+                className={selectClass}
+              >
+                <option value="">Not sure — we&apos;ll help</option>
+                {packages.map((pkg) => (
+                  <option key={pkg} value={pkg}>
+                    {pkg}
+                  </option>
+                ))}
+              </select>
+              <Chevron />
+            </div>
+            {!selectedPackage ? (
+              <p className="text-xs font-semibold text-brand-black/55">
+                Optional — pick one to customize meats, sides, and dessert, or
+                leave blank and we&apos;ll help in follow-up.
+              </p>
+            ) : null}
+          </div>
+
           {selectedPackage ? (
             <PackageCustomize
               item={selectedPackage}
@@ -807,20 +838,7 @@ export default function CateringForm() {
               onChange={setPackageChoices}
               onClear={() => selectPackage("")}
             />
-          ) : (
-            <p className="rounded-[8px] border border-dashed border-brand-black/20 bg-brand-tan/40 px-3 py-2.5 text-center text-xs font-semibold text-brand-black/60 lg:text-left">
-              Pick a package from the{" "}
-              <span className="hidden lg:inline">menu rail</span>
-              <a
-                href="#catering-menu"
-                className="text-brand-red underline-offset-2 hover:underline lg:hidden"
-              >
-                catering menu
-              </a>{" "}
-              to choose meats, sides, and dessert — or skip and note preferences
-              in comments.
-            </p>
-          )}
+          ) : null}
 
           <div className="border-t border-brand-black/10">
             <button
