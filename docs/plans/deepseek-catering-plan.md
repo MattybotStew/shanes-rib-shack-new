@@ -6,7 +6,7 @@
 
 > **SHIP STATUS (2026-07-23):** Phase A is **live** on GitHub Pages.  
 > https://mattybotstew.github.io/shanes-rib-shack-new/catering/ · [`../../AGENTS.md`](../../AGENTS.md) · [`../../CONSENSUS_PLAN.md`](../../CONSENSUS_PLAN.md)  
-> Sprint framing below remains useful for **Phase B**; do not re-propose Phase A.
+> **Local since Phase A:** 2-step path-first funnel + compact form + desktop package rail. Sprint framing below remains useful for **Phase B**; do not re-propose Phase A or rebuild the local funnel.
 
 **Author:** DeepSeek  
 **Focus of this file:** Lightweight ship framing derived from DeepSeek’s UX strategy (not a full eng spec).

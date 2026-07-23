@@ -7,7 +7,7 @@
 
 > **SHIP STATUS (2026-07-23):** Phase A is **live** on GitHub Pages.  
 > https://mattybotstew.github.io/shanes-rib-shack-new/catering/ · [`../../AGENTS.md`](../../AGENTS.md) · [`../../CONSENSUS_PLAN.md`](../../CONSENSUS_PLAN.md)  
-> Historical “codebase reality” below is **pre-ship**; do not re-implement Phase A.
+> **Local since Phase A:** 2-step path-first funnel + compact form + desktop package rail. Historical “codebase reality” below is **pre-ship**; do not re-implement Phase A or the local funnel.
 
 Grounded against repo truth (Next 16.2.11 static export). Aligns with `CATERING_PLAN.md` / `AGENTS.md`; tighter on reuse vs rewrite and PR sequencing.
 

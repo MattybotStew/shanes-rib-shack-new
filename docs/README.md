@@ -5,7 +5,9 @@
 **Phase A SHIPPED** on GitHub Pages.  
 https://mattybotstew.github.io/shanes-rib-shack-new/catering/  
 
-Agents: read [`../AGENTS.md`](../AGENTS.md) status snapshot before proposing new work. Do **not** redo Phase A unless fixing a regression.
+**Local (post–Phase A):** 2-step path-first catering UX (ContactBanner → PathDecision → compact form → menu; StickyPathBar; desktop package rail). Documented in [`../AGENTS.md`](../AGENTS.md).
+
+Agents: read that status snapshot before proposing new work. Do **not** redo Phase A or rebuild the local funnel unless fixing a regression.
 
 ## Rule: no overwrites
 
@@ -36,4 +38,4 @@ Do **not** overwrite `docs/strategies/{other}-*.md` or `docs/plans/{other}-*.md`
 
 ## Human direction
 
-Phase A is live. Focus remaining debate on **Phase B** and **client blockers**—not re-litigating short form / path labels.
+Phase A is live; local UX extends it into a path-first 2-step funnel. Focus remaining debate on **Phase B** and **client blockers**—not re-litigating short form / path labels / the local funnel.

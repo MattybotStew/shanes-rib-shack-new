@@ -48,7 +48,7 @@ export function HeroPathActions() {
         className={primaryBtn}
         onClick={() => trackPath("quote")}
       >
-        Custom Quote
+        Get a Quote
       </Link>
     </div>
   );

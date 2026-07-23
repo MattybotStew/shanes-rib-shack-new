@@ -13,21 +13,27 @@
 
 **Full Cursor ship vote:** [`../plans/cursor-catering-plan.md`](../plans/cursor-catering-plan.md)
 
-**Phase A SHIPPED (2026-07-23) — live on GitHub Pages** (`dba4b07`): path-labeled CTAs + helpers · short quote form (native date/time, email-or-phone) · soft trust/SLA · success/error · package Order/Quote CTAs · `/catering/` · FormSubmit default + ezCater brand URL + UTMs · analytics hooks · skip link.  
+**Phase A SHIPPED (2026-07-23) — live on GitHub Pages** (`dba4b07`): path-labeled CTAs + helpers · short quote form (native date/time, email-or-phone) · soft trust/SLA · success/error · `/catering/` · FormSubmit default + ezCater brand URL + UTMs · analytics hooks · skip link.
+
+**Local UX since Phase A (current baseline — do not re-implement):**  
+Hero hidden · ContactBanner → PathDecision (Step 1) → compact quote form (Step 2) → menu as reference · StickyPathBar (mobile) · HashScroll · accordion CateringMenu + desktop sticky package rail (`lib/menuData.ts`) · form compressed (single Name, Email or phone, date min +2 days, guest ranges, collapsed optionals) · CTAs **Order Online** / **Get a Quote** · RewardsApp removed from catering flow.
+
 **Remaining humans:** FormSubmit inbox confirm · client path-weight · GTM · 14–30 day path-mix → Phase B.  
-**Agents:** Prefer Phase B opinions in this file; do not re-litigate Phase A unless fixing a regression. See [`../../AGENTS.md`](../../AGENTS.md).
+**Agents:** Prefer Phase B opinions here; do not re-litigate Phase A or rebuild the local 2-step funnel unless fixing a regression. See [`../../AGENTS.md`](../../AGENTS.md).
 
 ---
 
 ## For other LLMs (read this first)
 
 1. This file is **Cursor’s opinion** only. If you disagree, write in *your* strategy file—**do not overwrite this doc**.
-2. **Do not** expand into package redesign, FAQ carousels, sticky bars, or full visual redesign until Phase A is agreed and measurable.
+2. **Do not** expand into package redesign, FAQ carousels, or full visual redesign until Phase A path-mix is measurable. Sticky path bar and accordion menu are already local — do not re-propose them as greenfield.
 3. Primary KPI = **total qualified catering conversions** (online-order path + quote path)—**not** form volume alone.
 4. Implementation/hosting details belong in `CONSENSUS_PLAN.md` / your plan vote, not here.
 
 **Cursor’s one-line position:**  
 Route every visitor in under five seconds to either “checkout now” or “get a quote,” then make the quote path short, trustworthy, and measurable—without judging success by form fills alone.
+
+**Current local product shape (Cursor):** Path-first 2-step funnel (choose path → compact form) with menu as reference; desktop package rail for browse-and-prefill. That is the conversion architecture to extend—not a blank Phase A restart.
 
 ---
 
@@ -90,17 +96,21 @@ Do **not** require Organization for personal events.
 
 ---
 
-## Phase B — Only after Phase A is measurable (~2-week path-mix read)
+## Phase B — Only after path-mix is measurable (~2-week read)
+
+Still deferred (not already local):
 
 - Package visual redesign  
 - FAQ accordion  
 - Testimonials / logos  
-- Sticky mobile “Get quote” bar  
 - Searchable location / ZIP  
-- Multi-step wizard  
+- True multi-step **wizard** beyond path → form  
+- Hard SLA / price floor (Ops)
+
+Already in local tree (do not re-propose): StickyPathBar · accordion menu · desktop package rail · compressed form · path-first sequence.
 
 If form is down but online orders are up → messaging/positioning, not “redesign the form.”  
-If both paths are weak → Phase A clarity/friction still unsolved.
+If both paths are weak → path clarity/friction still unsolved.
 
 ---
 
@@ -160,7 +170,7 @@ On **production** (`shanesribshack.com/catering/`):
 
 What’s missing is **hierarchy and labels** (who each path is for, and which CTA carries visual weight)—not the existence of the online-order path.
 
-This **repo** may not yet wire a live ezCater URL; production does. Stakeholder asks should be about **weight and preference**, not “should we add online order.”
+This **repo** now wires both paths (Pages defaults + optional Secrets). Stakeholder asks should be about **weight and preference**, not “should we add online order.” Local UX clarifies the fork as a Step 1 decision before the quote form.
 
 Shared PM packet: [`../CLIENT_BLOCKERS.md`](../CLIENT_BLOCKERS.md)
 

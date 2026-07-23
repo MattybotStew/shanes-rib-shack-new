@@ -9,29 +9,42 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Status snapshot (2026-07-23) — READ THIS FIRST
 
-**Phase A UX + conversion is SHIPPED and live on GitHub Pages.**
+**Phase A UX + conversion is SHIPPED and live on GitHub Pages.**  
+**Local working tree (uncommitted / post–Phase A):** 2-step path-first catering UX — ContactBanner → PathDecision → compact quote form → menu reference; desktop package rail.
 
 | URL | Status |
 | :--- | :--- |
-| https://mattybotstew.github.io/shanes-rib-shack-new/ | ✅ 200 |
-| https://mattybotstew.github.io/shanes-rib-shack-new/catering/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/ | ✅ 200 (Phase A) |
+| https://mattybotstew.github.io/shanes-rib-shack-new/catering/ | ✅ 200 (Phase A) |
 
-**Latest commits:** `dc0014e` (Phase A UX) → `1fafd58` (endpoints) → `dba4b07` (trailingSlash Pages fix)
+**Latest shipped commits (Pages):** `dc0014e` (Phase A UX) → `1fafd58` (endpoints) → `dba4b07` (trailingSlash Pages fix)  
+**Local UX since Phase A:** path-first funnel, compact form, StickyPathBar, HashScroll, accordion menu + package rail — prefer extending this; do not re-implement Phase A or rebuild the funnel from scratch.
 
-### What was shipped (do not re-implement)
+### What was shipped on Pages (do not re-implement)
 
-- Path-labeled CTAs: **Order Online (Standard Packages)** vs **Request a Custom Quote** + helper copy  
-- Short quote form: location, name, email **or** phone, event date, guest count required; org/package/time optional  
-- Native `type="date"` / `type="time"`  
-- Soft trust/SLA (no fake `$X`): ~48h notice · reply during business hours  
+- Path-labeled CTAs: **Order Online** vs **Get a Quote** + helper copy  
+- Short quote form + native date/time + soft trust/SLA  
 - Real submit via FormSubmit → `catering@shanesribshack.com` (first submit may need inbox confirm)  
 - Success / error / loading states + “submit another”  
-- Package CTAs: Order This Online / Quote This Package (package prefill)  
 - `/catering/` route (static export + `trailingSlash: true`)  
 - ezCater → `https://www.ezcater.com/brand/shanes-rib-shack` + UTMs  
 - Analytics hooks: `catering_path_selected`, form start/submit/success, `outbound_click`  
 - Placeholder alert/promo replaced; skip link + focus-visible  
 - Multi-LLM docs under `docs/`  
+
+### Current local UX (post–Phase A — do not re-implement)
+
+1. **Hero hidden** — page starts with **ContactBanner** (email · phone · See Menu) then **PathDecision**  
+2. **True 2-step funnel:** Step 1 path cards → Step 2 compact quote form → menu as reference below  
+3. **PathDecision** slimmed (Step 1 eyebrow, one-line benefits)  
+4. **StickyPathBar** (mobile): Order Online | Get a Quote after Step 1 scrolls away  
+5. **HashScroll** for smooth scroll to `#catering-menu` / `#catering-inquiry`  
+6. **CateringMenu:** stacked accordion; promo banner removed; sides/dessert as two brand cards; max-width ~600px  
+7. **Form compressed:** single Name; single “Email or phone”; date min +2 days; guest ranges; optionals collapsed; no black shell; tighter padding  
+8. **Desktop:** form + sticky **Catering Packages** sidebar rail; “Use this package →” prefills + opens optionals; no competing Order/Quote CTAs in rail; data in `lib/menuData.ts`  
+9. CTA labels unified: **Get a Quote** / **Order Online**  
+10. Header alert slimmed (phone only)  
+11. **RewardsApp** removed from homepage catering flow  
 
 ### Still pending humans (not code)
 
@@ -39,7 +52,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 2. Hard SLA / price floor — Ops (soft language already live)  
 3. Confirm FormSubmit email in `catering@shanesribshack.com` inbox  
 4. Optional: GitHub Secrets to override endpoints; GTM verification  
-5. Phase B after 14–30 day path-mix read (cards/FAQ/social proof)
+5. Phase B after 14–30 day path-mix read (cards/FAQ/social proof beyond what’s already local)
 
 ### Anti-overwrite rules
 
@@ -47,7 +60,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 2. Write ship/plan votes only to `docs/plans/{your-name}-catering-plan.md`  
 3. **Never** replace another agent’s named file  
 4. `docs/UX_CONVERSION_STRATEGY.md` is an **index only**  
-5. Prefer extending shipped UX over rewriting Phase A  
+5. Prefer extending shipped / local UX over rewriting Phase A  
 
 ### Strategy / plan map
 
@@ -68,7 +81,7 @@ Two paths · KPI ≠ form-only · dead form = outage · short form · easy dates
 
 ### Known disagreement (still open for Phase B)
 
-Path UI chrome · first lever ordering · menu-vs-form sequence · post-submit SMS depth  
+Path UI chrome weight · first lever ordering · post-submit SMS depth · further FAQ/social proof  
 
 ---
 
@@ -92,9 +105,10 @@ Path UI chrome · first lever ordering · menu-vs-form sequence · post-submit S
 ```
 AGENTS.md
 app/page.tsx, app/catering/page.tsx, app/layout.tsx, app/globals.css
-components/ Header, Hero, HeroPathActions, BigCta, CateringMenu,
-            CateringForm, RewardsApp, SiteFooter
-lib/ asset.ts, ezcater.ts, formEndpoint.ts
+components/ Header, ContactBanner, PathDecision, StickyPathBar, HashScroll,
+            CateringMenu, CateringForm, Hero (present, hidden in flow),
+            HeroPathActions, BigCta, SiteFooter
+lib/ asset.ts, ezcater.ts, formEndpoint.ts, menuData.ts
 docs/ strategies/, plans/, CLIENT_BLOCKERS.md, UX_CONVERSION_STRATEGY.md (index)
 CONSENSUS_PLAN.md, CATERING_PLAN.md
 ```
@@ -104,7 +118,8 @@ CONSENSUS_PLAN.md, CATERING_PLAN.md
 2. Footer copyright “2025”  
 3. Missing non-catering routes (`/menu`, `/locations`, …)  
 4. Dual headline treatment (desktop H1 / mobile styled `p`) — intentional for a11y  
+5. Local post–Phase A UX not yet redeployed to Pages (until next ship)
 
 ## Agent focus now
-**Ops/client follow-through + Phase B debate** — not redoing Phase A unless fixing a regression.
+**Ops/client follow-through + Phase B debate** — not redoing Phase A or the local 2-step funnel unless fixing a regression. Deploy/ship local UX when humans ask.
 <!-- END:project-context -->

@@ -5,7 +5,8 @@ This is a [Next.js](https://nextjs.org) project for **Shane's Rib Shack** (stati
 - https://mattybotstew.github.io/shanes-rib-shack-new/
 - https://mattybotstew.github.io/shanes-rib-shack-new/catering/
 
-**Phase A catering UX is shipped** (dual-path CTAs, short quote form, FormSubmit, ezCater brand URL).  
+**Phase A catering UX is shipped** on GitHub Pages (dual-path CTAs, short quote form, FormSubmit, ezCater brand URL).  
+**Local tree** extends that into a 2-step path-first funnel (ContactBanner → PathDecision → compact form → menu; desktop package rail).  
 Agent context: see [`AGENTS.md`](./AGENTS.md).
 
 ## Catering env

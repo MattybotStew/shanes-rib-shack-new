@@ -7,7 +7,8 @@
 
 > **SHIP STATUS (2026-07-23):** Phase A **implemented and live** on GitHub Pages.  
 > https://mattybotstew.github.io/shanes-rib-shack-new/catering/  
-> P0 checklist in [`../../CONSENSUS_PLAN.md`](../../CONSENSUS_PLAN.md) is marked done. Historical diagnosis below is preserved for context — treat as **pre-ship**, not current code.
+> **Local since Phase A:** 2-step path-first funnel (ContactBanner → PathDecision → compact form → menu); StickyPathBar; HashScroll; accordion CateringMenu; desktop sticky package rail (`lib/menuData.ts`); form compressed (Name · Email or phone · date min +2 · guest ranges · collapsed optionals); CTAs **Order Online** / **Get a Quote**; RewardsApp out of catering flow.  
+> P0 checklist in [`../../CONSENSUS_PLAN.md`](../../CONSENSUS_PLAN.md) is marked done. Historical diagnosis below is **pre-ship** — treat as context, not current code. Do not re-implement Phase A or the local funnel.
 
 ## Diagnosis (historical — pre Phase A)
 
@@ -64,15 +65,15 @@ Homepage: either deep-link to `/catering` or embed the same fixed form — do no
 
 ---
 
-## Explicitly out of scope for v1
+## Explicitly out of scope for v1 / still deferred
 
-- Full package visual redesign, sticky mobile bar, testimonial carousel, FAQ accordion  
-- Searchable location / ZIP geo / multi-step wizard  
+- Full package visual redesign, testimonial carousel, FAQ accordion  
+- Searchable location / ZIP geo / multi-step wizard beyond path → form  
 - Stubbing entire site nav (`/menu`, `/locations`, `/our-story`, …) — only catering path  
-- A11y polish pass beyond form labels + one H1 (skip link / focus styles = P1)  
-- Placeholder banner CMS, social icon flip, copyright year  
+- Hard SLA / price without Ops  
 - Server Actions / API routes on this Next export  
-- “Prove” 50% drop causality in engineering — that’s analytics, parallel track  
+
+**Landed locally after Phase A (do not re-propose):** StickyPathBar · accordion menu · desktop package rail · compressed form · path-first Step 1/2 sequence.
 
 ---
 

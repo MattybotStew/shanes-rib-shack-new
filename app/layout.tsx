@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import Header from "@/components/Header";
+import HashScroll from "@/components/HashScroll";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -20,7 +21,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${montserrat.variable} h-full antialiased`}>
+    <html lang="en" className={`${montserrat.variable} h-full scroll-smooth antialiased`}>
       <body className="flex min-h-full flex-col font-sans">
         <a
           href="#main-content"
@@ -29,6 +30,7 @@ export default function RootLayout({
           Skip to content
         </a>
         <Header />
+        <HashScroll />
         {children}
       </body>
     </html>

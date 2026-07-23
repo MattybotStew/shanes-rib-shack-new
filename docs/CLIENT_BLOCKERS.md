@@ -19,9 +19,11 @@ This GitHub Pages repo now wires both as well. Ask about **CTA weight**, not exi
 
 | Item | Value |
 | :--- | :--- |
-| Live catering | https://mattybotstew.github.io/shanes-rib-shack-new/catering/ |
+| Live catering (Phase A) | https://mattybotstew.github.io/shanes-rib-shack-new/catering/ |
 | ezCater | `https://www.ezcater.com/brand/shanes-rib-shack` + UTMs (`lib/ezcater.ts`) |
 | Form | FormSubmit ajax → `catering@shanesribshack.com` (`lib/formEndpoint.ts`) |
 | Overrides | GitHub Secrets `NEXT_PUBLIC_EZCATER_URL`, `NEXT_PUBLIC_CATERING_FORM_ENDPOINT` |
+| Local UX (post–Phase A) | 2-step path-first funnel · compact form · desktop package rail — see [`../AGENTS.md`](../AGENTS.md) |
 
-**Human action:** Open first FormSubmit confirmation email in the catering inbox (required once).
+**Human action:** Open first FormSubmit confirmation email in the catering inbox (required once).  
+**Unchanged blockers:** path weight · hard SLA/price · GTM verify · Phase B after measurement.

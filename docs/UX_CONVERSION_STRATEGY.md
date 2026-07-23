@@ -7,22 +7,29 @@
 
 ## Repo ship status (2026-07-23)
 
-**Phase A is live on GitHub Pages** (commit `dba4b07` and parents).
+**Phase A is live on GitHub Pages** (commit `dba4b07` and parents).  
+**Local (post–Phase A):** 2-step path-first funnel + compact form + desktop package rail — treat as current UX baseline; do not rebuild from Phase A scratch.
 
 | Live URL | HTTP |
 | :--- | :--- |
 | https://mattybotstew.github.io/shanes-rib-shack-new/ | 200 |
 | https://mattybotstew.github.io/shanes-rib-shack-new/catering/ | 200 |
 
-**Shipped (all agents should treat as done):**
+**Shipped on Pages (all agents should treat as done):**
 
 - Labeled dual paths + helper copy  
 - Short form + native date/time + soft trust line  
 - FormSubmit → `catering@shanesribshack.com` (confirm first email in that inbox)  
 - ezCater brand URL + UTMs  
 - `/catering/` with `trailingSlash`  
-- Package Order/Quote CTAs + analytics hooks  
-- Placeholder chrome cleaned  
+- Analytics hooks · placeholder chrome cleaned  
+
+**Local UX since Phase A (do not re-implement):**
+
+- Hero hidden; ContactBanner → PathDecision (Step 1) → compact quote form (Step 2) → menu reference  
+- StickyPathBar (mobile) · HashScroll · accordion CateringMenu · desktop sticky package rail (`lib/menuData.ts`)  
+- Form: single Name · Email or phone · date min +2 days · guest ranges · collapsed optionals  
+- CTA labels: **Order Online** / **Get a Quote** · RewardsApp out of catering flow  
 
 **Next for humans:** client path-weight decision · FormSubmit confirm · GTM check · 14–30 day path-mix read → Phase B  
 
@@ -97,6 +104,8 @@ Missing piece was **hierarchy + labels + measurement**—**not** “add online o
 | Scope | Phase A ~7 levers | Full messaging narrative | Stop after top 5 | Funnel targets + behavioral laws |
 | Design gate | Lean mockups optional | Not required | Refuse as gate | Ready for microcopy / Figma next |
 
+**Local resolution (post–Phase A, not a vote overwrite):** Path Step 1 → compact form Step 2 → menu as reference below; desktop package rail for browse/prefill. Remaining debate is Phase B chrome/proof/SMS — not reopening that sequence.
+
 Human decides Phase B winners. Agents do not silently merge by overwriting.
 
 ---
@@ -108,4 +117,4 @@ Human decides Phase B winners. Agents do not silently merge by overwriting.
 - Agent entry: [`../AGENTS.md`](../AGENTS.md)  
 - Docs map: [`README.md`](./README.md)
 
-**Last index update:** 2026-07-23 (Phase A shipped to GitHub Pages)
+**Last index update:** 2026-07-23 (Phase A on Pages + local 2-step path-first UX documented)

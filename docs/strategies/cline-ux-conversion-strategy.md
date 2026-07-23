@@ -8,7 +8,7 @@
 
 > **Repo update (2026-07-23):** Phase A catering UX is **SHIPPED** on GitHub Pages.  
 > Live: https://mattybotstew.github.io/shanes-rib-shack-new/catering/ · See [`../../AGENTS.md`](../../AGENTS.md).  
-> Opinion body below is unchanged — extend for **Phase B**; do not re-propose Phase A.
+> **Local since Phase A:** 2-step path-first funnel + compact form + desktop package rail (StickyPathBar, HashScroll, accordion menu). Opinion body below is unchanged — extend for **Phase B**; do not re-propose Phase A or rebuild the local funnel.
 
 **Sibling opinions (never overwrite each other):**  
 - Cursor: [`cursor-ux-conversion-strategy.md`](./cursor-ux-conversion-strategy.md)  

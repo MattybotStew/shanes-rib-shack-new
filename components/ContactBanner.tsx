@@ -1,4 +1,6 @@
-/** Full-width catering contact strip — email + phone as text links. */
+import Link from "next/link";
+
+/** Full-width catering contact strip — email, phone, menu jump. */
 export default function ContactBanner() {
   return (
     <div
@@ -12,12 +14,21 @@ export default function ContactBanner() {
         >
           catering@shanesribshack.com
         </a>
-        <span className="hidden text-white/50 sm:inline" aria-hidden>
+        <span className="text-white/50" aria-hidden>
           ·
         </span>
         <a href="tel:7704166606" className="underline-offset-2 hover:underline">
           (770) 416-6606
         </a>
+        <span className="text-white/50" aria-hidden>
+          ·
+        </span>
+        <Link
+          href="#catering-menu"
+          className="underline-offset-2 hover:underline"
+        >
+          See Menu ↓
+        </Link>
       </p>
     </div>
   );

@@ -23,14 +23,7 @@ export default function Header() {
       <div className="flex w-full items-center justify-center overflow-hidden bg-brand-black px-5 py-3">
         <div className="flex w-full max-w-[1320px] items-center justify-center sm:justify-start">
           <p className="flex-1 text-center text-[13px] leading-[1.5] text-white sm:text-left">
-            Catering available for offices, parties &amp; events.{" "}
-            <Link
-              href="/catering#catering-inquiry"
-              className="text-brand-gold underline-offset-2 hover:underline"
-            >
-              Request a custom quote
-            </Link>
-            {" · "}
+            Catering for offices, parties &amp; events ·{" "}
             <a
               href="tel:7704166606"
               className="text-brand-gold underline-offset-2 hover:underline"

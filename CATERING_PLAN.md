@@ -1,18 +1,19 @@
 # Catering Page Optimization — Implementation Plan
 
-**Status:** Research archive (Phase 2+ / Phase B options) — **Phase A is SHIPPED**  
+**Status:** Research archive (Phase 2+ / Phase B options) — **Phase A is SHIPPED**; local tree adds 2-step path-first UX  
 **UX strategies (one per LLM):** [`docs/UX_CONVERSION_STRATEGY.md`](./docs/UX_CONVERSION_STRATEGY.md) (index)  
 **P0 ship merge:** [`CONSENSUS_PLAN.md`](./CONSENSUS_PLAN.md) (checklist marked done)  
 **Agent entry:** [`AGENTS.md`](./AGENTS.md)  
-**Priority:** P0 was Phase A (live); this file is Phase B+ research  
+**Priority:** P0 was Phase A (live); local funnel extends it; this file is Phase B+ research  
 **Last Updated:** 2026-07-23  
-**Version:** 1.6
+**Version:** 1.7
 
-> **Live:** https://mattybotstew.github.io/shanes-rib-shack-new/catering/  
+> **Live (Phase A):** https://mattybotstew.github.io/shanes-rib-shack-new/catering/  
+> **Local UX:** ContactBanner → PathDecision → compact quote form → menu reference; StickyPathBar; desktop package rail — see `AGENTS.md`.  
 > For multi-LLM collaboration: each model keeps its own strategy under  
 > `docs/strategies/{name}-ux-conversion-strategy.md`. **No overwrites.**  
 > This file is background research and Phase 2+ ideas—not the UX opinion of record.  
-> Sections below that say “`/catering` does not exist” are **historical**; the route is live.
+> Sections below that say “`/catering` does not exist” or “form is a no-op” are **historical**; Phase A fixed those.
 
 ---
 
@@ -20,7 +21,7 @@
 
 **What:** Catering form inputs dropped ~50% after the new site launch.  
 **Where (production):** https://www.shanesribshack.com/catering/  
-**Where (this repo):** Homepage + dedicated `/catering/` route (Phase A shipped).
+**Where (this repo):** Homepage + dedicated `/catering/` route (Phase A shipped; local 2-step path-first UX extends it).
 
 ### Core problem (revised)
 

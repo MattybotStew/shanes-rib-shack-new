@@ -6,8 +6,9 @@
 
 > **Status: Phase A SHIPPED** to GitHub Pages (`dba4b07`).  
 > Live: https://mattybotstew.github.io/shanes-rib-shack-new/catering/  
+> **Local (post–Phase A):** 2-step path-first funnel + compact form + desktop package rail — see [`AGENTS.md`](./AGENTS.md).  
 > UX index: [`docs/UX_CONVERSION_STRATEGY.md`](./docs/UX_CONVERSION_STRATEGY.md)  
-> Do not replace another LLM’s strategy file.
+> Do not replace another LLM’s strategy file. Do not re-implement Phase A or the local funnel.
 
 ---
 
@@ -56,10 +57,12 @@
 ## Out of P0 / Phase B (still deferred)
 
 - Package visual redesign · FAQ · testimonial carousel  
-- Full two-card hero redesign  
+- Full two-card hero redesign (hero is currently **hidden** in local flow)  
 - Stubbing every nav route  
-- Multi-step wizard  
+- Multi-step **wizard** beyond the local 2-step path → form funnel  
 - Hard SLA / price floor without Ops confirmation  
+
+**Note:** Sticky mobile path bar, accordion menu, and desktop package rail landed locally after Phase A — do not re-propose them as greenfield Phase B.
 
 ---
 
@@ -85,7 +88,7 @@
 5. ~~Minimal analytics~~ ✅  
 6. ~~Placeholder cleanup~~ ✅  
 7. ~~Pages build/QA~~ ✅  
-8. **Next:** 2-week path-mix read → Phase B  
+8. **Next:** Deploy local 2-step UX when ready · 2-week path-mix read → Phase B  
 
 ---
 
@@ -95,11 +98,11 @@
 
 **Pitch**
 
-1. Phase A is live on GitHub Pages (dual-path labels, short form, soft SLA).  
+1. Phase A is live on GitHub Pages (dual-path labels, short form, soft SLA). Local tree extends to a path-first 2-step funnel.  
 2. Confirm FormSubmit email so leads reach `catering@shanesribshack.com`.  
 3. Primary KPI remains **total catering conversions** (form + ezCater), not form-only.  
 4. Client still chooses path **weight**; Ops still owns hard SLA/price.  
-5. After 14–30 days of path mix, decide Phase B (cards/FAQ/proof).  
+5. After 14–30 days of path mix, decide Phase B (FAQ/proof beyond what’s already local).  
 
 ---
 

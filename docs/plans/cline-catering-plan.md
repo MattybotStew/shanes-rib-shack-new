@@ -7,7 +7,7 @@
 
 > **SHIP STATUS (2026-07-23):** Phase A is **live** on GitHub Pages (thin-ship spirit largely followed).  
 > https://mattybotstew.github.io/shanes-rib-shack-new/catering/ · [`../../AGENTS.md`](../../AGENTS.md) · [`../../CONSENSUS_PLAN.md`](../../CONSENSUS_PLAN.md)  
-> File lists below are **pre-ship guidance**; do not re-implement Phase A.
+> **Local since Phase A:** 2-step path-first funnel + compact form + desktop package rail. File lists below are **pre-ship guidance**; do not re-implement Phase A or the local funnel.
 
 ## Philosophy (smallest ship)
 

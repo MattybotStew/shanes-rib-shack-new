@@ -3,90 +3,15 @@
 import Link from "next/link";
 import { useId, useState } from "react";
 import { ezCaterUrl } from "@/lib/ezcater";
+import { desserts, menuItems, sides, type MenuItem } from "@/lib/menuData";
 
-const introBody =
-  "Get ready to sit back, relax and enjoy your next event or party by letting the professionals at Shane's Rib Shack take care of the food! We are proud to offer our signature barbecue and side dishes in four different catering packages to satisfy events of all sizes. Our catering packages were designed to allow flexibility and a great selection of choices that can be customized for your event.";
-
-const dessertNote = "Add Dessert to any package! Choose from:";
-const desserts = "Homemade Peach Cobbler, Brownies, & Cookies";
-
-const pathHelper =
-  "Instant checkout online · Custom quotes get a specialist reply during business hours";
+const introLine =
+  "Four packages plus boxed lunches — expand a package to order online or get a quote.";
 
 const primaryBtn =
   "inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-red px-4 py-3 text-center text-xs font-bold uppercase leading-4 text-white transition-colors hover:bg-[#a01b25] sm:text-sm";
 const secondaryBtn =
   "inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-black px-4 py-3 text-center text-xs font-bold uppercase leading-4 text-white transition-colors hover:bg-[#1c2730] sm:text-sm";
-
-type MenuItem =
-  | { id: string; title: string; kind: "package"; items: string[] }
-  | { id: string; title: string; kind: "boxed"; lines: string[] };
-
-const menuItems: MenuItem[] = [
-  {
-    id: "one-meat",
-    title: "One Meat",
-    kind: "package",
-    items: [
-      "Chopped Pork OR Chopped Chicken",
-      "Two Side Items",
-      "Bread & BBQ",
-      "Sauce",
-      "Tea",
-      "Plates, Cups, Utensils, & Napkins",
-    ],
-  },
-  {
-    id: "ribs-one-meat",
-    title: "Ribs & One Meat",
-    kind: "package",
-    items: [
-      "Ribs, Chopped Pork OR Chopped Chicken",
-      "Two Side Items",
-      "Bread & BBQ",
-      "Sauce",
-      "Tea",
-      "Plates, Cups, Utensils, & Napkins",
-    ],
-  },
-  {
-    id: "two-meat",
-    title: "Two Meat",
-    kind: "package",
-    items: [
-      "Chopped Pork & Chopped Chicken",
-      "Two Side Items",
-      "Bread & BBQ",
-      "Sauce",
-      "Tea",
-      "Plates, Cups, Utensils, & Napkins",
-    ],
-  },
-  {
-    id: "three-meat",
-    title: "Three Meat",
-    kind: "package",
-    items: [
-      "Ribs, Chopped Pork, & Chopped Chicken",
-      "Two Side Items",
-      "Bread & BBQ",
-      "Sauce",
-      "Tea",
-      "Plates, Cups, Utensils, & Napkins",
-    ],
-  },
-  {
-    id: "boxed-lunches",
-    title: "Boxed Lunches",
-    kind: "boxed",
-    lines: [
-      "Pick Your Sandwich:",
-      "Big Dad Pork Sandwich or BBQ Chicken Sandwich",
-      "Served with:",
-      "Chips, Cookie, & Tea OR One Side, Cookie, & Tea",
-    ],
-  },
-];
 
 function Divider() {
   return <div className="h-px w-full bg-brand-black/15" aria-hidden />;
@@ -106,7 +31,7 @@ function PackagePathCtAs({ packageName }: { packageName: string }) {
         Order This Online
       </a>
       <Link href={quoteHref} className={primaryBtn} data-path="quote">
-        Quote This Package
+        Get a Quote
       </Link>
     </div>
   );
@@ -170,7 +95,7 @@ function PackageAccordion() {
   const [openId, setOpenId] = useState<string | null>(menuItems[0]?.id ?? null);
 
   return (
-    <div className="flex w-full max-w-[720px] flex-col overflow-hidden rounded-[12px] border border-brand-black/15 bg-brand-tan">
+    <div className="flex w-full max-w-[600px] flex-col overflow-hidden rounded-[12px] border border-brand-black/15 bg-brand-tan">
       {menuItems.map((item, index) => {
         const open = openId === item.id;
         const panelId = `${baseId}-panel-${item.id}`;
@@ -214,64 +139,42 @@ function PackageAccordion() {
 
 function IntroBlock() {
   return (
-    <div className="flex w-full max-w-[720px] flex-col items-center gap-5 text-center sm:gap-6">
-      <h2 className="w-full text-[32px] font-extrabold uppercase leading-none text-brand-red lg:text-[48px]">
+    <div className="flex w-full max-w-[600px] flex-col items-center gap-3 text-center">
+      <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-black/50">
+        Reference — packages
+      </p>
+      <h2 className="w-full text-[28px] font-extrabold uppercase leading-none text-brand-red sm:text-[32px] lg:text-[40px]">
         Catering Menu
       </h2>
-      <div className="w-full text-base leading-[1.5] text-brand-black sm:text-lg">
-        <p className="font-normal">{introBody}</p>
-        <p className="mt-4 mb-0 font-bold leading-[1.5]">{dessertNote}</p>
-        <p className="leading-[1.5]">{desserts}</p>
-      </div>
-      <p className="w-full text-sm font-semibold text-brand-black/70">{pathHelper}</p>
+      <p className="w-full text-base font-semibold leading-[1.45] text-brand-black/80">
+        {introLine}
+      </p>
     </div>
   );
 }
 
 function FooterBlock() {
   return (
-    <div className="flex w-full max-w-[720px] flex-col items-center gap-6">
-      <div className="grid w-full gap-4 sm:grid-cols-2 sm:gap-5">
-        <article className="flex flex-col gap-3 rounded-[12px] border border-brand-black/15 bg-brand-tan p-5 text-left sm:p-6">
-          <h3 className="text-lg font-extrabold uppercase leading-none text-brand-red sm:text-xl">
-            Side Selections Include
-          </h3>
-          <p className="text-base font-semibold leading-[1.5] text-brand-black">
-            Baked Beans, Coleslaw, Brunswick Stew, Mac &amp; Cheese, Potato
-            Salad, &amp; Side Salad
-          </p>
-        </article>
-        <article className="flex flex-col gap-3 rounded-[12px] border border-brand-black/15 bg-brand-tan p-5 text-left sm:p-6">
-          <h3 className="text-lg font-extrabold uppercase leading-none text-brand-red sm:text-xl">
-            Add Dessert to Any Package
-          </h3>
-          <p className="text-sm font-bold uppercase tracking-wide text-brand-black/60">
-            Choose from
-          </p>
-          <p className="text-base font-semibold leading-[1.5] text-brand-black">
-            {desserts}
-          </p>
-        </article>
-      </div>
-      <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center">
-        <Link
-          href="#catering-inquiry"
-          className="inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-red px-[26px] py-5 text-base font-bold uppercase leading-4 text-white transition-colors hover:bg-[#a01b25]"
-        >
-          Request a Custom Quote
-        </Link>
-        <a
-          href={ezCaterUrl()}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-black px-[26px] py-5 text-base font-bold uppercase leading-4 text-white transition-colors hover:bg-[#1c2730]"
-        >
-          Order Online
-        </a>
-      </div>
-      <p className="w-full text-center text-sm font-semibold leading-[1.5] text-brand-black/70">
-        {pathHelper}
-      </p>
+    <div className="grid w-full max-w-[600px] gap-4 sm:grid-cols-2 sm:gap-5">
+      <article className="flex flex-col gap-3 rounded-[12px] border border-brand-black/15 bg-brand-tan p-5 text-left sm:p-6">
+        <h3 className="text-lg font-extrabold uppercase leading-none text-brand-red sm:text-xl">
+          Side Selections Include
+        </h3>
+        <p className="text-base font-semibold leading-[1.5] text-brand-black">
+          {sides}
+        </p>
+      </article>
+      <article className="flex flex-col gap-3 rounded-[12px] border border-brand-black/15 bg-brand-tan p-5 text-left sm:p-6">
+        <h3 className="text-lg font-extrabold uppercase leading-none text-brand-red sm:text-xl">
+          Add Dessert to Any Package
+        </h3>
+        <p className="text-sm font-bold uppercase tracking-wide text-brand-black/60">
+          Choose from
+        </p>
+        <p className="text-base font-semibold leading-[1.5] text-brand-black">
+          {desserts}
+        </p>
+      </article>
     </div>
   );
 }
@@ -280,10 +183,10 @@ export default function CateringMenu() {
   return (
     <section
       id="catering-menu"
-      className="flex w-full flex-col items-center px-5 py-12 sm:py-16 lg:py-20"
+      className="scroll-mt-6 flex w-full flex-col items-center px-5 py-10 sm:py-12 lg:py-16"
       aria-label="Catering menu"
     >
-      <div className="flex w-full max-w-[720px] flex-col items-center gap-8 sm:gap-10">
+      <div className="flex w-full max-w-[600px] flex-col items-center gap-8 sm:gap-10">
         <IntroBlock />
         <PackageAccordion />
         <FooterBlock />
