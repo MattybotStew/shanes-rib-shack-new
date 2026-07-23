@@ -1,12 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useId, useState } from "react";
+import { asset } from "@/lib/asset";
 import { ezCaterUrl } from "@/lib/ezcater";
 import { desserts, menuItems, sides, type MenuItem } from "@/lib/menuData";
 
-const introLine =
-  "Four packages plus boxed lunches — expand a package to order online or get a quote.";
+const introBody =
+  "Get ready to sit back, relax and enjoy your next event or party by letting the professionals at Shane's Rib Shack take care of the food! We are proud to offer our signature barbecue and side dishes in four different catering packages to satisfy events of all sizes. Our catering packages were designed to allow flexibility and a great selection of choices that can be customized for your event.";
+
+const pathHelper =
+  "Instant checkout online · Custom quotes get a specialist reply during business hours";
 
 const primaryBtn =
   "inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-red px-4 py-3 text-center text-xs font-bold uppercase leading-4 text-white transition-colors hover:bg-[#a01b25] sm:text-sm";
@@ -14,13 +17,13 @@ const secondaryBtn =
   "inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-black px-4 py-3 text-center text-xs font-bold uppercase leading-4 text-white transition-colors hover:bg-[#1c2730] sm:text-sm";
 
 function Divider() {
-  return <div className="h-px w-full bg-brand-black/15" aria-hidden />;
+  return <div className="h-px w-full bg-black/10" aria-hidden />;
 }
 
 function PackagePathCtAs({ packageName }: { packageName: string }) {
   const quoteHref = `?package=${encodeURIComponent(packageName)}#catering-inquiry`;
   return (
-    <div className="flex flex-col gap-2 pt-1 sm:flex-row">
+    <div className="mt-auto flex flex-col gap-2 pt-2 sm:flex-row">
       <a
         href={ezCaterUrl()}
         target="_blank"
@@ -37,117 +40,83 @@ function PackagePathCtAs({ packageName }: { packageName: string }) {
   );
 }
 
-function Chevron({ open }: { open: boolean }) {
-  return (
-    <svg
-      className={`size-5 shrink-0 text-brand-red transition-transform duration-200 ${open ? "rotate-180" : ""}`}
-      viewBox="0 0 20 20"
-      fill="currentColor"
-      aria-hidden
-    >
-      <path
-        fillRule="evenodd"
-        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
-}
+function PackageCard({ item }: { item: MenuItem }) {
+  const lines = item.kind === "package" ? item.items : item.lines;
 
-function AccordionPanel({ item }: { item: MenuItem }) {
-  if (item.kind === "package") {
-    return (
-      <div className="flex flex-col gap-4 px-5 pb-5 pt-1 sm:px-6 sm:pb-6">
-        <ul className="flex flex-col gap-3">
-          {item.items.map((line, i) => (
-            <li key={line} className="flex flex-col gap-3">
-              <p className="text-base font-semibold leading-[1.5] text-brand-black sm:text-lg">
+  return (
+    <article className="flex h-full flex-col gap-[30px] rounded-[12px] border border-black/10 bg-brand-tan p-[30px]">
+      <div className="flex flex-1 flex-col gap-6">
+        <h3 className="text-2xl font-semibold uppercase leading-none text-brand-red">
+          {item.title}
+        </h3>
+        <Divider />
+        <ul className="flex flex-col gap-4">
+          {lines.map((line, i) => (
+            <li key={`${item.id}-${line}`} className="flex flex-col gap-4">
+              <p className="text-lg font-semibold leading-[1.5] text-brand-black">
                 {line}
               </p>
-              {i < item.items.length - 1 ? <Divider /> : null}
+              {i < lines.length - 1 ? <Divider /> : null}
             </li>
           ))}
         </ul>
         <PackagePathCtAs packageName={item.title} />
       </div>
-    );
-  }
+    </article>
+  );
+}
 
+function PromoBanner() {
   return (
-    <div className="flex flex-col gap-4 px-5 pb-5 pt-1 sm:px-6 sm:pb-6">
-      <div className="flex flex-col gap-3">
-        {item.lines.map((line, i) => (
-          <div key={line} className="flex flex-col gap-3">
-            <p className="text-base font-semibold leading-[1.5] text-brand-black sm:text-lg">
-              {line}
-            </p>
-            {i < item.lines.length - 1 ? <Divider /> : null}
-          </div>
-        ))}
+    <div className="flex h-full min-h-[277px] flex-col self-stretch rounded-[20px] border border-black/10 bg-brand-red p-2.5">
+      <div className="relative flex min-h-[277px] flex-1 flex-col items-center justify-center gap-4 overflow-hidden rounded-[10px] px-8 py-8 text-center">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={asset("/images/catering-menu-banner.jpg")}
+          alt=""
+          className="absolute inset-0 size-full object-cover"
+        />
+        <div className="absolute inset-0 bg-brand-black/70" aria-hidden />
+        <p className="relative text-2xl font-extrabold uppercase leading-none text-white">
+          Not sure which package?
+        </p>
+        <p className="relative max-w-xs text-sm font-semibold leading-[1.5] text-white/90">
+          Request a custom quote — a specialist will help you build the right
+          spread.
+        </p>
+        <Link
+          href="#catering-inquiry"
+          className="relative inline-flex items-center justify-center rounded-[5px] bg-brand-red px-5 py-3 text-xs font-bold uppercase text-white transition-colors hover:bg-[#a01b25]"
+        >
+          Get a Quote
+        </Link>
       </div>
-      <PackagePathCtAs packageName={item.title} />
     </div>
   );
 }
 
-function PackageAccordion() {
-  const baseId = useId();
-  const [openId, setOpenId] = useState<string | null>(menuItems[0]?.id ?? null);
-
+function PackageGrid() {
   return (
-    <div className="flex w-full max-w-[600px] flex-col overflow-hidden rounded-[12px] border border-brand-black/15 bg-brand-tan">
-      {menuItems.map((item, index) => {
-        const open = openId === item.id;
-        const panelId = `${baseId}-panel-${item.id}`;
-        const headerId = `${baseId}-header-${item.id}`;
-
-        return (
-          <div
-            key={item.id}
-            className={index > 0 ? "border-t border-brand-black/15" : ""}
-          >
-            <h3 className="m-0">
-              <button
-                type="button"
-                id={headerId}
-                aria-expanded={open}
-                aria-controls={panelId}
-                onClick={() => setOpenId(open ? null : item.id)}
-                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-brand-black/[0.03] sm:px-6 sm:py-5"
-              >
-                <span className="text-lg font-extrabold uppercase leading-none text-brand-red sm:text-xl">
-                  {item.title}
-                </span>
-                <Chevron open={open} />
-              </button>
-            </h3>
-            <div
-              id={panelId}
-              role="region"
-              aria-labelledby={headerId}
-              hidden={!open}
-              className={open ? "block" : "hidden"}
-            >
-              <AccordionPanel item={item} />
-            </div>
-          </div>
-        );
-      })}
+    <div className="grid w-full max-w-[1200px] grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {menuItems.map((item) => (
+        <PackageCard key={item.id} item={item} />
+      ))}
+      <PromoBanner />
     </div>
   );
 }
 
 function IntroBlock() {
   return (
-    <div className="flex w-full max-w-[600px] flex-col items-center gap-3 text-center">
-      <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-black/50">
-        Reference — packages
-      </p>
-      <h2 className="w-full text-[28px] font-extrabold uppercase leading-none text-brand-red sm:text-[32px] lg:text-[40px]">
+    <div className="flex w-full max-w-[960px] flex-col items-center gap-5 text-center sm:gap-6">
+      <h2 className="w-full text-[32px] font-extrabold uppercase leading-none text-brand-red lg:text-[48px]">
         Catering Menu
       </h2>
-      <p className="w-full text-base font-semibold leading-[1.45] text-brand-black/80">
-        {introLine}
+      <p className="w-full text-lg font-normal leading-[1.5] text-brand-black">
+        {introBody}
+      </p>
+      <p className="w-full text-sm font-semibold text-brand-black/70">
+        {pathHelper}
       </p>
     </div>
   );
@@ -155,7 +124,7 @@ function IntroBlock() {
 
 function FooterBlock() {
   return (
-    <div className="grid w-full max-w-[600px] gap-4 sm:grid-cols-2 sm:gap-5">
+    <div className="grid w-full max-w-[1200px] gap-4 sm:grid-cols-2 sm:gap-5">
       <article className="flex flex-col gap-3 rounded-[12px] border border-brand-black/15 bg-brand-tan p-5 text-left sm:p-6">
         <h3 className="text-lg font-extrabold uppercase leading-none text-brand-red sm:text-xl">
           Side Selections Include
@@ -183,12 +152,12 @@ export default function CateringMenu() {
   return (
     <section
       id="catering-menu"
-      className="scroll-mt-6 flex w-full flex-col items-center px-5 py-10 sm:py-12 lg:py-16"
+      className="scroll-mt-6 flex w-full flex-col items-center bg-white px-5 pt-10 pb-0 sm:pt-12 lg:pt-16"
       aria-label="Catering menu"
     >
-      <div className="flex w-full max-w-[600px] flex-col items-center gap-8 sm:gap-10">
+      <div className="flex w-full max-w-[1200px] flex-col items-center gap-[30px]">
         <IntroBlock />
-        <PackageAccordion />
+        <PackageGrid />
         <FooterBlock />
       </div>
     </section>

@@ -91,9 +91,6 @@ function MenuRail({
       aria-label="Catering packages reference"
     >
       <div className="flex flex-col gap-1 px-1">
-        <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand-black/50">
-          Reference
-        </p>
         <h3 className="text-lg font-extrabold uppercase leading-none text-brand-red">
           Catering Packages
         </h3>
@@ -102,7 +99,22 @@ function MenuRail({
         </p>
       </div>
 
-      <div className="flex flex-col overflow-hidden rounded-[12px] border border-brand-black/15 bg-brand-tan">
+      {selected ? (
+        <div className="flex items-center justify-between gap-3 rounded-[8px] border border-brand-red/25 bg-brand-red/[0.06] px-3 py-2">
+          <p className="text-xs font-bold uppercase tracking-wide text-brand-red">
+            Selected: {selected}
+          </p>
+          <button
+            type="button"
+            onClick={() => onSelect("")}
+            className="shrink-0 text-xs font-bold uppercase tracking-wide text-brand-black/70 underline-offset-2 hover:text-brand-red hover:underline"
+          >
+            Remove
+          </button>
+        </div>
+      ) : null}
+
+      <div className="flex flex-col overflow-hidden rounded-[12px] border border-brand-black/15 bg-white">
         {menuItems.map((item, index) => {
           const open = openId === item.id;
           const isSelected = selected === item.title;
@@ -165,13 +177,23 @@ function MenuRail({
                         </li>
                       ))}
                     </ul>
-                    <button
-                      type="button"
-                      onClick={() => onSelect(item.title)}
-                      className="self-start text-xs font-bold uppercase tracking-wide text-brand-red underline-offset-2 hover:underline"
-                    >
-                      {isSelected ? "Added to quote ✓" : "Use this package →"}
-                    </button>
+                    {isSelected ? (
+                      <button
+                        type="button"
+                        onClick={() => onSelect("")}
+                        className="self-start text-xs font-bold uppercase tracking-wide text-brand-black/65 underline-offset-2 hover:text-brand-red hover:underline"
+                      >
+                        Remove selection
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        onClick={() => onSelect(item.title)}
+                        className="self-start text-xs font-bold uppercase tracking-wide text-brand-red underline-offset-2 hover:underline"
+                      >
+                        Use this package →
+                      </button>
+                    )}
                   </div>
                 ) : null}
               </div>
@@ -660,8 +682,12 @@ export default function CateringForm() {
             selected={packagePrefill}
             onSelect={(title) => {
               setPackagePrefill(title);
-              setShowExtras(true);
-              track("catering_package_selected", { package: title });
+              if (title) {
+                setShowExtras(true);
+                track("catering_package_selected", { package: title });
+              } else {
+                track("catering_package_cleared");
+              }
             }}
           />
         </div>
