@@ -12,9 +12,9 @@ const pathHelper =
   "Instant checkout online · Custom quotes get a specialist reply during business hours";
 
 const primaryBtn =
-  "inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-red px-4 py-3 text-center text-xs font-bold uppercase leading-4 text-white transition-colors hover:bg-[#a01b25] sm:text-sm";
+  "inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-red px-3 py-2.5 text-center text-xs font-bold uppercase leading-4 text-white transition-colors hover:bg-[#a01b25] sm:text-sm";
 const secondaryBtn =
-  "inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-black px-4 py-3 text-center text-xs font-bold uppercase leading-4 text-white transition-colors hover:bg-[#1c2730] sm:text-sm";
+  "inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-black px-3 py-2.5 text-center text-xs font-bold uppercase leading-4 text-white transition-colors hover:bg-[#1c2730] sm:text-sm";
 
 function Divider() {
   return <div className="h-px w-full bg-black/10" aria-hidden />;
@@ -23,7 +23,7 @@ function Divider() {
 function PackagePathCtAs({ packageName }: { packageName: string }) {
   const quoteHref = `?package=${encodeURIComponent(packageName)}#catering-inquiry`;
   return (
-    <div className="mt-auto flex flex-col gap-2 pt-2 sm:flex-row">
+    <div className="mt-auto flex flex-col gap-2 pt-1 sm:flex-row">
       <a
         href={ezCaterUrl()}
         target="_blank"
@@ -44,16 +44,15 @@ function PackageCard({ item }: { item: MenuItem }) {
   const lines = item.kind === "package" ? item.items : item.lines;
 
   return (
-    <article className="flex h-full flex-col gap-[30px] rounded-[12px] border border-black/10 bg-brand-tan p-[30px]">
-      <div className="flex flex-1 flex-col gap-6">
-        <h3 className="text-2xl font-semibold uppercase leading-none text-brand-red">
+    <article className="flex h-full flex-col rounded-[12px] border border-black/10 bg-brand-tan p-5">
+      <div className="flex flex-1 flex-col gap-2.5">
+        <h3 className="text-lg font-semibold uppercase leading-none text-brand-red">
           {item.title}
         </h3>
-        <Divider />
-        <ul className="flex flex-col gap-4">
+        <ul className="flex flex-col">
           {lines.map((line, i) => (
-            <li key={`${item.id}-${line}`} className="flex flex-col gap-4">
-              <p className="text-lg font-semibold leading-[1.5] text-brand-black">
+            <li key={`${item.id}-${line}`} className="flex flex-col">
+              <p className="py-1.5 text-sm font-semibold leading-[1.35] text-brand-black">
                 {line}
               </p>
               {i < lines.length - 1 ? <Divider /> : null}
@@ -68,8 +67,8 @@ function PackageCard({ item }: { item: MenuItem }) {
 
 function PromoBanner() {
   return (
-    <div className="flex h-full min-h-[277px] flex-col self-stretch rounded-[20px] border border-black/10 bg-brand-red p-2.5">
-      <div className="relative flex min-h-[277px] flex-1 flex-col items-center justify-center gap-4 overflow-hidden rounded-[10px] px-8 py-8 text-center">
+    <div className="flex h-full min-h-[220px] flex-col self-stretch rounded-[16px] border border-black/10 bg-brand-red p-2">
+      <div className="relative flex min-h-[220px] flex-1 flex-col items-center justify-center gap-3 overflow-hidden rounded-[10px] px-6 py-6 text-center">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={asset("/images/catering-menu-banner.jpg")}
@@ -77,16 +76,16 @@ function PromoBanner() {
           className="absolute inset-0 size-full object-cover"
         />
         <div className="absolute inset-0 bg-brand-black/70" aria-hidden />
-        <p className="relative text-2xl font-extrabold uppercase leading-none text-white">
+        <p className="relative text-xl font-extrabold uppercase leading-none text-white">
           Not sure which package?
         </p>
-        <p className="relative max-w-xs text-sm font-semibold leading-[1.5] text-white/90">
+        <p className="relative max-w-xs text-sm font-semibold leading-[1.4] text-white/90">
           Request a custom quote — a specialist will help you build the right
           spread.
         </p>
         <Link
           href="#catering-inquiry"
-          className="relative inline-flex items-center justify-center rounded-[5px] bg-brand-red px-5 py-3 text-xs font-bold uppercase text-white transition-colors hover:bg-[#a01b25]"
+          className="relative inline-flex items-center justify-center rounded-[5px] bg-brand-red px-5 py-2.5 text-xs font-bold uppercase text-white transition-colors hover:bg-[#a01b25]"
         >
           Get a Quote
         </Link>
@@ -97,7 +96,7 @@ function PromoBanner() {
 
 function PackageGrid() {
   return (
-    <div className="grid w-full max-w-[1200px] grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid w-full max-w-[1200px] grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
       {menuItems.map((item) => (
         <PackageCard key={item.id} item={item} />
       ))}
@@ -155,7 +154,7 @@ export default function CateringMenu() {
       className="scroll-mt-6 flex w-full flex-col items-center bg-white px-5 pt-10 pb-0 sm:pt-12 lg:pt-16"
       aria-label="Catering menu"
     >
-      <div className="flex w-full max-w-[1200px] flex-col items-center gap-[30px]">
+      <div className="flex w-full max-w-[1200px] flex-col items-center gap-6">
         <IntroBlock />
         <PackageGrid />
         <FooterBlock />
