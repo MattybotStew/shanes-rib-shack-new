@@ -155,7 +155,7 @@ function PackageCustomize({
 
         {config.meatOptions?.length ? (
           <fieldset className="flex flex-col gap-2 border-0 p-0">
-            <legend className="text-sm font-semibold text-brand-black">
+            <legend className={`${labelClass} mb-[5px]`}>
               Meat <span className="text-brand-red">*</span>
             </legend>
             <div className="grid grid-cols-2 gap-2">
@@ -182,7 +182,7 @@ function PackageCustomize({
 
         {config.sandwichOptions?.length ? (
           <fieldset className="flex flex-col gap-2 border-0 p-0">
-            <legend className="text-sm font-semibold text-brand-black">
+            <legend className={`${labelClass} mb-[5px]`}>
               Sandwich <span className="text-brand-red">*</span>
             </legend>
             <div className="grid gap-2">
@@ -209,7 +209,7 @@ function PackageCustomize({
 
         {config.servedWithOptions?.length ? (
           <fieldset className="flex flex-col gap-2 border-0 p-0">
-            <legend className="text-sm font-semibold text-brand-black">
+            <legend className={`${labelClass} mb-[5px]`}>
               Served with <span className="text-brand-red">*</span>
             </legend>
             <div className="grid gap-2">
@@ -245,11 +245,8 @@ function PackageCustomize({
 
         {showSides ? (
           <fieldset className="flex flex-col gap-2 border-0 p-0">
-            <legend className="text-sm font-semibold text-brand-black">
-              Sides{" "}
-              <span className="font-normal text-brand-black/55">
-                ({choices.sides.length} of {sideLimit})
-              </span>{" "}
+            <legend className={`${labelClass} mb-[5px]`}>
+              Sides ({choices.sides.length}/{sideLimit}){" "}
               <span className="text-brand-red">*</span>
             </legend>
             <div className="grid grid-cols-2 gap-2">
@@ -286,9 +283,11 @@ function PackageCustomize({
 
         {item.kind === "package" ? (
           <fieldset className="flex flex-col gap-2 border-0 p-0">
-            <legend className="text-sm font-semibold text-brand-black">
+            <legend className={`${labelClass} mb-[5px]`}>
               Dessert{" "}
-              <span className="font-normal text-brand-black/55">(optional)</span>
+              <span className="text-sm font-normal text-[#808080]">
+                (optional)
+              </span>
             </legend>
             <div className="grid grid-cols-2 gap-2 sm:grid-cols-4">
               <label
