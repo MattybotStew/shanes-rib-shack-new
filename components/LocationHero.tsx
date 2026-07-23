@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import LocationOrderConfirm, {
+  type OrderFulfillment,
+} from "@/components/LocationOrderConfirm";
 import { asset } from "@/lib/asset";
-import { orderUrl, type LocationDetail } from "@/lib/locationData";
+import type { LocationDetail } from "@/lib/locationData";
 
 function BriefcaseIcon() {
   return (
@@ -43,6 +46,8 @@ const ctaBase =
 /** Location detail hero — matches live Edgewood card chrome + CTAs. */
 export default function LocationHero({ location }: { location: LocationDetail }) {
   const [isMyShack, setIsMyShack] = useState(true);
+  const [confirmFulfillment, setConfirmFulfillment] =
+    useState<OrderFulfillment | null>(null);
 
   return (
     <section className="relative w-full bg-white">
@@ -112,22 +117,20 @@ export default function LocationHero({ location }: { location: LocationDetail })
           </div>
 
           <div className="mt-[22px] flex flex-wrap items-center gap-3">
-            <a
-              href={orderUrl("PICKUP", location.locationId)}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              type="button"
+              onClick={() => setConfirmFulfillment("PICKUP")}
               className={`${ctaBase} border-2 border-brand-black bg-transparent text-brand-black hover:border-[#d94a2b] hover:bg-[#d94a2b] hover:text-white`}
             >
               Order Pickup
-            </a>
-            <a
-              href={orderUrl("DELIVERY", location.locationId)}
-              target="_blank"
-              rel="noopener noreferrer"
+            </button>
+            <button
+              type="button"
+              onClick={() => setConfirmFulfillment("DELIVERY")}
               className={`${ctaBase} border border-brand-red bg-brand-red text-white hover:shadow-[0px_6px_16px_0px_rgba(217,74,43,0.4)]`}
             >
               Order Delivery
-            </a>
+            </button>
             <a
               href={location.ezCaterUrl}
               target="_blank"
@@ -157,6 +160,13 @@ export default function LocationHero({ location }: { location: LocationDetail })
           </a>
         </div>
       </div>
+
+      <LocationOrderConfirm
+        location={location}
+        fulfillment={confirmFulfillment ?? "PICKUP"}
+        open={confirmFulfillment !== null}
+        onClose={() => setConfirmFulfillment(null)}
+      />
     </section>
   );
 }
