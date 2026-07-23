@@ -13,7 +13,9 @@
 
 **Full Cursor ship vote:** [`../plans/cursor-catering-plan.md`](../plans/cursor-catering-plan.md)
 
-**Shipped in repo (Phase A UX — 2026-07-23):** Path-labeled CTAs + helpers · short quote form (native date/time, email-or-phone) · soft trust/SLA copy · success/error states · package “Order / Quote this” CTAs · `/catering` route · placeholder chrome cleaned · skip link + focus styles · dual-path analytics hooks. Wire `NEXT_PUBLIC_CATERING_FORM_ENDPOINT` + real `NEXT_PUBLIC_EZCATER_URL` for production leads.
+**Phase A SHIPPED (2026-07-23) — live on GitHub Pages** (`dba4b07`): path-labeled CTAs + helpers · short quote form (native date/time, email-or-phone) · soft trust/SLA · success/error · package Order/Quote CTAs · `/catering/` · FormSubmit default + ezCater brand URL + UTMs · analytics hooks · skip link.  
+**Remaining humans:** FormSubmit inbox confirm · client path-weight · GTM · 14–30 day path-mix → Phase B.  
+**Agents:** Prefer Phase B opinions in this file; do not re-litigate Phase A unless fixing a regression. See [`../../AGENTS.md`](../../AGENTS.md).
 
 ---
 

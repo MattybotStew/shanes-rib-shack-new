@@ -5,11 +5,15 @@
 > Sibling strategies: Grok · Cline under `docs/strategies/`. Index: [`../UX_CONVERSION_STRATEGY.md`](../UX_CONVERSION_STRATEGY.md).  
 > This file is Cursor’s ship vote (KPIs + P0 + estimates).
 
-## Diagnosis
+> **SHIP STATUS (2026-07-23):** Phase A **implemented and live** on GitHub Pages.  
+> https://mattybotstew.github.io/shanes-rib-shack-new/catering/  
+> P0 checklist in [`../../CONSENSUS_PLAN.md`](../../CONSENSUS_PLAN.md) is marked done. Historical diagnosis below is preserved for context — treat as **pre-ship**, not current code.
+
+## Diagnosis (historical — pre Phase A)
 
 **The “50% form drop” is not a proven conversion crisis.** New site pushes two channels (ezCater + inquiry form). Form volume can tank while total catering demand is flat. We do not know path mix, mobile completion, or whether users ever hit a working submit.
 
-**What the code actually does wrong today:**
+**What the code actually did wrong before Phase A:**
 
 | Finding | Evidence | Funnel impact |
 | :--- | :--- | :--- |

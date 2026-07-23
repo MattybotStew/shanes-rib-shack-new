@@ -5,6 +5,10 @@
 > Siblings: Cursor · Grok under `docs/strategies/`. Index: [`../UX_CONVERSION_STRATEGY.md`](../UX_CONVERSION_STRATEGY.md).  
 > This file is Cline’s ship vote.
 
+> **SHIP STATUS (2026-07-23):** Phase A is **live** on GitHub Pages (thin-ship spirit largely followed).  
+> https://mattybotstew.github.io/shanes-rib-shack-new/catering/ · [`../../AGENTS.md`](../../AGENTS.md) · [`../../CONSENSUS_PLAN.md`](../../CONSENSUS_PLAN.md)  
+> File lists below are **pre-ship guidance**; do not re-implement Phase A.
+
 ## Philosophy (smallest ship)
 
 Ship conversion fixes, not a redesign. The form is a no-op, date/time are text, `/catering` 404s, and users get no path guidance. Fix those in place. Compose `/catering` from existing components. Do not invent `components/catering/*`, two-path card systems, FAQ, zod packages, or a 40-hour Basecamp theater. Static export = Formspree/webhook only — no Server Actions.

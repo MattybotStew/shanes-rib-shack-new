@@ -1,5 +1,7 @@
+"use client";
+
 import Link from "next/link";
-import { asset } from "@/lib/asset";
+import { useId, useState } from "react";
 import { ezCaterUrl } from "@/lib/ezcater";
 
 const introBody =
@@ -9,21 +11,22 @@ const dessertNote = "Add Dessert to any package! Choose from:";
 const desserts = "Homemade Peach Cobbler, Brownies, & Cookies";
 
 const pathHelper =
-  "Instant checkout for standard packages · Custom quotes get a specialist reply during business hours";
+  "Instant checkout online · Custom quotes get a specialist reply during business hours";
 
 const primaryBtn =
   "inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-red px-4 py-3 text-center text-xs font-bold uppercase leading-4 text-white transition-colors hover:bg-[#a01b25] sm:text-sm";
 const secondaryBtn =
   "inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-black px-4 py-3 text-center text-xs font-bold uppercase leading-4 text-white transition-colors hover:bg-[#1c2730] sm:text-sm";
 
-type PackageCard = {
-  title: string;
-  items: string[];
-};
+type MenuItem =
+  | { id: string; title: string; kind: "package"; items: string[] }
+  | { id: string; title: string; kind: "boxed"; lines: string[] };
 
-const packages: PackageCard[] = [
+const menuItems: MenuItem[] = [
   {
+    id: "one-meat",
     title: "One Meat",
+    kind: "package",
     items: [
       "Chopped Pork OR Chopped Chicken",
       "Two Side Items",
@@ -34,7 +37,9 @@ const packages: PackageCard[] = [
     ],
   },
   {
+    id: "ribs-one-meat",
     title: "Ribs & One Meat",
+    kind: "package",
     items: [
       "Ribs, Chopped Pork OR Chopped Chicken",
       "Two Side Items",
@@ -45,7 +50,9 @@ const packages: PackageCard[] = [
     ],
   },
   {
+    id: "two-meat",
     title: "Two Meat",
+    kind: "package",
     items: [
       "Chopped Pork & Chopped Chicken",
       "Two Side Items",
@@ -56,7 +63,9 @@ const packages: PackageCard[] = [
     ],
   },
   {
+    id: "three-meat",
     title: "Three Meat",
+    kind: "package",
     items: [
       "Ribs, Chopped Pork, & Chopped Chicken",
       "Two Side Items",
@@ -66,17 +75,18 @@ const packages: PackageCard[] = [
       "Plates, Cups, Utensils, & Napkins",
     ],
   },
+  {
+    id: "boxed-lunches",
+    title: "Boxed Lunches",
+    kind: "boxed",
+    lines: [
+      "Pick Your Sandwich:",
+      "Big Dad Pork Sandwich or BBQ Chicken Sandwich",
+      "Served with:",
+      "Chips, Cookie, & Tea OR One Side, Cookie, & Tea",
+    ],
+  },
 ];
-
-const boxedLunch = {
-  title: "Boxed Lunches",
-  lines: [
-    "Pick Your Sandwich:",
-    "Big Dad Pork Sandwich or BBQ Chicken Sandwich",
-    "Served with:",
-    "Chips, Cookie, & Tea OR One Side, Cookie, & Tea",
-  ],
-};
 
 function Divider() {
   return <div className="h-px w-full bg-brand-black/15" aria-hidden />;
@@ -85,7 +95,7 @@ function Divider() {
 function PackagePathCtAs({ packageName }: { packageName: string }) {
   const quoteHref = `?package=${encodeURIComponent(packageName)}#catering-inquiry`;
   return (
-    <div className="flex flex-col gap-2 pt-2 sm:flex-row">
+    <div className="flex flex-col gap-2 pt-1 sm:flex-row">
       <a
         href={ezCaterUrl()}
         target="_blank"
@@ -102,135 +112,148 @@ function PackagePathCtAs({ packageName }: { packageName: string }) {
   );
 }
 
-function PackageCardView({ title, items }: PackageCard) {
+function Chevron({ open }: { open: boolean }) {
   return (
-    <article className="flex flex-col gap-[30px] rounded-[12px] border border-black/10 bg-brand-tan p-[30px]">
-      <div className="flex flex-col gap-6">
-        <h3 className="text-2xl font-semibold uppercase leading-none text-brand-red">
-          {title}
-        </h3>
-        <Divider />
-        <ul className="flex flex-col gap-4">
-          {items.map((item, i) => (
-            <li key={item} className="flex flex-col gap-4">
-              <p className="text-lg font-semibold leading-[1.5] text-brand-black">
-                {item}
+    <svg
+      className={`size-5 shrink-0 text-brand-red transition-transform duration-200 ${open ? "rotate-180" : ""}`}
+      viewBox="0 0 20 20"
+      fill="currentColor"
+      aria-hidden
+    >
+      <path
+        fillRule="evenodd"
+        d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+        clipRule="evenodd"
+      />
+    </svg>
+  );
+}
+
+function AccordionPanel({ item }: { item: MenuItem }) {
+  if (item.kind === "package") {
+    return (
+      <div className="flex flex-col gap-4 px-5 pb-5 pt-1 sm:px-6 sm:pb-6">
+        <ul className="flex flex-col gap-3">
+          {item.items.map((line, i) => (
+            <li key={line} className="flex flex-col gap-3">
+              <p className="text-base font-semibold leading-[1.5] text-brand-black sm:text-lg">
+                {line}
               </p>
-              {i < items.length - 1 ? <Divider /> : null}
+              {i < item.items.length - 1 ? <Divider /> : null}
             </li>
           ))}
         </ul>
-        <PackagePathCtAs packageName={title} />
+        <PackagePathCtAs packageName={item.title} />
       </div>
-    </article>
-  );
-}
+    );
+  }
 
-function BoxedLunchCard() {
   return (
-    <article className="flex flex-col gap-[30px] rounded-[12px] border border-black/10 bg-brand-tan p-[30px]">
-      <div className="flex flex-col gap-6">
-        <h3 className="text-2xl font-semibold uppercase leading-none text-brand-red">
-          {boxedLunch.title}
-        </h3>
-        <Divider />
-        <div className="flex flex-col gap-4">
-          {boxedLunch.lines.map((line, i) => (
-            <div key={line} className="flex flex-col gap-4">
-              <p className="text-lg font-semibold leading-[1.5] text-brand-black">
-                {line}
-              </p>
-              {i < boxedLunch.lines.length - 1 ? <Divider /> : null}
-            </div>
-          ))}
-        </div>
-        <PackagePathCtAs packageName={boxedLunch.title} />
+    <div className="flex flex-col gap-4 px-5 pb-5 pt-1 sm:px-6 sm:pb-6">
+      <div className="flex flex-col gap-3">
+        {item.lines.map((line, i) => (
+          <div key={line} className="flex flex-col gap-3">
+            <p className="text-base font-semibold leading-[1.5] text-brand-black sm:text-lg">
+              {line}
+            </p>
+            {i < item.lines.length - 1 ? <Divider /> : null}
+          </div>
+        ))}
       </div>
-    </article>
-  );
-}
-
-function PromoBanner() {
-  return (
-    <div className="flex h-full min-h-[277px] flex-col self-stretch rounded-[20px] border border-black/10 bg-brand-red p-2.5">
-      <div className="relative flex min-h-[277px] flex-1 flex-col items-center justify-center gap-4 overflow-hidden rounded-[10px] px-8 py-8 text-center">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={asset("/images/catering-menu-banner.jpg")}
-          alt=""
-          className="absolute inset-0 size-full object-cover"
-        />
-        <div className="absolute inset-0 bg-brand-black/70" aria-hidden />
-        <p className="relative text-2xl font-extrabold uppercase leading-none text-white">
-          Not sure which package?
-        </p>
-        <p className="relative max-w-xs text-sm font-semibold leading-[1.5] text-white/90">
-          Request a custom quote — a specialist will help you build the right
-          spread.
-        </p>
-        <Link
-          href="#catering-inquiry"
-          className="relative inline-flex items-center justify-center rounded-[5px] bg-brand-red px-5 py-3 text-xs font-bold uppercase text-white transition-colors hover:bg-[#a01b25]"
-        >
-          Get a Quote
-        </Link>
-      </div>
+      <PackagePathCtAs packageName={item.title} />
     </div>
   );
 }
 
-function IntroCard({ compact }: { compact?: boolean }) {
+function PackageAccordion() {
+  const baseId = useId();
+  const [openId, setOpenId] = useState<string | null>(menuItems[0]?.id ?? null);
+
   return (
-    <div
-      className={`flex w-full flex-col items-center justify-center gap-[30px] rounded-[12px] border border-[rgba(31,33,31,0.2)] bg-brand-tan text-center ${
-        compact
-          ? "items-start border-black/10 p-[30px] text-center"
-          : "px-8 py-10 sm:px-[80px] sm:py-[70px]"
-      }`}
-    >
-      <h2
-        className={`w-full uppercase leading-none text-brand-red ${
-          compact
-            ? "text-2xl font-semibold"
-            : "text-[32px] font-extrabold lg:text-[48px]"
-        }`}
-      >
+    <div className="flex w-full max-w-[720px] flex-col overflow-hidden rounded-[12px] border border-brand-black/15 bg-brand-tan">
+      {menuItems.map((item, index) => {
+        const open = openId === item.id;
+        const panelId = `${baseId}-panel-${item.id}`;
+        const headerId = `${baseId}-header-${item.id}`;
+
+        return (
+          <div
+            key={item.id}
+            className={index > 0 ? "border-t border-brand-black/15" : ""}
+          >
+            <h3 className="m-0">
+              <button
+                type="button"
+                id={headerId}
+                aria-expanded={open}
+                aria-controls={panelId}
+                onClick={() => setOpenId(open ? null : item.id)}
+                className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left transition-colors hover:bg-brand-black/[0.03] sm:px-6 sm:py-5"
+              >
+                <span className="text-lg font-extrabold uppercase leading-none text-brand-red sm:text-xl">
+                  {item.title}
+                </span>
+                <Chevron open={open} />
+              </button>
+            </h3>
+            <div
+              id={panelId}
+              role="region"
+              aria-labelledby={headerId}
+              hidden={!open}
+              className={open ? "block" : "hidden"}
+            >
+              <AccordionPanel item={item} />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function IntroBlock() {
+  return (
+    <div className="flex w-full max-w-[720px] flex-col items-center gap-5 text-center sm:gap-6">
+      <h2 className="w-full text-[32px] font-extrabold uppercase leading-none text-brand-red lg:text-[48px]">
         Catering Menu
       </h2>
-      <div
-        className={`w-full text-brand-black ${
-          compact
-            ? "text-[13px] font-semibold leading-[1.5]"
-            : "text-lg leading-[1.5]"
-        }`}
-      >
+      <div className="w-full text-base leading-[1.5] text-brand-black sm:text-lg">
         <p className="font-normal">{introBody}</p>
-        <p className="my-0 leading-[1.5]">&nbsp;</p>
-        <p className="mb-0 font-bold leading-[1.5]">{dessertNote}</p>
+        <p className="mt-4 mb-0 font-bold leading-[1.5]">{dessertNote}</p>
         <p className="leading-[1.5]">{desserts}</p>
       </div>
-      <p className="w-full text-sm font-semibold text-brand-black/70">
-        {pathHelper}
-      </p>
+      <p className="w-full text-sm font-semibold text-brand-black/70">{pathHelper}</p>
     </div>
   );
 }
 
-function FooterCard() {
+function FooterBlock() {
   return (
-    <div className="flex w-full max-w-[960px] flex-col items-center justify-center gap-[30px] rounded-[12px] border border-[rgba(31,33,31,0.2)] bg-brand-tan px-8 py-10 text-center sm:px-[80px] sm:py-[70px]">
-      <div className="w-full text-lg leading-[1.5] text-brand-black">
-        <p className="mb-0 font-bold leading-[1.5]">Side Selections Include:</p>
-        <p className="font-normal leading-[1.5]">
-          Baked Beans, Coleslaw, Brunswick Stew, Mac &amp; Cheese, Potato Salad,
-          &amp; Side Salad
-        </p>
+    <div className="flex w-full max-w-[720px] flex-col items-center gap-6">
+      <div className="grid w-full gap-4 sm:grid-cols-2 sm:gap-5">
+        <article className="flex flex-col gap-3 rounded-[12px] border border-brand-black/15 bg-brand-tan p-5 text-left sm:p-6">
+          <h3 className="text-lg font-extrabold uppercase leading-none text-brand-red sm:text-xl">
+            Side Selections Include
+          </h3>
+          <p className="text-base font-semibold leading-[1.5] text-brand-black">
+            Baked Beans, Coleslaw, Brunswick Stew, Mac &amp; Cheese, Potato
+            Salad, &amp; Side Salad
+          </p>
+        </article>
+        <article className="flex flex-col gap-3 rounded-[12px] border border-brand-black/15 bg-brand-tan p-5 text-left sm:p-6">
+          <h3 className="text-lg font-extrabold uppercase leading-none text-brand-red sm:text-xl">
+            Add Dessert to Any Package
+          </h3>
+          <p className="text-sm font-bold uppercase tracking-wide text-brand-black/60">
+            Choose from
+          </p>
+          <p className="text-base font-semibold leading-[1.5] text-brand-black">
+            {desserts}
+          </p>
+        </article>
       </div>
-      <div className="w-full text-lg leading-[1.5] text-brand-black">
-        <p className="mb-0 font-bold leading-[1.5]">{dessertNote}</p>
-        <p className="font-normal leading-[1.5]">{desserts}</p>
-      </div>
-      <div className="flex w-full max-w-[602px] flex-col gap-3 sm:flex-row sm:items-center">
+      <div className="flex w-full flex-col gap-3 sm:flex-row sm:items-center">
         <Link
           href="#catering-inquiry"
           className="inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-red px-[26px] py-5 text-base font-bold uppercase leading-4 text-white transition-colors hover:bg-[#a01b25]"
@@ -243,10 +266,10 @@ function FooterCard() {
           rel="noopener noreferrer"
           className="inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-black px-[26px] py-5 text-base font-bold uppercase leading-4 text-white transition-colors hover:bg-[#1c2730]"
         >
-          Order Online (Standard)
+          Order Online
         </a>
       </div>
-      <p className="w-full text-sm font-semibold leading-[1.5] text-brand-black/70">
+      <p className="w-full text-center text-sm font-semibold leading-[1.5] text-brand-black/70">
         {pathHelper}
       </p>
     </div>
@@ -257,38 +280,13 @@ export default function CateringMenu() {
   return (
     <section
       id="catering-menu"
-      className="flex w-full flex-col items-center"
+      className="flex w-full flex-col items-center px-5 py-12 sm:py-16 lg:py-20"
       aria-label="Catering menu"
     >
-      <div className="hidden w-full flex-col items-center gap-[30px] px-5 py-20 lg:flex">
-        <div className="flex w-full max-w-[960px] flex-col items-center">
-          <IntroCard />
-        </div>
-
-        <div className="grid w-full max-w-[1200px] grid-cols-3 gap-5">
-          {packages.map((pkg) => (
-            <PackageCardView key={pkg.title} {...pkg} />
-          ))}
-          <BoxedLunchCard />
-          <PromoBanner />
-        </div>
-
-        <FooterCard />
-      </div>
-
-      <div className="flex w-full flex-col items-center lg:hidden">
-        <div className="w-full px-5 py-10">
-          <IntroCard compact />
-        </div>
-
-        <div className="flex w-full flex-col gap-5 px-5 pb-10">
-          {packages.map((pkg) => (
-            <PackageCardView key={pkg.title} {...pkg} />
-          ))}
-          <BoxedLunchCard />
-          <PromoBanner />
-          <FooterCard />
-        </div>
+      <div className="flex w-full max-w-[720px] flex-col items-center gap-8 sm:gap-10">
+        <IntroBlock />
+        <PackageAccordion />
+        <FooterBlock />
       </div>
     </section>
   );

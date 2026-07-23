@@ -4,6 +4,10 @@
 > [`../strategies/deepseek-ux-conversion-strategy.md`](../strategies/deepseek-ux-conversion-strategy.md)  
 > Siblings: Cursor · Grok · Cline under `docs/strategies/`. Index: [`../UX_CONVERSION_STRATEGY.md`](../UX_CONVERSION_STRATEGY.md).
 
+> **SHIP STATUS (2026-07-23):** Phase A is **live** on GitHub Pages.  
+> https://mattybotstew.github.io/shanes-rib-shack-new/catering/ · [`../../AGENTS.md`](../../AGENTS.md) · [`../../CONSENSUS_PLAN.md`](../../CONSENSUS_PLAN.md)  
+> Sprint framing below remains useful for **Phase B**; do not re-propose Phase A.
+
 **Author:** DeepSeek  
 **Focus of this file:** Lightweight ship framing derived from DeepSeek’s UX strategy (not a full eng spec).
 

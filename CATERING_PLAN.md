@@ -1,15 +1,18 @@
 # Catering Page Optimization — Implementation Plan
 
-**Status:** Research archive (Phase 2+ options)  
+**Status:** Research archive (Phase 2+ / Phase B options) — **Phase A is SHIPPED**  
 **UX strategies (one per LLM):** [`docs/UX_CONVERSION_STRATEGY.md`](./docs/UX_CONVERSION_STRATEGY.md) (index)  
-**P0 ship merge:** [`CONSENSUS_PLAN.md`](./CONSENSUS_PLAN.md)  
-**Priority:** P0 (Critical for Launch / Conversion Recovery)  
+**P0 ship merge:** [`CONSENSUS_PLAN.md`](./CONSENSUS_PLAN.md) (checklist marked done)  
+**Agent entry:** [`AGENTS.md`](./AGENTS.md)  
+**Priority:** P0 was Phase A (live); this file is Phase B+ research  
 **Last Updated:** 2026-07-23  
-**Version:** 1.5
+**Version:** 1.6
 
+> **Live:** https://mattybotstew.github.io/shanes-rib-shack-new/catering/  
 > For multi-LLM collaboration: each model keeps its own strategy under  
 > `docs/strategies/{name}-ux-conversion-strategy.md`. **No overwrites.**  
-> This file is background research and Phase 2+ ideas—not the UX opinion of record.
+> This file is background research and Phase 2+ ideas—not the UX opinion of record.  
+> Sections below that say “`/catering` does not exist” are **historical**; the route is live.
 
 ---
 
@@ -17,7 +20,7 @@
 
 **What:** Catering form inputs dropped ~50% after the new site launch.  
 **Where (production):** https://www.shanesribshack.com/catering/  
-**Where (this repo):** Homepage embeds catering sections; `/catering` route does not exist yet.
+**Where (this repo):** Homepage + dedicated `/catering/` route (Phase A shipped).
 
 ### Core problem (revised)
 

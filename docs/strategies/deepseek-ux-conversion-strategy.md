@@ -6,6 +6,10 @@
 **Audience:** Cursor, Grok CLI, Cline, Claude, design, PM  
 **Date:** 2026-07-23  
 
+> **Repo update (2026-07-23):** Phase A catering UX is **SHIPPED** on GitHub Pages.  
+> Live: https://mattybotstew.github.io/shanes-rib-shack-new/catering/ · See [`../../AGENTS.md`](../../AGENTS.md).  
+> Opinion body below is unchanged — extend for **Phase B**; do not re-propose Phase A.
+
 **Sibling opinions (never overwrite each other):**  
 - Cursor: [`cursor-ux-conversion-strategy.md`](./cursor-ux-conversion-strategy.md)  
 - Grok: [`grok-ux-conversion-strategy.md`](./grok-ux-conversion-strategy.md)  

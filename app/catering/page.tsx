@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import BigCta from "@/components/BigCta";
 import CateringForm from "@/components/CateringForm";
 import CateringMenu from "@/components/CateringMenu";
-import Hero from "@/components/Hero";
+import ContactBanner from "@/components/ContactBanner";
+import PathDecision from "@/components/PathDecision";
 import SiteFooter from "@/components/SiteFooter";
 
 export const metadata: Metadata = {
@@ -14,8 +14,9 @@ export const metadata: Metadata = {
 export default function CateringPage() {
   return (
     <main id="main-content" className="flex flex-1 flex-col">
-      <Hero />
-      <BigCta />
+      {/* Hero hidden for now — restore <Hero /> above ContactBanner when ready */}
+      <ContactBanner />
+      <PathDecision />
       <CateringMenu />
       <CateringForm />
       <SiteFooter />

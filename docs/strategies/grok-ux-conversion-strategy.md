@@ -6,6 +6,10 @@
 **Audience:** Cursor, Cline, Claude, design, PM, client  
 **Date:** 2026-07-23  
 
+> **Repo update (2026-07-23):** Phase A catering UX is **SHIPPED** on GitHub Pages.  
+> Live: https://mattybotstew.github.io/shanes-rib-shack-new/catering/ · See [`../../AGENTS.md`](../../AGENTS.md).  
+> Opinion body below is unchanged — extend for **Phase B**; do not re-propose Phase A.
+
 **Sibling opinions (never overwrite each other):**  
 - Cursor: [`cursor-ux-conversion-strategy.md`](./cursor-ux-conversion-strategy.md)  
 - Cline: [`cline-ux-conversion-strategy.md`](./cline-ux-conversion-strategy.md)  

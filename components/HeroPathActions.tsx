@@ -20,52 +20,39 @@ function trackPath(path: "online" | "quote") {
 const outlineBtn =
   "inline-flex items-center justify-center rounded-[5px] border-2 border-brand-black px-[26px] py-5 text-base font-bold uppercase leading-4 text-brand-black transition-colors hover:bg-brand-black hover:text-white";
 const primaryBtn =
-  "inline-flex items-center justify-center rounded-[5px] bg-brand-red px-[26px] py-5 text-base font-bold uppercase leading-4 text-white transition-colors hover:bg-[#a01b25]";
+  "inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-red px-3 py-4 text-center text-sm font-bold uppercase leading-4 text-white transition-colors hover:bg-[#a01b25] sm:px-[26px] sm:py-5 sm:text-base";
 const secondaryBtn =
-  "inline-flex items-center justify-center rounded-[5px] bg-brand-black px-[26px] py-5 text-base font-bold uppercase leading-4 text-white transition-colors hover:bg-[#1c2730]";
-
-const pathHelper =
-  "Instant checkout for standard packages · Custom events get a specialist reply during business hours";
+  "inline-flex flex-1 items-center justify-center rounded-[5px] bg-brand-black px-3 py-4 text-center text-sm font-bold uppercase leading-4 text-white transition-colors hover:bg-[#1c2730] sm:px-[26px] sm:py-5 sm:text-base";
 
 type HeroProps = {
   headline: string;
   body: string;
 };
 
-export function HeroPathActions({ compact }: { compact?: boolean }) {
+export function HeroPathActions() {
   const orderOnlineHref = ezCaterUrl();
-  const width = compact ? "w-full text-center" : "";
 
   return (
-    <>
-      <div
-        className={`flex ${compact ? "w-full flex-col" : "flex-wrap"} items-center gap-3`}
+    <div className="flex w-full flex-row flex-wrap items-stretch gap-3">
+      <a
+        href={orderOnlineHref}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={secondaryBtn}
+        onClick={() => trackPath("online")}
       >
-        <a
-          href={orderOnlineHref}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={`${secondaryBtn} ${width}`}
-          onClick={() => trackPath("online")}
-        >
-          Order Online (Standard Packages)
-        </a>
-        <Link
-          href="#catering-inquiry"
-          className={`${primaryBtn} ${width}`}
-          onClick={() => trackPath("quote")}
-        >
-          Request a Custom Quote
-        </Link>
-      </div>
-      <p
-        className={`w-full text-sm font-semibold leading-[1.5] text-brand-black/70 ${compact ? "text-center" : ""}`}
+        Order Online
+      </a>
+      <Link
+        href="#catering-inquiry"
+        className={primaryBtn}
+        onClick={() => trackPath("quote")}
       >
-        {pathHelper}
-      </p>
-    </>
+        Custom Quote
+      </Link>
+    </div>
   );
 }
 
-export { outlineBtn, primaryBtn, secondaryBtn, pathHelper };
+export { outlineBtn, primaryBtn, secondaryBtn };
 export type { HeroProps };
