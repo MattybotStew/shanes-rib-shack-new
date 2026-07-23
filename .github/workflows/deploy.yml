@@ -34,6 +34,9 @@ jobs:
         env:
           GITHUB_PAGES: "true"
           NEXT_PUBLIC_BASE_PATH: /shanes-rib-shack-new
+          # Optional overrides via repo Secrets; code has safe public defaults
+          NEXT_PUBLIC_EZCATER_URL: ${{ secrets.NEXT_PUBLIC_EZCATER_URL }}
+          NEXT_PUBLIC_CATERING_FORM_ENDPOINT: ${{ secrets.NEXT_PUBLIC_CATERING_FORM_ENDPOINT }}
         run: npm run build
 
       - name: Upload Pages artifact

@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { asset } from "@/lib/asset";
+import { cateringFormEndpoint } from "@/lib/formEndpoint";
 
 const fieldClass =
   "w-full rounded-[8px] border border-[#d6d6d6] bg-brand-tan px-3 py-3.5 text-[13px] font-semibold leading-[1.5] text-brand-black placeholder:text-[#808080] outline-none focus:border-brand-red focus-visible:ring-2 focus-visible:ring-brand-gold";
@@ -26,7 +27,7 @@ const packages = [
   "Boxed Lunches",
 ];
 
-const ENDPOINT = process.env.NEXT_PUBLIC_CATERING_FORM_ENDPOINT ?? "";
+const ENDPOINT = cateringFormEndpoint();
 
 type SubmitState = "idle" | "submitting" | "success" | "error";
 
@@ -90,13 +91,33 @@ export default function CateringForm() {
     track("catering_form_submitted", { path: "quote" });
 
     try {
+      // JSON body works with FormSubmit ajax + most webhooks; include _subject for inbox clarity
+      const payload: Record<string, string> = {
+        _subject: "Shane's Rib Shack — Catering Quote Request",
+        _template: "table",
+        _captcha: "false",
+      };
+      data.forEach((value, key) => {
+        if (typeof value === "string") payload[key] = value;
+      });
+
       const res = await fetch(ENDPOINT, {
         method: "POST",
-        body: data,
-        headers: { Accept: "application/json" },
+        body: JSON.stringify(payload),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
       });
 
       if (!res.ok) throw new Error(`Server responded with ${res.status}`);
+
+      // FormSubmit returns { success: "..." } or error object
+      const json = (await res.json().catch(() => null)) as {
+        success?: string;
+        error?: string;
+      } | null;
+      if (json?.error) throw new Error(json.error);
 
       setSubmitState("success");
       track("catering_form_success", { path: "quote" });
