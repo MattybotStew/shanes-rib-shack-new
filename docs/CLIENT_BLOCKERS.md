@@ -1,22 +1,27 @@
 # Client blockers — catering conversion
 
-Shared across Cursor / Grok / Cline / DeepSeek. Gates Phase A copy that ships as hard promises.
+Shared across Cursor / Grok / Cline / DeepSeek.
 
 ## Shared premise
 
 Production (`shanesribshack.com/catering/`) already has **both** paths (ezCater + form).  
-Ask about **CTA weight**, not “should we add online order.”
+This GitHub Pages repo now wires both as well. Ask about **CTA weight**, not existence.
 
 ## Decisions
 
 | # | Decision | Ask | Default if stalled | Status |
 | :--- | :--- | :--- | :--- | :--- |
-| 1 | Primary path **weight** | Online order vs custom quote — which gets visual primacy? | Equal-weight labeled dual CTAs | ⏳ Pending client |
-| 2 | SLA / price | Publishable reply time? $/person or min order? | Soft: “reach out during business hours.” No fake `$X` | ✅ Soft language shipped |
-| 3 | Measurement | Form vs ezCater visible pre/post? | Instrument both; review 14–30 days | ✅ Analytics hooks shipped; confirm GTM |
+| 1 | Primary path **weight** | Online vs quote — which is primary? | Equal-weight labeled dual CTAs | ⏳ Pending · equal-weight **live** |
+| 2 | SLA / price | Publishable reply time? $/person min? | Soft business-hours; no fake `$X` | ✅ Soft language **shipped** |
+| 3 | Measurement | Form vs ezCater pre/post? | Instrument both; review 14–30 days | ✅ Hooks **shipped** · GTM confirm ⏳ |
 
 ## Shipped defaults (2026-07-23)
 
-- ezCater CTAs → `https://www.ezcater.com/brand/shanes-rib-shack` + UTMs  
-- Form → FormSubmit ajax to `catering@shanesribshack.com` (confirm first email in that inbox)  
-- Override anytime with GitHub Secrets: `NEXT_PUBLIC_EZCATER_URL`, `NEXT_PUBLIC_CATERING_FORM_ENDPOINT`
+| Item | Value |
+| :--- | :--- |
+| Live catering | https://mattybotstew.github.io/shanes-rib-shack-new/catering/ |
+| ezCater | `https://www.ezcater.com/brand/shanes-rib-shack` + UTMs (`lib/ezcater.ts`) |
+| Form | FormSubmit ajax → `catering@shanesribshack.com` (`lib/formEndpoint.ts`) |
+| Overrides | GitHub Secrets `NEXT_PUBLIC_EZCATER_URL`, `NEXT_PUBLIC_CATERING_FORM_ENDPOINT` |
+
+**Human action:** Open first FormSubmit confirmation email in the catering inbox (required once).
