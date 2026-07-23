@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { useEffect, useId, useRef } from "react";
 import { orderUrl, type LocationDetail } from "@/lib/locationData";
 
@@ -100,9 +99,28 @@ export default function LocationOrderConfirm({
         aria-describedby={descId}
         className="relative z-10 w-full max-w-[420px] animate-[confirmPop_180ms_ease-out] rounded-[12px] border border-black/[0.1] bg-white p-6 shadow-[0_16px_40px_rgba(16,24,32,0.18)]"
       >
+        <button
+          type="button"
+          aria-label="Close"
+          onClick={onClose}
+          className="absolute right-3 top-3 flex size-10 items-center justify-center rounded-[6px] text-brand-black transition-colors duration-200 hover:bg-brand-tan hover:text-brand-red focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            className="size-5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.5"
+            strokeLinecap="round"
+          >
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+
         <h2
           id={titleId}
-          className="text-[28px] font-extrabold uppercase leading-none text-brand-red"
+          className="pr-10 text-[28px] font-extrabold uppercase leading-none text-brand-red"
         >
           {location.shortName}
         </h2>
@@ -125,13 +143,13 @@ export default function LocationOrderConfirm({
           >
             Continue to Order
           </a>
-          <Link
-            href="/locations"
+          <a
+            href={location.changeLocationUrl}
             className={`${ctaBase} border-2 border-brand-black bg-transparent text-brand-black hover:border-[#d94a2b] hover:bg-[#d94a2b] hover:text-white`}
             onClick={onClose}
           >
             Change Location
-          </Link>
+          </a>
         </div>
       </div>
     </div>

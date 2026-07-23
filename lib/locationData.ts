@@ -18,6 +18,8 @@ export type LocationDetail = {
   mapsUrl: string;
   cateringMinimum: string;
   ezCaterUrl: string;
+  /** Live locations picker with this store preselected (`?myShanes=`). */
+  changeLocationUrl: string;
   /** SEO body below the hero (live `location_content`). */
   content: LocationContentBlock;
 };
@@ -51,6 +53,8 @@ export const EDGEWOOD: LocationDetail = {
   cateringMinimum: "$200.00",
   ezCaterUrl:
     "https://www.ezcater.com/catering/shanes-rib-shack-atlanta-caroline-st-ne",
+  changeLocationUrl:
+    "https://www.shanesribshack.com/locations/?myShanes=LB1VY6W2WA7RZ",
   content: {
     heading: "Shane's Rib Shack in Edgewood, Atlanta, GA",
     addressLine: "1221 Caroline St, Atlanta, GA 30307",
