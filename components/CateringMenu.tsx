@@ -31,7 +31,7 @@ function PackagePathCtAs({ packageName }: { packageName: string }) {
         className={secondaryBtn}
         data-path="online"
       >
-        Order This Online
+        Order Online
       </a>
       <Link href={quoteHref} className={primaryBtn} data-path="quote">
         Get a Quote
