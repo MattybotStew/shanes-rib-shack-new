@@ -3,49 +3,143 @@ import PageShell from "@/components/PageShell";
 import Cta from "@/components/Cta";
 import { asset } from "@/lib/asset";
 import { ezCaterUrl } from "@/lib/ezcater";
-import { menuItems, sideOptions, dessertOptions } from "@/lib/menuData";
 
 export const metadata: Metadata = {
-  title: "Menu | Shane's Rib Shack",
+  title: "Menu | Shane's Rib Shack | Ribs, BBQ, Wings & Family Meals",
   description:
-    "Slow-smoked baby back ribs, hand-chopped BBQ pork, chicken, wings, and classic Southern sides. View our full menu and order online.",
+    "See our full BBQ menu including ribs, wings, sandwiches, plates, sides, kids meals, and family bundles. Order online or plan your next meal.",
 };
 
-const categories = [
+const menuSections = [
   {
-    title: "Ribs & Combos",
+    title: "Game Day Meals",
+    items: [
+      "50 Chicken Tenders + 5 Large Sides + 10 Sauces + 50 Cookies",
+      "Game Day Wings Bundle (50 pcs)",
+      "Family Feast (serves 10-12)",
+    ],
+  },
+  {
+    title: "Plates",
+    items: [
+      "Chopped Pork Plate (smoked 12+ hrs)",
+      "Chopped Chicken Plate",
+      "BBQ Sandwich Plate",
+      "2-Meat Combo Plate (pork + chicken)",
+      "3-Meat Combo Plate (ribs + pork + chicken)",
+      "Rib Plate (half rack)",
+      "Rib Plate (full rack)",
+    ],
+  },
+  {
+    title: "Sandwiches",
+    items: [
+      "Big Dad Sandwich (chopped pork on Texas toast)",
+      "BBQ Chicken Sandwich",
+      "Pulled Chicken Sandwich",
+    ],
+  },
+  {
+    title: "Burgers",
+    items: [
+      "Shack Burger",
+      "Cheese Shack Burger",
+      "Bacon Shack Burger",
+      "Beyond Burger",
+    ],
+  },
+  {
+    title: "Tenders",
+    items: [
+      "4-Pc Chicken Tenders",
+      "6-Pc Chicken Tenders",
+      "8-Pc Chicken Tenders",
+      "12-Pc Chicken Tenders",
+    ],
+  },
+  {
+    title: "Wings",
+    items: [
+      "6-Pc Smoked Wings",
+      "10-Pc Smoked Wings",
+      "15-Pc Smoked Wings",
+      "20-Pc Smoked Wings",
+      "50-Pc Smoked Wings",
+    ],
+  },
+  {
+    title: "Shack Baskets",
+    items: [
+      "Chicken Tender Basket",
+      "Wing & Fry Basket",
+      "Popcorn Shrimp Basket",
+      "Fish Basket",
+    ],
+  },
+  {
+    title: "Shack Potatoes",
+    items: [
+      "Pork Shack Potato",
+      "Chicken Shack Potato",
+      "Pork & Chicken Shack Potato",
+    ],
+  },
+  {
+    title: "Shack Fries",
+    items: [
+      "Pork Shack Fries",
+      "Chicken Shack Fries",
+      "Pork & Chicken Shack Fries",
+      "Loaded Cheese Fries",
+    ],
+  },
+  {
+    title: "Shack Salads",
+    items: [
+      "Grilled Chicken Salad",
+      "Pulled Pork Salad",
+    ],
+  },
+  {
+    title: "Kids Meals",
+    items: [
+      "Kids Chicken Tenders (2 pc)",
+      "Kids BBQ Sandwich",
+      "Kids Burger",
+      "Kids Grilled Cheese",
+    ],
+  },
+  {
+    title: "Meat Only",
     items: [
       "Full Rack Baby Back Ribs",
       "Half Rack Baby Back Ribs",
-      "Rib & Chicken Combo",
-      "Rib & Pork Combo",
+      "Chopped Pork (lb)",
+      "Chopped Chicken (lb)",
+      "Smoked Wings (per piece)",
     ],
   },
   {
-    title: "BBQ Pork & Chicken",
+    title: "Family Meals",
     items: [
-      "Chopped Pork Plate",
-      "Chopped Chicken Plate",
-      "Pork & Chicken Combo",
-      "BBQ Sandwich",
+      "Family Pack (serves 4-6)",
+      "Family Feast (serves 10-12)",
     ],
   },
   {
-    title: "Wings & More",
+    title: "Sides",
     items: [
-      "6-Piece Wings",
-      "12-Piece Wings",
-      "Wing & Fry Basket",
-      "Chicken Tender Basket",
+      "Baked Beans",
+      "Coleslaw",
+      "Brunswick Stew",
+      "Mac & Cheese",
+      "Potato Salad",
+      "Side Salad",
+      "French Fries",
+      "Onion Rings",
+      "Fried Okra",
+      "Green Beans",
     ],
-  },
-  {
-    title: "Southern Sides",
-    items: sideOptions.map((s) => s),
-  },
-  {
-    title: "Desserts",
-    items: dessertOptions.map((d) => d),
   },
   {
     title: "Drinks",
@@ -57,49 +151,50 @@ const categories = [
       "Bottled Water",
     ],
   },
+  {
+    title: "Desserts",
+    items: [
+      "Homemade Peach Cobbler",
+      "Brownies",
+      "Cookies",
+    ],
+  },
 ];
 
 export default function MenuPage() {
   return (
     <PageShell>
       {/* Hero */}
-      <section className="relative flex min-h-[300px] items-center justify-center overflow-hidden bg-brand-black lg:min-h-[400px]">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-50"
-          style={{ backgroundImage: `url(${asset("/images/hero-catering.jpg")})` }}
-        />
+      <section className="relative flex min-h-[350px] items-center justify-center overflow-hidden bg-brand-black lg:min-h-[450px]">
         <div className="relative z-10 px-5 py-16 text-center text-white lg:py-24">
-          <h1 className="mb-4 text-4xl font-extrabold uppercase leading-tight lg:text-5xl">
-            Our Menu
+          <h1 className="mb-4 text-[42px] font-extrabold uppercase leading-tight lg:text-[64px]">
+            Menu
           </h1>
           <p className="mx-auto max-w-2xl text-lg leading-relaxed text-white/80">
-            Slow-smoked, hand-chopped, and made from scratch. Every bite tastes like home.
+            Slow-smoked ribs, hand-chopped pork, wings, and Southern sides — made from scratch every day.
           </p>
         </div>
       </section>
 
-      {/* Regular Menu Grid */}
+      {/* Full Menu Grid */}
       <section className="bg-brand-tan px-5 py-16 lg:px-[66px] lg:py-24">
         <div className="mx-auto max-w-[1200px]">
-          <h2 className="mb-10 text-center text-2xl font-bold uppercase text-brand-black lg:text-3xl">
-            Dine-In & Takeout Menu
-          </h2>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {categories.map((cat) => (
+          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {menuSections.map((section) => (
               <div
-                key={cat.title}
+                key={section.title}
                 className="rounded-lg bg-white p-6 shadow-sm"
               >
-                <h3 className="mb-4 border-b border-brand-red/20 pb-2 text-xl font-bold uppercase text-brand-red">
-                  {cat.title}
-                </h3>
+                <h2 className="mb-4 border-b-2 border-brand-red pb-2 text-lg font-extrabold uppercase text-brand-red">
+                  {section.title}
+                </h2>
                 <ul className="space-y-2">
-                  {cat.items.map((item) => (
+                  {section.items.map((item) => (
                     <li
                       key={item}
-                      className="flex items-center gap-2 text-sm font-semibold text-brand-black"
+                      className="flex items-start gap-2 text-sm font-medium text-brand-black leading-snug"
                     >
-                      <span className="inline-block size-1.5 rounded-full bg-brand-red" />
+                      <span className="mt-[5px] inline-block size-1.5 shrink-0 rounded-full bg-brand-red" />
                       {item}
                     </li>
                   ))}
@@ -110,83 +205,34 @@ export default function MenuPage() {
         </div>
       </section>
 
-      {/* Catering Packages Section */}
+      {/* Catering Section */}
       <section className="bg-white px-5 py-16 lg:px-[66px] lg:py-24">
-        <div className="mx-auto max-w-[1200px]">
-          <h2 className="mb-4 text-center text-2xl font-bold uppercase text-brand-black lg:text-3xl">
-            Catering Packages
+        <div className="mx-auto max-w-[800px] text-center">
+          <h2 className="mb-4 text-[32px] font-extrabold uppercase text-brand-black">
+            Catering & Events
           </h2>
-          <p className="mx-auto mb-10 max-w-2xl text-center text-base leading-relaxed text-brand-gray">
-            Perfect for offices, parties, weddings, and events. Each package includes
-            bread, BBQ sauce, tea, and disposableware. Add sides and desserts to complete
-            your meal.
+          <p className="mb-8 text-base leading-relaxed text-brand-gray">
+            {`Planning a party, office lunch, or wedding? We've got BBQ packages that
+            feed a crowd. Choose from One Meat, Two Meat, Three Meat, or Boxed Lunches.`}
           </p>
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {menuItems.map((pkg) => (
-              <div
-                key={pkg.id}
-                className="flex flex-col rounded-lg border border-brand-black/10 bg-brand-tan p-6"
-              >
-                <h3 className="mb-3 text-lg font-bold uppercase text-brand-red">
-                  {pkg.title}
-                </h3>
-                <ul className="mb-4 flex-1 space-y-1.5">
-                  {pkg.kind === "package"
-                    ? pkg.items.map((item, i) => (
-                        <li
-                          key={i}
-                          className="text-sm leading-relaxed text-brand-gray"
-                        >
-                          {item}
-                        </li>
-                      ))
-                    : pkg.lines.map((line, i) => (
-                        <li
-                          key={i}
-                          className="text-sm leading-relaxed text-brand-gray"
-                        >
-                          {line}
-                        </li>
-                      ))}
-                </ul>
-                {pkg.choices.sideCount > 0 && (
-                  <p className="mb-1 text-xs font-semibold uppercase text-brand-black">
-                    Choose {pkg.choices.sideCount} side{pkg.choices.sideCount > 1 ? "s" : ""}:
-                  </p>
-                )}
-                {pkg.choices.meatOptions && (
-                  <p className="text-xs text-brand-gray">
-                    Meat choice: {pkg.choices.meatOptions.join(" / ")}
-                  </p>
-                )}
-              </div>
-            ))}
-          </div>
-          <div className="mt-10 text-center">
-            <Cta href="/catering" variant="red">
-              Order Catering
-            </Cta>
-          </div>
+          <Cta href="/catering" variant="red">
+            View Catering Menu
+          </Cta>
         </div>
       </section>
 
-      {/* CTAs */}
+      {/* CTA */}
       <section className="bg-brand-tan px-5 py-16 text-center lg:py-20">
         <div className="mx-auto max-w-[600px]">
-          <h2 className="mb-4 text-2xl font-bold uppercase text-brand-black lg:text-3xl">
+          <h2 className="mb-4 text-[32px] font-extrabold uppercase text-brand-black">
             Ready to Eat?
           </h2>
           <p className="mb-8 text-base leading-relaxed text-brand-gray">
-            Order online for pickup or delivery, or book catering for your next event.
+            Order online for pickup or delivery.
           </p>
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Cta href={ezCaterUrl()} variant="red">
-              Order Online
-            </Cta>
-            <Cta href="/catering" variant="outline">
-              View Catering Menu
-            </Cta>
-          </div>
+          <Cta href={ezCaterUrl()} variant="red">
+            Order Now
+          </Cta>
         </div>
       </section>
     </PageShell>
