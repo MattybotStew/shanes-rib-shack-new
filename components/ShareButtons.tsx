@@ -8,10 +8,25 @@ type ShareButtonsProps = {
   title: string;
 };
 
+/** Build a shareable absolute URL, respecting GitHub Pages basePath. */
 function absoluteUrl(path: string) {
   if (typeof window === "undefined") return path;
   try {
-    return new URL(path, window.location.origin).toString();
+    if (/^https?:\/\//i.test(path)) return path;
+    const normalized = path.startsWith("/") ? path : `/${path}`;
+    // Prefer the live page URL when already on this route (includes basePath).
+    const current = new URL(window.location.href);
+    const currentPath = current.pathname.replace(/\/$/, "") || "/";
+    const targetPath = normalized.replace(/\/$/, "") || "/";
+    if (
+      currentPath === targetPath ||
+      currentPath.endsWith(targetPath)
+    ) {
+      return current.toString().split("#")[0].split("?")[0];
+    }
+    // Prefix basePath for site-relative paths (Pages mounts under /shanes-rib-shack-new).
+    const withBase = asset(normalized);
+    return new URL(withBase, window.location.origin).toString();
   } catch {
     return path;
   }

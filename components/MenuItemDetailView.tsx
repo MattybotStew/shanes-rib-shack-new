@@ -4,7 +4,6 @@ import ShareButtons from "@/components/ShareButtons";
 import { asset } from "@/lib/asset";
 import { ORDER_HOME_URL } from "@/lib/locationData";
 import {
-  MENU_ITEM_SEO_DOUGLASVILLE,
   NUTRITION_GUIDE_URL,
   type MenuItemDetail,
   type MenuItemSeoBlock,
@@ -14,14 +13,12 @@ const rule = "h-0 w-full border-t border-dashed border-brand-black/30";
 
 type Props = {
   item: MenuItemDetail;
+  /** Optional location SEO block — omit unless the PDP is location-specific. */
   seo?: MenuItemSeoBlock;
 };
 
 /** Menu item PDP — Figma `DK-Menu-Item-sandwich-BigDad` / `MB-Menu-Item`. */
-export default function MenuItemDetailView({
-  item,
-  seo = MENU_ITEM_SEO_DOUGLASVILLE,
-}: Props) {
+export default function MenuItemDetailView({ item, seo }: Props) {
   const categoryHref = `/menu/${item.categorySlug}/`;
   const sharePath = `/menu/${item.categorySlug}/${item.itemSlug}/`;
   const tagline =
@@ -125,78 +122,83 @@ export default function MenuItemDetailView({
         </div>
       </section>
 
-      {/* Location SEO content */}
-      <section
-        className="flex w-full flex-col items-center px-5 pt-10 lg:pt-[60px]"
-        aria-labelledby="menu-item-seo-heading"
-      >
-        <div className="w-full max-w-[1200px] rounded-[12px] border border-black/20 bg-white p-5 sm:p-10 lg:p-[80px]">
-          <div className="flex w-full flex-col items-start gap-8 lg:gap-10">
-            <h2
-              id="menu-item-seo-heading"
-              className="w-full text-[28px] font-extrabold uppercase leading-none text-brand-black sm:text-[36px] lg:text-[45px]"
-            >
-              {seo.heading}
-            </h2>
+      {/* Optional location SEO — only when explicitly provided (not a false default). */}
+      {seo ? (
+        <section
+          className="flex w-full flex-col items-center px-5 pt-10 lg:pt-[60px]"
+          aria-labelledby="menu-item-seo-heading"
+        >
+          <div className="w-full max-w-[1200px] rounded-[12px] border border-black/20 bg-white p-5 sm:p-10 lg:p-[80px]">
+            <div className="flex w-full flex-col items-start gap-8 lg:gap-10">
+              <h2
+                id="menu-item-seo-heading"
+                className="w-full text-[28px] font-extrabold uppercase leading-none text-brand-black sm:text-[36px] lg:text-[45px]"
+              >
+                {seo.heading}
+              </h2>
 
-            <p className="w-full text-base font-normal leading-[1.3] text-[#828282]">
-              {seo.addressLine}
-              <br />
-              {seo.callLabel}{" "}
-              <a href={seo.phoneHref} className="text-[#c41e3a] hover:underline">
-                {seo.phoneDisplay}
-              </a>
-            </p>
+              <p className="w-full text-base font-normal leading-[1.3] text-[#828282]">
+                {seo.addressLine}
+                <br />
+                {seo.callLabel}{" "}
+                <a href={seo.phoneHref} className="text-[#c41e3a] hover:underline">
+                  {seo.phoneDisplay}
+                </a>
+              </p>
 
-            <p className="w-full text-base font-normal leading-[1.3] text-[#828282]">
-              {seo.intro}
-            </p>
+              <p className="w-full text-base font-normal leading-[1.3] text-[#828282]">
+                {seo.intro}
+              </p>
 
-            {seo.sections.map((section) => (
-              <div key={section.heading} className="flex w-full flex-col gap-8 lg:gap-10">
-                <h3 className="w-full text-2xl font-bold leading-none text-brand-black">
-                  {section.heading}
-                </h3>
-                {section.paragraphs.map((p, i) => (
-                  <p
-                    key={`${section.heading}-${i}`}
-                    className="w-full text-base font-normal leading-[1.3] text-[#828282]"
-                  >
-                    {section.heading === "Why Locals Keep Coming Back" &&
-                    i === section.paragraphs.length - 1 ? (
-                      <>
-                        {p}
-                        <a
-                          href={seo.mapsUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[#c41e3a] hover:underline"
-                        >
-                          find this Shack on Google
-                        </a>
-                        .
-                      </>
-                    ) : (
-                      p
-                    )}
-                  </p>
-                ))}
-              </div>
-            ))}
+              {seo.sections.map((section) => (
+                <div key={section.heading} className="flex w-full flex-col gap-8 lg:gap-10">
+                  <h3 className="w-full text-2xl font-bold leading-none text-brand-black">
+                    {section.heading}
+                  </h3>
+                  {section.paragraphs.map((p, i) => (
+                    <p
+                      key={`${section.heading}-${i}`}
+                      className="w-full text-base font-normal leading-[1.3] text-[#828282]"
+                    >
+                      {section.heading === "Why Locals Keep Coming Back" &&
+                      i === section.paragraphs.length - 1 ? (
+                        <>
+                          {p}
+                          <a
+                            href={seo.mapsUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#c41e3a] hover:underline"
+                          >
+                            find this Shack on Google
+                          </a>
+                          .
+                        </>
+                      ) : (
+                        p
+                      )}
+                    </p>
+                  ))}
+                </div>
+              ))}
 
-            <p className="w-full text-base font-normal leading-[1.3] text-[#828282]">
-              {seo.closing}
-            </p>
-
-            <ShareButtons path={sharePath} title={item.name} />
-
-            <Link
-              href={categoryHref}
-              className="text-sm font-bold uppercase text-brand-red hover:underline"
-            >
-              ← Back to {item.categoryTitle}
-            </Link>
+              <p className="w-full text-base font-normal leading-[1.3] text-[#828282]">
+                {seo.closing}
+              </p>
+            </div>
           </div>
+        </section>
+      ) : null}
+
+      <section className="flex w-full flex-col items-center px-5 py-10 lg:pb-[60px]">
+        <div className="flex w-full max-w-[1200px] flex-col items-start gap-6">
+          <ShareButtons path={sharePath} title={item.name} />
+          <Link
+            href={categoryHref}
+            className="text-sm font-bold uppercase text-brand-red hover:underline"
+          >
+            ← Back to {item.categoryTitle}
+          </Link>
         </div>
       </section>
     </>

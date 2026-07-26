@@ -10,8 +10,9 @@ const PER_PAGE = 6;
 
 function BlogGridInner({ articles }: { articles: BlogArticle[] }) {
   const searchParams = useSearchParams();
-  const page = Number(searchParams.get("page")) || 1;
-  const totalPages = Math.ceil(articles.length / PER_PAGE);
+  const totalPages = Math.max(1, Math.ceil(articles.length / PER_PAGE));
+  const rawPage = Number(searchParams.get("page")) || 1;
+  const page = Math.min(Math.max(1, rawPage), totalPages);
   const start = (page - 1) * PER_PAGE;
   const displayed = articles.slice(start, start + PER_PAGE);
 

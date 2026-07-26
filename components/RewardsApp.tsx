@@ -1,6 +1,11 @@
 import Link from "next/link";
 import { asset } from "@/lib/asset";
 
+const APP_STORE_URL =
+  "https://apps.apple.com/us/app/shanes-rib-shack-2-0/id6759003661";
+const PLAY_STORE_URL =
+  "https://play.google.com/store/apps/details?id=com.tryperdiem.franchise.shanesribshack&hl=en";
+
 function AppleBadge({
   size = "desktop",
 }: {
@@ -67,14 +72,14 @@ export default function RewardsApp() {
             </p>
             <div className="flex items-start gap-6">
               <Link
-                href="https://apps.apple.com"
+                href={APP_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <AppleBadge size="desktop" />
               </Link>
               <Link
-                href="https://play.google.com"
+                href={PLAY_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative block h-[49px] w-[165px] shrink-0"
@@ -114,14 +119,14 @@ export default function RewardsApp() {
             </p>
             <div className="flex items-start gap-[10px]">
               <Link
-                href="https://apps.apple.com"
+                href={APP_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <AppleBadge size="mobile" />
               </Link>
               <Link
-                href="https://play.google.com"
+                href={PLAY_STORE_URL}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="relative block h-[42px] w-[140px] shrink-0"

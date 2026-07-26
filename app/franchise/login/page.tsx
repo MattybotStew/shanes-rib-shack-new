@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   description: "Franchise partner login portal for Shane's Rib Shack.",
 };
 
-const portalLinks = [
-  { label: "Operations Manual", href: "#" },
-  { label: "Marketing Resources", href: "#" },
-  { label: "Supply Ordering", href: "#" },
-  { label: "Training Materials", href: "#" },
-  { label: "Reports & Analytics", href: "#" },
-];
+const portalResources = [
+  "Operations Manual",
+  "Marketing Resources",
+  "Supply Ordering",
+  "Training Materials",
+  "Reports & Analytics",
+] as const;
 
 export default function FranchiseLoginPage() {
   return (
@@ -35,18 +35,19 @@ export default function FranchiseLoginPage() {
             {`Access the franchise partner portal for resources, reports, and support.`}
           </p>
 
-          <div className="mb-8 space-y-3">
-            {portalLinks.map((link) => (
-              <a
-                key={link.label}
-                href={link.href}
-                className="flex items-center justify-between rounded-lg border border-brand-black/10 bg-brand-tan px-6 py-4 text-sm font-bold uppercase text-brand-black transition-colors hover:bg-brand-red hover:text-white"
+          <ul className="mb-8 space-y-3">
+            {portalResources.map((label) => (
+              <li
+                key={label}
+                className="flex items-center justify-between rounded-lg border border-brand-black/10 bg-brand-tan px-6 py-4 text-sm font-bold uppercase text-brand-black"
               >
-                {link.label}
-                <span aria-hidden>&rarr;</span>
-              </a>
+                {label}
+                <span className="text-[10px] font-semibold normal-case tracking-wide text-brand-gray">
+                  Via portal
+                </span>
+              </li>
             ))}
-          </div>
+          </ul>
 
           <div className="text-center">
             <Cta

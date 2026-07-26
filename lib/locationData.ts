@@ -53,8 +53,7 @@ export const EDGEWOOD: LocationDetail = {
   cateringMinimum: "$200.00",
   ezCaterUrl:
     "https://www.ezcater.com/catering/shanes-rib-shack-atlanta-caroline-st-ne",
-  changeLocationUrl:
-    "https://www.shanesribshack.com/locations/?myShanes=LB1VY6W2WA7RZ",
+  changeLocationUrl: "/locations/",
   content: {
     heading: "Shane's Rib Shack in Edgewood, Atlanta, GA",
     addressLine: "1221 Caroline St, Atlanta, GA 30307",
@@ -105,8 +104,7 @@ export const NORCROSS: LocationDetail = {
   cateringMinimum: "$200.00",
   ezCaterUrl:
     "https://www.ezcater.com/catering/shanes-rib-shack-norcross",
-  changeLocationUrl:
-    "https://www.shanesribshack.com/locations/?myShanes=NORCROSS",
+  changeLocationUrl: "/locations/",
   content: {
     heading: "Shane's Rib Shack in Norcross, GA",
     addressLine: "5770 Peachtree Industrial Blvd Suite 111, Norcross, GA 30092",
@@ -144,8 +142,7 @@ export const CARROLLTON: LocationDetail = {
   cateringMinimum: "$200.00",
   ezCaterUrl:
     "https://www.ezcater.com/catering/shanes-rib-shack-carrollton",
-  changeLocationUrl:
-    "https://www.shanesribshack.com/locations/?myShanes=CARROLLTON",
+  changeLocationUrl: "/locations/",
   content: {
     heading: "Shane's Rib Shack in Carrollton, GA",
     addressLine: "1109 Bankhead Hwy, Carrollton, GA 30117",
@@ -183,8 +180,7 @@ export const DOUGLASVILLE: LocationDetail = {
   cateringMinimum: "$200.00",
   ezCaterUrl:
     "https://www.ezcater.com/catering/shanes-rib-shack-douglasville",
-  changeLocationUrl:
-    "https://www.shanesribshack.com/locations/?myShanes=DOUGLASVILLE",
+  changeLocationUrl: "/locations/",
   content: {
     heading: "Shane's Rib Shack in Douglasville, GA",
     addressLine: "6480 Douglas Blvd, Douglasville, GA 30135",

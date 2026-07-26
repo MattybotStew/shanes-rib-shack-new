@@ -34,6 +34,7 @@ function LocationCard({ item }: { item: LocationListItem }) {
   const detailsHref = item.slug
     ? `/locations/${item.slug}/`
     : item.mapsUrl;
+  const closed = Boolean(item.closedTemporarily);
 
   return (
     <article className="flex w-full flex-col gap-3 opacity-[0.83]">
@@ -41,6 +42,11 @@ function LocationCard({ item }: { item: LocationListItem }) {
         <div className="flex min-w-0 flex-1 flex-col gap-3.5">
           <h3 className="text-lg font-bold uppercase leading-[21px] text-brand-red">
             {item.title}
+            {closed ? (
+              <span className="ml-2 inline-block rounded bg-brand-black px-2 py-0.5 align-middle text-[10px] font-bold normal-case tracking-wide text-white">
+                Closed temporarily
+              </span>
+            ) : null}
           </h3>
           <p className="text-base font-semibold leading-[1.3] text-brand-black">
             {item.address}
@@ -53,23 +59,41 @@ function LocationCard({ item }: { item: LocationListItem }) {
             >
               Directions
             </Cta>
-            <Cta
-              href={item.cateringUrl}
-              variant="black"
-              className={`${compactCta} min-w-0 flex-1 border-2 border-brand-black lg:flex-none`}
-            >
-              Order Catering
-            </Cta>
+            {closed ? (
+              <span
+                className={`${compactCta} inline-flex min-w-0 flex-1 cursor-not-allowed items-center justify-center rounded-[5px] border-2 border-brand-black/30 bg-brand-black/30 text-center font-bold uppercase text-white lg:flex-none`}
+                aria-disabled="true"
+              >
+                Order Catering
+              </span>
+            ) : (
+              <Cta
+                href={item.cateringUrl}
+                variant="black"
+                className={`${compactCta} min-w-0 flex-1 border-2 border-brand-black lg:flex-none`}
+              >
+                Order Catering
+              </Cta>
+            )}
           </div>
         </div>
         <div className="flex w-full items-center lg:w-auto lg:shrink-0">
-          <Cta
-            href={detailsHref}
-            variant="red"
-            className="w-full !px-4 !py-4 text-base leading-4 sm:!px-4 sm:!py-4 sm:text-base lg:w-auto"
-          >
-            View Details
-          </Cta>
+          {closed ? (
+            <span
+              className="inline-flex w-full cursor-not-allowed items-center justify-center rounded-[5px] bg-brand-red/40 px-4 py-4 text-center text-base font-bold uppercase leading-4 text-white lg:w-auto"
+              aria-disabled="true"
+            >
+              Temporarily Closed
+            </span>
+          ) : (
+            <Cta
+              href={detailsHref}
+              variant="red"
+              className="w-full !px-4 !py-4 text-base leading-4 sm:!px-4 sm:!py-4 sm:text-base lg:w-auto"
+            >
+              View Details
+            </Cta>
+          )}
         </div>
       </div>
     </article>
@@ -77,18 +101,23 @@ function LocationCard({ item }: { item: LocationListItem }) {
 }
 
 function SearchFilters({
+  idPrefix,
   query,
   radius,
   onQueryChange,
   onRadiusChange,
   onSearch,
 }: {
+  idPrefix: string;
   query: string;
   radius: string;
   onQueryChange: (value: string) => void;
   onRadiusChange: (value: string) => void;
   onSearch: () => void;
 }) {
+  const queryId = `${idPrefix}-location-query`;
+  const radiusId = `${idPrefix}-location-radius`;
+
   return (
     <form
       className="flex w-full flex-col gap-4 lg:flex-row lg:items-center lg:gap-10"
@@ -99,13 +128,13 @@ function SearchFilters({
     >
       <div className="flex min-w-0 flex-1 flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
         <label
-          htmlFor="location-query"
+          htmlFor={queryId}
           className="shrink-0 text-base font-semibold leading-[1.3] text-[#0d0d0d]"
         >
           Location
         </label>
         <input
-          id="location-query"
+          id={queryId}
           type="search"
           name="location"
           value={query}
@@ -125,14 +154,14 @@ function SearchFilters({
 
       <div className="flex min-w-0 flex-1 flex-col gap-2 sm:flex-row sm:items-center sm:gap-3">
         <label
-          htmlFor="location-radius"
+          htmlFor={radiusId}
           className="shrink-0 text-base font-semibold leading-[1.3] text-[#0d0d0d]"
         >
           Select a Radius
         </label>
         <div className="relative min-w-0 flex-1">
           <select
-            id="location-radius"
+            id={radiusId}
             name="radius"
             value={radius}
             onChange={(e) => onRadiusChange(e.target.value)}
@@ -206,6 +235,7 @@ export default function LocationsFinder({ locations }: Props) {
         {filtersOpen ? (
           <div className="mt-4 rounded-[12px] border border-[rgba(31,33,31,0.2)] bg-white p-5">
             <SearchFilters
+              idPrefix="mobile"
               query={queryDraft}
               radius={radiusDraft}
               onQueryChange={setQueryDraft}
@@ -220,6 +250,7 @@ export default function LocationsFinder({ locations }: Props) {
       <div className="hidden w-full max-w-[1180px] lg:block">
         <div className="rounded-[12px] border border-[rgba(31,33,31,0.2)] bg-white p-[30px]">
           <SearchFilters
+            idPrefix="desktop"
             query={queryDraft}
             radius={radiusDraft}
             onQueryChange={setQueryDraft}

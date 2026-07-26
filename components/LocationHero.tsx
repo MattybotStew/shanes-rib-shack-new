@@ -45,7 +45,7 @@ const ctaBase =
 
 /** Location detail hero — matches live Edgewood card chrome + CTAs. */
 export default function LocationHero({ location }: { location: LocationDetail }) {
-  const [isMyShack, setIsMyShack] = useState(true);
+  const [isMyShack, setIsMyShack] = useState(false);
   const [confirmFulfillment, setConfirmFulfillment] =
     useState<OrderFulfillment | null>(null);
 

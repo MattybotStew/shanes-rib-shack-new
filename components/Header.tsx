@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { asset } from "@/lib/asset";
 import { locationFromPathname } from "@/lib/locationData";
 
@@ -65,6 +65,11 @@ export default function Header() {
   const onLocations = isActiveNav(pathname, "/locations");
   const activeLocation = locationFromPathname(pathname);
   const shackCtaLabel = onLocations ? "Change Your Shack" : "Find your shack";
+
+  // Header lives in the root layout — close the drawer on client navigations.
+  useEffect(() => {
+    setMobileOpen(false);
+  }, [pathname]);
 
   return (
     <header className="flex w-full flex-col items-center">
@@ -215,6 +220,7 @@ export default function Header() {
             className="relative block h-[17px] w-[22px] shrink-0 cursor-pointer"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
+            aria-controls="mobile-nav"
             onClick={() => setMobileOpen((o) => !o)}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -230,6 +236,7 @@ export default function Header() {
             href="/"
             className="relative flex h-[58px] w-[58px] shrink-0 items-center justify-center"
             aria-label="Shane's Rib Shack home"
+            onClick={() => setMobileOpen(false)}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -242,6 +249,7 @@ export default function Header() {
           <Link
             href="/order"
             className="flex shrink-0 items-center justify-center rounded-[5px] text-center text-[10.44px] font-bold uppercase leading-[10.444px] text-brand-black"
+            onClick={() => setMobileOpen(false)}
           >
             <span>
               Order
@@ -255,6 +263,7 @@ export default function Header() {
       {/* Mobile nav panel (hamburger open) — not in closed Figma frame; needed for usability */}
       {mobileOpen ? (
         <nav
+          id="mobile-nav"
           className="flex w-full flex-col border-t border-brand-black/10 bg-white px-4 py-2 lg:hidden"
           aria-label="Mobile"
         >

@@ -272,12 +272,18 @@ export default function CareersForm() {
             <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
               {(
                 ["monday", "tuesday", "wednesday", "thursday", "friday"] as const
-              ).map((day) => (
+              ).map((day) => {
+                const selectId = `cf-${day}`;
+                return (
                 <div key={day}>
-                  <label className="mb-1 block text-[10px] font-bold uppercase text-brand-gray">
+                  <label
+                    className="mb-1 block text-[10px] font-bold uppercase text-brand-gray"
+                    htmlFor={selectId}
+                  >
                     {day.charAt(0).toUpperCase() + day.slice(1)}
                   </label>
                   <select
+                    id={selectId}
                     className={inputClass}
                     value={form[day]}
                     onChange={(e) => update(day, e.target.value)}
@@ -289,7 +295,8 @@ export default function CareersForm() {
                     ))}
                   </select>
                 </div>
-              ))}
+                );
+              })}
             </div>
           </fieldset>
 

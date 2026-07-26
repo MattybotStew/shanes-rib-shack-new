@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef } from "react";
+import Link from "next/link";
 import { orderUrl, type LocationDetail } from "@/lib/locationData";
 
 export type OrderFulfillment = "PICKUP" | "DELIVERY";
@@ -143,13 +144,13 @@ export default function LocationOrderConfirm({
           >
             Continue to Order
           </a>
-          <a
-            href={location.changeLocationUrl}
+          <Link
+            href="/locations/"
             className={`${ctaBase} border-2 border-brand-black bg-transparent text-brand-black hover:border-[#d94a2b] hover:bg-[#d94a2b] hover:text-white`}
             onClick={onClose}
           >
             Change Location
-          </a>
+          </Link>
         </div>
       </div>
     </div>
