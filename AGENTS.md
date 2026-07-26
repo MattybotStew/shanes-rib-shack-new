@@ -165,7 +165,7 @@ AGENTS.md
 app/page.tsx (marketing home), app/catering/page.tsx (funnel), app/layout.tsx, app/globals.css
 app/not-found.tsx (branded 404)
 app/menu/                  Menu page
-app/locations/             Locations index + edgewood-atlanta-ga/ detail
+app/locations/             Locations index + [slug]/ dynamic detail
 app/our-story/             Our Story
 app/news-events/           News & Events
 app/careers/               Careers
@@ -186,7 +186,7 @@ components/
             CateringMenu, CateringForm, Hero (present, hidden in flow),
             HeroPathActions
   location: LocationContent, LocationHero, LocationOrderConfirm, LocationPromoBanner
-lib/ asset.ts, ezcater.ts, formEndpoint.ts, menuData.ts, newsData.ts, locationData.ts
+lib/ asset.ts, ezcater.ts, formEndpoint.ts, menuData.ts, newsData.ts, locationData.ts, menuPageData.ts
 public/images/home/          homepage photography (Figma exports)
 public/images/arrow-right.svg
 docs/ strategies/, plans/, CLIENT_BLOCKERS.md, UX_CONVERSION_STRATEGY.md (index)
@@ -195,6 +195,8 @@ CONSENSUS_PLAN.md, CATERING_PLAN.md
 
 ## Remaining known issues (not Phase A blockers)
 1. Dual headline treatment on older catering hero (desktop H1 / mobile styled `p`) — intentional for a11y  
+2. Menu page uses placeholder images for items without dedicated photos (Figma design has per-item photography)  
+3. Only 4 locations have detail pages — remaining 24+ from live site not yet added to `ALL_LOCATIONS`  
 
 ## Agent focus now
 1. **Do not** re-implement Phase A or the `/catering/` 2-step funnel unless fixing a regression.  
@@ -202,4 +204,5 @@ CONSENSUS_PLAN.md, CATERING_PLAN.md
 3. Prefer regression fixes / human-flagged pixel tweaks over new homepage sections.  
 4. Ops/client blockers + Phase B debate remain human/docs work; deploy/ship local UX only when asked.  
 5. **All 20 pages are live on Pages** — extend, don't re-implement.  
+6. Menu page now matches Figma `DK-Menu-Item-sandwich` design — add real item photos to `menuPageData.ts` when available.  
 <!-- END:project-context -->
