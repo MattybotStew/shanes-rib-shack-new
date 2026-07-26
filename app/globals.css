@@ -23,6 +23,62 @@
   --font-sans: var(--font-montserrat);
 }
 
+/* Figma `shane_typography_system` (6552:22112) — size / line-height / weight.
+   Utilities: text-h2, text-h3-big, text-h3, text-h4, text-h6,
+              text-p-big, text-p-regular, text-p-small, text-cta, text-nav */
+@theme {
+  --text-h2: 74px;
+  --text-h2--line-height: 1;
+  --text-h2--font-weight: 800;
+
+  --text-h3-big: 48px;
+  --text-h3-big--line-height: 1;
+  --text-h3-big--font-weight: 800;
+
+  --text-h3: 45px;
+  --text-h3--line-height: 1;
+  --text-h3--font-weight: 800;
+
+  --text-h4: 32px;
+  --text-h4--line-height: 1;
+  --text-h4--font-weight: 800;
+
+  --text-h6: 24px;
+  --text-h6--line-height: 1;
+  --text-h6--font-weight: 600;
+
+  --text-p-big: 18px;
+  --text-p-big--line-height: 1.5;
+  --text-p-big--font-weight: 600;
+
+  --text-p-regular: 16px;
+  --text-p-regular--line-height: 1.3;
+  --text-p-regular--font-weight: 600;
+
+  --text-p-small: 13px;
+  --text-p-small--line-height: 1.5;
+  --text-p-small--font-weight: 600;
+
+  --text-cta: 16px;
+  --text-cta--line-height: 1;
+  --text-cta--font-weight: 700;
+
+  --text-nav: 12px;
+  --text-nav--line-height: 1;
+  --text-nav--font-weight: 700;
+
+  /* Figma radius system: 5 CTA / 10 card image / 12 card / 20 gift card /
+     21 gift card photo / 50 arrow pill. Utilities: rounded-cta,
+     rounded-card-image, rounded-card, rounded-gift-card,
+     rounded-gift-card-photo, rounded-pill */
+  --radius-cta: 5px;
+  --radius-card-image: 10px;
+  --radius-card: 12px;
+  --radius-gift-card: 20px;
+  --radius-gift-card-photo: 21px;
+  --radius-pill: 50px;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

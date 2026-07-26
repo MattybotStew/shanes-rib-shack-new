@@ -1,0 +1,54 @@
+{
+  "languages": {
+    "TypeScript": {
+      "formatter": "language_server",
+      "format_on_save": "on"
+    },
+    "TSX": {
+      "formatter": "language_server",
+      "format_on_save": "on"
+    },
+    "CSS": {
+      "formatter": "language_server",
+      "format_on_save": "on"
+    }
+  },
+  "agent_servers": {
+    "cline": {
+      "type": "custom",
+      "command": "/Users/matthewstewart/Developer/shanes-rib-shack-new/bin/cline-zed",
+      "args": ["--acp"],
+      "env": {}
+    }
+  },
+  "tasks": {
+    "Cline: Plan Mode": {
+      "command": "bin/cline-zed",
+      "args": ["-p", "-c", ".", "--thinking", "medium"],
+      "cwd": "$ZED_WORKTREE_ROOT",
+      "use_new_terminal": "true",
+      "label": "Cline (plan)"
+    },
+    "Cline: Act Mode": {
+      "command": "bin/cline-zed",
+      "args": ["-c", ".", "--thinking", "medium"],
+      "cwd": "$ZED_WORKTREE_ROOT",
+      "use_new_terminal": "true",
+      "label": "Cline (act)"
+    },
+    "Cline: TUI (Interactive)": {
+      "command": "bin/cline-zed",
+      "args": ["-i", "-c", "."],
+      "cwd": "$ZED_WORKTREE_ROOT",
+      "use_new_terminal": "true",
+      "label": "Cline (TUI)"
+    },
+    "Cline: Resume Session": {
+      "command": "bin/cline-zed",
+      "args": ["-i", "-c", ".", "--id"],
+      "cwd": "$ZED_WORKTREE_ROOT",
+      "use_new_terminal": "true",
+      "label": "Cline (resume)"
+    }
+  }
+}

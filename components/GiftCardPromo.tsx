@@ -26,36 +26,13 @@ export default function GiftCardPromo() {
           <div className="relative h-[290px] w-full overflow-hidden rounded-[21px] sm:h-[300px] lg:h-[327px] lg:flex-1">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={asset("/images/home/giftcard-plate.jpg")}
-              alt="Shane's Rib Shack plate of chopped BBQ pork with sides"
-              className="absolute inset-0 size-full object-cover"
+              src={asset("/images/home/giftcard-plate-new.png")}
+              alt="Shane's Rib Shack gift card with BBQ plate"
+              className="size-full object-cover"
             />
-            {/* Mobile overlay — MB-Home: ~23% / ~43% of image */}
-            <div className="absolute left-[23%] top-[43%] rotate-[17.33deg] lg:hidden">
-              <div className="relative h-[149px] w-[233px] overflow-hidden rounded-[20px] shadow-[0px_4px_74px_0px_rgba(0,0,0,0.75)]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={asset("/images/home/giftcard-cards.png")}
-                  alt="Shane's Rib Shack gift cards"
-                  className="absolute inset-0 size-full object-cover"
-                />
-              </div>
-            </div>
-            {/* Desktop overlay — DK-Home */}
-            <div className="absolute left-[46%] top-[28%] hidden rotate-[17.33deg] lg:block">
-              <div className="relative h-[181px] w-[283px] overflow-hidden rounded-[20px] shadow-[0px_4px_74px_0px_rgba(0,0,0,0.75)]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={asset("/images/home/giftcard-cards.png")}
-                  alt="Shane's Rib Shack gift cards"
-                  className="absolute inset-0 size-full object-cover"
-                />
-              </div>
-            </div>
           </div>
 
           <div className="flex w-full flex-col items-start justify-center gap-6 lg:flex-1 lg:gap-[30px]">
-            {/* Smaller than the 74px H2 scale — this headline sits in a half-width column. */}
             <h2 className="w-full text-[45px] font-extrabold uppercase leading-none text-white lg:text-[60px]">
               {headline}
             </h2>

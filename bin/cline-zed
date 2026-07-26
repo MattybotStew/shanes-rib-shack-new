@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Cline CLI wrapper for Zed terminal
+# Unsets env vars that conflict when VS Code Cline extension is also running.
+# Place in your PATH or source this file before using `cline`.
+
+# These are set by the VS Code Cline extension and cause the CLI
+# to try starting its own hub daemon instead of connecting to the existing one.
+unset CLINE_RUN_AS_HUB_DAEMON
+unset CLINE_NO_INTERACTIVE
+unset CLINE_BUILD_ENV
+
+# Forward all args to the real cline binary
+exec cline "$@"

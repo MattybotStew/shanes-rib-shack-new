@@ -27,6 +27,12 @@ This version has breaking changes — APIs, conventions, and file structure may 
 11. **Locations listing finder** — `/locations/` uses `LocationsFinder` (filters + list + desktop static map) matching DK-Location `6250:6377` / MB-Location `6250:6567`. Data: `LOCATION_LIST_ITEMS` in `lib/locationData.ts`. Map: `public/images/locations/map-atlanta.jpg`. Client-side search only (no geocoding API). Detail pages remain at `/locations/[slug]/`.
 12. **Shop** — `/shop/` from Figma **DK-Shop** `6250:7860` / **MB-Shop** `6250:8150`. Composition: `ShopHero` → sauce grid (`ShopProductCard` + promo slot) → `ShopAllSauces` / `GiftCardPromo` (order swaps on mobile) → Rewards via `PageShell`. Data: `lib/shopData.ts`. Assets: `public/images/shop/`.
 13. **Our Story** — `/our-story/` from Figma **DK-OurStory** `6250:6880` / **MB** `6250:7360`. Composition: `OurStoryHero` → `OurStorySections` (Shane band, Big Dad, Giving Back, Join Team) → Rewards via `PageShell`. Assets: `public/images/our-story/`.
+14. **Blog listing** — `/news-events/` refactored from Figma **DK-Blog** `6250:7905` / **MB-Blog**. Composition: Hero → `BlogGrid` (3-col cards + client-side pagination, 6 per page via `?page=`). Components: `BlogCard`, `Pagination`, `BlogGrid`. Data: `BlogArticle` type + 12 articles in `lib/newsData.ts`. Assets: `public/images/news-events/`.
+15. **Article detail** — `/news-events/[slug]/` new route from Figma **DK-Blog-Article** `6250:8043`. Composition: Hero → article header (title, excerpt, `ShareButtons`) → body (HTML content) → mid-article CTA → `RelatedArticles` grid (6 "Similar Reads"). 12 SSG routes via `generateStaticParams`. Components: `RelatedArticles`.
+16. **Thank You** — `/thank-you/` new route from Figma **DK-thank you** `6250:8404` / **MB-thank you**. Composition: Hero with checkmark → "What Happens Next?" CTAs. Component: `ThankYouHero` (reusable for forms). Assets: `public/images/thank-you/`.
+17. **ThreeColGrid** — reusable responsive 3-column card grid from Figma **2xl-3col** `6478:16369` (6 breakpoints). Wired on homepage as "Explore Our Menu" (6 menu categories → `/menu/[slug]/`). Components: `ThreeColGrid`, `ThreeColCard`. Data: mapped from `lib/menuPageData.ts`.
+18. **Careers** — `/careers/` refactored from Figma **DK-Careers** `6250:7140`. Composition: Hero → 3-column benefit cards → mid-page image → `CareersForm` (16-field application: name, contact, position, availability, education, textareas) → "View Open Positions" CTA. Form submits via FormSubmit → `careers@shanesribshack.com`. Components: `CareersForm`. Assets: `public/images/careers/`.
+19. **Figma reference screenshots** — saved at `docs/figma-exports/` (DK-Blog, DK-Blog-Article, hero frames).
 
 | URL | Status |
 | :--- | :--- |
@@ -44,6 +50,8 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | https://mattybotstew.github.io/shanes-rib-shack-new/rewards/ | ✅ 200 |
 | https://mattybotstew.github.io/shanes-rib-shack-new/gift-cards/ | ✅ 200 |
 | https://mattybotstew.github.io/shanes-rib-shack-new/news-events/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/news-events/ | ✅ 200 (on `main` = DK-Blog; Pages deploy may lag) |
+| https://mattybotstew.github.io/shanes-rib-shack-new/thank-you/ | ✅ 200 (on `main` = DK-thank you; Pages deploy may lag) |
 | https://mattybotstew.github.io/shanes-rib-shack-new/terms/ | ✅ 200 |
 | https://mattybotstew.github.io/shanes-rib-shack-new/privacy/ | ✅ 200 |
 | https://mattybotstew.github.io/shanes-rib-shack-new/troubleshooting/ | ✅ 200 |
@@ -51,7 +59,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | https://mattybotstew.github.io/shanes-rib-shack-new/locations/edgewood-atlanta-ga/ | ✅ 200 |
 | `/menu/[slug]/` · `/menu/[slug]/[item]/` | 🟡 on `main` @ `1aa7e04` (Pages deploy may lag) |
 
-**Latest on `origin/main` @ `1aa7e04`:** Figma menu hub/category/PDP, LocationsFinder, Shop (DK-Shop), Our Story (DK-OurStory), plus prior Phase A catering + full prototype.  
+**Latest on `origin/main`:** Figma menu hub/category/PDP, LocationsFinder, Shop (DK-Shop), Our Story (DK-OurStory), Blog listing + Article detail (DK-Blog / DK-Blog-Article), Thank You (DK-thank you), ThreeColGrid (homepage), Careers (DK-Careers with form), plus prior Phase A catering + full prototype.  
 **GitHub Pages:** deploy workflow runs after push — live Pages may still briefly serve the previous build. Prefer extending; do not re-implement Phase A or rebuild the funnel from scratch.
 
 ### What was shipped on Pages (do not re-implement)
@@ -274,18 +282,20 @@ CONSENSUS_PLAN.md, CATERING_PLAN.md
 2. Most menu items lack dedicated PDP photography — only Big Dad has `public/images/menu/items/`; others fall back to category photos  
 3. Only 4 locations have detail pages in `ALL_LOCATIONS` — listing may show more via `LOCATION_LIST_ITEMS` with Maps fallback when no slug  
 4. Locations finder is static map + client-side text filter only — radius UI is present but not geo-backed  
-5. Menu hub / category / PDP, LocationsFinder, Shop (DK-Shop), and Our Story (DK-OurStory) are on `main` @ `1aa7e04` — GitHub Pages deploy via workflow may lag behind the push  
-6. Shop promo banner slot is a client-upload placeholder (no creative yet)  
+5. Shop promo banner slot is a client-upload placeholder (no creative yet)  
+6. Blog/article images are placeholder copies from existing assets — need dedicated photography for `public/images/news-events/`
+7. Careers benefit/hero images are placeholder copies — need dedicated photography for `public/images/careers/`
+8. Figma reference screenshots in `docs/figma-exports/` may contain placeholder copy/lorem from Figma design file
 
 ## Agent focus now
 1. **Do not** re-implement Phase A or the `/catering/` 2-step funnel unless fixing a regression.  
 2. **Homepage is additive** — listed Figma fidelity gaps (`MB-Home 1` `6310:5770`) are closed; do not rebuild `/` or fold catering back into `/`.  
-3. **Do not** re-implement menu hub / category / PDP, LocationsFinder, Shop, or Our Story — extend data/assets only (`menuPageData`, `LOCATION_LIST_ITEMS`, `shopData`, story assets).  
-4. Prefer regression fixes / human-flagged pixel tweaks over new homepage sections.  
+3. **Do not** re-implement menu hub / category / PDP, LocationsFinder, Shop, Our Story, Blog listing, Article detail, Thank You, or Careers — extend data/assets only.  
+4. Prefer regression fixes / human-flagged pixel tweaks over new sections.  
 5. Ops/client blockers + Phase B debate remain human/docs work.  
-6. **`origin/main` @ `1aa7e04`** includes menu PDP stack, LocationsFinder, Shop, and Our Story — extend, don't re-implement; Pages deploy may lag.  
-7. Menu: **DK-Menu** `6250:6294` → `/menu/[slug]/` → PDP **DK-Menu-Item-sandwich-BigDad** `6250:6349` / **MB** `6250:6498` (Big Dad fully detailed; others category-photo fallback). Mobile menu: **MB-Menu** `6250:6830`.  
-8. Locations: **DK-Location** `6250:6377` / **MB-Location** `6250:6567` via `LocationsFinder`; details stay at `/locations/[slug]/`.  
-9. Shop: **DK-Shop** `6250:7860` / **MB-Shop** `6250:8150` — extend `shopData` / sauce art; keep `GiftCardPromo` reuse and shop-focused hero copy.  
-10. Our Story: **DK-OurStory** `6250:6880` / **MB** `6250:7360` — extend sections/assets; do not rebuild hero/sections stack.  
+6. Blog: **DK-Blog** `6250:7905` / **MB-Blog** → `/news-events/` with `BlogGrid` + client-side pagination (6/page). Article: **DK-Blog-Article** `6250:8043` → `/news-events/[slug]/` (12 articles). Extend `lib/newsData.ts`; do not rebuild.  
+7. Thank You: **DK-thank you** `6250:8404` → `/thank-you/`. Reusable `ThankYouHero` component for form success redirects.  
+8. ThreeColGrid: **2xl-3col** `6478:16369` → wired on homepage as "Explore Our Menu". Reusable grid component.  
+9. Careers: **DK-Careers** `6250:7140` → `/careers/` with benefit cards + 16-field `CareersForm` (FormSubmit → `careers@shanesribshack.com`).  
+10. Figma Dev handoff page (`0:1`) fully mapped and all sections built.
 <!-- END:project-context -->
