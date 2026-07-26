@@ -3,12 +3,12 @@ export type LocationDetail = {
   slug: string;
   /** Display title in the hero (live uses short city name). */
   name: string;
-  /** Short label used on live site H1 / alert (“Edgewood Location”). */
+  /** Short label used on live site H1 / alert ("Edgewood Location"). */
   shortName: string;
   address: string;
-  /** Hero phone display — matches live “+1 404-525-7427”. */
+  /** Hero phone display — matches live "+1 404-525-7427". */
   phone: string;
-  /** Compact alert-bar phone — matches live “+14045257427”. */
+  /** Compact alert-bar phone — matches live "+14045257427". */
   phoneAlert: string;
   phoneHref: string;
   hours: string;
@@ -88,9 +88,132 @@ export const EDGEWOOD: LocationDetail = {
   },
 };
 
-export const LOCATIONS_BY_SLUG: Record<string, LocationDetail> = {
-  [EDGEWOOD.slug]: EDGEWOOD,
+/** Norcross — the original Shane's Rib Shack location. */
+export const NORCROSS: LocationDetail = {
+  slug: "norcross-ga",
+  name: "Norcross",
+  shortName: "Norcross",
+  address: "5770 Peachtree Industrial Blvd Suite 111, Norcross, GA 30092",
+  phone: "+1 770-416-6606",
+  phoneAlert: "+17704166606",
+  phoneHref: "tel:+17704166606",
+  hours: "MON-SUN, 11:00 AM-9:00 PM",
+  locationId: "NORCROSS",
+  storefrontImage: "/images/locations/edgewood-storefront.jpg",
+  mapsUrl:
+    "https://www.google.com/maps/dir//Shane's+Rib+Shack,+5770+Peachtree+Industrial+Blvd+Suite+111,+Norcross,+GA+30092",
+  cateringMinimum: "$200.00",
+  ezCaterUrl:
+    "https://www.ezcater.com/catering/shanes-rib-shack-norcross",
+  changeLocationUrl:
+    "https://www.shanesribshack.com/locations/?myShanes=NORCROSS",
+  content: {
+    heading: "Shane's Rib Shack in Norcross, GA",
+    addressLine: "5770 Peachtree Industrial Blvd Suite 111, Norcross, GA 30092",
+    callLine: "Call for Pickup: (770) 416-6606",
+    introHtml:
+      "The original Shane's Rib Shack. What started as a tiny roadside stand in McDonough grew into a beloved BBQ destination, and the Norcross location carries that tradition forward. Located off Peachtree Industrial Boulevard, this Shack serves the same slow-smoked ribs, chopped pork, and Southern sides that made Shane's famous.",
+    sections: [
+      {
+        heading: "The Original BBQ Experience",
+        paragraphs: [
+          "As one of the flagship locations, Norcross delivers the full Shane's experience. Baby back ribs smoked low and slow over hickory, hand-chopped pork, and chicken that's tender enough to fall off the bone. The menu covers all the classics, and the portions are generous enough to guarantee leftovers.",
+          "The Norcross location is a favorite for lunch crowds and families looking for a reliable BBQ dinner without the drive downtown. The dining room is comfortable and unpretentious — exactly what a BBQ joint should be.",
+        ],
+      },
+    ],
+    closing:
+      "Stop by the original Shack and taste the BBQ that started it all.",
+  },
 };
+
+/** Carrollton location. */
+export const CARROLLTON: LocationDetail = {
+  slug: "carrollton-ga",
+  name: "Carrollton",
+  shortName: "Carrollton",
+  address: "1109 Bankhead Hwy, Carrollton, GA 30117",
+  phone: "+1 770-832-7427",
+  phoneAlert: "+17708327427",
+  phoneHref: "tel:+17708327427",
+  hours: "MON-SUN, 11:00 AM-9:00 PM",
+  locationId: "CARROLLTON",
+  storefrontImage: "/images/locations/edgewood-storefront.jpg",
+  mapsUrl:
+    "https://www.google.com/maps/dir//Shane's+Rib+Shack,+1109+Bankhead+Hwy,+Carrollton,+GA+30117",
+  cateringMinimum: "$200.00",
+  ezCaterUrl:
+    "https://www.ezcater.com/catering/shanes-rib-shack-carrollton",
+  changeLocationUrl:
+    "https://www.shanesribshack.com/locations/?myShanes=CARROLLTON",
+  content: {
+    heading: "Shane's Rib Shack in Carrollton, GA",
+    addressLine: "1109 Bankhead Hwy, Carrollton, GA 30117",
+    callLine: "Call for Pickup: (770) 832-7427",
+    introHtml:
+      "Shane's Rib Shack in Carrollton brings authentic slow-smoked BBQ to the west Georgia community. Located on Bankhead Highway, this location is a go-to spot for Carrollton residents and visitors alike who crave real Southern BBQ.",
+    sections: [
+      {
+        heading: "BBQ Worth the Drive",
+        paragraphs: [
+          "The Carrollton location serves all the Shane's classics: baby back ribs, chopped pork, chicken, wings, and a full lineup of Southern sides. Whether you're dining in or taking out, the food is made fresh and smoked on-site.",
+          "It's a popular stop for game day catering, family dinners, and lunch breaks. The staff knows the regulars by name, and the service is as warm as the food.",
+        ],
+      },
+    ],
+    closing:
+      "Next time you're in Carrollton, stop by the Shack for BBQ that hits the spot.",
+  },
+};
+
+/** Douglasville location. */
+export const DOUGLASVILLE: LocationDetail = {
+  slug: "douglasville-ga",
+  name: "Douglasville",
+  shortName: "Douglasville",
+  address: "6480 Douglas Blvd, Douglasville, GA 30135",
+  phone: "+1 770-577-7427",
+  phoneAlert: "+17705777427",
+  phoneHref: "tel:+17705777427",
+  hours: "MON-SUN, 11:00 AM-9:00 PM",
+  locationId: "DOUGLASVILLE",
+  storefrontImage: "/images/locations/edgewood-storefront.jpg",
+  mapsUrl:
+    "https://www.google.com/maps/dir//Shane's+Rib+Shack,+6480+Douglas+Blvd,+Douglasville,+GA+30135",
+  cateringMinimum: "$200.00",
+  ezCaterUrl:
+    "https://www.ezcater.com/catering/shanes-rib-shack-douglasville",
+  changeLocationUrl:
+    "https://www.shanesribshack.com/locations/?myShanes=DOUGLASVILLE",
+  content: {
+    heading: "Shane's Rib Shack in Douglasville, GA",
+    addressLine: "6480 Douglas Blvd, Douglasville, GA 30135",
+    callLine: "Call for Pickup: (770) 577-7427",
+    introHtml:
+      "Shane's Rib Shack in Douglasville serves the same award-winning BBQ that made the brand famous, now convenient for the west Atlanta suburbs. Located on Douglas Boulevard, this location is a favorite for families, commuters, and anyone craving real hickory-smoked BBQ.",
+    sections: [
+      {
+        heading: "Suburban BBQ Done Right",
+        paragraphs: [
+          "The Douglasville location brings the full Shane's experience to the suburbs. From full racks of baby back ribs to chopped pork plates, chicken tenders, and wings, every order is made from scratch and smoked in-house.",
+          "It's a popular choice for catering events, weekend family dinners, and quick lunch stops. The drive-through makes it easy to grab BBQ on the go without sacrificing quality.",
+        ],
+      },
+    ],
+    closing:
+      "Find us on Douglas Boulevard and taste why Douglasville keeps coming back to the Shack.",
+  },
+};
+
+export const ALL_LOCATIONS: LocationDetail[] = [
+  EDGEWOOD,
+  NORCROSS,
+  CARROLLTON,
+  DOUGLASVILLE,
+];
+
+export const LOCATIONS_BY_SLUG: Record<string, LocationDetail> =
+  Object.fromEntries(ALL_LOCATIONS.map((loc) => [loc.slug, loc]));
 
 /** Resolve a location from a pathname like `/locations/edgewood-atlanta-ga/`. */
 export function locationFromPathname(pathname: string): LocationDetail | null {

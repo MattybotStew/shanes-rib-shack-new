@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import PageShell from "@/components/PageShell";
 import { asset } from "@/lib/asset";
-import { EDGEWOOD } from "@/lib/locationData";
+import { ALL_LOCATIONS } from "@/lib/locationData";
 
 export const metadata: Metadata = {
   title: "Locations | Shane's Rib Shack",
@@ -10,12 +10,7 @@ export const metadata: Metadata = {
     "Find a Shane's Rib Shack near you. Slow-smoked BBQ, ribs, and Southern sides served fresh daily.",
 };
 
-const locations = [
-  {
-    ...EDGEWOOD,
-    image: asset("/images/locations/edgewood-storefront.jpg"),
-  },
-];
+const STOREFRONT_IMAGE = "/images/locations/edgewood-storefront.jpg";
 
 export default function LocationsPage() {
   return (
@@ -36,7 +31,7 @@ export default function LocationsPage() {
       <section className="bg-brand-tan px-5 py-16 lg:px-[66px] lg:py-24">
         <div className="mx-auto max-w-[1200px]">
           <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {locations.map((loc) => (
+            {ALL_LOCATIONS.map((loc) => (
               <Link
                 key={loc.slug}
                 href={`/locations/${loc.slug}/`}
@@ -44,7 +39,7 @@ export default function LocationsPage() {
               >
                 <div className="aspect-[16/9] overflow-hidden">
                   <img
-                    src={loc.image}
+                    src={asset(STOREFRONT_IMAGE)}
                     alt={`${loc.name} storefront`}
                     className="size-full object-cover transition-transform duration-300 group-hover:scale-105"
                   />
@@ -65,12 +60,6 @@ export default function LocationsPage() {
               </Link>
             ))}
           </div>
-
-          {locations.length === 0 && (
-            <p className="py-20 text-center text-lg text-brand-gray">
-              More locations coming soon. Check back for a Shane's near you.
-            </p>
-          )}
         </div>
       </section>
     </PageShell>
