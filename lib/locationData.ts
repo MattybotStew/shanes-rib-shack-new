@@ -215,6 +215,66 @@ export const ALL_LOCATIONS: LocationDetail[] = [
 export const LOCATIONS_BY_SLUG: Record<string, LocationDetail> =
   Object.fromEntries(ALL_LOCATIONS.map((loc) => [loc.slug, loc]));
 
+/** Card row on the `/locations/` finder (DK-Location / MB-Location). */
+export type LocationListItem = {
+  id: string;
+  /** Red uppercase title, e.g. "Edgewood - Atlanta, GA". */
+  title: string;
+  address: string;
+  mapsUrl: string;
+  cateringUrl: string;
+  /** When set, View Details → `/locations/[slug]/`. */
+  slug?: string;
+  closedTemporarily?: boolean;
+};
+
+/** Listing titles that match Figma DK-Location card copy. */
+const LIST_TITLES: Record<string, string> = {
+  "edgewood-atlanta-ga": "Edgewood - Atlanta, GA",
+  "norcross-ga": "Norcross, GA",
+  "carrollton-ga": "Carrollton, GA",
+  "douglasville-ga": "Douglasville, GA",
+};
+
+function listItemFromDetail(loc: LocationDetail): LocationListItem {
+  return {
+    id: loc.slug,
+    title: LIST_TITLES[loc.slug] ?? loc.name,
+    address: loc.content.addressLine,
+    mapsUrl: loc.mapsUrl,
+    cateringUrl: loc.ezCaterUrl,
+    slug: loc.slug,
+  };
+}
+
+/**
+ * Finder list for `/locations/` — detail-backed shacks plus Figma showcase
+ * rows that do not yet have local detail pages.
+ */
+export const LOCATION_LIST_ITEMS: LocationListItem[] = [
+  listItemFromDetail(EDGEWOOD),
+  {
+    id: "airport-atlanta-ga",
+    title: "Airport - Atlanta, GA (CLOSED TEMPORARILY)",
+    address: "6000 N Terminal Pkwy Atlanta, GA 30320",
+    mapsUrl:
+      "https://www.google.com/maps/dir//Shane's+Rib+Shack,+6000+N+Terminal+Pkwy,+Atlanta,+GA+30320",
+    cateringUrl: "https://www.ezcater.com/brand/shanes-rib-shack",
+    closedTemporarily: true,
+  },
+  {
+    id: "cumberland-pointe-atlanta-ga",
+    title: "Cumberland Pointe - Atlanta, GA",
+    address: "3155 Cobb Parkway Atlanta, GA 30339",
+    mapsUrl:
+      "https://www.google.com/maps/dir//Shane's+Rib+Shack,+3155+Cobb+Parkway,+Atlanta,+GA+30339",
+    cateringUrl: "https://www.ezcater.com/brand/shanes-rib-shack",
+  },
+  listItemFromDetail(NORCROSS),
+  listItemFromDetail(CARROLLTON),
+  listItemFromDetail(DOUGLASVILLE),
+];
+
 /** Resolve a location from a pathname like `/locations/edgewood-atlanta-ga/`. */
 export function locationFromPathname(pathname: string): LocationDetail | null {
   const match = pathname.match(/\/locations\/([^/]+)\/?$/);
