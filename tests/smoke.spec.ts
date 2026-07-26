@@ -38,6 +38,12 @@ test("menu Big Dad PDP renders", async ({ page }) => {
   await expect(page.getByRole("heading", { name: /Big Dad/i })).toBeVisible();
 });
 
+test("shop promo banner uses real content", async ({ page }) => {
+  await page.goto("/shop/");
+  await expect(page.getByText(/Shack favorites/i)).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Stock up on Shane's sauces and smoky BBQ gifts/i })).toBeVisible();
+});
+
 test("news article renders", async ({ page }) => {
   await page.goto("/news-events/nba-finals-watch-party-bbq-ideas/");
   await expect(page.getByRole("heading", { name: /NBA Finals Watch Party/i })).toBeVisible();

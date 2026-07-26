@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import GiftCardPromo from "@/components/GiftCardPromo";
 import PageShell from "@/components/PageShell";
 import ShopAllSauces from "@/components/ShopAllSauces";
@@ -16,11 +17,26 @@ function PromoBanner() {
   return (
     <div className="flex w-full justify-center">
       <div className="w-full rounded-[20px] border border-black/10 bg-brand-red p-2.5 lg:w-[390px] lg:shrink-0">
-        <div className="relative flex min-h-[160px] w-full items-center justify-center overflow-hidden rounded-[10px] bg-brand-black px-6 py-8 sm:min-h-[200px] lg:h-[276px]">
-          <p className="max-w-[90%] text-center text-sm font-bold uppercase leading-4 text-white sm:text-base">
-            Client promotional banner image — upload desktop and mobile creatives
-            here
-          </p>
+        <div className="relative flex min-h-[160px] w-full flex-col items-center justify-center overflow-hidden rounded-[10px] bg-brand-black px-6 py-8 text-center sm:min-h-[200px] lg:h-[276px]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,199,44,0.2),transparent_40%),linear-gradient(140deg,rgba(255,255,255,0.06),transparent_48%)]" />
+          <div className="relative z-10 flex max-w-[280px] flex-col items-center gap-3">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-gold">
+              Shack favorites
+            </p>
+            <h2 className="text-[24px] font-extrabold uppercase leading-none text-white sm:text-[28px] lg:text-[30px]">
+              Stock up on Shane&apos;s sauces and smoky BBQ gifts
+            </h2>
+            <p className="text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+              Bring home the flavors you love or send a gift card to your favorite
+              barbecue fan.
+            </p>
+            <Link
+              href="/gift-cards/"
+              className="mt-1 inline-flex min-h-11 items-center justify-center rounded-full bg-brand-gold px-6 py-3 text-sm font-extrabold uppercase tracking-[0.08em] text-brand-black transition hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+            >
+              Shop Gift Cards
+            </Link>
+          </div>
         </div>
       </div>
     </div>
