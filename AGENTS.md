@@ -9,25 +9,44 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Status snapshot (2026-07-25) — READ THIS FIRST
 
-**Phase A catering UX + conversion is SHIPPED and live on GitHub Pages** (`/catering/` + older `/`).  
-**Local working tree is UNCOMMITTED** — do not assume the marketing homepage is on Pages yet.
+**Full prototype is SHIPPED and live on GitHub Pages** — all 20 static pages deployed, replacing the Phase A homepage.  
+**Catering funnel unchanged at `/catering/`** — do not re-implement.
 
-**Local (this tree):**
-1. **Full prototype — all nav/footer routes built** (20 static pages, 0 build errors). Every header and footer link resolves. Mark: https://mattybotstew.github.io/shanes-rib-shack-new/
+**Live (this tree):**
+1. **Full prototype — all nav/footer routes built** (20 static pages, 0 build errors). Every header and footer link resolves. Live at: https://mattybotstew.github.io/shanes-rib-shack-new/
 2. **Marketing homepage at `/`** from Figma `DK-Home` (`6310:5558`, file `fIxLVL93B0QkxG3bbpH8vZ`). Mobile reference: **`MB-Home 1` `6310:5770`**. Listed Figma fidelity gaps closed. Copy largely from live [shanesribshack.com](https://www.shanesribshack.com) (not Figma lorem).
 3. **Catering 2-step funnel unchanged at `/catering/`** — ContactBanner → PathDecision → compact quote form → menu reference; desktop package rail. Do not remove or rebuild it.
 4. **Edgewood location detail page** at `/locations/edgewood-atlanta-ga/` with order-confirm modal, matched to live production.
 5. **PageShell** shared component (`components/PageShell.tsx`) used by most pages.
 6. **404 page** at `app/not-found.tsx` with branded fallback.
 7. **Footer copyright** now dynamic (`new Date().getFullYear()`).
+8. **Social icons** `-scale-y-100` bug fixed.
+9. **All content pages polished** with real copy (Menu, Our Story, FAQs, Contact, Careers, Order, Shop, Franchise, Terms, Privacy, etc.).
 
 | URL | Status |
 | :--- | :--- |
-| https://mattybotstew.github.io/shanes-rib-shack-new/ | ✅ 200 (Phase A — **not** the new local homepage) |
-| https://mattybotstew.github.io/shanes-rib-shack-new/catering/ | ✅ 200 (Phase A) |
+| https://mattybotstew.github.io/shanes-rib-shack-new/ | ✅ 200 (new homepage) |
+| https://mattybotstew.github.io/shanes-rib-shack-new/catering/ | ✅ 200 (Phase A funnel) |
+| https://mattybotstew.github.io/shanes-rib-shack-new/menu/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/locations/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/our-story/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/faqs/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/contact/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/order/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/shop/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/franchise/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/careers/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/rewards/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/gift-cards/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/news-events/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/terms/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/privacy/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/troubleshooting/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/franchise/login/ | ✅ 200 |
+| https://mattybotstew.github.io/shanes-rib-shack-new/locations/edgewood-atlanta-ga/ | ✅ 200 |
 
-**Latest shipped commits (Pages):** `dc0014e` (Phase A UX) → `1fafd58` (endpoints) → `dba4b07` (trailingSlash Pages fix)  
-**Local since Phase A (also uncommitted until ship):** path-first funnel + new `/` homepage — prefer extending; do not re-implement Phase A or rebuild the funnel from scratch.
+**Latest shipped commits (Pages):** `7609829` (Phase 2 polish) → `469063d` (full prototype) → `4fb5644` (audit cleanup)  
+**All local UX is now live on Pages.** Prefer extending; do not re-implement Phase A or rebuild the funnel from scratch.
 
 ### What was shipped on Pages (do not re-implement)
 
@@ -175,13 +194,12 @@ CONSENSUS_PLAN.md, CATERING_PLAN.md
 ```
 
 ## Remaining known issues (not Phase A blockers)
-1. Social icons `-scale-y-100`  
-2. Dual headline treatment on older catering hero (desktop H1 / mobile styled `p`) — intentional for a11y  
-3. **Local full prototype not on Pages** until humans ask to commit/deploy — 20 static pages built, replacing Phase A homepage + adding all nav/footer routes  
+1. Dual headline treatment on older catering hero (desktop H1 / mobile styled `p`) — intentional for a11y  
 
 ## Agent focus now
 1. **Do not** re-implement Phase A or the `/catering/` 2-step funnel unless fixing a regression.  
 2. **Homepage is additive** — listed Figma fidelity gaps (`MB-Home 1` `6310:5770`) are closed; do not rebuild `/` or fold catering back into `/`.  
 3. Prefer regression fixes / human-flagged pixel tweaks over new homepage sections.  
 4. Ops/client blockers + Phase B debate remain human/docs work; deploy/ship local UX only when asked.  
+5. **All 20 pages are live on Pages** — extend, don't re-implement.  
 <!-- END:project-context -->

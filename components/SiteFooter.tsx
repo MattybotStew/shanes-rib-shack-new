@@ -60,7 +60,7 @@ export default function SiteFooter() {
               href="https://facebook.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative block size-[35px] -scale-y-100"
+              className="relative block size-[35px]"
               aria-label="Facebook"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -74,7 +74,7 @@ export default function SiteFooter() {
               href="https://instagram.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative block size-[35px] -scale-y-100"
+              className="relative block size-[35px]"
               aria-label="Instagram"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -88,7 +88,7 @@ export default function SiteFooter() {
               href="https://youtube.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative block size-[35px] -scale-y-100"
+              className="relative block size-[35px]"
               aria-label="YouTube"
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
