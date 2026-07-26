@@ -10,6 +10,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 ## Status snapshot (2026-07-26) — READ THIS FIRST
 
 **Full prototype + Figma marketing pages are on `main`** — pushed to `origin/main` @ **`1aa7e04`**.  
+**Smoke coverage (Playwright) + `metadataBase` canonical URLs on `main`** — pushed to `origin/main` @ **`c4b1327`** (CI runs lint → build → e2e on every push/PR).  
 **Catering funnel unchanged at `/catering/`** — do not re-implement.  
 **Pages deploy may lag:** GitHub Pages is updated via `.github/workflows/deploy.yml`. Do **not** assume live Pages URLs already serve the new menu/locations/shop/our-story UX until you verify the site (or the workflow completes). Prefer: *pushed to main @ 1aa7e04; Pages deploy via workflow may lag.* Extend these pages; do not rebuild.
 
