@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { asset } from "@/lib/asset";
 import Cta from "@/components/Cta";
 import type { BlogArticle } from "@/lib/newsData";

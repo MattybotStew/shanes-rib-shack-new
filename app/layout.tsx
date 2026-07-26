@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import Header from "@/components/Header";
 import HashScroll from "@/components/HashScroll";
+import { getMetadataBase } from "@/lib/siteUrl";
 import "./globals.css";
 
 const montserrat = Montserrat({
@@ -11,6 +12,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata: Metadata = {
+  metadataBase: getMetadataBase(),
   title: "Shane's Rib Shack",
   description: "Find your shack. Order ribs, catering, and more.",
 };

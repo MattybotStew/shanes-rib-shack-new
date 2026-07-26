@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import PageShell from "@/components/PageShell";
 
 export const metadata: Metadata = {
@@ -76,12 +77,12 @@ export default function ContactPage() {
             <p className="mb-4 text-brand-gray">
               Find hours, address, and contact info for your nearest shack.
             </p>
-            <a
+            <Link
               href="/locations"
               className="text-sm font-bold uppercase text-brand-red hover:underline"
             >
               View All Locations &rarr;
-            </a>
+            </Link>
           </div>
         </div>
       </section>

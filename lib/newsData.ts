@@ -61,7 +61,6 @@ export function getRelatedArticles(
   return blogArticles.filter((a) => a.slug !== slug).slice(0, limit);
 }
 
-/* eslint-disable */
 export const blogArticles: BlogArticle[] = [
   {
     slug: "nba-finals-watch-party-bbq-ideas",
@@ -208,4 +207,3 @@ export const blogArticles: BlogArticle[] = [
     category: "Promotions",
   },
 ];
-/* eslint-enable */

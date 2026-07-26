@@ -59,7 +59,7 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | https://mattybotstew.github.io/shanes-rib-shack-new/locations/edgewood-atlanta-ga/ | ✅ 200 |
 | `/menu/[slug]/` · `/menu/[slug]/[item]/` | 🟡 on `main` @ `1aa7e04` (Pages deploy may lag) |
 
-**Latest on `origin/main`:** Figma menu hub/category/PDP, LocationsFinder, Shop (DK-Shop), Our Story (DK-OurStory), Blog listing + Article detail (DK-Blog / DK-Blog-Article), Thank You (DK-thank you), ThreeColGrid (homepage), Careers (DK-Careers with form), plus prior Phase A catering + full prototype.  
+**Latest on `origin/main`:** Playwright smoke suite + CI (`.github/workflows/smoke.yml`), `metadataBase` via `lib/siteUrl.ts`, Figma menu hub/category/PDP, LocationsFinder, Shop (DK-Shop), Our Story (DK-OurStory), Blog listing + Article detail (DK-Blog / DK-Blog-Article), Thank You (DK-thank you), ThreeColGrid (homepage), Careers (DK-Careers with form), plus prior Phase A catering + full prototype.  
 **GitHub Pages:** deploy workflow runs after push — live Pages may still briefly serve the previous build. Prefer extending; do not re-implement Phase A or rebuild the funnel from scratch.
 
 ### What was shipped on Pages (do not re-implement)
@@ -220,6 +220,7 @@ Path UI chrome weight · first lever ordering · post-submit SMS depth · furthe
 
 ## Configuration
 - `GITHUB_PAGES=true` → basePath `/shanes-rib-shack-new`  
+- `NEXT_PUBLIC_SITE_URL` may be set for canonical/metadata URL generation; otherwise `lib/siteUrl.ts` falls back to GitHub Pages in CI and `http://localhost:3000` locally  
 - Defaults (overridable by Secrets / `.env`):  
   - ezCater brand URL in `lib/ezcater.ts`  
   - FormSubmit ajax in `lib/formEndpoint.ts`  
@@ -263,7 +264,7 @@ components/
             HeroPathActions
   location: LocationsFinder, LocationContent, LocationHero,
             LocationOrderConfirm, LocationPromoBanner
-lib/ asset.ts, ezcater.ts, formEndpoint.ts, menuData.ts, newsData.ts,
+lib/ asset.ts, ezcater.ts, formEndpoint.ts, siteUrl.ts, menuData.ts, newsData.ts,
      locationData.ts (ALL_LOCATIONS + LOCATION_LIST_ITEMS), menuPageData.ts,
      shopData.ts
 public/images/home/               homepage photography (Figma exports)
@@ -273,6 +274,9 @@ public/images/locations/          storefront + map-atlanta.jpg + chevron
 public/images/shop/               shop hero + sauce product art
 public/images/our-story/          Our Story photography
 public/images/arrow-right.svg
+tests/smoke.spec.ts               Playwright smoke suite (routes, nav, forms, 404)
+scripts/serve-static.mjs          Static out/ server; emulates Pages basePath mount
+playwright.config.ts              chromium-desktop + webkit-mobile projects
 docs/ strategies/, plans/, CLIENT_BLOCKERS.md, UX_CONVERSION_STRATEGY.md (index)
 CONSENSUS_PLAN.md, CATERING_PLAN.md
 ```
@@ -297,5 +301,7 @@ CONSENSUS_PLAN.md, CATERING_PLAN.md
 7. Thank You: **DK-thank you** `6250:8404` → `/thank-you/`. Reusable `ThankYouHero` component for form success redirects.  
 8. ThreeColGrid: **2xl-3col** `6478:16369` → wired on homepage as "Explore Our Menu". Reusable grid component.  
 9. Careers: **DK-Careers** `6250:7140` → `/careers/` with benefit cards + 16-field `CareersForm` (FormSubmit → `careers@shanesribshack.com`).  
-10. Figma Dev handoff page (`0:1`) fully mapped and all sections built.
+10. Figma Dev handoff page (`0:1`) fully mapped and all sections built.  
+11. Smoke coverage now exists via Playwright (`playwright.config.ts`, `tests/smoke.spec.ts`, `scripts/serve-static.mjs`) plus CI workflow `.github/workflows/smoke.yml`; prefer extending these tests over adding ad hoc browser checks. `serve-static.mjs` emulates the GitHub Pages basePath mount (auto-detect or `NEXT_PUBLIC_BASE_PATH`), so tests pass against both local and `GITHUB_PAGES=true` exports.  
+12. Build metadata now uses `metadataBase` from `lib/siteUrl.ts`; preserve GitHub Pages compatibility when editing canonical/Open Graph metadata.
 <!-- END:project-context -->
