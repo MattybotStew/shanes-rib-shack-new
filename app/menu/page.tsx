@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import MenuCategoryCard from "@/components/MenuCategoryCard";
 import PageShell from "@/components/PageShell";
 import {
@@ -16,11 +17,26 @@ function PromoBanner() {
   return (
     <div className="flex w-full justify-center px-5 lg:px-0">
       <div className="w-full max-w-[1180px] rounded-[20px] border border-black/10 bg-brand-red p-2.5">
-        <div className="relative flex h-[160px] w-full items-center justify-center overflow-hidden rounded-[10px] bg-brand-black sm:h-[200px] lg:h-[233px]">
-          <p className="max-w-[90%] px-4 text-center text-sm font-bold uppercase leading-4 text-white sm:text-base">
-            Client promotional banner image — upload desktop and mobile creatives
-            here
-          </p>
+        <div className="relative flex h-[160px] w-full flex-col items-center justify-center overflow-hidden rounded-[10px] bg-brand-black px-6 text-center sm:h-[200px] lg:h-[233px]">
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,199,44,0.22),transparent_42%),linear-gradient(135deg,rgba(255,255,255,0.06),transparent_45%)]" />
+          <div className="relative z-10 flex max-w-[760px] flex-col items-center gap-3">
+            <p className="text-xs font-bold uppercase tracking-[0.16em] text-brand-gold">
+              Crowd favorites
+            </p>
+            <h2 className="text-[24px] font-extrabold uppercase leading-none text-white sm:text-[30px] lg:text-[36px]">
+              Slow-smoked BBQ, family meals, and game-day ready picks
+            </h2>
+            <p className="max-w-[620px] text-sm font-semibold leading-relaxed text-white/80 sm:text-base">
+              Explore the full menu, then order online for pickup or delivery from
+              your nearest Shack.
+            </p>
+            <Link
+              href="/order/"
+              className="mt-1 inline-flex min-h-11 items-center justify-center rounded-full bg-brand-gold px-6 py-3 text-sm font-extrabold uppercase tracking-[0.08em] text-brand-black transition hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+            >
+              Order Online
+            </Link>
+          </div>
         </div>
       </div>
     </div>

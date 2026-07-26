@@ -26,6 +26,12 @@ test("catering path CTAs are visible", async ({ page }) => {
   await expect(page.getByRole("button", { name: /Get a Quote/i }).first()).toBeVisible();
 });
 
+test("menu promo banner uses real content", async ({ page }) => {
+  await page.goto("/menu/");
+  await expect(page.getByText(/Crowd favorites/i)).toBeVisible();
+  await expect(page.getByRole("heading", { name: /Slow-smoked BBQ, family meals, and game-day ready picks/i })).toBeVisible();
+});
+
 test("menu Big Dad PDP renders", async ({ page }) => {
   await page.goto("/menu/sandwiches/big-dad/");
   await expect(page).toHaveTitle(/Big Dad|Shane's Rib Shack/i);
@@ -95,13 +101,16 @@ test("mobile menu opens and navigates", async ({ page, isMobile }) => {
 
 test("catering form validates invalid contact details", async ({ page }) => {
   await page.goto("/catering/");
-  await page.getByLabel(/Name/i).fill("Test User");
-  await page.getByLabel(/Location/i).selectOption("Norcross");
-  await page.getByLabel(/Email or phone/i).fill("bad");
-  await page.getByLabel(/Event date/i).fill("2099-12-31");
-  await page.getByLabel(/Guest count/i).selectOption("26-50");
-  await page.getByRole("button", { name: /^Get a Quote$/i }).last().click();
-  await expect(page.getByText(/Enter a valid email or 10-digit phone number/i)).toBeVisible();
+  const inquiryForm = page.getByRole("region", { name: /Catering inquiry form/i });
+
+  await inquiryForm.getByLabel(/Name/i).fill("Test User");
+  await inquiryForm.getByLabel(/Location/i).selectOption("Norcross");
+  await inquiryForm.getByLabel(/Email or phone/i).fill("bad");
+  await inquiryForm.getByLabel(/Event date/i).fill("2099-12-31");
+  await inquiryForm.getByLabel(/Guest count/i).selectOption("26-50");
+  await inquiryForm.getByRole("button", { name: /^Get a Quote$/i }).click();
+
+  await expect(inquiryForm.getByText(/Enter a valid email or 10-digit phone number/i)).toBeVisible();
 });
 
 test("catering form can submit successfully with mocked endpoint", async ({ page }) => {
@@ -114,12 +123,14 @@ test("catering form can submit successfully with mocked endpoint", async ({ page
   });
 
   await page.goto("/catering/");
-  await page.getByLabel(/Name/i).fill("Test User");
-  await page.getByLabel(/Location/i).selectOption("Norcross");
-  await page.getByLabel(/Email or phone/i).fill("test@example.com");
-  await page.getByLabel(/Event date/i).fill("2099-12-31");
-  await page.getByLabel(/Guest count/i).selectOption("26-50");
-  await page.getByRole("button", { name: /^Get a Quote$/i }).last().click();
+  const inquiryForm = page.getByRole("region", { name: /Catering inquiry form/i });
+
+  await inquiryForm.getByLabel(/Name/i).fill("Test User");
+  await inquiryForm.getByLabel(/Location/i).selectOption("Norcross");
+  await inquiryForm.getByLabel(/Email or phone/i).fill("test@example.com");
+  await inquiryForm.getByLabel(/Event date/i).fill("2099-12-31");
+  await inquiryForm.getByLabel(/Guest count/i).selectOption("26-50");
+  await inquiryForm.getByRole("button", { name: /^Get a Quote$/i }).click();
 
   await expect(page.getByRole("heading", { name: /Thanks — we got your request/i })).toBeVisible();
   await expect(page.getByText(/A catering specialist will reach out during business hours/i)).toBeVisible();
