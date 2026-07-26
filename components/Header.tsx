@@ -109,10 +109,26 @@ export default function Header() {
           </div>
         </div>
       ) : (
-        <div className="flex w-full items-center justify-center overflow-hidden bg-brand-black px-5 py-3">
-          <div className="flex w-full max-w-[1320px] items-center justify-center sm:justify-start">
-            <p className="flex-1 text-center text-[13px] leading-[1.5] text-white sm:text-left">
-              Catering for offices, parties &amp; events ·{" "}
+        <>
+          {/* Desktop default alert — catering banner */}
+          <div className="hidden w-full items-center justify-center overflow-hidden bg-brand-black px-5 py-3 lg:flex">
+            <div className="flex w-full max-w-[1320px] items-center justify-start">
+              <p className="flex-1 text-left text-[13px] leading-[1.5] text-white">
+                Catering for offices, parties &amp; events ·{" "}
+                <a
+                  href="tel:7704166606"
+                  className="text-brand-gold underline-offset-2 hover:underline"
+                >
+                  (770) 416-6606
+                </a>
+              </p>
+            </div>
+          </div>
+
+          {/* Mobile default alert — node 6354:11981 */}
+          <div className="flex w-full flex-col items-center gap-2.5 bg-brand-black px-2.5 py-[9px] lg:hidden">
+            <p className="w-full text-center text-[13px] font-semibold leading-[1.5] text-white">
+              5770 Peachtree Industrial Blvd Suite 111, Norcross, GA |{" "}
               <a
                 href="tel:7704166606"
                 className="text-brand-gold underline-offset-2 hover:underline"
@@ -120,8 +136,14 @@ export default function Header() {
                 (770) 416-6606
               </a>
             </p>
+            <Link
+              href="/locations"
+              className="flex w-full items-center justify-center rounded-[5px] bg-brand-red px-3.5 py-3 text-xs font-bold uppercase leading-none text-white transition-colors hover:bg-[#a01b25]"
+            >
+              Change your location
+            </Link>
           </div>
-        </div>
+        </>
       )}
 
       {/* Desktop header — lg+ */}

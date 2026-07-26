@@ -7,6 +7,8 @@
   --brand-red: #bb202b;
   --brand-gold: #ffc72c;
   --brand-tan: #f8f5ec;
+  --brand-cream: #efeadc;
+  --brand-gray: #3a3a3a;
 }
 
 @theme inline {
@@ -16,6 +18,8 @@
   --color-brand-red: var(--brand-red);
   --color-brand-gold: var(--brand-gold);
   --color-brand-tan: var(--brand-tan);
+  --color-brand-cream: var(--brand-cream);
+  --color-brand-gray: var(--brand-gray);
   --font-sans: var(--font-montserrat);
 }
 

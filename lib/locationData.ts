@@ -99,6 +99,9 @@ export function locationFromPathname(pathname: string): LocationDetail | null {
   return LOCATIONS_BY_SLUG[match[1]] ?? null;
 }
 
+/** Order platform entry point with no store preselected. */
+export const ORDER_HOME_URL = "https://order.shanesribshack.com/order";
+
 /** Build order.shanesribshack.com URL with fulfillment + location deep link. */
 export function orderUrl(
   fulfillment: "PICKUP" | "DELIVERY",

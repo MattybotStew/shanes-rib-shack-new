@@ -473,7 +473,7 @@ export default function CateringForm() {
   const [packageChoices, setPackageChoices] =
     useState<PackageChoicesState>(emptyChoices);
   const [showExtras, setShowExtras] = useState(false);
-  const [minDate, setMinDate] = useState("");
+  const minDate = todayPlusDays(2);
   const formRef = useRef<HTMLFormElement>(null);
   const startedRef = useRef(false);
   const selectedPackage = getMenuItemByTitle(packagePrefill);
@@ -487,10 +487,6 @@ export default function CateringForm() {
       track("catering_package_cleared");
     }
   }
-
-  useEffect(() => {
-    setMinDate(todayPlusDays(2));
-  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") return;

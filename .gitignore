@@ -45,3 +45,8 @@ next-env.d.ts
 # Local Figma MCP scratch
 .figma*
 
+# Local dev artifacts
+.chrome-smoke/
+.vscode/
+tmp-screenshots/
+

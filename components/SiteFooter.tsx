@@ -44,9 +44,9 @@ function FooterLinks({ links }: { links: { label: string; href: string }[] }) {
 
 export default function SiteFooter() {
   return (
-    <footer className="flex w-full items-center justify-center bg-brand-red px-6 py-12 lg:px-[66px] lg:py-[90px]">
+    <footer className="flex w-full items-center justify-center bg-brand-red px-[30px] py-10 lg:px-[66px] lg:py-[90px]">
       <div className="flex w-full max-w-[1200px] flex-col items-center gap-10 lg:flex-row lg:items-start lg:justify-center lg:gap-10">
-        <div className="flex shrink-0 flex-col items-center gap-6">
+        <div className="order-2 flex shrink-0 flex-col items-center gap-6 lg:order-1">
           <Link href="/" className="relative block size-32" aria-label="Home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -100,11 +100,11 @@ export default function SiteFooter() {
             </a>
           </div>
           <p className="text-center text-[13px] font-semibold uppercase leading-[1.5] text-white">
-            © 2025 shane&apos;s rib shack.
+            {`© ${new Date().getFullYear()} shane's rib shack.`}
           </p>
         </div>
 
-        <div className="flex w-full flex-col gap-8 sm:flex-row sm:gap-6 lg:gap-10">
+        <div className="order-1 flex w-full flex-col gap-8 sm:flex-row sm:gap-6 lg:order-2 lg:gap-10">
           <FooterLinks links={col1} />
           <FooterLinks links={col2} />
           <FooterLinks links={col3} />

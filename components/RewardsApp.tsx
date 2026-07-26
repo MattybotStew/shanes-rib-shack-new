@@ -56,7 +56,7 @@ export default function RewardsApp() {
     <section className="w-full" aria-label="Rewards app">
       {/* Desktop — 6250:6292 */}
       <div className="hidden w-full flex-col items-center px-5 py-20 lg:flex">
-        <div className="flex w-full max-w-[1200px] items-center justify-center overflow-hidden rounded-[12px] bg-brand-black pl-[60px]">
+        <div className="flex w-full max-w-[1200px] items-center justify-center gap-[100px] overflow-hidden rounded-[12px] bg-brand-black pl-[60px]">
           <div className="flex h-[354px] flex-1 flex-col items-start justify-center gap-10">
             <h2 className="w-full text-[45px] font-extrabold uppercase leading-none text-white">
               Download our rewards app today
