@@ -9,12 +9,12 @@ This version has breaking changes — APIs, conventions, and file structure may 
 
 ## Status snapshot (2026-07-26) — READ THIS FIRST
 
-**Full prototype is SHIPPED and live on GitHub Pages** — all 20 static pages deployed (older menu listing + card-grid locations).  
+**Full prototype + Figma marketing pages are on `main`** — pushed to `origin/main` @ **`1aa7e04`**.  
 **Catering funnel unchanged at `/catering/`** — do not re-implement.  
-**LOCAL (uncommitted in this tree — not yet on Pages):** Figma menu hub + category + item PDP, LocationsFinder, Shop (DK-Shop), and Our Story (DK-OurStory). Prefer extending; do not rebuild.
+**Pages deploy may lag:** GitHub Pages is updated via `.github/workflows/deploy.yml`. Do **not** assume live Pages URLs already serve the new menu/locations/shop/our-story UX until you verify the site (or the workflow completes). Prefer: *pushed to main @ 1aa7e04; Pages deploy via workflow may lag.* Extend these pages; do not rebuild.
 
-**Live on Pages + this tree:**
-1. **Full prototype — all nav/footer routes built** (20 static pages, 0 build errors). Every header and footer link resolves. Live at: https://mattybotstew.github.io/shanes-rib-shack-new/
+**On `main` / this tree (extend, do not re-implement):**
+1. **Full prototype — all nav/footer routes built** (static export, 0 build errors). Every header and footer link resolves. Site: https://mattybotstew.github.io/shanes-rib-shack-new/
 2. **Marketing homepage at `/`** from Figma `DK-Home` (`6310:5558`, file `fIxLVL93B0QkxG3bbpH8vZ`). Mobile reference: **`MB-Home 1` `6310:5770`**. Listed Figma fidelity gaps closed. Copy largely from live [shanesribshack.com](https://www.shanesribshack.com) (not Figma lorem).
 3. **Catering 2-step funnel unchanged at `/catering/`** — ContactBanner → PathDecision → compact quote form → menu reference; desktop package rail. Do not remove or rebuild it.
 4. **Location detail pages** at `/locations/[slug]/` (Edgewood + Norcross, Carrollton, Douglasville) with order-confirm modal where applicable.
@@ -23,8 +23,6 @@ This version has breaking changes — APIs, conventions, and file structure may 
 7. **Footer copyright** now dynamic (`new Date().getFullYear()`).
 8. **Social icons** `-scale-y-100` bug fixed.
 9. **All content pages polished** with real copy (Menu, Our Story, FAQs, Contact, Careers, Order, Shop, Franchise, Terms, Privacy, etc.).
-
-**LOCAL uncommitted (this tree only — extend, do not re-implement):**
 10. **Menu hub → category → item PDP** — `/menu/` (DK-Menu `6250:6294`), `/menu/[slug]/`, `/menu/[slug]/[item]/` e.g. `/menu/sandwiches/big-dad/` (DK-Menu-Item-sandwich-BigDad `6250:6349` / MB `6250:6498`). Category listing “More Info” links to PDP. Big Dad is the fully detailed Figma reference; other items use category photo fallback until dedicated art. Assets: `public/images/menu/`, `public/images/menu/items/`, share icons `public/images/share/`.
 11. **Locations listing finder** — `/locations/` uses `LocationsFinder` (filters + list + desktop static map) matching DK-Location `6250:6377` / MB-Location `6250:6567`. Data: `LOCATION_LIST_ITEMS` in `lib/locationData.ts`. Map: `public/images/locations/map-atlanta.jpg`. Client-side search only (no geocoding API). Detail pages remain at `/locations/[slug]/`.
 12. **Shop** — `/shop/` from Figma **DK-Shop** `6250:7860` / **MB-Shop** `6250:8150`. Composition: `ShopHero` → sauce grid (`ShopProductCard` + promo slot) → `ShopAllSauces` / `GiftCardPromo` (order swaps on mobile) → Rewards via `PageShell`. Data: `lib/shopData.ts`. Assets: `public/images/shop/`.
@@ -34,13 +32,13 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | :--- | :--- |
 | https://mattybotstew.github.io/shanes-rib-shack-new/ | ✅ 200 (homepage) |
 | https://mattybotstew.github.io/shanes-rib-shack-new/catering/ | ✅ 200 (Phase A funnel) |
-| https://mattybotstew.github.io/shanes-rib-shack-new/menu/ | ✅ 200 (older listing on Pages; **local** = DK-Menu hub) |
-| https://mattybotstew.github.io/shanes-rib-shack-new/locations/ | ✅ 200 (older cards on Pages; **local** = LocationsFinder) |
-| https://mattybotstew.github.io/shanes-rib-shack-new/our-story/ | ✅ 200 (older polished page on Pages; **local** = DK-OurStory) |
+| https://mattybotstew.github.io/shanes-rib-shack-new/menu/ | ✅ 200 (on `main` @ `1aa7e04` = DK-Menu hub; Pages deploy may lag) |
+| https://mattybotstew.github.io/shanes-rib-shack-new/locations/ | ✅ 200 (on `main` @ `1aa7e04` = LocationsFinder; Pages deploy may lag) |
+| https://mattybotstew.github.io/shanes-rib-shack-new/our-story/ | ✅ 200 (on `main` @ `1aa7e04` = DK-OurStory; Pages deploy may lag) |
 | https://mattybotstew.github.io/shanes-rib-shack-new/faqs/ | ✅ 200 |
 | https://mattybotstew.github.io/shanes-rib-shack-new/contact/ | ✅ 200 |
 | https://mattybotstew.github.io/shanes-rib-shack-new/order/ | ✅ 200 |
-| https://mattybotstew.github.io/shanes-rib-shack-new/shop/ | ✅ 200 (older polished page on Pages; **local** = DK-Shop) |
+| https://mattybotstew.github.io/shanes-rib-shack-new/shop/ | ✅ 200 (on `main` @ `1aa7e04` = DK-Shop; Pages deploy may lag) |
 | https://mattybotstew.github.io/shanes-rib-shack-new/franchise/ | ✅ 200 |
 | https://mattybotstew.github.io/shanes-rib-shack-new/careers/ | ✅ 200 |
 | https://mattybotstew.github.io/shanes-rib-shack-new/rewards/ | ✅ 200 |
@@ -51,10 +49,10 @@ This version has breaking changes — APIs, conventions, and file structure may 
 | https://mattybotstew.github.io/shanes-rib-shack-new/troubleshooting/ | ✅ 200 |
 | https://mattybotstew.github.io/shanes-rib-shack-new/franchise/login/ | ✅ 200 |
 | https://mattybotstew.github.io/shanes-rib-shack-new/locations/edgewood-atlanta-ga/ | ✅ 200 |
-| `/menu/[slug]/` · `/menu/[slug]/[item]/` | 🟡 local only (not on Pages until deploy) |
+| `/menu/[slug]/` · `/menu/[slug]/[item]/` | 🟡 on `main` @ `1aa7e04` (Pages deploy may lag) |
 
-**Latest shipped commits (Pages / `origin/main` @ `deafbc5`):** includes Phase 2 polish, full prototype, location details, older menu listing.  
-**Not on Pages yet:** menu hub/category/PDP + LocationsFinder + Shop (DK-Shop) + Our Story (DK-OurStory) (uncommitted). Prefer extending; do not re-implement Phase A or rebuild the funnel from scratch.
+**Latest on `origin/main` @ `1aa7e04`:** Figma menu hub/category/PDP, LocationsFinder, Shop (DK-Shop), Our Story (DK-OurStory), plus prior Phase A catering + full prototype.  
+**GitHub Pages:** deploy workflow runs after push — live Pages may still briefly serve the previous build. Prefer extending; do not re-implement Phase A or rebuild the funnel from scratch.
 
 ### What was shipped on Pages (do not re-implement)
 
@@ -111,7 +109,7 @@ Composition: **HomeHero → CateringPromo → ShackNews → GiftCardPromo → Re
 
 Full design inventory: Figma Dev handoff canvas. Key mobile home frame: **`6310:5770`**.
 
-### Menu (`/menu/`) — Figma DK-Menu + category + PDP (LOCAL, uncommitted)
+### Menu (`/menu/`) — Figma DK-Menu + category + PDP (on `main` @ `1aa7e04`)
 
 **Do not rebuild.** Extend data/assets only.
 
@@ -125,7 +123,7 @@ Full design inventory: Figma Dev handoff canvas. Key mobile home frame: **`6310:
 - Share icons: `public/images/share/` (facebook, twitter/X, linkedin, link).
 - Category art: `public/images/menu/*.jpg`.
 
-### Locations (`/locations/`) — Figma DK-Location / MB-Location (LOCAL, uncommitted)
+### Locations (`/locations/`) — Figma DK-Location / MB-Location (on `main` @ `1aa7e04`)
 
 **Do not rebuild.** Extend list data / detail pages only.
 
@@ -137,7 +135,7 @@ Full design inventory: Figma Dev handoff canvas. Key mobile home frame: **`6310:
 | Map | `public/images/locations/map-atlanta.jpg` — static image only; **no** live maps/geocoding API |
 | Details | Still `/locations/[slug]/` (4 locations); cards without a slug fall through to Google Maps URL |
 
-### Shop (`/shop/`) — Figma DK-Shop / MB-Shop (LOCAL, uncommitted)
+### Shop (`/shop/`) — Figma DK-Shop / MB-Shop (on `main` @ `1aa7e04`)
 
 **Do not rebuild.** Extend `shopData` / product assets / purchase URLs only.
 
@@ -153,7 +151,7 @@ Full design inventory: Figma Dev handoff canvas. Key mobile home frame: **`6310:
 - Gift card block reuses `GiftCardPromo` (real homepage copy) instead of Figma lorem / typo “Shiop GIFT CARD”.
 - Section order: desktop Shop All → Gift Cards; mobile Gift Cards → Shop All (MB-Shop).
 
-### Our Story (`/our-story/`) — Figma DK-OurStory / MB (LOCAL, uncommitted)
+### Our Story (`/our-story/`) — Figma DK-OurStory / MB (on `main` @ `1aa7e04`)
 
 **Do not rebuild.** Extend sections / assets / copy only.
 
@@ -276,7 +274,7 @@ CONSENSUS_PLAN.md, CATERING_PLAN.md
 2. Most menu items lack dedicated PDP photography — only Big Dad has `public/images/menu/items/`; others fall back to category photos  
 3. Only 4 locations have detail pages in `ALL_LOCATIONS` — listing may show more via `LOCATION_LIST_ITEMS` with Maps fallback when no slug  
 4. Locations finder is static map + client-side text filter only — radius UI is present but not geo-backed  
-5. Menu hub / category / PDP, LocationsFinder, Shop (DK-Shop), and Our Story (DK-OurStory) are **local uncommitted** — Pages still serves older `/menu/`, `/locations/`, `/shop/`, and `/our-story/` until deploy  
+5. Menu hub / category / PDP, LocationsFinder, Shop (DK-Shop), and Our Story (DK-OurStory) are on `main` @ `1aa7e04` — GitHub Pages deploy via workflow may lag behind the push  
 6. Shop promo banner slot is a client-upload placeholder (no creative yet)  
 
 ## Agent focus now
@@ -284,8 +282,8 @@ CONSENSUS_PLAN.md, CATERING_PLAN.md
 2. **Homepage is additive** — listed Figma fidelity gaps (`MB-Home 1` `6310:5770`) are closed; do not rebuild `/` or fold catering back into `/`.  
 3. **Do not** re-implement menu hub / category / PDP, LocationsFinder, Shop, or Our Story — extend data/assets only (`menuPageData`, `LOCATION_LIST_ITEMS`, `shopData`, story assets).  
 4. Prefer regression fixes / human-flagged pixel tweaks over new homepage sections.  
-5. Ops/client blockers + Phase B debate remain human/docs work; deploy/ship local UX only when asked.  
-6. **Pages has the 20-page prototype**; local tree adds menu PDP stack, LocationsFinder, Shop, and Our Story — extend, don't re-implement.  
+5. Ops/client blockers + Phase B debate remain human/docs work.  
+6. **`origin/main` @ `1aa7e04`** includes menu PDP stack, LocationsFinder, Shop, and Our Story — extend, don't re-implement; Pages deploy may lag.  
 7. Menu: **DK-Menu** `6250:6294` → `/menu/[slug]/` → PDP **DK-Menu-Item-sandwich-BigDad** `6250:6349` / **MB** `6250:6498` (Big Dad fully detailed; others category-photo fallback). Mobile menu: **MB-Menu** `6250:6830`.  
 8. Locations: **DK-Location** `6250:6377` / **MB-Location** `6250:6567` via `LocationsFinder`; details stay at `/locations/[slug]/`.  
 9. Shop: **DK-Shop** `6250:7860` / **MB-Shop** `6250:8150` — extend `shopData` / sauce art; keep `GiftCardPromo` reuse and shop-focused hero copy.  
