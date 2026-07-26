@@ -22,17 +22,37 @@ export default function ShopPage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-16 text-center lg:px-[66px] lg:py-24">
-        <div className="mx-auto max-w-[600px]">
-          <p className="mb-8 text-lg leading-relaxed text-brand-gray">
-            {`Visit our online store for Shane's merchandise and gift cards.`}
-          </p>
-          <Cta
-            href="https://www.shanesribshack.com/shop/"
-            variant="red"
-          >
-            Visit the Shop
-          </Cta>
+      <section className="bg-white px-5 py-16 lg:px-[66px] lg:py-24">
+        <div className="mx-auto max-w-[800px]">
+          <div className="grid gap-8 md:grid-cols-2">
+            <div className="rounded-lg border border-brand-black/10 bg-brand-tan p-8 text-center">
+              <h2 className="mb-3 text-lg font-bold uppercase text-brand-red">
+                Gift Cards
+              </h2>
+              <p className="mb-6 text-sm leading-relaxed text-brand-gray">
+                {`The perfect gift for any BBQ lover. Available in any amount at
+                all locations or online.`}
+              </p>
+              <Cta href="/gift-cards" variant="red">
+                Buy Gift Cards
+              </Cta>
+            </div>
+
+            <div className="rounded-lg border border-brand-black/10 bg-brand-tan p-8 text-center">
+              <h2 className="mb-3 text-lg font-bold uppercase text-brand-red">
+                Merchandise
+              </h2>
+              <p className="mb-6 text-sm leading-relaxed text-brand-gray">
+                {`T-shirts, hats, and more — rep the Shack wherever you go.`}
+              </p>
+              <Cta
+                href="https://www.shanesribshack.com/shop/"
+                variant="outline"
+              >
+                Visit Online Store
+              </Cta>
+            </div>
+          </div>
         </div>
       </section>
     </PageShell>

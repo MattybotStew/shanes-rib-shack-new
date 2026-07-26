@@ -23,21 +23,44 @@ export default function OrderPage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-16 text-center lg:px-[66px] lg:py-24">
-        <div className="mx-auto max-w-[600px]">
-          <h2 className="mb-4 text-2xl font-bold uppercase text-brand-black lg:text-3xl">
-            Choose How to Order
-          </h2>
-          <p className="mb-8 text-base leading-relaxed text-brand-gray">
-            Order through ezCater for delivery or find your nearest shack for pickup.
-          </p>
-          <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-            <Cta href={ezCaterUrl()} variant="red">
-              Order Delivery
-            </Cta>
-            <Cta href="/locations" variant="outline">
-              Find a Location
-            </Cta>
+      <section className="bg-white px-5 py-16 lg:px-[66px] lg:py-24">
+        <div className="mx-auto max-w-[800px]">
+          <div className="mx-auto mb-12 max-w-[600px] text-center">
+            <h2 className="mb-4 text-2xl font-bold uppercase text-brand-black lg:text-3xl">
+              Choose How to Order
+            </h2>
+            <p className="text-base leading-relaxed text-brand-gray">
+              {`Order through ezCater for delivery or find your nearest shack for
+              pickup. You can also call any location to place an order by phone.`}
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            <div className="rounded-lg border border-brand-black/10 bg-brand-tan p-8 text-center">
+              <h3 className="mb-3 text-lg font-bold uppercase text-brand-red">
+                Delivery
+              </h3>
+              <p className="mb-6 text-sm leading-relaxed text-brand-gray">
+                {`Order through ezCater for delivery to your home or office. Large
+                catering orders welcome.`}
+              </p>
+              <Cta href={ezCaterUrl()} variant="red">
+                Order Delivery
+              </Cta>
+            </div>
+
+            <div className="rounded-lg border border-brand-black/10 bg-brand-tan p-8 text-center">
+              <h3 className="mb-3 text-lg font-bold uppercase text-brand-red">
+                Pickup
+              </h3>
+              <p className="mb-6 text-sm leading-relaxed text-brand-gray">
+                {`Find your nearest Shane's Rib Shack and order for pickup. Just
+                walk in and smell the smoke.`}
+              </p>
+              <Cta href="/locations" variant="outline">
+                Find a Location
+              </Cta>
+            </div>
           </div>
         </div>
       </section>

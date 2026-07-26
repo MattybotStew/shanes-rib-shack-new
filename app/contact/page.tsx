@@ -29,6 +29,9 @@ export default function ContactPage() {
             </h2>
             <p className="mb-1 text-brand-gray">Email: catering@shanesribshack.com</p>
             <p className="text-brand-gray">Phone: (770) 416-6606</p>
+            <p className="mt-4 text-sm text-brand-gray">
+              {`We typically respond within 1 business day. For rush orders, please call.`}
+            </p>
           </div>
 
           <div className="rounded-lg bg-white p-8 text-center shadow-sm">
@@ -38,9 +41,9 @@ export default function ContactPage() {
             <p className="mb-4 text-brand-gray">
               Visit your nearest location or reach out through our social channels.
             </p>
-            <div className="flex justify-center gap-4">
+            <div className="flex justify-center gap-6">
               <a
-                href="https://facebook.com"
+                href="https://facebook.com/ShanesRibShack"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-bold uppercase text-brand-red hover:underline"
@@ -48,12 +51,20 @@ export default function ContactPage() {
                 Facebook
               </a>
               <a
-                href="https://instagram.com"
+                href="https://instagram.com/shanesribshack"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm font-bold uppercase text-brand-red hover:underline"
               >
                 Instagram
+              </a>
+              <a
+                href="https://youtube.com/@ShanesRibShack"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-bold uppercase text-brand-red hover:underline"
+              >
+                YouTube
               </a>
             </div>
           </div>

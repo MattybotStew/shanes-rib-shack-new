@@ -10,27 +10,39 @@ export const metadata: Metadata = {
 const faqs = [
   {
     q: "What are your hours?",
-    a: "Most locations are open Monday through Sunday, 11:00 AM to 9:00 PM. Check your local shack for exact hours.",
+    a: "Most locations are open Monday through Sunday, 11:00 AM to 9:00 PM. Hours may vary by location, so check your local shack's page for exact times.",
   },
   {
     q: "Do you offer catering?",
-    a: "Yes! We cater offices, parties, weddings, and events of all sizes. Visit our catering page to order online or request a quote.",
+    a: "Yes! We cater offices, parties, weddings, and events of all sizes. Choose from our catering packages like One Meat, Two Meat, Three Meat, or Boxed Lunches. Each includes sides, bread, BBQ sauce, tea, and disposableware. Visit our catering page to order online or request a quote.",
+  },
+  {
+    q: "What's the minimum for catering?",
+    a: "Our catering minimum is $200. We recommend ordering at least 2-3 days in advance to ensure availability.",
   },
   {
     q: "Can I order online?",
-    a: "Absolutely. Order online for pickup or delivery through our website or the Shane's Rib Shack app.",
-  },
-  {
-    q: "Do you have gift cards?",
-    a: "Yes! Gift cards are available at any location or online. They make the perfect gift for BBQ lovers.",
-  },
-  {
-    q: "What's on the menu?",
-    a: "Slow-smoked baby back ribs, chopped pork, chicken, wings, Southern sides like mac & cheese and Brunswick stew, plus homemade desserts.",
+    a: "Absolutely! Order online for pickup or delivery through ezCater. You can also order directly from your nearest location by phone.",
   },
   {
     q: "Do you have a rewards program?",
-    a: "We sure do! Download the Shane's Rib Shack app to earn points, get exclusive offers, and enjoy birthday rewards.",
+    a: "Yes! Download the Shane's Rib Shack app to earn points with every purchase, get exclusive offers, and enjoy a birthday reward. Available on iOS and Android.",
+  },
+  {
+    q: "Do you have gift cards?",
+    a: "Gift cards are available for purchase at any location or online. They make the perfect gift for BBQ lovers and can be redeemed at any Shane's Rib Shack.",
+  },
+  {
+    q: "What's on the menu?",
+    a: "We serve slow-smoked baby back ribs, chopped pork, chopped chicken, wings, chicken tenders, and classic Southern sides like mac & cheese, Brunswick stew, baked beans, coleslaw, and potato salad. Don't forget dessert — homemade peach cobbler, brownies, and cookies.",
+  },
+  {
+    q: "Do you have gluten-free options?",
+    a: "Many of our meats and sides are naturally gluten-free. Please ask your server for details and recommendations.",
+  },
+  {
+    q: "Can I book a location for an event?",
+    a: "Contact your nearest Shane's Rib Shack location to inquire about event bookings and private dining options.",
   },
 ];
 

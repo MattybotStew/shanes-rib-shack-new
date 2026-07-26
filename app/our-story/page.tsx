@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
 
 export const metadata: Metadata = {
-  title: "Shane's Rib Shack | Our Story",
+  title: "Our Story | Shane's Rib Shack",
   description:
     "Shane's Rib Shack started in a tiny shack in McDonough, GA. Today we're still serving the same slow-smoked BBQ that made us famous.",
 };
@@ -24,18 +24,25 @@ export default function OurStoryPage() {
       <section className="bg-white px-5 py-16 lg:px-[66px] lg:py-24">
         <div className="mx-auto max-w-[800px] space-y-6 text-base leading-relaxed text-brand-gray">
           <p>
-            {`Shane's Rib Shack was born in a tiny 400-square-foot shack in
-            McDonough, Georgia. What started as one man's passion for
-            slow-smoked BBQ grew into a beloved local institution — and today,
-            we serve our signature ribs, chopped pork, and Southern sides at
-            locations across Georgia.`}
+            {`Shane's Rib Shack was born in 2002 in a tiny 400-square-foot shack in
+            McDonough, Georgia. Founder Shane Thompson had a simple vision: serve
+            authentic, slow-smoked BBQ that would bring people together. What started
+            as a roadside stand with a single smoker quickly became a local legend.`}
           </p>
           <p>
-            {`Every rack of ribs is slow-smoked to perfection over hickory wood.
-            Every batch of Brunswick stew is made from scratch. Every guest is
-            treated like family. That's the Shane's way.`}
+            {`Word spread fast. People drove from all over Georgia for Shane's
+            baby back ribs — fall-off-the-bone tender, kissed by hickory smoke,
+            and slathered in our signature sauce. The Shack grew from that one
+            location to multiple spots across the state, but the recipe never
+            changed: low-and-slow, made from scratch, served with a smile.`}
           </p>
           <p>
+            {`Today, Shane's Rib Shack is still family-owned and operated. Every
+            rack of ribs is hand-rubbed and smoked daily. Every batch of
+            Brunswick stew simmers for hours. Every guest is treated like
+            family. That's the Shane's way — and it always will be.`}
+          </p>
+          <p className="pt-4 text-center text-lg font-bold text-brand-black">
             From our family to yours — welcome to the Shack.
           </p>
         </div>

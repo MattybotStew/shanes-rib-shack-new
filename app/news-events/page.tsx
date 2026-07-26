@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import PageShell from "@/components/PageShell";
-import Cta from "@/components/Cta";
 import { asset } from "@/lib/asset";
 import { newsItems } from "@/lib/newsData";
 

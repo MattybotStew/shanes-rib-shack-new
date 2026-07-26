@@ -21,29 +21,40 @@ export default function PrivacyPage() {
         <div className="mx-auto max-w-[800px] space-y-4 text-sm leading-relaxed text-brand-gray">
           <p>
             {`This Privacy Policy describes how Shane's Rib Shack collects, uses, and
-            discloses your information when you visit our website.`}
+            shares your personal information when you visit our website, use our services,
+            or interact with us.`}
           </p>
           <h2 className="pt-4 text-base font-bold uppercase text-brand-black">
             Information We Collect
           </h2>
           <p>
-            {`We may collect personal information such as your name, email address,
-            phone number, and location data when you fill out forms on our site.`}
+            {`We may collect personal information you provide directly, such as your name,
+            email address, phone number, and delivery address when you fill out forms,
+            place orders, or contact us. We also automatically collect certain information
+            about your device and browsing behavior through cookies and similar technologies.`}
           </p>
           <h2 className="pt-4 text-base font-bold uppercase text-brand-black">
             How We Use Your Information
           </h2>
           <p>
-            {`We use your information to respond to inquiries, process catering
-            requests, and improve our services. We do not sell your personal
-            information to third parties.`}
+            {`We use your information to process orders, respond to inquiries, improve our
+            services, send marketing communications (with your consent), and comply with
+            legal obligations. We do not sell your personal information to third parties.`}
+          </p>
+          <h2 className="pt-4 text-base font-bold uppercase text-brand-black">
+            Cookies
+          </h2>
+          <p>
+            {`Our website uses cookies to enhance your browsing experience, analyze site
+            traffic, and serve relevant content. You can control cookie preferences through
+            your browser settings.`}
           </p>
           <h2 className="pt-4 text-base font-bold uppercase text-brand-black">
             Contact
           </h2>
           <p>
-            {`If you have questions about this policy, please contact us at
-            catering@shanesribshack.com.`}
+            {`If you have questions about this policy or wish to exercise your data rights,
+            please contact us at catering@shanesribshack.com.`}
           </p>
         </div>
       </section>

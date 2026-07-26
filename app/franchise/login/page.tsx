@@ -7,6 +7,14 @@ export const metadata: Metadata = {
   description: "Franchise partner login portal for Shane's Rib Shack.",
 };
 
+const portalLinks = [
+  { label: "Operations Manual", href: "#" },
+  { label: "Marketing Resources", href: "#" },
+  { label: "Supply Ordering", href: "#" },
+  { label: "Training Materials", href: "#" },
+  { label: "Reports & Analytics", href: "#" },
+];
+
 export default function FranchiseLoginPage() {
   return (
     <PageShell>
@@ -21,17 +29,33 @@ export default function FranchiseLoginPage() {
         </div>
       </section>
 
-      <section className="bg-white px-5 py-16 text-center lg:px-[66px] lg:py-24">
+      <section className="bg-white px-5 py-16 lg:px-[66px] lg:py-24">
         <div className="mx-auto max-w-[600px]">
-          <p className="mb-8 text-lg leading-relaxed text-brand-gray">
-            Access the franchise partner portal for resources, reports, and support.
+          <p className="mb-8 text-center text-lg leading-relaxed text-brand-gray">
+            {`Access the franchise partner portal for resources, reports, and support.`}
           </p>
-          <Cta
-            href="https://www.shanesribshack.com/franchise/login/"
-            variant="red"
-          >
-            Go to Portal
-          </Cta>
+
+          <div className="mb-8 space-y-3">
+            {portalLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="flex items-center justify-between rounded-lg border border-brand-black/10 bg-brand-tan px-6 py-4 text-sm font-bold uppercase text-brand-black transition-colors hover:bg-brand-red hover:text-white"
+              >
+                {link.label}
+                <span aria-hidden>&rarr;</span>
+              </a>
+            ))}
+          </div>
+
+          <div className="text-center">
+            <Cta
+              href="https://www.shanesribshack.com/franchise/login/"
+              variant="red"
+            >
+              Go to Portal
+            </Cta>
+          </div>
         </div>
       </section>
     </PageShell>
