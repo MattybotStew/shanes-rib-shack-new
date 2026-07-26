@@ -7,7 +7,7 @@ import { asset } from "@/lib/asset";
 import { locationFromPathname } from "@/lib/locationData";
 
 const navItems = [
-  { label: "Menu", href: "/menu", hasDropdown: true },
+  { label: "Menu", href: "/menu" },
   { label: "Catering", href: "/catering" },
   { label: "Locations", href: "/locations" },
   { label: "Our Story", href: "/our-story" },
@@ -185,19 +185,6 @@ export default function Header() {
                   }`}
                 >
                   {item.label}
-                  {"hasDropdown" in item && item.hasDropdown ? (
-                    <span className="relative ml-0.5 inline-block h-[5.5px] w-[9.5px] shrink-0 overflow-hidden">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={asset("/images/chevron-down.svg")}
-                        alt=""
-                        width={10}
-                        height={6}
-                        className="block size-full"
-                        aria-hidden
-                      />
-                    </span>
-                  ) : null}
                 </Link>
               );
             })}
