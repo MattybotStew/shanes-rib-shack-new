@@ -8,7 +8,13 @@
     "start": "next start",
     "lint": "eslint",
     "serve:out": "node scripts/serve-static.mjs",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "figma:init": "figma init --project .",
+    "figma:fetch": "figma fetch --project .",
+    "figma:tokens": "figma tokens --project .",
+    "figma:assets": "figma assets --project .",
+    "figma:components": "figma components --project .",
+    "figma:sync": "figma sync --project ."
   },
   "dependencies": {
     "next": "16.2.11",
@@ -25,5 +31,9 @@
     "eslint-config-next": "16.2.11",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "packageManager": "pnpm@11.21.0",
+  "engines": {
+    "node": ">=20"
   }
 }
