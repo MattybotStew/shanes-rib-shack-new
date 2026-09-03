@@ -306,3 +306,35 @@ CONSENSUS_PLAN.md, CATERING_PLAN.md
 11. Smoke coverage now exists via Playwright (`playwright.config.ts`, `tests/smoke.spec.ts`, `scripts/serve-static.mjs`) plus CI workflow `.github/workflows/smoke.yml`; prefer extending these tests over adding ad hoc browser checks. `serve-static.mjs` emulates the GitHub Pages basePath mount (auto-detect or `NEXT_PUBLIC_BASE_PATH`), so tests pass against both local and `GITHUB_PAGES=true` exports.  
 12. Build metadata now uses `metadataBase` from `lib/siteUrl.ts`; preserve GitHub Pages compatibility when editing canonical/Open Graph metadata.
 <!-- END:project-context -->
+
+<!-- BEGIN:live-wordpress-news-work -->
+# Live WordPress site news work (client-facing, NOT this repo)
+
+**Scope boundary:** These requests concern the **live WordPress site** (shanesribshack.com — `/news/` archive + `/news/[post]/` single post templates). That site is **not** in this repo and not editable here. This repo (`shanes-rib-shack-new`) is the Next.js static-export prototype; its `/news-events/` pages are only a design reference for the WP templates. When asked to "update the news pages," first clarify which target (WP live site vs. this repo) before writing code.
+
+## Client request (2026-09): News landing + single post UI/UX
+- Client unhappy with the **News landing page** and **single post template** on the live WP site.
+- **Single post template:** shorten the header banner; put content on **2/3** and featured image on **1/3**; remove the weird/underutilized excerpt field; the image should **always size to fit its container** and be **clickable to open in a Fancybox** lightbox.
+- **News landing page:** general redesign (grid/cards/layout).
+- Ask from client: what **Featured Image size** ensures words aren't cropped on `/news/` and `/`.
+- Ask from client: a **step-by-step publish guide** (duplicate post → swap content → publish).
+
+## Delivered estimates (hours) — reference for re-estimating
+| Scope | Est. |
+| :--- | :--- |
+| Single post template updates (shorten banner; 2/3-content + 1/3-image layout; remove excerpt; image fit + Fancybox; QA) | 6–10h |
+| News landing page redesign | 4–8h |
+| Featured image sizing/editorial spec (one canonical ratio, e.g. 1600×900 16:9, safe-zone center) | ~1h |
+| Client publish/duplicate guide | ~1h |
+| **Combined project** | **~12–20h** (recommend quoting ~20h to buffer QA/revisions) |
+
+## Standing guidance (dev notes for the WP work)
+- Feed editors **one** fixed crop ratio per surface (e.g. card grid and single-post featured both 1600×900 16:9 with `object-fit: cover`) so copy/text is never clipped; keep important text in the center ~50% safe zone.
+- Fancybox image should use a clickable full-size source while the 1/3-column layout shows a CSS-fitted thumbnail.
+- These are estimates/answers only unless the client asks for build-out; the WP theme is a separate deliverable tracked outside this repo.
+<!-- END:live-wordpress-news-work -->
+
+
+## Figma MCP
+
+Official remote server: `https://mcp.figma.com/mcp`. Read `FIGMA.md` before implementing from a Figma URL.
