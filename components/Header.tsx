@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { asset } from "@/lib/asset";
 import { locationFromPathname } from "@/lib/locationData";
 
@@ -62,14 +62,17 @@ function PhoneIcon() {
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
   const onLocations = isActiveNav(pathname, "/locations");
   const activeLocation = locationFromPathname(pathname);
   const shackCtaLabel = onLocations ? "Change Your Shack" : "Find your shack";
 
   // Header lives in the root layout — close the drawer on client navigations.
-  useEffect(() => {
+  // Reset state during render (React docs pattern) instead of in an effect.
+  if (pathname !== prevPathname) {
+    setPrevPathname(pathname);
     setMobileOpen(false);
-  }, [pathname]);
+  }
 
   return (
     <header className="flex w-full flex-col items-center">
