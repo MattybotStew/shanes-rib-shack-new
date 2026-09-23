@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shane's Rib Shack — News UI Redesign Mockups (Design)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  :root {
+    --black: #101820;
+    --red: #bb202b;
+    --gold: #ffc72c;
+    --tan: #f8f5ec;
+    --cream: #efeadc;
+    --gray: #3a3a3a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--black);
+    color: var(--tan);
+    font-family: "Montserrat", system-ui, sans-serif;
+  }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 64px 24px; }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    margin: 0 0 12px;
+  }
+  h1 {
+    font-size: 38px;
+    line-height: 1.05;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+  h2.section {
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    margin: 40px 0 16px;
+  }
+  p.lead {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(248, 245, 236, 0.85);
+    max-width: 680px;
+    margin: 0 0 8px;
+  }
+  .cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; }
+  .card {
+    display: block;
+    background: #ffffff;
+    color: var(--black);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0,0,0,.35); }
+  .thumb { height: 180px; background-size: cover; background-position: center; }
+  .card-body { padding: 18px; }
+  .num {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--red);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 6px;
+  }
+  .card h3 {
+    font-size: 14px;
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.3;
+    margin: 0 0 8px;
+  }
+  .card p.desc {
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--gray);
+    margin: 0 0 12px;
+  }
+  .cta {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: #fff;
+    background: var(--red);
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 5px;
+    letter-spacing: 0.03em;
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Design deliverable · UI mockups · News</p>
+    <h1>News &amp; Events UI Redesign</h1>
+    <p class="lead">
+      Six layout options for the live WordPress site (shanesribshack.com) — three for the
+      single post template and three for the News landing page. All share the 1230px content
+      width used live, 16:9 thumbnails, and click-to-zoom featured images.
+    </p>
+
+    <h2 class="section">Single Post template</h2>
+    <div class="cards">
+      <a class="card" href="single-post.html">
+        <div class="thumb" style="background-image:url('../../public/images/news-events/summer-bbq.jpg')"></div>
+        <div class="card-body">
+          <p class="num">A · Recommended</p>
+          <h3>2/3 content + 1/3 image</h3>
+          <p class="desc">Short banner, body on left 2/3, featured image fills right 1/3 rail (sticky) and opens in Fancybox.</p>
+          <span class="cta">Open</span>
+        </div>
+      </a>
+      <a class="card" href="single-post-alt-1.html">
+        <div class="thumb" style="background-image:url('../../public/images/news-events/holiday-catering.jpg')"></div>
+        <div class="card-body">
+          <p class="num">B · Alternative</p>
+          <h3>Full-width image hero</h3>
+          <p class="desc">Red banner, full-width 16:9 featured image with Fancybox, centered single-column article.</p>
+          <span class="cta">Open</span>
+        </div>
+      </a>
+      <a class="card" href="single-post-alt-2.html">
+        <div class="thumb" style="background-image:url('../../public/images/news-events/game-day.jpg')"></div>
+        <div class="card-body">
+          <p class="num">C · Alternative</p>
+          <h3>Mirrored 1/3 image + 2/3 content</h3>
+          <p class="desc">Featured image on the left 1/3 with a share card underneath; body on right 2/3.</p>
+          <span class="cta">Open</span>
+        </div>
+      </a>
+    </div>
+
+    <h2 class="section">News landing page</h2>
+    <div class="cards">
+      <a class="card" href="news-landing.html">
+        <div class="thumb" style="background-image:url('../../public/images/news-events/hero.jpg')"></div>
+        <div class="card-body">
+          <p class="num">A · Recommended</p>
+          <h3>Lead story + 3-up grid</h3>
+          <p class="desc">Short banner, featured lead story at 16:9, then a 3-up card grid with pagination.</p>
+          <span class="cta">Open</span>
+        </div>
+      </a>
+      <a class="card" href="news-landing-alt-1.html">
+        <div class="thumb" style="background-image:url('../../public/images/news-events/march-madness.jpg')"></div>
+        <div class="card-body">
+          <p class="num">B · Alternative</p>
+          <h3>Overlay hero + grid</h3>
+          <p class="desc">Full-width featured image with dark overlay headline, then a 3-up grid with pagination.</p>
+          <span class="cta">Open</span>
+        </div>
+      </a>
+      <a class="card" href="news-landing-alt-2.html">
+        <div class="thumb" style="background-image:url('../../public/images/news-events/origin-story.jpg')"></div>
+        <div class="card-body">
+          <p class="num">C · Alternative</p>
+          <h3>Compact 4-up grid + filters</h3>
+          <p class="desc">No large featured block — category filter chips over a dense 4-column card grid.</p>
+          <span class="cta">Open</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mockup 2 · News Landing — Shane's Rib Shack News Redesign</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800;1,400&display=swap"
+  rel="stylesheet"
+/>
+<style>
+  :root {
+    --black: #101820;
+    --red: #bb202b;
+    --gold: #ffc72c;
+    --tan: #f8f5ec;
+    --cream: #efeadc;
+    --gray: #3a3a3a;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--tan);
+    color: var(--black);
+    font-family: "Montserrat", system-ui, sans-serif;
+  }
+
+  .toolbar {
+    background: var(--black);
+    color: var(--tan);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .toolbar .crumb {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .toolbar .crumb a { color: var(--gold); text-decoration: none; }
+
+  .site-nav {
+    background: #fff;
+    border-bottom: 1px solid var(--cream);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+  .site-nav .logo { font-weight: 800; text-transform: uppercase; font-size: 15px; color: var(--black); }
+  .site-nav .logo span { color: var(--red); }
+  .site-nav .links { display: flex; gap: 22px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
+  .site-nav .links a { color: var(--black); text-decoration: none; }
+  .site-nav .links a.active { color: var(--red); }
+  .site-nav .btn-order {
+    background: var(--red);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 9px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+
+  /* ── 1 · SHORTENED HEADER BANNER ─────────────────────────── */
+  .page-banner {
+    background: var(--black);
+    color: #fff;
+    padding: 34px 24px 36px;
+    text-align: center;
+  }
+  .page-banner .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--gold);
+    margin: 0 0 10px;
+  }
+  .page-banner h1 {
+    font-size: clamp(26px, 4vw, 46px);
+    line-height: 1.05;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+  .page-banner p.tag {
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* ── 2 · FEATURED LEAD STORY ─────────────────────────────── */
+  .list-wrap {
+    max-width: 1230px;
+    margin: 0 auto;
+    padding: 40px 24px 8px;
+  }
+  .lead-story {
+    display: grid;
+    grid-template-columns: 7fr 5fr;
+    gap: 28px;
+    background: #fff;
+    border: 1px solid var(--cream);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .lead-story .img { aspect-ratio: 16 / 9; min-height: 0; }
+  .lead-story .img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .lead-story .meta { display: flex; flex-direction: column; justify-content: center; padding: 30px; }
+  .lead-story .cat,
+  .card .cat {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--red);
+    letter-spacing: 0.04em;
+    margin: 0 0 8px;
+  }
+  .lead-story h2 {
+    font-size: clamp(18px, 2.4vw, 26px);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.2;
+    margin: 0 0 12px;
+  }
+  .lead-story .excerpt { font-size: 14px; line-height: 1.6; color: var(--gray); margin: 0 0 18px; }
+  .lead-cta, .card .cta {
+    display: inline-block;
+    align-self: flex-start;
+    background: var(--red);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 9px 16px;
+    border-radius: 5px;
+  }
+
+  /* ── 3 · CARD GRID (fixed 16:9) ──────────────────────────── */
+  .grid-label {
+    font-size: 20px;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 20px;
+  }
+  .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .card {
+    background: #fff;
+    border: 1px solid var(--cream);
+    border-radius: 12px;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08); }
+  .card .img { aspect-ratio: 16 / 9; overflow: hidden; }
+  .card .img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .card .meta { padding: 18px; display: flex; flex-direction: column; flex: 1; }
+  .card h3 { font-size: 14px; font-weight: 700; text-transform: uppercase; line-height: 1.35; margin: 0 0 8px; flex: 1; }
+  .card .excerpt {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--gray);
+    margin: 0 0 16px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* pagination */
+  .pagination { display: flex; justify-content: center; align-items: center; gap: 6px; padding: 40px 0 8px; }
+  .pagination a {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    background: #fff;
+    border: 1px solid var(--cream);
+    color: var(--black);
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: none;
+  }
+  .pagination a.active { background: var(--red); border-color: var(--red); color: #fff; }
+  .pagination a.dots { border: none; background: transparent; }
+
+  .site-footer {
+    background: var(--black);
+    color: rgba(255,255,255,.7);
+    text-align: center;
+    padding: 48px 24px 28px;
+    font-size: 12px;
+  }
+
+  @media (max-width: 900px) {
+    .lead-story { grid-template-columns: 1fr; }
+    .lead-story .img { min-height: 0; aspect-ratio: 16 / 9; }
+    .card-grid { grid-template-columns: 1fr; }
+    .site-nav .links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <span class="crumb"><a href="index.html">&larr; All mockups</a> · News Landing · A</span>
+</div>
+
+<!-- site chrome -->
+<header class="site-nav">
+  <span class="logo">Shane&#8217;s <span>Rib Shack</span></span>
+  <nav class="links">
+    <a href="#">Menu</a>
+    <a href="#">Catering</a>
+    <a href="#">Locations</a>
+    <a href="#">Our Story</a>
+    <a href="#" class="active">News &amp; Events</a>
+    <a href="#">Careers</a>
+  </nav>
+  <a class="btn-order" href="#">Order Now</a>
+</header>
+
+<!-- 1 · shortened header banner -->
+<section class="page-banner">
+  <p class="eyebrow">News &amp; Events</p>
+  <h1>Shack News</h1>
+  <p class="tag">From local happenings to the latest promotions and catering ideas — this is where we share what&#8217;s new.</p>
+</section>
+
+<div class="list-wrap">
+
+  <!-- 2 · featured lead story -->
+  <a class="lead-story" href="single-post.html">
+    <div class="img"><img src="../../public/images/news-events/summer-bbq.jpg" alt="" /></div>
+    <div class="meta">
+      <p class="cat">News</p>
+      <h2>Thank &#8216;QUE, Shaniacs! Join us 8/11/26 for a $6.99 Big Dad and Side</h2>
+      <p class="excerpt">Customer appreciation day at the Shack — our signature Big Dad BBQ Pork Sandwich plus a small side for just $6.99. One day only, while supplies last.</p>
+      <span class="lead-cta">Read More</span>
+    </div>
+  </a>
+
+  <!-- 3 · card grid -->
+  <p class="grid-label">Latest News</p>
+  <div class="card-grid">
+    <a class="card" href="single-post.html">
+      <div class="img"><img src="../../public/images/news-events/game-day.jpg" alt="" /></div>
+      <div class="meta">
+        <p class="cat">Game Day</p>
+        <h3>Build the Ultimate BBQ Tailgate Tray</h3>
+        <p class="excerpt">Wings, ribs, and sides that travel — set up your home game-day spread the easy way.</p>
+        <span class="cta">Read More</span>
+      </div>
+    </a>
+    <a class="card" href="single-post.html">
+      <div class="img"><img src="../../public/images/news-events/holiday-catering.jpg" alt="" /></div>
+      <div class="meta">
+        <p class="cat">Catering</p>
+        <h3>Stress-free Holiday Meals for the Office</h3>
+        <p class="excerpt">Thanksgiving, Christmas and everything in between — we bring the smoked meats.</p>
+        <span class="cta">Read More</span>
+      </div>
+    </a>
+    <a class="card" href="single-post.html">
+      <div class="img"><img src="../../public/images/news-events/new-sauces.jpg" alt="" /></div>
+      <div class="meta">
+        <p class="cat">Menu</p>
+        <h3>Two New Sauces Have Landed</h3>
+        <p class="excerpt">New bottles on the shelf — samples available at every location this week.</p>
+        <span class="cta">Read More</span>
+      </div>
+    </a>
+    <a class="card" href="single-post.html">
+      <div class="img"><img src="../../public/images/news-events/march-madness.jpg" alt="" /></div>
+      <div class="meta">
+        <p class="cat">Catering</p>
+        <h3>March Madness BBQ Menu Bracket</h3>
+        <p class="excerpt">Fill out your bracket with ribs, chicken and sides built for game night.</p>
+        <span class="cta">Read More</span>
+      </div>
+    </a>
+    <a class="card" href="single-post.html">
+      <div class="img"><img src="../../public/images/news-events/community.jpg" alt="" /></div>
+      <div class="meta">
+        <p class="cat">Community</p>
+        <h3>24 Years of Shane&#8217;s Rib Shack</h3>
+        <p class="excerpt">A look back at two-plus decades of slow-smoking and serving our neighbors.</p>
+        <span class="cta">Read More</span>
+      </div>
+    </a>
+    <a class="card" href="single-post.html">
+      <div class="img"><img src="../../public/images/news-events/rewards-launch.jpg" alt="" /></div>
+      <div class="meta">
+        <p class="cat">Rewards</p>
+        <h3>Meet the New Shane&#8217;s Rewards App</h3>
+        <p class="excerpt">Free shakes, birthday deals and points on every order — download today.</p>
+        <span class="cta">Read More</span>
+      </div>
+    </a>
+    <a class="card" href="single-post.html">
+      <div class="img"><img src="../../public/images/news-events/origin-story.jpg" alt="" /></div>
+      <div class="meta">
+        <p class="cat">Our Story</p>
+        <h3>From One Shack to Many</h3>
+        <p class="excerpt">How a single storefront grew into a family of Shacks across the South.</p>
+        <span class="cta">Read More</span>
+      </div>
+    </a>
+    <a class="card" href="single-post.html">
+      <div class="img"><img src="../../public/images/news-events/gift-cards.jpg" alt="" /></div>
+      <div class="meta">
+        <p class="cat">Gift Cards</p>
+        <h3>Give the Gift of Good BBQ</h3>
+        <p class="excerpt">Digital gift cards make last-minute holidays and birthdays effortless.</p>
+        <span class="cta">Read More</span>
+      </div>
+    </a>
+    <a class="card" href="single-post.html">
+      <div class="img"><img src="../../public/images/news-events/shack-baskets.jpg" alt="" /></div>
+      <div class="meta">
+        <p class="cat">Menu</p>
+        <h3>Smokehouse Baskets by the Bundle</h3>
+        <p class="excerpt">Packed baskets for parties — grab yours in-store or order ahead.</p>
+        <span class="cta">Read More</span>
+      </div>
+    </a>
+  </div>
+
+  <!-- pagination -->
+  <nav class="pagination" aria-label="News pages">
+    <a href="#" aria-label="Previous">←</a>
+    <a href="#" class="active">1</a>
+    <a href="#">2</a>
+    <a href="#">3</a>
+    <a href="#" class="dots">…</a>
+    <a href="#">12</a>
+    <a href="#" aria-label="Next">→</a>
+  </nav>
+</div>
+
+<footer class="site-footer">Shane&#8217;s Rib Shack &middot; Design mockup — News landing page</footer>
+
+</body>
+</html>
