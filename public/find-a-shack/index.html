@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mobile: changing your Shane's location</title>
+<style>
+  :root { --red:#bb202b; --black:#101820; --cream:#efeadc; --green:#1f7a3d; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f4f2ec; color:var(--black);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .page { width:1200px; margin:0 auto; background:#fff; padding:56px 64px 64px; }
+  .eyebrow { font-size:14px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--red); margin:0 0 14px; }
+  h1 { font-size:52px; line-height:1.05; margin:0 0 18px; letter-spacing:-.01em; }
+  .lede { font-size:21px; line-height:1.5; margin:0; max-width:900px; color:#2a2f36; }
+  .lede b { color:var(--black); }
+  .rule { height:2px; background:var(--cream); margin:38px 0 34px; border:0; }
+  .panel { border:2px solid var(--cream); border-radius:16px; padding:26px 28px 30px; margin-bottom:26px; }
+  .panel h2 { font-size:15px; letter-spacing:.1em; text-transform:uppercase; margin:0 0 4px; }
+  .panel .sub { font-size:17px; margin:0 0 20px; color:#4a5057; }
+  .pill { display:inline-block; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    padding:5px 11px; border-radius:999px; color:#fff; vertical-align:middle; margin-left:10px; }
+  .ok { background:var(--green); }
+  .bad { background:var(--red); }
+  .shot { position:relative; display:inline-block; line-height:0; }
+  .shot img { display:block; max-width:100%; border:1px solid #dcd8cd; border-radius:10px; }
+  .box { position:absolute; border:4px solid var(--red); border-radius:8px; box-shadow:0 0 0 4px rgba(187,32,43,.18); }
+  .label { display:inline-block; background:var(--red); color:#fff; font-size:15px; font-weight:800; line-height:1.25;
+    padding:6px 12px; border-radius:8px; margin:12px 0 0; }
+  .cols { display:flex; gap:26px; align-items:flex-start; }
+  .shot-col { width:300px; flex:0 0 auto; }
+  .notes { flex:1; padding-top:6px; }
+  .shot img { height:auto; }
+  @media (max-width:980px) {
+    .page { width:auto; padding:32px 20px 40px; }
+    h1 { font-size:34px; }
+    .lede { font-size:18px; }
+    .cols, .fixes { flex-direction:column; }
+    .shot-col { width:100%; max-width:420px; }
+  }
+  .cap { font-size:16px; line-height:1.45; color:#4a5057; margin:14px 0 0; }
+  ul { margin:16px 0 0; padding-left:22px; font-size:17px; line-height:1.55; }
+  li { margin-bottom:8px; }
+  .fixes { display:flex; gap:22px; margin-top:6px; }
+  .fix { flex:1; background:var(--cream); border-radius:12px; padding:20px 22px; }
+  .fix .n { font-size:13px; font-weight:800; color:var(--red); letter-spacing:.1em; text-transform:uppercase; }
+  .fix h3 { font-size:20px; margin:8px 0 8px; }
+  .fix p { font-size:16px; line-height:1.5; margin:0; color:#3a4046; }
+  .foot { font-size:14px; color:#6a7076; margin-top:30px; line-height:1.5; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="eyebrow">Website review &middot; Find a Shane&rsquo;s</p>
+  <h1>On a phone, customers can&rsquo;t switch locations</h1>
+  <p class="lede">The red <b>&ldquo;Change Your Shack&rdquo;</b> button works on a computer &mdash; but on a phone
+  it isn&rsquo;t shown at all, and it isn&rsquo;t in the menu either. Customers have to find their way to
+  <b>Locations</b> on their own.</p>
+
+  <hr class="rule">
+
+  <div class="panel">
+    <h2>On a computer <span class="pill ok">Works</span></h2>
+    <p class="sub">The button sits right next to the logo, on every page.</p>
+    <div class="shot">
+      <img src="assets/desktop-header.png" alt="Desktop header with Change Your Shack button" width="1000">
+      <div class="box" style="left:12.15%; top:27.6%; width:11.9%; height:14.6%;"></div>
+    </div>
+    <p class="cap"><span class="label">Change Your Shack &mdash; visible</span><br>
+      One tap &rarr; pick a different Shane&rsquo;s. Clear and obvious.</p>
+  </div>
+
+  <div class="panel">
+    <h2>On a phone <span class="pill bad">Button missing</span></h2>
+    <p class="sub">Same page, phone screen &mdash; the button is gone, and the menu doesn&rsquo;t include it.</p>
+    <div class="cols">
+      <div class="shot-col">
+        <div class="shot">
+          <img src="assets/mobile-header.png" alt="Mobile header without the Change Your Shack button" width="300">
+        </div>
+        <p class="cap"><span class="label">No button here</span><br>
+          Hamburger, logo, Order Now. No way to change location from the header.</p>
+      </div>
+      <div class="shot-col">
+        <div class="shot">
+          <img src="assets/mobile-menu.png" alt="Mobile menu open, no location option" width="300">
+        </div>
+        <p class="cap"><span class="label">Not in the menu either</span><br>
+          The menu has 9 items. None of them changes your location.</p>
+      </div>
+      <div class="notes">
+        <p class="cap" style="margin-top:0"><b>What customers see today</b></p>
+        <ul>
+          <li>The shack name at the top is tappable &mdash; but it opens <b>that</b> shack&rsquo;s page. It doesn&rsquo;t let you pick another one.</li>
+          <li>To actually switch, they must go <b>Menu &rarr; Locations</b>, search, then open a shack and tap <b>View Details</b>.</li>
+          <li>That&rsquo;s 3&ndash;4 extra taps, and only if they think to look in the menu.</li>
+          <li>There&rsquo;s also no map on phones &mdash; just the search box and the list.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Two easy fixes</h2>
+    <p class="sub">Either one is a small change &mdash; no redesign needed.</p>
+    <div class="fixes">
+      <div class="fix">
+        <div class="n">Option 1</div>
+        <h3>Add the button to the phone header</h3>
+        <p>Show the same red &ldquo;Change Your Shack&rdquo; button on phones that computers already get. Most consistent with the desktop site.</p>
+      </div>
+      <div class="fix">
+        <div class="n">Option 2</div>
+        <h3>Add it to the top of the menu</h3>
+        <p>Make &ldquo;Change Your Shack&rdquo; the first item in the mobile menu, above &ldquo;Menu&rdquo;. Smallest visual change.</p>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot">Checked on a 390&nbsp;px-wide phone screen &mdash; the same width as an iPhone &mdash; on the live
+  site, 23&nbsp;September&nbsp;2026. Screenshots are unedited.</p>
+
+</div>
+</body>
+</html>

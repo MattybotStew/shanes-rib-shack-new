@@ -342,6 +342,10 @@ Static HTML options for the WP news redesign. **Canonical source:** `docs/design
 **Header rule (do not regress):** every mockup uses the real site header. Desktop: logo (`public/images/logo-desktop.svg`), red **Find your shack**, nav Menu / Catering / Locations / Our Story / News & Events / Careers / FAQs, outlined **Rewards**, black **Order Now**. On the news mockups, **News & Events** is the active nav item. At 1100px and below, use the Figma mobile bar `6250:6501`: 70px white row, 22×17 hamburger (`public/images/menu-icon.svg`), 58px round logo (`public/images/logo-mobile.svg`), stacked **Order / Now**. Keep the black review toolbar (crumbs linking back to `index.html`) above that header on the six option pages. Do **not** put back the text-only “Shane’s Rib Shack” nav or a single red Order button.
 
 **Path rewrite when mirroring (`docs/` → `public/`):** `../../public/images/` → `../images/`, and the header home link `href="../../"` → `href="../"`. Relative links between mockup pages (`index.html`, `*-alt-*.html`) are unchanged. After mirroring, run `npm run build` and confirm `out/design-mockups/index.html` and `out/images/news-events/*.jpg` exist before pushing.
+
+## Find a Shack client page (2026-09-23)
+
+Client one-pager for the live-site mobile gap: **Change Your Shack** is hidden on phones. Canonical HTML: `docs/client-briefs/mobile-find-a-shack.html`. Published copy: `public/find-a-shack/` (page + `assets/`), served at https://mattybotstew.github.io/shanes-rib-shack-new/find-a-shack/ . Edit `docs/` first, copy the HTML to `public/find-a-shack/index.html` and the screenshots into `public/find-a-shack/assets/`, regenerate the PNG, and commit both together. Internal flow notes stay in `docs/live-wp-find-location-flow.md`. This is a live WordPress finding — do not implement the fix in this Next.js repo.
 <!-- END:live-wordpress-news-work -->
 
 

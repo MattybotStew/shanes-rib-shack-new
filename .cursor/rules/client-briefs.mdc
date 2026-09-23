@@ -1,0 +1,83 @@
+---
+description: Work on client-facing briefs in docs/client-briefs (authoring rules, PNG re-render workflow, verified mobile find-a-shack findings)
+globs: docs/client-briefs/**,docs/live-wp-find-location-flow.md
+alwaysApply: false
+---
+
+# Client briefs & the find-a-shack flow
+
+Two different audiences live in two different files. Don't blend them.
+
+| File | Audience | Voice |
+| :--- | :--- | :--- |
+| `docs/client-briefs/*.html` + `.png` | **Client** — non-technical stakeholder | Plain English, visual, no jargon |
+| `docs/client-briefs/*-email.md` | You, to send the client | Paste-ready message + verbal script |
+| `docs/live-wp-find-location-flow.md` | **Internal** — devs/agents | Technical, Mermaid diagrams, exact identifiers |
+
+## Published page
+
+Canonical HTML stays in `docs/client-briefs/`. The shareable page is a copy:
+
+`public/find-a-shack/index.html` plus `public/find-a-shack/assets/`
+
+GitHub Pages serves it at https://mattybotstew.github.io/shanes-rib-shack-new/find-a-shack/
+
+After editing the HTML, copy it and the screenshots into `public/find-a-shack/` (keep `assets/` next to `index.html` so the image paths still resolve), regenerate the PNG, and commit both sides together.
+
+## Re-render the brief PNG
+
+Briefs are authored as HTML so they stay editable, then rendered to one PNG for sending.
+
+```bash
+node scripts/render-client-brief.mjs                                  # all briefs
+node scripts/render-client-brief.mjs docs/client-briefs/<name>.html   # one brief
+```
+
+- The script renders `.html` → `.png` at **1200px viewport, 2× scale, full page**.
+- It prefers installed **Google Chrome** (`channel: "chrome"`) because the bundled Playwright
+  browsers are often absent in this repo. If it fails, run `npx playwright install chromium`.
+- **Always regenerate the PNG after editing the HTML.** Sending a stale PNG is the easiest
+  mistake to make here.
+
+## Authoring rules for anything client-facing
+
+1. **Lead with what works.** "The button works on a computer" first, so it reads as a small fix,
+   not a verdict on the site.
+2. **One issue per brief.** Park secondary findings for the internal doc.
+3. **Ban jargon.** No `cookie`, `myShanes`, `DOM`, `CSS`, `display:none`, `component`, `populate`,
+   `breakpoint`. Say "not shown", "not in the menu", "phone screen".
+4. **Give two options, both framed as small** — choice without a cost debate.
+5. **Offer the walkthrough, don't request it.**
+6. Keep the footer note with the **test width** (390px) and **date** so the client can verify.
+7. Screenshots must be **unedited live captures**. If you re-capture, say so in the footer.
+
+## Verified findings — do not re-derive or contradict
+
+These were confirmed with a real Chrome session at **390 × 844** and the live theme/plugin source
+(23 Sep 2026). Full detail: `docs/live-wp-find-location-flow.md` §9.
+
+- **`Change Your Shack` is `display: none` on mobile.** Desktop: visible (171×38px next to the logo).
+  This is *the* mobile gap.
+- **The top-bar shack name is a link to that shack's page — not a picker.** It never opens the modal.
+- **The mobile menu has no location-switching item** (Menu, Catering, Locations, Our Story,
+  News & Events, Careers, FAQs, Rewards, Order Now).
+- **Changing location on mobile works, indirectly:** Menu → Locations → search → View Details.
+  That's the step that writes the `myShanes` cookie.
+- **No map on mobile** — `.wpgmza_map` renders at height 0.
+- **Order Now does work on mobile**; it opens `#order-modal`.
+
+## Scope boundary — important
+
+The mobile gap is in the **live WordPress theme** (`cm-shanes`), which is **not in this repo**.
+You can spec the fix, but you cannot implement it here. This repo is the Next.js prototype.
+
+The prototype behaves differently (it *does* show a mobile "CHANGE YOUR LOCATION" button, but not on
+location detail pages, and its "Make My Shack" control persists nothing). Don't describe prototype
+behaviour as if it were live behaviour.
+
+## Do not touch
+
+- `docs/strategies/cursor-ux-conversion-strategy.md` and `docs/plans/cursor-catering-plan.md` are
+  another agent's named files — never replace them (see `AGENTS.md` → Anti-overwrite rules).
+- Don't re-implement Phase A, the `/catering/` funnel, menu stack, locations finder, Shop, Our Story,
+  Blog, Article, Thank You, or Careers. Extend data/assets only.
