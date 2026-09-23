@@ -44,30 +44,41 @@
   }
   .toolbar .crumb a { color: var(--gold); text-decoration: none; }
 
-  .site-nav {
+  .site-header {
     background: #fff;
-    border-bottom: 1px solid var(--cream);
-    padding: 14px 24px;
+    padding: 10px 20px;
+  }
+  .site-header-inner {
+    max-width: 1400px;
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
   }
-  .site-nav .logo { font-weight: 800; text-transform: uppercase; font-size: 15px; color: var(--black); }
-  .site-nav .logo span { color: var(--red); }
-  .site-nav .links { display: flex; gap: 22px; font-size: 12px; font-weight: 700; text-transform: uppercase; }
-  .site-nav .links a { color: var(--black); text-decoration: none; }
-  .site-nav .links a.active { color: var(--red); }
-  .site-nav .btn-order {
-    background: var(--red);
-    color: #fff;
+  .brand { display: flex; align-items: center; gap: 20px; flex-shrink: 0; }
+  .brand img { display: block; height: 47px; width: 140px; object-fit: contain; object-position: left; }
+  .btn-shack, .btn-rewards, .btn-order, .nav a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+    padding: 12px 14px;
     font-size: 12px;
     font-weight: 700;
     text-transform: uppercase;
-    padding: 9px 16px;
-    border-radius: 5px;
+    line-height: 1;
     text-decoration: none;
+    letter-spacing: 0;
+    white-space: nowrap;
   }
+  .btn-shack { background: var(--red); color: #fff; }
+  .nav { display: flex; align-items: center; }
+  .nav a { color: var(--black); }
+  .nav a.active { background: var(--red); color: #fff; }
+  .actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+  .btn-rewards { border: 1px solid var(--black); color: var(--black); }
+  .btn-order { background: var(--black); color: #fff; }
 
   /* ── 1 · SHORTENED HEADER BANNER ─────────────────────────── */
   .page-banner {
@@ -217,7 +228,7 @@
     .lead-story { grid-template-columns: 1fr; }
     .lead-story .img { min-height: 0; aspect-ratio: 16 / 9; }
     .card-grid { grid-template-columns: 1fr; }
-    .site-nav .links { display: none; }
+    .nav { display: none; }
   }
 </style>
 </head>
@@ -228,17 +239,28 @@
 </div>
 
 <!-- site chrome -->
-<header class="site-nav">
-  <span class="logo">Shane&#8217;s <span>Rib Shack</span></span>
-  <nav class="links">
-    <a href="#">Menu</a>
-    <a href="#">Catering</a>
-    <a href="#">Locations</a>
-    <a href="#">Our Story</a>
-    <a href="#" class="active">News &amp; Events</a>
-    <a href="#">Careers</a>
-  </nav>
-  <a class="btn-order" href="#">Order Now</a>
+<header class="site-header">
+  <div class="site-header-inner">
+    <div class="brand">
+      <a href="../../" aria-label="Shane's Rib Shack home">
+        <img src="../../public/images/logo-desktop.svg" alt="Shane's Rib Shack" />
+      </a>
+      <a class="btn-shack" href="#">Find your shack</a>
+    </div>
+    <nav class="nav" aria-label="Primary">
+      <a href="#">Menu</a>
+      <a href="#">Catering</a>
+      <a href="#">Locations</a>
+      <a href="#">Our Story</a>
+      <a href="#" class="active">News &amp; Events</a>
+      <a href="#">Careers</a>
+      <a href="#">FAQs</a>
+    </nav>
+    <div class="actions">
+      <a class="btn-rewards" href="#">Rewards</a>
+      <a class="btn-order" href="#">Order Now</a>
+    </div>
+  </div>
 </header>
 
 <!-- 1 · shortened header banner -->

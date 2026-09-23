@@ -332,6 +332,16 @@ CONSENSUS_PLAN.md, CATERING_PLAN.md
 - Feed editors **one** fixed crop ratio per surface (e.g. card grid and single-post featured both 1600×900 16:9 with `object-fit: cover`) so copy/text is never clipped; keep important text in the center ~50% safe zone.
 - Fancybox image should use a clickable full-size source while the 1/3-column layout shows a CSS-fitted thumbnail.
 - These are estimates/answers only unless the client asks for build-out; the WP theme is a separate deliverable tracked outside this repo.
+
+## Design mockups (this repo, 2026-09-23) — one canonical source, one published mirror
+
+Static HTML options for the WP news redesign. **Canonical source:** `docs/design-mockups/` — index `docs/design-mockups/index.html` plus six option pages: `single-post.html`, `single-post-alt-1.html`, `single-post-alt-2.html`, `news-landing.html`, `news-landing-alt-1.html`, `news-landing-alt-2.html`.
+
+**Published copy (client review URL):** `public/design-mockups/` is mirrored verbatim into the static export, so Pages serves it at https://mattybotstew.github.io/shanes-rib-shack-new/design-mockups/ . It is a build mirror, **not** a second source of truth. Edit `docs/design-mockups/` first, regenerate the mirror, and commit both together — never edit only one side.
+
+**Header rule (do not regress):** every mockup uses the real site header — logo, red **Find your shack**, nav Menu / Catering / Locations / Our Story / News & Events / Careers / FAQs, outlined **Rewards**, black **Order Now**. Logo asset: `public/images/logo-desktop.svg`. On the news mockups, **News & Events** is the active nav item. Keep the black review toolbar (crumbs linking back to `index.html`) above that header on the six option pages. Do **not** put back the text-only “Shane’s Rib Shack” nav or a single red Order button.
+
+**Path rewrite when mirroring (`docs/` → `public/`):** `../../public/images/` → `../images/`, and the header home link `href="../../"` → `href="../"`. Relative links between mockup pages (`index.html`, `*-alt-*.html`) are unchanged. After mirroring, run `npm run build` and confirm `out/design-mockups/index.html` and `out/images/news-events/*.jpg` exist before pushing.
 <!-- END:live-wordpress-news-work -->
 
 
