@@ -249,7 +249,38 @@
     .article-side { position: static; }
     .image-frame { aspect-ratio: 16 / 10; }
     .related-grid { grid-template-columns: 1fr; }
-    .nav { display: none; }
+  }
+
+  .site-header-mobile { display: none; }
+  .menu-btn {
+    width: 22px;
+    height: 17px;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+  .menu-btn img { display: block; width: 22px; height: 17px; }
+  .logo-mark { display: block; width: 58px; height: 58.002px; }
+  .order-stack {
+    color: var(--black);
+    font-size: 10.44px;
+    font-weight: 700;
+    line-height: 10.444px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  @media (max-width: 1100px) {
+    .site-header { display: none; }
+    .site-header-mobile {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 70px;
+      padding: 0 10px;
+      background: #fff;
+    }
   }
 </style>
 </head>
@@ -282,6 +313,16 @@
     </div>
   </div>
 </header>
+<header class="site-header-mobile">
+  <button class="menu-btn" type="button" aria-label="Open menu">
+    <img src="../../public/images/menu-icon.svg" alt="" width="22" height="17" />
+  </button>
+  <a href="../../" aria-label="Shane's Rib Shack home">
+    <img class="logo-mark" src="../../public/images/logo-mobile.svg" alt="Shane's Rib Shack" width="58" height="58" />
+  </a>
+  <a class="order-stack" href="#">Order<br />Now</a>
+</header>
+
 
 <!-- short banner -->
 <section class="article-banner">
