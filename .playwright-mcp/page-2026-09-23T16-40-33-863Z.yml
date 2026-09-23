@@ -1,0 +1,75 @@
+- generic [active] [ref=f7e1]:
+  - generic [ref=f7e3]:
+    - link "← All mockups" [ref=f7e4] [cursor=pointer]:
+      - /url: index.html
+    - text: · Single Post · B
+  - banner [ref=f7e5]:
+    - generic [ref=f7e6]: Shane’s Rib Shack
+    - navigation [ref=f7e7]:
+      - link "Menu" [ref=f7e8] [cursor=pointer]:
+        - /url: "#"
+      - link "Catering" [ref=f7e9] [cursor=pointer]:
+        - /url: "#"
+      - link "Locations" [ref=f7e10] [cursor=pointer]:
+        - /url: "#"
+      - link "Our Story" [ref=f7e11] [cursor=pointer]:
+        - /url: "#"
+      - link "News & Events" [ref=f7e12] [cursor=pointer]:
+        - /url: "#"
+      - link "Careers" [ref=f7e13] [cursor=pointer]:
+        - /url: "#"
+    - link "Order Now" [ref=f7e14] [cursor=pointer]:
+      - /url: "#"
+  - generic [ref=f7e15]:
+    - paragraph [ref=f7e16]: Shack News · News
+    - heading "Thank ‘QUE, Shaniacs! Join us 8/11/26 for a $6.99 Big Dad and Side" [level=1] [ref=f7e17]
+    - generic [ref=f7e18]:
+      - generic [ref=f7e19]: "Published: Aug 22, 2026"
+      - generic [ref=f7e20]: "Valid: Aug 11, 2026 only"
+      - generic [ref=f7e21]: "Read time: 1 min"
+  - link [ref=f7e23] [cursor=pointer]:
+    - /url: ../../public/images/news-events/summer-bbq.jpg
+    - img "Big Dad BBQ Pork Sandwich and a side — $6.99 on August 11, 2026" [ref=f7e24]
+  - main [ref=f7e25]:
+    - generic [ref=f7e26]:
+      - generic [ref=f7e27]:
+        - generic [ref=f7e28]: Share
+        - link "LinkedIn" [ref=f7e29] [cursor=pointer]:
+          - /url: "#"
+          - text: in
+        - link "Twitter/X" [ref=f7e30] [cursor=pointer]:
+          - /url: "#"
+          - text: ✕
+        - link "Facebook" [ref=f7e31] [cursor=pointer]:
+          - /url: "#"
+          - text: f
+        - link "Copy link" [ref=f7e32] [cursor=pointer]:
+          - /url: "#"
+          - text: 🔗
+      - heading "✨ AUGUST 11th, 2026 — $6.99 Big Dad + Small Side ✨" [level=2] [ref=f7e33]
+      - paragraph [ref=f7e34]: THANK ‘QUE, Shaniacs! At Shane’s Rib Shack, Southern BBQ has always been about more than what’s on the plate — it’s about the people. Whether you’ve stopped in for a quick lunch, picked up dinner, or made us part of your weekend tradition, you’ve become part of our family.
+      - paragraph [ref=f7e35]: We’re humbled by your loyalty, grateful for your stories, and honored to serve a community that feels more like family. See you soon!
+      - paragraph [ref=f7e36]: On August 11th, 2026, enjoy our signature Big Dad BBQ Pork Sandwich with a small side for just $6.99 — slow-smoked, hand-chopped, and piled high, just the way you like it.
+      - paragraph [ref=f7e37]: "*Valid 8/11/26 only while supplies last at participating locations. Order in-store, online or in-app. No code needed."
+      - link "Order Ahead — order.shanesribshack.com" [ref=f7e38] [cursor=pointer]:
+        - /url: "#"
+      - paragraph [ref=f7e39]: Click image above to view full size
+  - generic [ref=f7e41]:
+    - heading "More from the Shack" [level=2] [ref=f7e42]
+    - generic [ref=f7e43]:
+      - link [ref=f7e44] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=f7e46]:
+          - paragraph [ref=f7e47]: Game Day
+          - heading "Build the Ultimate BBQ Tailgate Tray" [level=3] [ref=f7e48]
+      - link [ref=f7e49] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=f7e51]:
+          - paragraph [ref=f7e52]: Catering
+          - heading "Stress-free Holiday Meals for the Office" [level=3] [ref=f7e53]
+      - link [ref=f7e54] [cursor=pointer]:
+        - /url: "#"
+        - generic [ref=f7e56]:
+          - paragraph [ref=f7e57]: Menu
+          - heading "Two New Sauces Just Landed" [level=3] [ref=f7e58]
+  - contentinfo [ref=f7e59]: Shane’s Rib Shack · Design mockup — Single Post · Layout B

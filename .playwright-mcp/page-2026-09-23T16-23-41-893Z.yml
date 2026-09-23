@@ -1,0 +1,99 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e3]:
+      - link "← All mockups" [ref=e4] [cursor=pointer]:
+        - /url: index.html
+      - text: · Single Post template
+    - generic [ref=e5]: Design review · v1
+  - generic [ref=e6]: Interactive preview — click the featured image on the right to test Fancybox zoom.
+  - banner [ref=e7]:
+    - generic [ref=e8]: Shane’s Rib Shack
+    - navigation [ref=e9]:
+      - link "Menu" [ref=e10] [cursor=pointer]:
+        - /url: "#"
+      - link "Catering" [ref=e11] [cursor=pointer]:
+        - /url: "#"
+      - link "Locations" [ref=e12] [cursor=pointer]:
+        - /url: "#"
+      - link "Our Story" [ref=e13] [cursor=pointer]:
+        - /url: "#"
+      - link "News & Events" [ref=e14] [cursor=pointer]:
+        - /url: "#"
+      - link "Careers" [ref=e15] [cursor=pointer]:
+        - /url: "#"
+    - link "Order Now" [ref=e16] [cursor=pointer]:
+      - /url: "#"
+  - generic [ref=e17]:
+    - strong [ref=e18]: Request 1 — SHORTENED HEADER BANNER (OLD ≈ 300px+ two-line hero → NEW ≈ 130px single band).
+    - text: No giant subtitle block and no duplicate excerpt words; just category tag, title, and a one-line meta. The old theme’s
+    - code [ref=e19]: .hero_section
+    - text: with its 100px top/bottom spacers is replaced by this slim band.
+  - generic [ref=e20]:
+    - paragraph [ref=e21]: Shack News
+    - generic [ref=e22]: News
+    - heading "Thank ‘QUE, Shaniacs! Join us 8/11/26 for a $6.99 Big Dad and Side" [level=1] [ref=e23]
+    - generic [ref=e24]:
+      - generic [ref=e25]: "Published: Aug 22, 2026"
+      - generic [ref=e26]: "Valid: Aug 11, 2026 only"
+      - generic [ref=e27]: "Read time: 1 min"
+  - generic [ref=e28]:
+    - strong [ref=e29]: Request 2 — 2/3 CONTENT + 1/3 IMAGE.
+    - text: Body copy and sharing sit in the left 2/3; the featured image fills the right 1/3 rail and sticks as you scroll. (Old layout rendered the image at ~60% width with the excerpt on 40% — inverted.)
+  - main [ref=e30]:
+    - generic [ref=e32]:
+      - generic [ref=e33]:
+        - generic [ref=e34]:
+          - generic [ref=e35]: Share
+          - link "LinkedIn" [ref=e36] [cursor=pointer]:
+            - /url: "#"
+            - text: in
+          - link "Twitter/X" [ref=e37] [cursor=pointer]:
+            - /url: "#"
+            - text: ✕
+          - link "Facebook" [ref=e38] [cursor=pointer]:
+            - /url: "#"
+            - text: f
+          - link "Copy link" [ref=e39] [cursor=pointer]:
+            - /url: "#"
+            - text: 🔗
+        - heading "✨ AUGUST 11th, 2026 — $6.99 Big Dad + Small Side ✨" [level=2] [ref=e40]
+        - paragraph [ref=e41]: THANK ‘QUE, Shaniacs! At Shane’s Rib Shack, Southern BBQ has always been about more than what’s on the plate — it’s about the people. Whether you’ve stopped in for a quick lunch, picked up dinner, or made us part of your weekend tradition, you’ve become part of our family.
+        - paragraph [ref=e42]: We’re humbled by your loyalty, grateful for your stories, and honored to serve a community that feels more like family. See you soon!
+        - paragraph [ref=e43]: On August 11th, 2026, enjoy our signature Big Dad BBQ Pork Sandwich with a small side for just $6.99 — slow-smoked, hand-chopped, and piled high, just the way you like it.
+        - paragraph [ref=e44]: "*Valid 8/11/26 only while supplies last at participating locations. Order in-store, online or in-app. No code needed."
+        - link "Order Ahead — order.shanesribshack.com" [ref=e45] [cursor=pointer]:
+          - /url: "#"
+        - paragraph [ref=e46]: Newsletter signups and the CTA bar are handled by the existing page footer; this mockup focuses on the article template.
+      - complementary [ref=e47]:
+        - link [ref=e49] [cursor=pointer]:
+          - /url: ../../public/images/news-events/summer-bbq.jpg
+          - img "Big Dad BBQ Pork Sandwich and a side — $6.99 on August 11, 2026" [ref=e50]
+        - paragraph [ref=e51]: Click image to view full size
+        - paragraph [ref=e55]:
+          - text: Featured image fills its 1/3 column at
+          - code [ref=e56]: "object-fit: cover"
+          - text: — always fits the container — and opens in Fancybox at full resolution. (Request 3 + 4.)
+    - generic [ref=e57]:
+      - strong [ref=e58]: Request 3 — EXCERPT FIELD REMOVED.
+      - text: Only the shared
+      - code [ref=e59]: <h1>
+      - text: + meta line appear in the banner; the redundant excerpt text block that used to sit under the title (duplicating the body) is gone. Cards still truncate at the meta description for listing.
+    - generic [ref=e61]:
+      - heading "More from the Shack" [level=2] [ref=e62]
+      - generic [ref=e63]:
+        - link [ref=e64] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e66]:
+            - paragraph [ref=e67]: Game Day
+            - heading "Build the Ultimate BBQ Tailgate Tray" [level=3] [ref=e68]
+        - link [ref=e69] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e71]:
+            - paragraph [ref=e72]: Catering
+            - heading "Stress-free Holiday Meals for the Office" [level=3] [ref=e73]
+        - link [ref=e74] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=e76]:
+            - paragraph [ref=e77]: Menu
+            - heading "Two New Sauces Just Landed" [level=3] [ref=e78]
+  - contentinfo [ref=e79]: Shane’s Rib Shack · Design mockup — News single post template

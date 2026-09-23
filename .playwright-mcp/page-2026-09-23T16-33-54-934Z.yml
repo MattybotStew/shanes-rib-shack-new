@@ -1,0 +1,134 @@
+- generic [active] [ref=f6e1]:
+  - generic [ref=f6e2]:
+    - generic [ref=f6e3]:
+      - link "← All mockups" [ref=f6e4] [cursor=pointer]:
+        - /url: index.html
+      - text: · News landing page
+    - generic [ref=f6e5]: Design review · v1
+  - banner [ref=f6e6]:
+    - generic [ref=f6e7]: Shane’s Rib Shack
+    - navigation [ref=f6e8]:
+      - link "Menu" [ref=f6e9] [cursor=pointer]:
+        - /url: "#"
+      - link "Catering" [ref=f6e10] [cursor=pointer]:
+        - /url: "#"
+      - link "Locations" [ref=f6e11] [cursor=pointer]:
+        - /url: "#"
+      - link "Our Story" [ref=f6e12] [cursor=pointer]:
+        - /url: "#"
+      - link "News & Events" [ref=f6e13] [cursor=pointer]:
+        - /url: "#"
+      - link "Careers" [ref=f6e14] [cursor=pointer]:
+        - /url: "#"
+    - link "Order Now" [ref=f6e15] [cursor=pointer]:
+      - /url: "#"
+  - generic [ref=f6e16]:
+    - strong [ref=f6e17]: "Request 5 — REVISED NEWS LANDING (OLD: 3-up equal cards with ragged native-ratio thumbnails that crop words)."
+    - text: "NEW: slim banner, one featured lead story, then a consistent 3-up grid. Every thumbnail is rendered at a"
+    - strong [ref=f6e18]: fixed 1600×900 (16:9)
+    - text: ratio with
+    - code [ref=f6e19]: "object-fit: cover"
+    - text: so words are never cropped. Feed editors upload one 16:9 featured image per post and keep key text/art in the center ~50% safe zone.
+  - generic [ref=f6e20]:
+    - paragraph [ref=f6e21]: News & Events
+    - heading "Shack News" [level=1] [ref=f6e22]
+    - paragraph [ref=f6e23]: From local happenings to the latest promotions and catering ideas — this is where we share what’s new.
+  - generic [ref=f6e24]:
+    - generic [ref=f6e25]:
+      - strong [ref=f6e26]: "Lead story (optional):"
+      - text: newest/latest post spans full width — 16:9 image + headline + 2-line intro + Read More. Below it, the grid.
+    - link "News Thank ‘QUE, Shaniacs! Join us 8/11/26 for a $6.99 Big Dad and Side Customer appreciation day at the Shack — our signature Big Dad BBQ Pork Sandwich plus a small side for just $6.99. One day only, while supplies last. Read More" [ref=f6e27] [cursor=pointer]:
+      - /url: single-post.html
+      - generic [ref=f6e29]:
+        - paragraph [ref=f6e30]: News
+        - heading "Thank ‘QUE, Shaniacs! Join us 8/11/26 for a $6.99 Big Dad and Side" [level=2] [ref=f6e31]
+        - paragraph [ref=f6e32]: Customer appreciation day at the Shack — our signature Big Dad BBQ Pork Sandwich plus a small side for just $6.99. One day only, while supplies last.
+        - generic [ref=f6e33]: Read More
+    - paragraph [ref=f6e34]: Latest News
+    - generic [ref=f6e35]:
+      - link "Game Day Build the Ultimate BBQ Tailgate Tray Wings, ribs, and sides that travel — set up your home game-day spread the easy way. Read More" [ref=f6e36] [cursor=pointer]:
+        - /url: single-post.html
+        - generic [ref=f6e38]:
+          - paragraph [ref=f6e39]: Game Day
+          - heading "Build the Ultimate BBQ Tailgate Tray" [level=3] [ref=f6e40]
+          - paragraph [ref=f6e41]: Wings, ribs, and sides that travel — set up your home game-day spread the easy way.
+          - generic [ref=f6e42]: Read More
+      - link "Catering Stress-free Holiday Meals for the Office Thanksgiving, Christmas and everything in between — we bring the smoked meats. Read More" [ref=f6e43] [cursor=pointer]:
+        - /url: single-post.html
+        - generic [ref=f6e45]:
+          - paragraph [ref=f6e46]: Catering
+          - heading "Stress-free Holiday Meals for the Office" [level=3] [ref=f6e47]
+          - paragraph [ref=f6e48]: Thanksgiving, Christmas and everything in between — we bring the smoked meats.
+          - generic [ref=f6e49]: Read More
+      - link "Menu Two New Sauces Have Landed New bottles on the shelf — samples available at every location this week. Read More" [ref=f6e50] [cursor=pointer]:
+        - /url: single-post.html
+        - generic [ref=f6e52]:
+          - paragraph [ref=f6e53]: Menu
+          - heading "Two New Sauces Have Landed" [level=3] [ref=f6e54]
+          - paragraph [ref=f6e55]: New bottles on the shelf — samples available at every location this week.
+          - generic [ref=f6e56]: Read More
+      - link "Catering March Madness BBQ Menu Bracket Fill out your bracket with ribs, chicken and sides built for game night. Read More" [ref=f6e57] [cursor=pointer]:
+        - /url: single-post.html
+        - generic [ref=f6e59]:
+          - paragraph [ref=f6e60]: Catering
+          - heading "March Madness BBQ Menu Bracket" [level=3] [ref=f6e61]
+          - paragraph [ref=f6e62]: Fill out your bracket with ribs, chicken and sides built for game night.
+          - generic [ref=f6e63]: Read More
+      - link "Community 24 Years of Shane’s Rib Shack A look back at two-plus decades of slow-smoking and serving our neighbors. Read More" [ref=f6e64] [cursor=pointer]:
+        - /url: single-post.html
+        - generic [ref=f6e66]:
+          - paragraph [ref=f6e67]: Community
+          - heading "24 Years of Shane’s Rib Shack" [level=3] [ref=f6e68]
+          - paragraph [ref=f6e69]: A look back at two-plus decades of slow-smoking and serving our neighbors.
+          - generic [ref=f6e70]: Read More
+      - link "Rewards Meet the New Shane’s Rewards App Free shakes, birthday deals and points on every order — download today. Read More" [ref=f6e71] [cursor=pointer]:
+        - /url: single-post.html
+        - generic [ref=f6e73]:
+          - paragraph [ref=f6e74]: Rewards
+          - heading "Meet the New Shane’s Rewards App" [level=3] [ref=f6e75]
+          - paragraph [ref=f6e76]: Free shakes, birthday deals and points on every order — download today.
+          - generic [ref=f6e77]: Read More
+      - link "Our Story From One Shack to Many How a single storefront grew into a family of Shacks across the South. Read More" [ref=f6e78] [cursor=pointer]:
+        - /url: single-post.html
+        - generic [ref=f6e80]:
+          - paragraph [ref=f6e81]: Our Story
+          - heading "From One Shack to Many" [level=3] [ref=f6e82]
+          - paragraph [ref=f6e83]: How a single storefront grew into a family of Shacks across the South.
+          - generic [ref=f6e84]: Read More
+      - link "Gift Cards Give the Gift of Good BBQ Digital gift cards make last-minute holidays and birthdays effortless. Read More" [ref=f6e85] [cursor=pointer]:
+        - /url: single-post.html
+        - generic [ref=f6e87]:
+          - paragraph [ref=f6e88]: Gift Cards
+          - heading "Give the Gift of Good BBQ" [level=3] [ref=f6e89]
+          - paragraph [ref=f6e90]: Digital gift cards make last-minute holidays and birthdays effortless.
+          - generic [ref=f6e91]: Read More
+      - link "Menu Smokehouse Baskets by the Bundle Packed baskets for parties — grab yours in-store or order ahead. Read More" [ref=f6e92] [cursor=pointer]:
+        - /url: single-post.html
+        - generic [ref=f6e94]:
+          - paragraph [ref=f6e95]: Menu
+          - heading "Smokehouse Baskets by the Bundle" [level=3] [ref=f6e96]
+          - paragraph [ref=f6e97]: Packed baskets for parties — grab yours in-store or order ahead.
+          - generic [ref=f6e98]: Read More
+    - navigation "News pages" [ref=f6e99]:
+      - link "Previous" [ref=f6e100] [cursor=pointer]:
+        - /url: "#"
+        - text: ←
+      - link "1" [ref=f6e101] [cursor=pointer]:
+        - /url: "#"
+      - link "2" [ref=f6e102] [cursor=pointer]:
+        - /url: "#"
+      - link "3" [ref=f6e103] [cursor=pointer]:
+        - /url: "#"
+      - link "…" [ref=f6e104] [cursor=pointer]:
+        - /url: "#"
+      - link "12" [ref=f6e105] [cursor=pointer]:
+        - /url: "#"
+      - link "Next" [ref=f6e106] [cursor=pointer]:
+        - /url: "#"
+        - text: →
+    - generic [ref=f6e107]:
+      - strong [ref=f6e108]: Dev/editor notes —
+      - text: 12 posts per two Pages of grid at 6 per row set; the featured lead + card thumbnails all render 16:9 via
+      - code [ref=f6e109]: "object-fit: cover"
+      - text: (no native-ratio clipping). Category tags come from the existing post category; the excerpt line is pulled from the meta description (not the unused excerpt field). Keep this column and hand to the WP theme build.
+  - contentinfo [ref=f6e110]: Shane’s Rib Shack · Design mockup — News landing page
