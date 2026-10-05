@@ -362,6 +362,49 @@
     <p class="badge-note" style="margin-top:13px">Illustrative mockups, not final visual design. Effort labels are relative: Low = a small tweak, Medium = a few days with testing.</p>
   </div>
 
+  <!-- ================= METHODOLOGY & METRICS ================= -->
+  <div class="panel">
+    <h2>How we ranked this &mdash; and how to prove it</h2>
+    <p class="sub">The ranking is a prioritised hypothesis built from UX principles and measured facts &mdash; not from live analytics. Prove it with the metrics below.</p>
+
+    <p class="cap" style="margin-top:0"><b>Measured facts</b> (live mobile site): the button is <code>display:none</code> at 390&nbsp;px, the picker already exists, and today&rsquo;s switch costs 3&ndash;4 taps plus typing. <b>The order between options, however, is inference.</b></p>
+
+    <table class="cost" style="margin-top:16px">
+      <thead>
+        <tr><th>Principle</th><th>What it argues</th><th>Backs up</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Fitts&rsquo;s Law</td><td>Big, high, near targets are faster &mdash; thumb reach matters</td><td>Options 1, 2, 5</td></tr>
+        <tr><td>Nielsen #1 &mdash; visibility of status</td><td>Always show the current shack</td><td>Option 2</td></tr>
+        <tr><td>Nielsen #6 &mdash; recognition over recall</td><td>Don&rsquo;t make users remember how to switch</td><td>Options 1, 3</td></tr>
+        <tr><td>Nielsen #5 &mdash; error prevention</td><td>Stop ordering from the wrong shack</td><td>Option 4</td></tr>
+        <tr><td>Jakob&rsquo;s Law</td><td>Match other food / retail app patterns</td><td>Options 1, 2</td></tr>
+        <tr><td>Hick&rsquo;s Law</td><td>Fewer visible choices &rarr; faster decision</td><td>Nearest-4 first</td></tr>
+        <tr><td>Progressive disclosure</td><td>Hide search / all 28 until needed</td><td>Option 5</td></tr>
+        <tr><td>Thumb-zone research</td><td>~49% of mobile use is one-handed</td><td>Options 2, 5</td></tr>
+        <tr><td>Baymard / NNg mobile-nav findings</td><td>Hamburger items are low-discovery</td><td>Why Option 6 ranks last</td></tr>
+      </tbody>
+    </table>
+
+    <p class="cap" style="margin-top:22px"><b>What to measure</b> &mdash; needs GA4 / GTM events, which aren&rsquo;t available from this build.</p>
+    <table class="cost" style="margin-top:8px">
+      <thead>
+        <tr><th>Metric</th><th>Why it matters</th><th>Source</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Taps / events to switch</td><td>The goal itself &mdash; fewer clicks</td><td>GA4 <code>picker_open</code> &rarr; <code>location_selected</code></td></tr>
+        <tr><td>Location-set rate</td><td>% of sessions that end with a shack chosen</td><td>GA4 + <code>userSet</code> cookie</td></tr>
+        <tr><td>Switch abandonment</td><td>People who open the picker but don&rsquo;t choose</td><td>Funnel: open &rarr; selected</td></tr>
+        <tr><td>Finder search &rarr; View Details</td><td>Is today&rsquo;s path actually failing?</td><td>Existing finder events</td></tr>
+        <tr><td>Order completion by fulfilment</td><td>Wrong-shack orders / drop-off</td><td>Order platform + <code>fulfillmentType</code></td></tr>
+        <tr><td>&ldquo;Wrong location&rdquo; tickets</td><td>Outcome-quality check</td><td>Support system</td></tr>
+        <tr><td>Session recordings / 5-user test</td><td>The &ldquo;why&rdquo; behind the numbers</td><td>Clarity / Hotjar</td></tr>
+      </tbody>
+    </table>
+
+    <p class="cap" style="margin-top:16px">Treat <b>Options 1&ndash;3</b> as the test candidates: ship #1, instrument the events above, and let real data confirm or re-rank the rest.</p>
+  </div>
+
   <p class="foot">Checked on a live 390&nbsp;px-wide phone screen &mdash; the same width as an iPhone &mdash; 5&nbsp;October&nbsp;2026.
   The top-bar capture is unedited. Mockups above are schematic, not final designs.</p>
 
