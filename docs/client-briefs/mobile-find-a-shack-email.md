@@ -10,25 +10,21 @@ The PNG (`mobile-find-a-shack.png`) is the same one-pager if a file is easier th
 
 ## Email / Slack version
 
-**Subject:** Small flag — "Change Your Shack" is missing on phones
+**Subject:** Mobile location switching — six options, ranked by effort
 
 Hi [Name],
 
-While reviewing the location finder, we found one thing worth fixing.
+Following on from the note about "Change Your Shack" being missing on phones, here are a few ways to
+fix it — from a one-evening tweak to a more polished picker. You asked for ideas that reduce taps, so
+each one is shown with how many taps it takes.
 
-On a computer, the red **"Change Your Shack"** button sits next to the logo on every page. On a phone,
-that button isn't shown at all — and it isn't in the menu either.
+The short version: the location picker **already exists** on the site — it just has no button on mobile
+to open it. So the cheapest win is to make the shack name that's already in the top bar open that
+picker. That takes switching from **3–4 taps plus typing down to 2 taps**, and it covers the three
+ideas you floated (tap the location, a switch cue, and an underline to show it's clickable).
 
-So a mobile customer who wants a different Shane's has to work it out: **Menu → Locations → search →
-open a shack → View Details**. It works, but it's easy to miss.
-
-Two small options:
-
-1. Show the same red button in the phone header, like the desktop site.
-2. Add "Change Your Shack" as the first item in the mobile menu.
-
-Either one is a small change — no redesign needed. I've attached a one-page visual that shows it
-side by side.
+The page lays out all six, simplest first, with a recommendation to start with that one and add the
+"we think you're near…" auto-suggest next.
 
 Happy to walk through it whenever suits.
 
@@ -39,18 +35,21 @@ Thanks,
 
 ## 30-second verbal version
 
-> "On desktop, changing your Shane's is one click — there's a red button next to the logo.
-> On mobile, that button isn't there, and it's not in the menu either.
-> So customers have to go Menu → Locations → search → View Details. It works, but most people won't
-> find it.
-> The fix is small: either show the same button in the mobile header, or add it to the top of the menu."
+> "On desktop, changing your Shane's is one click. On mobile, the button's missing and it's not in the
+> menu, so customers have to go Menu → Locations → search → View Details — three or four taps plus
+> typing.
+> The good news: the location picker already exists. We just need something on the phone to open it.
+> The cheapest fix is to make the shack name at the top open that picker — two taps, no typing — plus
+> a little chevron and underline so it's obviously clickable.
+> I've put six options on a page, simplest first, with tap counts, and a recommended starting point."
 
 ---
 
 ## Why this framing works
 
-- **Starts with what works**, so it doesn't read as a complaint about the whole site.
-- **One issue only** — the hidden button — not a list of technical findings.
-- **No jargon**: no cookies, `myShanes`, DOM, or CSS. "Not shown" and "not in the menu" are enough.
-- **Two options, both described as small**, so the client picks rather than debates whether to act.
+- **Leads with the good news** — the picker already exists, so this is small.
+- **Answers the ask directly** — every option is scored by taps, which is what the client asked to reduce.
+- **Shows their three ideas are covered** by Option 1, then offers more if they want to go further.
+- **One recommendation**, so they pick rather than debate.
+- **No jargon**: no cookies, `myShanes`, DOM, or CSS.
 - **Offers the walkthrough**, so it doesn't demand a meeting.

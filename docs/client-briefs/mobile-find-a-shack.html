@@ -3,123 +3,359 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Mobile: changing your Shane's location</title>
+<title>Mobile: switching your Shane's location — options</title>
 <style>
-  :root { --red:#bb202b; --black:#101820; --cream:#efeadc; --green:#1f7a3d; }
+  :root { --red:#bb202b; --black:#101820; --cream:#efeadc; --green:#1f7a3d; --ink:#2a2f36; --muted:#5a6067; }
   * { box-sizing: border-box; }
   body { margin:0; background:#f4f2ec; color:var(--black);
     font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
   .page { width:1200px; margin:0 auto; background:#fff; padding:56px 64px 64px; }
   .eyebrow { font-size:14px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--red); margin:0 0 14px; }
   h1 { font-size:52px; line-height:1.05; margin:0 0 18px; letter-spacing:-.01em; }
-  .lede { font-size:21px; line-height:1.5; margin:0; max-width:900px; color:#2a2f36; }
+  .lede { font-size:21px; line-height:1.5; margin:0; max-width:920px; color:var(--ink); }
   .lede b { color:var(--black); }
   .rule { height:2px; background:var(--cream); margin:38px 0 34px; border:0; }
   .panel { border:2px solid var(--cream); border-radius:16px; padding:26px 28px 30px; margin-bottom:26px; }
   .panel h2 { font-size:15px; letter-spacing:.1em; text-transform:uppercase; margin:0 0 4px; }
-  .panel .sub { font-size:17px; margin:0 0 20px; color:#4a5057; }
+  .panel .sub { font-size:17px; margin:0 0 20px; color:var(--muted); }
   .pill { display:inline-block; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
     padding:5px 11px; border-radius:999px; color:#fff; vertical-align:middle; margin-left:10px; }
   .ok { background:var(--green); }
   .bad { background:var(--red); }
   .shot { position:relative; display:inline-block; line-height:0; }
   .shot img { display:block; max-width:100%; border:1px solid #dcd8cd; border-radius:10px; }
-  .box { position:absolute; border:4px solid var(--red); border-radius:8px; box-shadow:0 0 0 4px rgba(187,32,43,.18); }
   .label { display:inline-block; background:var(--red); color:#fff; font-size:15px; font-weight:800; line-height:1.25;
     padding:6px 12px; border-radius:8px; margin:12px 0 0; }
   .cols { display:flex; gap:26px; align-items:flex-start; }
   .shot-col { width:300px; flex:0 0 auto; }
   .notes { flex:1; padding-top:6px; }
-  .shot img { height:auto; }
+  .cap { font-size:16px; line-height:1.45; color:var(--muted); margin:14px 0 0; }
+  ul { margin:16px 0 0; padding-left:22px; font-size:17px; line-height:1.55; }
+  li { margin-bottom:8px; }
+
+  /* tap-cost table */
+  table.cost { width:100%; border-collapse:collapse; font-size:16px; }
+  table.cost th, table.cost td { text-align:left; padding:11px 12px; border-bottom:1px solid #e7e3d9; vertical-align:top; }
+  table.cost th { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  table.cost tr.now td { background:#fbeceb; font-weight:700; }
+  table.cost .n { color:var(--red); font-weight:800; }
+
+  /* options grid */
+  .opts { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .opt { display:flex; gap:20px; border:2px solid var(--cream); border-radius:16px; padding:22px 22px 24px; }
+  .opt .body { flex:1; min-width:0; }
+  .opt .num { font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--red); }
+  .opt h3 { font-size:22px; margin:8px 0 8px; line-height:1.15; }
+  .opt p { font-size:16px; line-height:1.5; margin:0; color:#3a4046; }
+  .opt .tags { margin:10px 0 0; display:flex; gap:8px; flex-wrap:wrap; }
+  .tag { font-size:12px; font-weight:800; letter-spacing:.04em; padding:4px 10px; border-radius:999px; border:1.5px solid var(--black); }
+  .tag.taps { background:var(--black); color:#fff; }
+  .tag.eff-low { background:#e6f4ea; border-color:var(--green); color:var(--green); }
+  .tag.eff-med { background:#fdf3e3; border-color:#b9761a; color:#b9761a; }
+  .tag.answers { background:var(--cream); }
+  .rec { background:var(--cream); }
+  .rec .n { font-size:13px; font-weight:800; color:var(--red); letter-spacing:.1em; text-transform:uppercase; }
+  .rec h3 { font-size:22px; margin:8px 0 10px; }
+  .rec p { font-size:17px; line-height:1.55; margin:0 0 6px; color:#3a4046; }
+  .foot { font-size:14px; color:#6a7076; margin-top:30px; line-height:1.5; }
+  code { background:#f2efe7; padding:1px 5px; border-radius:4px; font-size:.92em; }
+
+  /* ---------- phone mockups ---------- */
+  .phone { width:196px; flex:0 0 auto; border:8px solid #1c1c1c; border-radius:22px; overflow:hidden;
+    background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.10); }
+  .scr { height:300px; background:#f7f5ef; display:flex; flex-direction:column; position:relative; overflow:hidden; }
+  .tbar { background:#1a1a1a; color:#fff; padding:9px 10px; display:flex; align-items:center; gap:6px; font-size:11px; font-weight:700; }
+  .pin { width:13px; height:13px; fill:#fff; flex:0 0 auto; }
+  .tbar .loc { display:flex; align-items:center; gap:5px; min-width:0; }
+  .tbar .loc span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .tbar .chev { width:12px; height:12px; fill:#fff; opacity:.85; flex:0 0 auto; }
+  .tbar .half { width:1px; height:14px; background:rgba(255,255,255,.35); margin:0 2px; }
+  .tbar .phone-num { color:#ffc72c; font-weight:600; font-size:10px; }
+  .ul { text-decoration:underline; text-underline-offset:2px; text-decoration-thickness:1.5px; }
+  .change-pill { margin-left:auto; background:var(--red); color:#fff; font-size:9px; font-weight:800;
+    padding:3px 8px; border-radius:999px; letter-spacing:.03em; }
+  .hamb { display:flex; flex-direction:column; gap:3px; margin-right:6px; }
+  .hamb i { display:block; width:15px; height:2px; background:#fff; border-radius:2px; }
+  .scrhead { background:#1a1a1a; color:#fff; padding:8px 10px; display:flex; align-items:center; justify-content:space-between; font-size:10px; }
+  .scrhead .order { background:var(--red); color:#fff; font-weight:800; font-size:9px; padding:5px 9px; border-radius:4px; line-height:1.05; text-align:center; }
+  .content { padding:12px 12px; flex:1; }
+  .ln { height:7px; background:#ddd8cc; border-radius:4px; margin-bottom:8px; }
+  .ln.w70 { width:70%; } .ln.w45 { width:45%; } .ln.w85 { width:85%; }
+  .btn { background:var(--red); color:#fff; border-radius:6px; text-align:center; font-size:11px; font-weight:800; padding:9px 10px; }
+  .btn.dark { background:var(--black); }
+  .card { background:#fff; border-radius:8px; padding:9px 10px; margin-bottom:8px; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+  .card.sel { border:2px solid var(--red); }
+  .card .t { font-size:11px; font-weight:800; }
+  .card .s { font-size:9px; color:var(--muted); margin-top:2px; }
+  .card .go { float:right; font-size:9px; font-weight:800; color:var(--red); }
+  .sheet { position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:14px 14px 0 0;
+    box-shadow:0 -6px 18px rgba(0,0,0,.18); padding:11px 12px 14px; }
+  .grab { width:34px; height:4px; border-radius:3px; background:#d7d2c6; margin:0 auto 9px; }
+  .sheet .st { font-size:11px; font-weight:800; margin-bottom:8px; }
+  .sheet .ss { font-size:9px; color:var(--muted); margin:-4px 0 9px; }
+  .search { display:flex; align-items:center; gap:6px; border:1.5px solid #dcd8cd; border-radius:8px; padding:7px 8px; font-size:10px; color:#9aa0a6; margin-bottom:7px; }
+  .search svg { width:11px; height:11px; fill:#9aa0a6; }
+  .row { display:flex; gap:8px; margin-top:9px; }
+  .row .btn { flex:1; }
+  .ghost { flex:1; text-align:center; font-size:11px; font-weight:800; padding:9px 10px; border-radius:6px; border:1.5px solid var(--black); color:var(--black); }
+  .scrim { position:absolute; inset:0; background:rgba(16,24,32,.42); }
+  .sticky { position:absolute; left:0; right:0; bottom:0; background:var(--black); color:#fff; font-size:9px;
+    font-weight:700; padding:9px 11px; display:flex; align-items:center; gap:5px; white-space:nowrap; }
+  .sticky .stx { overflow:hidden; text-overflow:ellipsis; }
+  .sticky .chg { margin-left:auto; color:#ffc72c; font-weight:800; text-decoration:underline; flex:0 0 auto; }
+  .drawer { position:absolute; inset:0; background:#fff; }
+  .drawer .dhead { background:#1a1a1a; color:#fff; padding:9px 11px; font-size:10px; font-weight:700; }
+  .ditem { padding:11px 12px; border-bottom:1px solid #eee9dd; font-size:12px; font-weight:700; }
+  .ditem small { display:block; font-size:9px; font-weight:600; color:var(--muted); margin-top:2px; }
+  .ditem.first { background:#fbeceb; border-left:4px solid var(--red); }
+  .swap { width:13px; height:13px; fill:#fff; }
+  .badge-note { font-size:14px; color:var(--muted); margin:0 0 18px; }
+
   @media (max-width:980px) {
     .page { width:auto; padding:32px 20px 40px; }
     h1 { font-size:34px; }
     .lede { font-size:18px; }
-    .cols, .fixes { flex-direction:column; }
+    .cols, .opts { display:block; }
     .shot-col { width:100%; max-width:420px; }
+    .opt { margin-bottom:20px; }
   }
-  .cap { font-size:16px; line-height:1.45; color:#4a5057; margin:14px 0 0; }
-  ul { margin:16px 0 0; padding-left:22px; font-size:17px; line-height:1.55; }
-  li { margin-bottom:8px; }
-  .fixes { display:flex; gap:22px; margin-top:6px; }
-  .fix { flex:1; background:var(--cream); border-radius:12px; padding:20px 22px; }
-  .fix .n { font-size:13px; font-weight:800; color:var(--red); letter-spacing:.1em; text-transform:uppercase; }
-  .fix h3 { font-size:20px; margin:8px 0 8px; }
-  .fix p { font-size:16px; line-height:1.5; margin:0; color:#3a4046; }
-  .foot { font-size:14px; color:#6a7076; margin-top:30px; line-height:1.5; }
 </style>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></symbol>
+  <symbol id="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="swap" viewBox="0 0 24 24"><path d="M7 7h11l-3-3 1.4-1.4L21.8 8l-5.4 5.4L15 12l3-3H7V7zm10 10H6l3 3-1.4 1.4L2.2 16l5.4-5.4L9 12l-3 3h11v2z"/></symbol>
+  <symbol id="search" viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></symbol>
+</svg>
+
 <div class="page">
 
   <p class="eyebrow">Website review &middot; Find a Shane&rsquo;s</p>
-  <h1>On a phone, customers can&rsquo;t switch locations</h1>
-  <p class="lede">The red <b>&ldquo;Change Your Shack&rdquo;</b> button works on a computer &mdash; but on a phone
-  it isn&rsquo;t shown at all, and it isn&rsquo;t in the menu either. Customers have to find their way to
-  <b>Locations</b> on their own.</p>
+  <h1>Switching locations on a phone</h1>
+  <p class="lede">On a computer, the red <b>&ldquo;Change Your Shack&rdquo;</b> button sits next to the logo on every
+  page. On a phone it isn&rsquo;t shown &mdash; so customers have to go <b>Menu &rarr; Locations &rarr; search &rarr;
+  open a shack &rarr; View Details</b>. That&rsquo;s 3&ndash;4 taps plus typing, and only if they think to look.
+  Below are <b>six ways to cut that down</b>, from a one-evening tweak to a native-feeling picker.</p>
 
   <hr class="rule">
 
+  <!-- ================= CURRENT STATE ================= -->
   <div class="panel">
-    <h2>On a computer <span class="pill ok">Works</span></h2>
-    <p class="sub">The button sits right next to the logo, on every page.</p>
-    <div class="shot">
-      <img src="assets/desktop-header.png" alt="Desktop header with Change Your Shack button" width="1000">
-      <div class="box" style="left:12.15%; top:27.6%; width:11.9%; height:14.6%;"></div>
-    </div>
-    <p class="cap"><span class="label">Change Your Shack &mdash; visible</span><br>
-      One tap &rarr; pick a different Shane&rsquo;s. Clear and obvious.</p>
-  </div>
-
-  <div class="panel">
-    <h2>On a phone <span class="pill bad">Button missing</span></h2>
-    <p class="sub">Same page, phone screen &mdash; the button is gone, and the menu doesn&rsquo;t include it.</p>
+    <h2>What a phone shows today</h2>
+    <p class="sub">The shack name at the top is tappable &mdash; but it opens that shack&rsquo;s page. It never lets you pick a different one.</p>
     <div class="cols">
       <div class="shot-col">
         <div class="shot">
-          <img src="assets/mobile-header.png" alt="Mobile header without the Change Your Shack button" width="300">
+          <img src="assets/mobile-topbar.png" alt="Live mobile top bar showing Edgewood Location and phone number" width="390">
         </div>
-        <p class="cap"><span class="label">No button here</span><br>
-          Hamburger, logo, Order Now. No way to change location from the header.</p>
-      </div>
-      <div class="shot-col">
-        <div class="shot">
-          <img src="assets/mobile-menu.png" alt="Mobile menu open, no location option" width="300">
-        </div>
-        <p class="cap"><span class="label">Not in the menu either</span><br>
-          The menu has 9 items. None of them changes your location.</p>
+        <p class="cap"><span class="label">Live top bar, 390&nbsp;px</span><br>
+          Pin + &ldquo;Edgewood Location&rdquo; + phone. It links to the <em>current</em> shack &mdash; not a switcher.</p>
       </div>
       <div class="notes">
-        <p class="cap" style="margin-top:0"><b>What customers see today</b></p>
+        <p class="cap" style="margin-top:0"><b>Why it&rsquo;s hard</b></p>
         <ul>
-          <li>The shack name at the top is tappable &mdash; but it opens <b>that</b> shack&rsquo;s page. It doesn&rsquo;t let you pick another one.</li>
-          <li>To actually switch, they must go <b>Menu &rarr; Locations</b>, search, then open a shack and tap <b>View Details</b>.</li>
-          <li>That&rsquo;s 3&ndash;4 extra taps, and only if they think to look in the menu.</li>
-          <li>There&rsquo;s also no map on phones &mdash; just the search box and the list.</li>
+          <li>The red <b>&ldquo;Change Your Shack&rdquo;</b> button is <b>hidden on phones</b> (genuinely not rendered &mdash; not just scrolled off).</li>
+          <li>It&rsquo;s <b>not in the menu</b> either. The menu&rsquo;s 9 items don&rsquo;t include a location switcher.</li>
+          <li>The location picker itself <b>already exists and works</b> &mdash; it just has no button on mobile to open it.</li>
+          <li>No map on phones &mdash; only the search box and list on <code>/locations/</code>.</li>
         </ul>
       </div>
     </div>
   </div>
 
+  <!-- ================= TAP COST ================= -->
   <div class="panel">
-    <h2>Two easy fixes</h2>
-    <p class="sub">Either one is a small change &mdash; no redesign needed.</p>
-    <div class="fixes">
-      <div class="fix">
-        <div class="n">Option 1</div>
-        <h3>Add the button to the phone header</h3>
-        <p>Show the same red &ldquo;Change Your Shack&rdquo; button on phones that computers already get. Most consistent with the desktop site.</p>
+    <h2>Taps to switch a shack</h2>
+    <p class="sub">Every option below is measured against what a mobile customer does today.</p>
+    <table class="cost">
+      <thead>
+        <tr><th>Journey</th><th>Taps</th><th>Typing?</th></tr>
+      </thead>
+      <tbody>
+        <tr class="now"><td>Today: Menu &rarr; Locations &rarr; search &rarr; shack &rarr; View Details</td><td class="n">3&ndash;4</td><td>Yes</td></tr>
+        <tr><td>Option 1 &mdash; tap top-bar location &rarr; pick from nearest</td><td class="n">2</td><td>No</td></tr>
+        <tr><td>Option 2 &mdash; confirm the suggested nearby shack</td><td class="n">1&ndash;2</td><td>No</td></tr>
+        <tr><td>Option 3 &mdash; bottom-sheet picker (search or nearest)</td><td class="n">2</td><td>Optional</td></tr>
+        <tr><td>Option 4 &mdash; location gate inside Order Now</td><td class="n">1&ndash;2</td><td>No</td></tr>
+        <tr><td>Option 5 &mdash; sticky &ldquo;Change&rdquo; bar</td><td class="n">1</td><td>No</td></tr>
+        <tr><td>Option 6 &mdash; first item in the hamburger menu</td><td class="n">2</td><td>No</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ================= OPTIONS ================= -->
+  <div class="panel">
+    <h2>Six options, simplest first</h2>
+    <p class="sub">They stack &mdash; Option&nbsp;1 alone fixes the gap; the rest make it feel native.</p>
+    <div class="opts">
+
+      <!-- Option 1 -->
+      <div class="opt">
+        <div class="phone">
+          <div class="scr">
+            <div class="tbar">
+              <svg class="pin"><use href="#pin"/></svg>
+              <span class="loc"><span class="ul">Edgewood Location</span><svg class="chev"><use href="#chev"/></svg></span>
+            </div>
+            <div class="content">
+              <div class="ln w85"></div><div class="ln w70"></div><div class="ln w45"></div>
+            </div>
+            <div class="scrim"></div>
+            <div class="sheet">
+              <div class="grab"></div>
+              <div class="st">Nearby Shane&rsquo;s</div>
+              <div class="ss">Tap to switch. We&rsquo;ll remember it.</div>
+              <div class="card sel"><span class="go">Use</span><div class="t">Edgewood &middot; 1.2 mi</div><div class="s">123 Main St, Atlanta GA</div></div>
+              <div class="card"><span class="go">Use</span><div class="t">Norcross &middot; 8.4 mi</div><div class="s">555 Peachtree Pkwy</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="num">Option 1</div>
+          <h3>Tap the top location &rarr; pick a shack</h3>
+          <p>Make the shack name (already in the top bar) open the <b>location picker that already exists</b>. Show 4 nearest, one tap to switch. Adds a small chevron and underline so it reads as clickable.</p>
+          <div class="tags"><span class="tag taps">2 taps</span><span class="tag eff-low">Low effort</span><span class="tag answers">Answers ideas 1, 2 &amp; 3</span></div>
+        </div>
       </div>
-      <div class="fix">
-        <div class="n">Option 2</div>
-        <h3>Add it to the top of the menu</h3>
-        <p>Make &ldquo;Change Your Shack&rdquo; the first item in the mobile menu, above &ldquo;Menu&rdquo;. Smallest visual change.</p>
+
+      <!-- Option 2 -->
+      <div class="opt">
+        <div class="phone">
+          <div class="scr">
+            <div class="tbar">
+              <svg class="pin"><use href="#pin"/></svg>
+              <span class="loc"><span>Edgewood Location</span></span>
+            </div>
+            <div class="content"><div class="ln w85"></div><div class="ln w70"></div><div class="ln w45"></div></div>
+            <div class="scrim"></div>
+            <div class="sheet">
+              <div class="grab"></div>
+              <div class="st">We think you&rsquo;re near Edgewood</div>
+              <div class="ss">Closest shack to your phone.</div>
+              <div class="row"><div class="btn dark">Order here</div><div class="ghost">Change</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="num">Option 2</div>
+          <h3>Auto-suggest + one-tap confirm</h3>
+          <p>On the first visit, detect and confirm: <b>&ldquo;We think you&rsquo;re near Edgewood &mdash; Order here / Change&rdquo;</b>. Confirming is a single tap; &ldquo;Change&rdquo; opens the picker. Removes all hunting for new customers.</p>
+          <div class="tags"><span class="tag taps">1&ndash;2 taps</span><span class="tag eff-low">Low&ndash;medium effort</span></div>
+        </div>
       </div>
+
+      <!-- Option 3 -->
+      <div class="opt">
+        <div class="phone">
+          <div class="scr">
+            <div class="tbar">
+              <svg class="pin"><use href="#pin"/></svg>
+              <span class="loc"><span class="ul">Edgewood Location</span></span>
+            </div>
+            <div class="content"><div class="ln w85"></div><div class="ln w70"></div></div>
+            <div class="scrim"></div>
+            <div class="sheet">
+              <div class="grab"></div>
+              <div class="search"><svg><use href="#search"/></svg> City, ZIP, or shack name</div>
+              <div class="ghost" style="text-align:left">Use my current location</div>
+              <div class="card"><div class="t">Edgewood &middot; 1.2 mi</div><div class="s">Atlanta, GA</div></div>
+              <div class="card"><div class="t">Norcross &middot; 8.4 mi</div><div class="s">Norcross, GA</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="num">Option 3</div>
+          <h3>Native bottom-sheet picker</h3>
+          <p>Turn the existing pop-up picker into a modern <b>bottom sheet</b> with a search field, &ldquo;Use my current location&rdquo;, the nearest shacks, and &ldquo;See all&rdquo;. Easier to reach with a thumb than a centred pop-up.</p>
+          <div class="tags"><span class="tag taps">2 taps</span><span class="tag eff-med">Medium effort</span></div>
+        </div>
+      </div>
+
+      <!-- Option 4 -->
+      <div class="opt">
+        <div class="phone">
+          <div class="scr">
+            <div class="scrhead"><span class="hamb"><i></i><i></i><i></i></span><span class="order">ORDER<br>NOW</span></div>
+            <div class="content"><div class="ln w85"></div><div class="ln w70"></div><div class="ln w45"></div></div>
+            <div class="scrim"></div>
+            <div class="sheet">
+              <div class="grab"></div>
+              <div class="st">Choose a shack to order from</div>
+              <div class="ss">Pickup &amp; delivery need a location.</div>
+              <div class="card sel"><span class="go">Use</span><div class="t">Edgewood &middot; 1.2 mi</div></div>
+              <div class="card"><div class="t">Norcross &middot; 8.4 mi</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="num">Option 4</div>
+          <h3>Ask for a shack at checkout</h3>
+          <p>When someone taps <b>Order Now</b> without a shack set, ask for it right there &mdash; then continue straight to ordering. The choice happens exactly when it matters, so nobody orders from the wrong kitchen.</p>
+          <div class="tags"><span class="tag taps">1&ndash;2 taps</span><span class="tag eff-med">Medium effort</span></div>
+        </div>
+      </div>
+
+      <!-- Option 5 -->
+      <div class="opt">
+        <div class="phone">
+          <div class="scr">
+            <div class="tbar">
+              <svg class="pin"><use href="#pin"/></svg>
+              <span class="loc"><span>Edgewood Location</span></span>
+            </div>
+            <div class="content"><div class="ln w85"></div><div class="ln w70"></div><div class="ln w45"></div><div class="ln w85"></div><div class="ln w70"></div></div>
+            <div class="sticky">
+              <svg class="pin"><use href="#pin"/></svg>
+              <span class="stx">Ordering from: Edgewood</span>
+              <span class="chg">Change</span>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="num">Option 5</div>
+          <h3>Persistent &ldquo;Ordering from&rdquo; bar</h3>
+          <p>A slim sticky bar at the bottom &mdash; <b>&ldquo;Ordering from: Edgewood &middot; Change&rdquo;</b> &mdash; shows the current shack and switches in one tap, from anywhere on the site. Makes the selection obvious at all times.</p>
+          <div class="tags"><span class="tag taps">1 tap</span><span class="tag eff-med">Medium effort</span></div>
+        </div>
+      </div>
+
+      <!-- Option 6 -->
+      <div class="opt">
+        <div class="phone">
+          <div class="scr">
+            <div class="drawer">
+              <div class="dhead">Menu</div>
+              <div class="ditem first">Change Your Shack<small>Currently: Edgewood Location</small></div>
+              <div class="ditem">Menu</div>
+              <div class="ditem">Catering</div>
+              <div class="ditem">Locations</div>
+              <div class="ditem">Our Story</div>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="num">Option 6</div>
+          <h3>Add it to the top of the menu</h3>
+          <p>Make <b>&ldquo;Change Your Shack&rdquo;</b> the first item in the hamburger menu, with the current shack as a subtitle. The smallest visual change, and a safe fallback if the top bar can&rsquo;t be repurposed.</p>
+          <div class="tags"><span class="tag taps">2 taps</span><span class="tag eff-low">Low effort</span><span class="tag answers">Original brief option 2</span></div>
+        </div>
+      </div>
+
     </div>
   </div>
 
-  <p class="foot">Checked on a 390&nbsp;px-wide phone screen &mdash; the same width as an iPhone &mdash; on the live
-  site, 23&nbsp;September&nbsp;2026. Screenshots are unedited.</p>
+  <!-- ================= RECOMMENDATION ================= -->
+  <div class="panel rec">
+    <div class="n">Recommendation</div>
+    <h3>Start with Option 1, then layer Option 2.</h3>
+    <p><b>Option 1</b> is the highest return for the least work: the picker already exists, so we only need to point the top-bar location at it and add a chevron + underline. That alone takes switching from <b>3&ndash;4 taps plus typing to 2 taps</b>.</p>
+    <p><b>Option 2</b> then catches new customers before they ever hunt for the menu. Options 3&ndash;6 are polish we can phase in based on how the first two perform.</p>
+    <p class="badge-note" style="margin-top:13px">Illustrative mockups, not final visual design. Effort labels are relative: Low = a small tweak, Medium = a few days with testing.</p>
+  </div>
+
+  <p class="foot">Checked on a live 390&nbsp;px-wide phone screen &mdash; the same width as an iPhone &mdash; 5&nbsp;October&nbsp;2026.
+  The top-bar capture is unedited. Mockups above are schematic, not final designs.</p>
 
 </div>
 </body>
