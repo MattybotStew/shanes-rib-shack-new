@@ -48,6 +48,8 @@
   .opt h3 { font-size:22px; margin:8px 0 8px; line-height:1.15; }
   .opt p { font-size:16px; line-height:1.5; margin:0; color:#3a4046; }
   .opt .tags { margin:10px 0 0; display:flex; gap:8px; flex-wrap:wrap; }
+  .opt .why { font-size:15px; line-height:1.5; margin:12px 0 0; padding-top:10px; border-top:1px dashed #e0dbcd; color:#3a4046; }
+  .opt .why b { color:var(--red); letter-spacing:.02em; }
   .tag { font-size:12px; font-weight:800; letter-spacing:.04em; padding:4px 10px; border-radius:999px; border:1.5px solid var(--black); }
   .tag.taps { background:var(--black); color:#fff; }
   .tag.eff-low { background:#e6f4ea; border-color:var(--green); color:var(--green); }
@@ -136,7 +138,7 @@
   <p class="lede">On a computer, the red <b>&ldquo;Change Your Shack&rdquo;</b> button sits next to the logo on every
   page. On a phone it isn&rsquo;t shown &mdash; so customers have to go <b>Menu &rarr; Locations &rarr; search &rarr;
   open a shack &rarr; View Details</b>. That&rsquo;s 3&ndash;4 taps plus typing, and only if they think to look.
-  Below are <b>six ways to cut that down</b>, from a one-evening tweak to a native-feeling picker.</p>
+  Below are <b>six ways to cut that down</b>, ranked best UX first.</p>
 
   <hr class="rule">
 
@@ -175,10 +177,10 @@
       <tbody>
         <tr class="now"><td>Today: Menu &rarr; Locations &rarr; search &rarr; shack &rarr; View Details</td><td class="n">3&ndash;4</td><td>Yes</td></tr>
         <tr><td>Option 1 &mdash; tap top-bar location &rarr; pick from nearest</td><td class="n">2</td><td>No</td></tr>
-        <tr><td>Option 2 &mdash; confirm the suggested nearby shack</td><td class="n">1&ndash;2</td><td>No</td></tr>
-        <tr><td>Option 3 &mdash; bottom-sheet picker (search or nearest)</td><td class="n">2</td><td>Optional</td></tr>
+        <tr><td>Option 2 &mdash; sticky &ldquo;Ordering from&rdquo; bar</td><td class="n">1</td><td>No</td></tr>
+        <tr><td>Option 3 &mdash; confirm the suggested nearby shack</td><td class="n">1&ndash;2</td><td>No</td></tr>
         <tr><td>Option 4 &mdash; location gate inside Order Now</td><td class="n">1&ndash;2</td><td>No</td></tr>
-        <tr><td>Option 5 &mdash; sticky &ldquo;Change&rdquo; bar</td><td class="n">1</td><td>No</td></tr>
+        <tr><td>Option 5 &mdash; bottom-sheet picker (search or nearest)</td><td class="n">2</td><td>Optional</td></tr>
         <tr><td>Option 6 &mdash; first item in the hamburger menu</td><td class="n">2</td><td>No</td></tr>
       </tbody>
     </table>
@@ -186,8 +188,8 @@
 
   <!-- ================= OPTIONS ================= -->
   <div class="panel">
-    <h2>Six options, simplest first</h2>
-    <p class="sub">They stack &mdash; Option&nbsp;1 alone fixes the gap; the rest make it feel native.</p>
+    <h2>Six options, best UX first</h2>
+    <p class="sub">Numbered 1&ndash;6 in order of best UX &mdash; not effort. They stack; Option&nbsp;1 alone fixes the gap.</p>
     <div class="opts">
 
       <!-- Option 1 -->
@@ -212,14 +214,40 @@
           </div>
         </div>
         <div class="body">
-          <div class="num">Option 1</div>
+          <div class="num">Option 1 &middot; Rank 1</div>
           <h3>Tap the top location &rarr; pick a shack</h3>
           <p>Make the shack name (already in the top bar) open the <b>location picker that already exists</b>. Show 4 nearest, one tap to switch. Adds a small chevron and underline so it reads as clickable.</p>
           <div class="tags"><span class="tag taps">2 taps</span><span class="tag eff-low">Low effort</span><span class="tag answers">Answers ideas 1, 2 &amp; 3</span></div>
+          <p class="why"><b>Why #1:</b> where customers already look, always on screen, 2 taps &mdash; and it reuses a picker that already works. Best balance of discoverability and clicks.</p>
         </div>
       </div>
 
       <!-- Option 2 -->
+      <div class="opt">
+        <div class="phone">
+          <div class="scr">
+            <div class="tbar">
+              <svg class="pin"><use href="#pin"/></svg>
+              <span class="loc"><span>Edgewood Location</span></span>
+            </div>
+            <div class="content"><div class="ln w85"></div><div class="ln w70"></div><div class="ln w45"></div><div class="ln w85"></div><div class="ln w70"></div></div>
+            <div class="sticky">
+              <svg class="pin"><use href="#pin"/></svg>
+              <span class="stx">Ordering from: Edgewood</span>
+              <span class="chg">Change</span>
+            </div>
+          </div>
+        </div>
+        <div class="body">
+          <div class="num">Option 2 &middot; Rank 2</div>
+          <h3>Persistent &ldquo;Ordering from&rdquo; bar</h3>
+          <p>A slim sticky bar at the bottom &mdash; <b>&ldquo;Ordering from: Edgewood &middot; Change&rdquo;</b> &mdash; shows the current shack and switches in one tap, from anywhere on the site. Makes the selection obvious at all times.</p>
+          <div class="tags"><span class="tag taps">1 tap</span><span class="tag eff-med">Medium effort</span></div>
+          <p class="why"><b>Why #2:</b> the clearest of the six &mdash; current shack always visible, switch in 1 tap. Small cost: a persistent bar uses screen space.</p>
+        </div>
+      </div>
+
+      <!-- Option 3 -->
       <div class="opt">
         <div class="phone">
           <div class="scr">
@@ -238,37 +266,11 @@
           </div>
         </div>
         <div class="body">
-          <div class="num">Option 2</div>
+          <div class="num">Option 3 &middot; Rank 3</div>
           <h3>Auto-suggest + one-tap confirm</h3>
           <p>On the first visit, detect and confirm: <b>&ldquo;We think you&rsquo;re near Edgewood &mdash; Order here / Change&rdquo;</b>. Confirming is a single tap; &ldquo;Change&rdquo; opens the picker. Removes all hunting for new customers.</p>
           <div class="tags"><span class="tag taps">1&ndash;2 taps</span><span class="tag eff-low">Low&ndash;medium effort</span></div>
-        </div>
-      </div>
-
-      <!-- Option 3 -->
-      <div class="opt">
-        <div class="phone">
-          <div class="scr">
-            <div class="tbar">
-              <svg class="pin"><use href="#pin"/></svg>
-              <span class="loc"><span class="ul">Edgewood Location</span></span>
-            </div>
-            <div class="content"><div class="ln w85"></div><div class="ln w70"></div></div>
-            <div class="scrim"></div>
-            <div class="sheet">
-              <div class="grab"></div>
-              <div class="search"><svg><use href="#search"/></svg> City, ZIP, or shack name</div>
-              <div class="ghost" style="text-align:left">Use my current location</div>
-              <div class="card"><div class="t">Edgewood &middot; 1.2 mi</div><div class="s">Atlanta, GA</div></div>
-              <div class="card"><div class="t">Norcross &middot; 8.4 mi</div><div class="s">Norcross, GA</div></div>
-            </div>
-          </div>
-        </div>
-        <div class="body">
-          <div class="num">Option 3</div>
-          <h3>Native bottom-sheet picker</h3>
-          <p>Turn the existing pop-up picker into a modern <b>bottom sheet</b> with a search field, &ldquo;Use my current location&rdquo;, the nearest shacks, and &ldquo;See all&rdquo;. Easier to reach with a thumb than a centred pop-up.</p>
-          <div class="tags"><span class="tag taps">2 taps</span><span class="tag eff-med">Medium effort</span></div>
+          <p class="why"><b>Why #3:</b> the smoothest first-time experience (1 tap), but only pays off on the first visit &mdash; it must be dismissible so it never nags.</p>
         </div>
       </div>
 
@@ -289,10 +291,11 @@
           </div>
         </div>
         <div class="body">
-          <div class="num">Option 4</div>
+          <div class="num">Option 4 &middot; Rank 4</div>
           <h3>Ask for a shack at checkout</h3>
           <p>When someone taps <b>Order Now</b> without a shack set, ask for it right there &mdash; then continue straight to ordering. The choice happens exactly when it matters, so nobody orders from the wrong kitchen.</p>
           <div class="tags"><span class="tag taps">1&ndash;2 taps</span><span class="tag eff-med">Medium effort</span></div>
+          <p class="why"><b>Why #4:</b> catches people exactly when the choice matters and prevents wrong-shack orders. Narrower: it only appears at ordering.</p>
         </div>
       </div>
 
@@ -302,21 +305,25 @@
           <div class="scr">
             <div class="tbar">
               <svg class="pin"><use href="#pin"/></svg>
-              <span class="loc"><span>Edgewood Location</span></span>
+              <span class="loc"><span class="ul">Edgewood Location</span></span>
             </div>
-            <div class="content"><div class="ln w85"></div><div class="ln w70"></div><div class="ln w45"></div><div class="ln w85"></div><div class="ln w70"></div></div>
-            <div class="sticky">
-              <svg class="pin"><use href="#pin"/></svg>
-              <span class="stx">Ordering from: Edgewood</span>
-              <span class="chg">Change</span>
+            <div class="content"><div class="ln w85"></div><div class="ln w70"></div></div>
+            <div class="scrim"></div>
+            <div class="sheet">
+              <div class="grab"></div>
+              <div class="search"><svg><use href="#search"/></svg> City, ZIP, or shack name</div>
+              <div class="ghost" style="text-align:left">Use my current location</div>
+              <div class="card"><div class="t">Edgewood &middot; 1.2 mi</div><div class="s">Atlanta, GA</div></div>
+              <div class="card"><div class="t">Norcross &middot; 8.4 mi</div><div class="s">Norcross, GA</div></div>
             </div>
           </div>
         </div>
         <div class="body">
-          <div class="num">Option 5</div>
-          <h3>Persistent &ldquo;Ordering from&rdquo; bar</h3>
-          <p>A slim sticky bar at the bottom &mdash; <b>&ldquo;Ordering from: Edgewood &middot; Change&rdquo;</b> &mdash; shows the current shack and switches in one tap, from anywhere on the site. Makes the selection obvious at all times.</p>
-          <div class="tags"><span class="tag taps">1 tap</span><span class="tag eff-med">Medium effort</span></div>
+          <div class="num">Option 5 &middot; Rank 5</div>
+          <h3>Native bottom-sheet picker</h3>
+          <p>Turn the existing pop-up picker into a modern <b>bottom sheet</b> with a search field, &ldquo;Use my current location&rdquo;, the nearest shacks, and &ldquo;See all&rdquo;. Easier to reach with a thumb than a centred pop-up.</p>
+          <div class="tags"><span class="tag taps">2 taps</span><span class="tag eff-med">Medium effort</span></div>
+          <p class="why"><b>Why #5:</b> a real ergonomic upgrade, but it improves the picker shell rather than adding a way in &mdash; best paired with 1 or 2.</p>
         </div>
       </div>
 
@@ -335,42 +342,23 @@
           </div>
         </div>
         <div class="body">
-          <div class="num">Option 6</div>
+          <div class="num">Option 6 &middot; Rank 6</div>
           <h3>Add it to the top of the menu</h3>
           <p>Make <b>&ldquo;Change Your Shack&rdquo;</b> the first item in the hamburger menu, with the current shack as a subtitle. The smallest visual change, and a safe fallback if the top bar can&rsquo;t be repurposed.</p>
           <div class="tags"><span class="tag taps">2 taps</span><span class="tag eff-low">Low effort</span><span class="tag answers">Original brief option 2</span></div>
+          <p class="why"><b>Why #6:</b> low effort and safe as a fallback, but it hides behind the hamburger &mdash; the hardest to discover, and not a standalone fix.</p>
         </div>
       </div>
 
     </div>
   </div>
 
-  <!-- ================= UX RANKING ================= -->
-  <div class="panel">
-    <h2>Ranked: best UX first</h2>
-    <p class="sub">The same six options, ordered by how well they serve a mobile customer &mdash; not by effort.</p>
-    <table class="cost">
-      <thead>
-        <tr><th>#</th><th>Solution</th><th>Why it ranks here</th></tr>
-      </thead>
-      <tbody>
-        <tr><td class="n">1</td><td><b>Option 1</b><br>Top-bar location &rarr; picker</td><td>Where customers already look, always on screen, 2 taps &mdash; and it reuses a picker that already works. Best balance of discoverability and clicks.</td></tr>
-        <tr><td class="n">2</td><td><b>Option 5</b><br>Sticky &ldquo;Ordering from&rdquo; bar</td><td>Removes all doubt about the current shack and switches in 1 tap &mdash; the clearest of the six. Small cost: a persistent bar uses screen space.</td></tr>
-        <tr><td class="n">3</td><td><b>Option 2</b><br>Auto-suggest + confirm</td><td>The smoothest first-time experience (1 tap), but only pays off on the first visit &mdash; it must be dismissible so it never nags.</td></tr>
-        <tr><td class="n">4</td><td><b>Option 4</b><br>Location gate at checkout</td><td>Catches people exactly when the choice matters and prevents wrong-shack orders. Narrower: it only appears at ordering.</td></tr>
-        <tr><td class="n">5</td><td><b>Option 3</b><br>Native bottom-sheet picker</td><td>A real ergonomic upgrade, but it improves the picker shell rather than adding a way in &mdash; best paired with 1 or 5.</td></tr>
-        <tr><td class="n">6</td><td><b>Option 6</b><br>Menu item</td><td>Low effort and safe as a fallback, but it hides behind the hamburger, so it&rsquo;s the hardest to discover &mdash; and not a standalone fix.</td></tr>
-      </tbody>
-    </table>
-    <p class="cap" style="margin-top:16px"><b>Best of all:</b> Option&nbsp;1 as the everyday switcher, Option&nbsp;2 for first visits, and Option&nbsp;5 on ordering pages &mdash; with Option&nbsp;3 as the picker they all open.</p>
-  </div>
-
   <!-- ================= RECOMMENDATION ================= -->
   <div class="panel rec">
     <div class="n">Recommendation</div>
-    <h3>Start with Option 1, then layer Option 2.</h3>
+    <h3>Start with Option 1, then layer Option 3.</h3>
     <p><b>Option 1</b> is the highest return for the least work: the picker already exists, so we only need to point the top-bar location at it and add a chevron + underline. That alone takes switching from <b>3&ndash;4 taps plus typing to 2 taps</b>.</p>
-    <p><b>Option 2</b> then catches new customers before they ever hunt for the menu. Options 3&ndash;6 are polish we can phase in based on how the first two perform.</p>
+    <p><b>Option 3</b> then catches new customers before they ever hunt for the menu, and <b>Option 2</b> (the sticky bar) is the next-best value on ordering pages. <b>Best of all:</b> Option&nbsp;1 as the everyday switcher, Option&nbsp;2 on ordering pages, and Option&nbsp;3 for first visits &mdash; with Option&nbsp;5 as the picker they all open.</p>
     <p class="badge-note" style="margin-top:13px">Illustrative mockups, not final visual design. Effort labels are relative: Low = a small tweak, Medium = a few days with testing.</p>
   </div>
 
