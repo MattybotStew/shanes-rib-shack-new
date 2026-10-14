@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Put Order Catering back next to Pickup and Delivery</title>
+<style>
+  :root { --red:#bb202b; --black:#101820; --cream:#efeadc; --gold:#ffc72c; --green:#1f7a3d; --ink:#2a2f36; --muted:#5a6067; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f4f2ec; color:var(--black);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .page { width:1200px; margin:0 auto; background:#fff; padding:56px 64px 64px; }
+  .eyebrow { font-size:14px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--red); margin:0 0 14px; }
+  h1 { font-size:48px; line-height:1.08; margin:0 0 18px; letter-spacing:-.01em; }
+  .lede { font-size:21px; line-height:1.5; margin:0; max-width:980px; color:var(--ink); }
+  .lede b { color:var(--black); }
+  .rule { height:2px; background:var(--cream); margin:38px 0 34px; border:0; }
+  .panel { border:2px solid var(--cream); border-radius:16px; padding:26px 28px 28px; margin-bottom:26px; }
+  .panel h2 { font-size:22px; margin:0 0 6px; line-height:1.2; }
+  .panel .sub { font-size:17px; margin:0 0 20px; color:#3a4046; line-height:1.5; }
+  .pill { display:inline-block; font-size:12px; font-weight:800; letter-spacing:.08em; text-transform:uppercase;
+    padding:5px 11px; border-radius:999px; color:#fff; vertical-align:middle; margin-left:10px; }
+  .ok { background:var(--green); }
+  .bad { background:var(--red); }
+  .rec { background:var(--cream); }
+  .rec .n { font-size:13px; font-weight:800; color:var(--red); letter-spacing:.1em; text-transform:uppercase; }
+  .rec h3 { font-size:22px; margin:8px 0 10px; }
+  .rec p { font-size:17px; line-height:1.55; margin:0; color:#3a4046; }
+  .foot { font-size:14px; color:#6a7076; margin-top:30px; line-height:1.5; }
+
+  .loc { display:flex; gap:18px; align-items:stretch; border:1px solid #e4dfd4; border-radius:14px; padding:22px 22px 20px; background:#fff; }
+  .loc-copy { flex:1; min-width:0; }
+  .meta { font-size:13px; font-weight:700; color:var(--black); margin:0 0 8px; }
+  .meta .pipe { color:#b7b2a6; margin:0 6px; }
+  .city { font-size:40px; line-height:1; font-weight:800; color:var(--red); margin:0 0 12px; letter-spacing:.01em; }
+  .addr, .phone { margin:0; font-size:15px; font-weight:700; color:var(--red); line-height:1.35; }
+  .hours { margin:10px 0 0; font-size:14px; font-weight:700; color:var(--black); }
+  .hours a { color:var(--red); text-decoration:none; font-weight:700; }
+  .hours .pipe { margin:0 6px; color:var(--black); }
+  .btns { display:flex; flex-wrap:wrap; gap:10px; margin-top:16px; }
+  .btn { display:inline-flex; align-items:center; justify-content:center; min-height:40px; padding:10px 16px;
+    border-radius:6px; font-size:13px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; line-height:1; }
+  .btn.pickup { background:#fff; color:var(--black); border:2px solid var(--black); }
+  .btn.delivery { background:var(--red); color:#fff; border:2px solid var(--red); }
+  .btn.cater { background:var(--black); color:#fff; border:2px solid var(--black); }
+  .btn.cater-red { background:var(--red); color:#fff; border:2px solid var(--red); }
+  .btn.delivery-black { background:var(--black); color:#fff; border:2px solid var(--black); }
+  .photo { width:340px; flex:0 0 auto; border-radius:12px; background:
+    radial-gradient(circle at 20% 30%, #f3d27a 0 18%, transparent 19%),
+    radial-gradient(circle at 72% 28%, #e8c56a 0 22%, transparent 23%),
+    linear-gradient(160deg, #c9843a 0%, #8a4b22 42%, #6b3a18 100%);
+    position:relative; min-height:210px; }
+  .photo .plate { position:absolute; inset:28px 36px; border-radius:18px; background:
+    linear-gradient(#f7f1e4, #efe4cc); box-shadow:0 8px 0 rgba(0,0,0,.08); }
+  .map { position:absolute; right:14px; bottom:14px; background:#fff; color:var(--black);
+    font-size:11px; font-weight:700; letter-spacing:.06em; text-transform:uppercase;
+    padding:8px 10px; border-radius:6px; }
+
+  .phone-wrap { margin-top:18px; display:flex; align-items:flex-start; gap:16px; }
+  .phone { width:280px; border:8px solid #1c1c1c; border-radius:22px; overflow:hidden; background:#fff; }
+  .phone .loc { display:block; border:0; border-radius:0; padding:16px 14px 18px; }
+  .phone .city { font-size:28px; }
+  .phone .photo { display:none; }
+  .phone-note { font-size:15px; color:var(--muted); line-height:1.45; padding-top:8px; max-width:420px; }
+
+  @media (max-width:980px) {
+    .page { width:auto; padding:32px 20px 40px; }
+    h1 { font-size:34px; }
+    .lede { font-size:18px; }
+    .loc { display:block; }
+    .photo { width:100%; height:180px; margin-top:16px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <p class="eyebrow">Location pages</p>
+  <h1>Put Order Catering back next to Pickup and Delivery</h1>
+  <p class="lede">On some location pages, like Chattanooga, the row only shows <b>Order Pickup</b> and <b>Order Delivery</b>. The catering button used to sit beside them. The red text link <b>See Our Catering Menu</b> is still there, but it is easy to miss.</p>
+
+  <hr class="rule">
+
+  <div class="panel">
+    <h2>Today on Chattanooga <span class="pill bad">Missing</span></h2>
+    <p class="sub">Pickup and Delivery are buttons. Catering is only the small red words next to the hours.</p>
+    <div class="loc">
+      <div class="loc-copy">
+        <p class="meta">Current Shack <span class="pipe">|</span> Careers</p>
+        <p class="city">CHATTANOOGA</p>
+        <p class="addr">9448 Bradmore Ln, Ooltewah, TN, 37363-8245</p>
+        <p class="phone">+1 423-702-9801</p>
+        <p class="hours">SUN-SAT, 11:00 AM-8:00 PM <span class="pipe">|</span> <a href="#catering-menu">See Our Catering Menu</a></p>
+        <div class="btns">
+          <span class="btn pickup">Order Pickup</span>
+          <span class="btn delivery">Order Delivery</span>
+        </div>
+      </div>
+      <div class="photo" aria-hidden="true"><div class="plate"></div><span class="map">Map &amp; directions</span></div>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Put the button back <span class="pill ok">Recommended</span></h2>
+    <p class="sub">Every location page shows all three. If that shack already has a catering order link, the button uses it. If not, it goes to the Shane&rsquo;s catering page so the button never disappears.</p>
+    <div class="loc">
+      <div class="loc-copy">
+        <p class="meta">Current Shack <span class="pipe">|</span> Careers</p>
+        <p class="city">CHATTANOOGA</p>
+        <p class="addr">9448 Bradmore Ln, Ooltewah, TN, 37363-8245</p>
+        <p class="phone">+1 423-702-9801</p>
+        <p class="hours">SUN-SAT, 11:00 AM-8:00 PM <span class="pipe">|</span> <a href="#catering-menu">See Our Catering Menu</a></p>
+        <div class="btns">
+          <span class="btn pickup">Order Pickup</span>
+          <span class="btn delivery">Order Delivery</span>
+          <span class="btn cater">Order Catering</span>
+        </div>
+      </div>
+      <div class="photo" aria-hidden="true"><div class="plate"></div><span class="map">Map &amp; directions</span></div>
+    </div>
+    <div class="phone-wrap">
+      <div class="phone" aria-hidden="true">
+        <div class="loc">
+          <p class="meta">Current Shack <span class="pipe">|</span> Careers</p>
+          <p class="city">CHATTANOOGA</p>
+          <p class="hours" style="margin-top:0">On a phone the three buttons wrap onto a second line. They stay the same size.</p>
+          <div class="btns">
+            <span class="btn pickup">Order Pickup</span>
+            <span class="btn delivery">Order Delivery</span>
+            <span class="btn cater">Order Catering</span>
+          </div>
+        </div>
+      </div>
+      <p class="phone-note">Narrow screens wrap the row. Order Catering stays visible under Pickup and Delivery.</p>
+    </div>
+  </div>
+
+  <div class="panel">
+    <h2>Make catering the red button</h2>
+    <p class="sub">Use this if catering orders matter more than delivery on these pages. Catering takes the red, and Delivery becomes the black button.</p>
+    <div class="loc">
+      <div class="loc-copy">
+        <p class="meta">Current Shack <span class="pipe">|</span> Careers</p>
+        <p class="city">CHATTANOOGA</p>
+        <p class="addr">9448 Bradmore Ln, Ooltewah, TN, 37363-8245</p>
+        <p class="phone">+1 423-702-9801</p>
+        <p class="hours">SUN-SAT, 11:00 AM-8:00 PM <span class="pipe">|</span> <a href="#catering-menu">See Our Catering Menu</a></p>
+        <div class="btns">
+          <span class="btn pickup">Order Pickup</span>
+          <span class="btn delivery-black">Order Delivery</span>
+          <span class="btn cater-red">Order Catering</span>
+        </div>
+      </div>
+      <div class="photo" aria-hidden="true"><div class="plate"></div><span class="map">Map &amp; directions</span></div>
+    </div>
+  </div>
+
+  <div class="panel rec">
+    <p class="n">Recommendation</p>
+    <h3>Ship the middle option</h3>
+    <p>Put the third button back on every location page, in the same row, with the same labels. Locations that already have a catering order link keep it. The rest go to the Shane&rsquo;s catering page so nobody sees a two-button row.</p>
+  </div>
+
+  <p class="foot">Design option, 14 Oct 2026. For the live location pages. The prototype location pages already show the three-button row.</p>
+</div>
+</body>
+</html>
