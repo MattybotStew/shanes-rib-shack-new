@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mobile: switching your Shane's location — clickable options</title>
+<style>
+  :root { --red:#bb202b; --black:#101820; --cream:#efeadc; --green:#1f7a3d; --ink:#2a2f36; --muted:#5a6067; --gold:#ffc72c; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f4f2ec; color:var(--black);
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .page { width:1200px; margin:0 auto; background:#fff; padding:56px 64px 64px; }
+  .eyebrow { font-size:14px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--red); margin:0 0 14px; }
+  h1 { font-size:52px; line-height:1.05; margin:0 0 18px; letter-spacing:-.01em; }
+  .lede { font-size:21px; line-height:1.5; margin:0; max-width:920px; color:var(--ink); }
+  .lede b { color:var(--black); }
+  .rule { height:2px; background:var(--cream); margin:38px 0 34px; border:0; }
+  .panel { border:2px solid var(--cream); border-radius:16px; padding:26px 28px 30px; margin-bottom:26px; }
+  .panel h2 { font-size:15px; letter-spacing:.1em; text-transform:uppercase; margin:0 0 4px; }
+  .panel .sub { font-size:17px; margin:0 0 20px; color:var(--muted); }
+  ul { margin:16px 0 0; padding-left:22px; font-size:17px; line-height:1.55; }
+  li { margin-bottom:8px; }
+
+  /* tap-cost table */
+  table.cost { width:100%; border-collapse:collapse; font-size:16px; }
+  table.cost th, table.cost td { text-align:left; padding:11px 12px; border-bottom:1px solid #e7e3d9; vertical-align:top; }
+  table.cost th { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  table.cost tr.now td { background:#fbeceb; font-weight:700; }
+  table.cost .n { color:var(--red); font-weight:800; }
+
+  /* options grid */
+  .opts { display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  .opt { display:flex; gap:20px; border:2px solid var(--cream); border-radius:16px; padding:22px 22px 24px; }
+  .opt .body { flex:1; min-width:0; }
+  .opt .num { font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--red); }
+  .opt h3 { font-size:22px; margin:8px 0 8px; line-height:1.15; }
+  .opt p { font-size:16px; line-height:1.5; margin:0; color:#3a4046; }
+  .opt .tags { margin:10px 0 0; display:flex; gap:8px; flex-wrap:wrap; }
+  .opt .why { font-size:15px; line-height:1.5; margin:12px 0 0; padding-top:10px; border-top:1px dashed #e0dbcd; color:#3a4046; }
+  .opt .why b { color:var(--red); letter-spacing:.02em; }
+  .tag { font-size:12px; font-weight:800; letter-spacing:.04em; padding:4px 10px; border-radius:999px; border:1.5px solid var(--black); }
+  .tag.taps { background:var(--black); color:#fff; }
+  .tag.eff-low { background:#e6f4ea; border-color:var(--green); color:var(--green); }
+  .tag.eff-med { background:#fdf3e3; border-color:#b9761a; color:#b9761a; }
+  .tag.answers { background:var(--cream); }
+  .rec { background:var(--cream); }
+  .rec .n { font-size:13px; font-weight:800; color:var(--red); letter-spacing:.1em; text-transform:uppercase; }
+  .rec h3 { font-size:22px; margin:8px 0 10px; }
+  .rec p { font-size:17px; line-height:1.55; margin:0 0 6px; color:#3a4046; }
+  .foot { font-size:14px; color:#6a7076; margin-top:30px; line-height:1.5; }
+
+  /* toolbar */
+  .toolbar { position:sticky; top:0; z-index:50; background:var(--black); color:#fff;
+    display:flex; align-items:center; justify-content:space-between; gap:16px; padding:11px 20px; }
+  .toolbar a { color:#fff; text-decoration:none; font-size:13px; font-weight:700; opacity:.85; }
+  .toolbar a:hover { opacity:1; text-decoration:underline; }
+  .toolbar .brandmark { font-size:12px; font-weight:800; letter-spacing:.1em; text-transform:uppercase; color:var(--gold); }
+  .toolbar .btns { display:flex; gap:8px; }
+  .tbtn { background:var(--red); color:#fff; border:0; border-radius:6px; padding:8px 14px;
+    font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; cursor:pointer; font-family:inherit; }
+  .tbtn.ghostbtn { background:transparent; border:1.5px solid rgba(255,255,255,.5); }
+  .tbtn:hover { background:#d7334f; }
+
+  /* phone mockups */
+  .phonecol { display:flex; flex-direction:column; align-items:center; gap:8px; flex:0 0 auto; }
+  .hint { font-size:11px; font-weight:800; letter-spacing:.04em; text-transform:uppercase; color:var(--red); }
+  .phone.touched + .hint { display:none; }
+  .phone { width:196px; flex:0 0 auto; border:8px solid #1c1c1c; border-radius:22px; overflow:hidden;
+    background:#fff; box-shadow:0 6px 18px rgba(0,0,0,.10); cursor:pointer; transition:transform .15s ease, box-shadow .15s ease; }
+  .phone:hover { transform:translateY(-3px); box-shadow:0 12px 26px rgba(0,0,0,.16); }
+  .phone:focus-visible { outline:3px solid var(--red); outline-offset:3px; }
+  .scr { height:300px; background:#f7f5ef; display:flex; flex-direction:column; position:relative; overflow:hidden; }
+  .tbar { background:#1a1a1a; color:#fff; padding:9px 10px; display:flex; align-items:center; gap:6px; font-size:11px; font-weight:700; }
+  .pin { width:13px; height:13px; fill:#fff; flex:0 0 auto; }
+  .tbar .loc { display:flex; align-items:center; gap:5px; min-width:0; }
+  .tbar .loc span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .tbar .chev { width:12px; height:12px; fill:#fff; opacity:.85; flex:0 0 auto; }
+  .tbar .phone-num { color:var(--gold); font-weight:600; font-size:10px; }
+  .ul { text-decoration:underline; text-underline-offset:2px; text-decoration-thickness:1.5px; }
+  .hamb { display:flex; flex-direction:column; gap:3px; margin-right:6px; }
+  .hamb i { display:block; width:15px; height:2px; background:#fff; border-radius:2px; }
+  .scrhead { background:#1a1a1a; color:#fff; padding:8px 10px; display:flex; align-items:center; justify-content:space-between; font-size:10px; }
+  .scrhead .order { background:var(--red); color:#fff; font-weight:800; font-size:9px; padding:5px 9px; border-radius:4px; line-height:1.05; text-align:center; }
+  .content { padding:12px 12px; flex:1; }
+  .ln { height:7px; background:#ddd8cc; border-radius:4px; margin-bottom:8px; }
+  .ln.w70 { width:70%; } .ln.w45 { width:45%; } .ln.w85 { width:85%; }
+  .btn { background:var(--red); color:#fff; border-radius:6px; text-align:center; font-size:11px; font-weight:800; padding:9px 10px; }
+  .btn.dark { background:var(--black); }
+  .card { background:#fff; border-radius:8px; padding:9px 10px; margin-bottom:8px; box-shadow:0 1px 3px rgba(0,0,0,.08); }
+  .card .t { font-size:11px; font-weight:800; }
+  .card .s { font-size:9px; color:var(--muted); margin-top:2px; }
+  .card .go { float:right; font-size:9px; font-weight:800; color:var(--red); }
+  .sheet { position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:14px 14px 0 0;
+    box-shadow:0 -6px 18px rgba(0,0,0,.18); padding:11px 12px 14px; z-index:5;
+    transform:translateY(112%); transition:transform .45s cubic-bezier(.22,.61,.36,1); }
+  .phone.is-open .sheet { transform:translateY(0); }
+  .phone[data-demo="2"] .sheet { bottom:80px; }
+  .phone[data-demo="2"] .sticky { bottom:50px; }
+  .grab { width:34px; height:4px; border-radius:3px; background:#d7d2c6; margin:0 auto 9px; }
+  .sheet .st { font-size:11px; font-weight:800; margin-bottom:8px; }
+  .sheet .ss { font-size:9px; color:var(--muted); margin:-4px 0 9px; }
+  .search { display:flex; align-items:center; gap:6px; border:1.5px solid #dcd8cd; border-radius:8px; padding:7px 8px; font-size:10px; color:#9aa0a6; margin-bottom:7px; }
+  .search svg { width:11px; height:11px; fill:#9aa0a6; }
+  .row { display:flex; gap:8px; margin-top:9px; }
+  .row .btn { flex:1; }
+  .ghost { flex:1; text-align:center; font-size:11px; font-weight:800; padding:9px 10px; border-radius:6px; border:1.5px solid var(--black); color:var(--black); }
+  .scrim { position:absolute; inset:0; background:rgba(16,24,32,.42); opacity:0; pointer-events:none; transition:opacity .3s ease; z-index:4; }
+  .phone.is-open .scrim { opacity:1; pointer-events:auto; }
+  .sticky { position:absolute; left:0; right:0; bottom:0; background:var(--black); color:#fff; font-size:9px; z-index:3;
+    font-weight:700; padding:9px 11px; display:flex; align-items:center; gap:5px; white-space:nowrap; }
+  .sticky .stx { overflow:hidden; text-overflow:ellipsis; }
+  .sticky .chg { margin-left:auto; color:var(--gold); font-weight:800; text-decoration:underline; flex:0 0 auto; }
+  .drawer { position:absolute; inset:0; background:#fff; z-index:6; transform:translateX(-100%); transition:transform .4s cubic-bezier(.22,.61,.36,1); }
+  .phone.is-menu .drawer { transform:translateX(0); }
+  .drawer .dhead { background:#1a1a1a; color:#fff; padding:9px 11px; font-size:10px; font-weight:700; }
+  .ditem { padding:11px 12px; border-bottom:1px solid #eee9dd; font-size:12px; font-weight:700; }
+  .ditem small { display:block; font-size:9px; font-weight:600; color:var(--muted); margin-top:2px; }
+  .ditem.first { background:#fbeceb; border-left:4px solid var(--red); }
+  .toast { position:absolute; left:10px; right:10px; top:44px; background:var(--black); color:#fff; z-index:7;
+    font-size:10px; font-weight:700; padding:7px 10px; border-radius:8px; text-align:center;
+    opacity:0; transform:translateY(-6px); transition:opacity .25s ease, transform .25s ease; }
+  .phone.is-toast .toast { opacity:1; transform:translateY(0); }
+  .nm-current, .stx { transition:opacity .18s ease; }
+  .phone.is-flash .nm-current, .phone.is-flash .stx { opacity:.2; }
+  [data-act] { cursor:pointer; }
+  .tapdot { position:absolute; width:34px; height:34px; transform:translate(-50%,-50%); border-radius:50%; z-index:2; pointer-events:none; }
+  .tapdot::before { content:""; position:absolute; inset:9px; border-radius:50%; background:rgba(187,32,43,.9); box-shadow:0 0 0 2px rgba(255,255,255,.9); }
+  .tapdot::after { content:""; position:absolute; inset:0; border-radius:50%; border:2px solid rgba(187,32,43,.65); animation:ping 1.7s ease-out infinite; }
+  .phone.touched .tapdot { opacity:0; transition:opacity .3s ease; }
+  @keyframes ping { 0% { transform:scale(.55); opacity:.9 } 70% { transform:scale(1.25); opacity:0 } 100% { opacity:0 } }
+  .badge-note { font-size:14px; color:var(--muted); margin:0 0 18px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tapdot::after { animation:none; }
+    .sheet, .drawer, .scrim { transition:none; }
+  }
+  @media (max-width:980px) {
+    .page { width:auto; padding:32px 20px 40px; }
+    h1 { font-size:34px; }
+    .lede { font-size:18px; }
+    .opts { display:block; }
+    .opt { margin-bottom:20px; }
+  }
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></symbol>
+  <symbol id="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="search" viewBox="0 0 24 24"><path d="M10 2a8 8 0 1 0 4.9 14.3l5.4 5.4 1.4-1.4-5.4-5.4A8 8 0 0 0 10 2zm0 2a6 6 0 1 1 0 12 6 6 0 0 1 0-12z"/></symbol>
+</svg>
+
+<div class="toolbar">
+  <a href="mobile-find-a-shack.html">&larr; Written one-pager</a>
+  <span class="brandmark">Clickable mockups &middot; Find a Shane&rsquo;s</span>
+  <div class="btns">
+    <button class="tbtn" id="playall" type="button">Play all demos</button>
+    <button class="tbtn ghostbtn" id="reset" type="button">Reset</button>
+  </div>
+</div>
+
+<div class="page">
+
+  <p class="eyebrow">Website review &middot; Find a Shane&rsquo;s</p>
+  <h1>Switching locations on a phone &mdash; clickable</h1>
+  <p class="lede">The same six options from the written brief, now <b>clickable</b>. <b>Tap any phone</b> to open its
+  picker, tap a shack to choose it, or tap <b>Play all demos</b> to walk through every option in turn.</p>
+
+  <hr class="rule">
+
+  <!-- ================= TODAY ================= -->
+  <div class="panel">
+    <h2>What a phone shows today</h2>
+    <p class="sub">The red &ldquo;Change Your Shack&rdquo; button is hidden on phones, and it isn&rsquo;t in the menu either.
+    Today: Menu &rarr; Locations &rarr; search &rarr; shack &rarr; View Details &mdash; 3&ndash;4 taps plus typing.</p>
+    <div class="cols" style="display:flex; gap:26px; align-items:flex-start;">
+      <div style="width:300px; flex:0 0 auto;">
+        <img src="assets/mobile-topbar.png" alt="Live mobile top bar showing Edgewood Location and phone number" width="390" style="border:1px solid #dcd8cd; border-radius:10px; max-width:100%;">
+      </div>
+      <ul style="margin-top:0">
+        <li>The picker it drives <b>already exists and works</b> &mdash; it just has no trigger on mobile.</li>
+        <li>The top-bar shack name <b>links to the current shack</b>, it doesn&rsquo;t switch.</li>
+        <li>No map on phones &mdash; search controls and the card list only.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ================= TAP COST ================= -->
+  <div class="panel">
+    <h2>Taps to switch a shack</h2>
+    <p class="sub">Every option below is measured against what a mobile customer does today.</p>
+    <table class="cost">
+      <thead>
+        <tr><th>Journey</th><th>Taps</th><th>Typing?</th></tr>
+      </thead>
+      <tbody>
+        <tr class="now"><td>Today: Menu &rarr; Locations &rarr; search &rarr; shack &rarr; View Details</td><td class="n">3&ndash;4</td><td>Yes</td></tr>
+        <tr><td>Option 1 &mdash; tap top-bar location &rarr; pick from nearest</td><td class="n">2</td><td>No</td></tr>
+        <tr><td>Option 2 &mdash; sticky &ldquo;Ordering from&rdquo; bar</td><td class="n">1</td><td>No</td></tr>
+        <tr><td>Option 3 &mdash; confirm the suggested nearby shack</td><td class="n">1&ndash;2</td><td>No</td></tr>
+        <tr><td>Option 4 &mdash; location gate inside Order Now</td><td class="n">1&ndash;2</td><td>No</td></tr>
+        <tr><td>Option 5 &mdash; bottom-sheet picker (search or nearest)</td><td class="n">2</td><td>Optional</td></tr>
+        <tr><td>Option 6 &mdash; first item in the hamburger menu</td><td class="n">2</td><td>No</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ================= OPTIONS ================= -->
+  <div class="panel">
+    <h2>Six options, best UX first</h2>
+    <p class="sub">Ranked 1&ndash;6 by best UX &mdash; not effort. They stack; Option&nbsp;1 alone fixes the gap. Click a phone to try it.</p>
+    <div class="opts">
+
+      <!-- Option 1 -->
+      <div class="opt">
+        <div class="phonecol">
+          <div class="phone" data-demo="1" tabindex="0" role="button" aria-label="Try Option 1: tap the top location to pick a shack">
+            <div class="scr">
+              <div class="tbar">
+                <svg class="pin"><use href="#pin"/></svg>
+                <span class="loc"><span class="nm-current">Edgewood Location</span><svg class="chev"><use href="#chev"/></svg></span>
+              </div>
+              <div class="content"><div class="ln w85"></div><div class="ln w70"></div><div class="ln w45"></div></div>
+              <span class="tapdot" style="left:74px;top:17px"></span>
+              <div class="scrim" data-act="close"></div>
+              <div class="sheet">
+                <div class="grab"></div>
+                <div class="st">Nearby Shane&rsquo;s</div>
+                <div class="ss">Tap to switch. We&rsquo;ll remember it.</div>
+                <div class="card" data-act="pick" data-name="Edgewood Location"><span class="go">Use</span><div class="t">Edgewood &middot; 1.2 mi</div><div class="s">123 Main St, Atlanta GA</div></div>
+                <div class="card" data-act="pick" data-name="Norcross Location"><span class="go">Use</span><div class="t">Norcross &middot; 8.4 mi</div><div class="s">555 Peachtree Pkwy</div></div>
+              </div>
+            </div>
+          </div>
+          <span class="hint">Tap the phone to try</span>
+        </div>
+        <div class="body">
+          <div class="num">Option 1 &middot; Rank 1</div>
+          <h3>Tap the top location &rarr; pick a shack</h3>
+          <p>Make the shack name (already in the top bar) open the <b>location picker that already exists</b>. Show 4 nearest, one tap to switch. Adds a small chevron and underline so it reads as clickable.</p>
+          <div class="tags"><span class="tag taps">2 taps</span><span class="tag eff-low">Low effort</span><span class="tag answers">Answers ideas 1, 2 &amp; 3</span></div>
+          <p class="why"><b>Why #1:</b> where customers already look, always on screen, 2 taps &mdash; and it reuses a picker that already works. Best balance of discoverability and clicks.</p>
+        </div>
+      </div>
+
+      <!-- Option 2 -->
+      <div class="opt">
+        <div class="phonecol">
+          <div class="phone" data-demo="2" tabindex="0" role="button" aria-label="Try Option 2: sticky Ordering from bar">
+            <div class="scr">
+              <div class="tbar">
+                <svg class="pin"><use href="#pin"/></svg>
+                <span class="loc"><span>Edgewood Location</span></span>
+              </div>
+              <div class="content"><div class="ln w85"></div><div class="ln w70"></div><div class="ln w45"></div><div class="ln w85"></div><div class="ln w70"></div></div>
+              <div class="sticky">
+                <svg class="pin"><use href="#pin"/></svg>
+                <span class="stx">Ordering from: Edgewood</span>
+                <span class="chg">Change</span>
+              </div>
+              <span class="tapdot" style="left:170px;top:237px"></span>
+              <div class="scrim" data-act="close"></div>
+              <div class="sheet">
+                <div class="grab"></div>
+                <div class="st">Change shack</div>
+                <div class="ss">Pick a shack to order from.</div>
+                <div class="card" data-act="sticky" data-sticky="Norcross"><div class="t">Norcross &middot; 8.4 mi</div><div class="s">555 Peachtree Pkwy</div></div>
+                <div class="card" data-act="sticky" data-sticky="Carrollton"><div class="t">Carrollton &middot; 22 mi</div><div class="s">Carrollton, GA</div></div>
+              </div>
+            </div>
+          </div>
+          <span class="hint">Tap the phone to try</span>
+        </div>
+        <div class="body">
+          <div class="num">Option 2 &middot; Rank 2</div>
+          <h3>Persistent &ldquo;Ordering from&rdquo; bar</h3>
+          <p>A slim sticky bar at the bottom &mdash; <b>&ldquo;Ordering from: Edgewood &middot; Change&rdquo;</b> &mdash; shows the current shack and switches in one tap, from anywhere on the site. Makes the selection obvious at all times.</p>
+          <div class="tags"><span class="tag taps">1 tap</span><span class="tag eff-med">Medium effort</span></div>
+          <p class="why"><b>Why #2:</b> the clearest of the six &mdash; current shack always visible, switch in 1 tap. Small cost: a persistent bar uses screen space.</p>
+        </div>
+      </div>
+
+      <!-- Option 3 -->
+      <div class="opt">
+        <div class="phonecol">
+          <div class="phone" data-demo="3" tabindex="0" role="button" aria-label="Try Option 3: auto-suggest and confirm">
+            <div class="scr">
+              <div class="tbar">
+                <svg class="pin"><use href="#pin"/></svg>
+                <span class="loc"><span>Edgewood Location</span></span>
+              </div>
+              <div class="content"><div class="ln w85"></div><div class="ln w70"></div><div class="ln w45"></div></div>
+              <span class="tapdot" style="left:98px;top:150px"></span>
+              <div class="scrim" data-act="close"></div>
+              <div class="toast">&#10003; Ordering from Edgewood</div>
+              <div class="sheet">
+                <div class="grab"></div>
+                <div class="st">We think you&rsquo;re near Edgewood</div>
+                <div class="ss">Closest shack to your phone.</div>
+                <div class="row"><div class="btn dark" data-act="confirm">Order here</div><div class="ghost" data-act="close">Change</div></div>
+              </div>
+            </div>
+          </div>
+          <span class="hint">Tap the phone to try</span>
+        </div>
+        <div class="body">
+          <div class="num">Option 3 &middot; Rank 3</div>
+          <h3>Auto-suggest + one-tap confirm</h3>
+          <p>On the first visit, detect and confirm: <b>&ldquo;We think you&rsquo;re near Edgewood &mdash; Order here / Change&rdquo;</b>. Confirming is a single tap; &ldquo;Change&rdquo; opens the picker. Removes all hunting for new customers.</p>
+          <div class="tags"><span class="tag taps">1&ndash;2 taps</span><span class="tag eff-low">Low&ndash;medium effort</span></div>
+          <p class="why"><b>Why #3:</b> the smoothest first-time experience (1 tap), but only pays off on the first visit &mdash; it must be dismissible so it never nags.</p>
+        </div>
+      </div>
+
+      <!-- Option 4 -->
+      <div class="opt">
+        <div class="phonecol">
+          <div class="phone" data-demo="4" tabindex="0" role="button" aria-label="Try Option 4: choose a shack at Order Now">
+            <div class="scr">
+              <div class="scrhead"><span class="hamb"><i></i><i></i><i></i></span><span class="order">ORDER<br>NOW</span></div>
+              <div class="content"><div class="ln w85"></div><div class="ln w70"></div><div class="ln w45"></div></div>
+              <span class="tapdot" style="left:160px;top:16px"></span>
+              <div class="scrim" data-act="close"></div>
+              <div class="sheet">
+                <div class="grab"></div>
+                <div class="st">Choose a shack to order from</div>
+                <div class="ss">Pickup &amp; delivery need a location.</div>
+                <div class="card" data-act="close"><span class="go">Use</span><div class="t">Edgewood &middot; 1.2 mi</div></div>
+                <div class="card" data-act="close"><div class="t">Norcross &middot; 8.4 mi</div></div>
+              </div>
+            </div>
+          </div>
+          <span class="hint">Tap the phone to try</span>
+        </div>
+        <div class="body">
+          <div class="num">Option 4 &middot; Rank 4</div>
+          <h3>Ask for a shack at checkout</h3>
+          <p>When someone taps <b>Order Now</b> without a shack set, ask for it right there &mdash; then continue straight to ordering. The choice happens exactly when it matters, so nobody orders from the wrong kitchen.</p>
+          <div class="tags"><span class="tag taps">1&ndash;2 taps</span><span class="tag eff-med">Medium effort</span></div>
+          <p class="why"><b>Why #4:</b> catches people exactly when the choice matters and prevents wrong-shack orders. Narrower: it only appears at ordering.</p>
+        </div>
+      </div>
+
+      <!-- Option 5 -->
+      <div class="opt">
+        <div class="phonecol">
+          <div class="phone" data-demo="5" tabindex="0" role="button" aria-label="Try Option 5: bottom-sheet picker">
+            <div class="scr">
+              <div class="tbar">
+                <svg class="pin"><use href="#pin"/></svg>
+                <span class="loc"><span class="ul nm-current">Edgewood Location</span></span>
+              </div>
+              <div class="content"><div class="ln w85"></div><div class="ln w70"></div></div>
+              <span class="tapdot" style="left:70px;top:17px"></span>
+              <div class="scrim" data-act="close"></div>
+              <div class="sheet">
+                <div class="grab"></div>
+                <div class="search"><svg><use href="#search"/></svg> City, ZIP, or shack name</div>
+                <div class="ghost" style="text-align:left">Use my current location</div>
+                <div class="card" data-act="pick" data-name="Norcross Location"><div class="t">Norcross &middot; 8.4 mi</div><div class="s">Norcross, GA</div></div>
+                <div class="card" data-act="pick" data-name="Carrollton Location"><div class="t">Carrollton &middot; 22 mi</div><div class="s">Carrollton, GA</div></div>
+              </div>
+            </div>
+          </div>
+          <span class="hint">Tap the phone to try</span>
+        </div>
+        <div class="body">
+          <div class="num">Option 5 &middot; Rank 5</div>
+          <h3>Native bottom-sheet picker</h3>
+          <p>Turn the existing pop-up picker into a modern <b>bottom sheet</b> with a search field, &ldquo;Use my current location&rdquo;, the nearest shacks, and &ldquo;See all&rdquo;. Easier to reach with a thumb than a centred pop-up.</p>
+          <div class="tags"><span class="tag taps">2 taps</span><span class="tag eff-med">Medium effort</span></div>
+          <p class="why"><b>Why #5:</b> a real ergonomic upgrade, but it improves the picker shell rather than adding a way in &mdash; best paired with 1 or 2.</p>
+        </div>
+      </div>
+
+      <!-- Option 6 -->
+      <div class="opt">
+        <div class="phonecol">
+          <div class="phone" data-demo="6" tabindex="0" role="button" aria-label="Try Option 6: Change Your Shack in the hamburger menu">
+            <div class="scr">
+              <div class="tbar">
+                <svg class="pin"><use href="#pin"/></svg>
+                <span class="loc"><span>Edgewood Location</span></span>
+              </div>
+              <div class="content"><div class="ln w85"></div><div class="ln w70"></div><div class="ln w45"></div></div>
+              <span class="tapdot" style="left:17px;top:16px"></span>
+              <div class="drawer">
+                <div class="dhead">Menu</div>
+                <div class="ditem first" data-act="close">Change Your Shack<small>Currently: Edgewood Location</small></div>
+                <div class="ditem">Menu</div>
+                <div class="ditem">Catering</div>
+                <div class="ditem">Locations</div>
+                <div class="ditem">Our Story</div>
+              </div>
+            </div>
+          </div>
+          <span class="hint">Tap the phone to try</span>
+        </div>
+        <div class="body">
+          <div class="num">Option 6 &middot; Rank 6</div>
+          <h3>Add it to the top of the menu</h3>
+          <p>Make <b>&ldquo;Change Your Shack&rdquo;</b> the first item in the hamburger menu, with the current shack as a subtitle. The smallest visual change, and a safe fallback if the top bar can&rsquo;t be repurposed.</p>
+          <div class="tags"><span class="tag taps">2 taps</span><span class="tag eff-low">Low effort</span><span class="tag answers">Original brief option 2</span></div>
+          <p class="why"><b>Why #6:</b> low effort and safe as a fallback, but it hides behind the hamburger &mdash; the hardest to discover, and not a standalone fix.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= RECOMMENDATION ================= -->
+  <div class="panel rec">
+    <div class="n">Recommendation</div>
+    <h3>Start with Option 1, then layer Option 3.</h3>
+    <p><b>Option 1</b> is the highest return for the least work: the picker already exists, so we only need to point the top-bar location at it and add a chevron + underline. That alone takes switching from <b>3&ndash;4 taps plus typing to 2 taps</b>.</p>
+    <p><b>Option 3</b> then catches new customers before they ever hunt for the menu, and <b>Option 2</b> (the sticky bar) is the next-best value on ordering pages. <b>Best of all:</b> Option&nbsp;1 as the everyday switcher, Option&nbsp;2 on ordering pages, and Option&nbsp;3 for first visits &mdash; with Option&nbsp;5 as the picker they all open.</p>
+    <p class="badge-note" style="margin-top:13px">Clickable mockups are schematic, not final visual design. Effort labels are relative: Low = a small tweak, Medium = a few days with testing.</p>
+  </div>
+
+  <p class="foot">Companion to the written one-pager (<a href="mobile-find-a-shack.html">open it</a>). Behaviour verified against a live 390&nbsp;px-wide phone screen, 5&nbsp;October&nbsp;2026. No live analytics are used &mdash; the ranking is a prioritised hypothesis, proven with the metrics in the written brief.</p>
+
+</div>
+
+<script>
+  (function () {
+    var phones = Array.prototype.slice.call(document.querySelectorAll('.phone'));
+    var sleep = function (ms) { return new Promise(function (r) { setTimeout(r, ms); }); };
+
+    function openClass(p) { return p.dataset.demo === '6' ? 'is-menu' : 'is-open'; }
+    function closeAll(p) { p.classList.remove('is-open', 'is-menu'); }
+    function flash(p) {
+      p.classList.add('is-flash');
+      setTimeout(function () { p.classList.remove('is-flash'); }, 320);
+    }
+    function reset() {
+      phones.forEach(function (p) { closeAll(p); p.classList.remove('is-toast', 'touched', 'is-flash'); });
+    }
+
+    phones.forEach(function (phone) {
+      phone.addEventListener('click', function (e) {
+        var hit = e.target.closest('[data-act]');
+        var act = hit ? hit.dataset.act : null;
+        phone.classList.add('touched');
+
+        if (act === 'pick') {
+          closeAll(phone);
+          var nm = phone.querySelector('.nm-current');
+          if (nm && hit.dataset.name) { nm.textContent = hit.dataset.name; flash(phone); }
+          return;
+        }
+        if (act === 'sticky') {
+          closeAll(phone);
+          var stx = phone.querySelector('.stx');
+          if (stx && hit.dataset.sticky) { stx.textContent = 'Ordering from: ' + hit.dataset.sticky; flash(phone); }
+          return;
+        }
+        if (act === 'confirm') {
+          closeAll(phone);
+          phone.classList.add('is-toast');
+          setTimeout(function () { phone.classList.remove('is-toast'); }, 1700);
+          return;
+        }
+        if (act === 'close') { closeAll(phone); return; }
+
+        // Default: toggle the option's overlay (whole phone is clickable).
+        var oc = openClass(phone);
+        if (phone.classList.contains(oc)) { closeAll(phone); }
+        else { closeAll(phone); phone.classList.add(oc); }
+      });
+
+      phone.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); phone.click(); }
+      });
+    });
+
+    var playall = document.getElementById('playall');
+    if (playall) {
+      playall.addEventListener('click', function () {
+        reset();
+        var chain = Promise.resolve();
+        phones.forEach(function (p, i) {
+          chain = chain.then(function () {
+            p.classList.add('touched');
+            p.classList.add(openClass(p));
+            return sleep(1150);
+          });
+        });
+        chain.then(function () {
+          return sleep(700);
+        }).then(function () {
+          phones.forEach(function (p) { p.classList.remove('is-open', 'is-menu', 'is-toast'); });
+        });
+      });
+    }
+
+    var resetBtn = document.getElementById('reset');
+    if (resetBtn) { resetBtn.addEventListener('click', reset); }
+  })();
+</script>
+</body>
+</html>
