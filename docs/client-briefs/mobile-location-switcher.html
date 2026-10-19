@@ -88,12 +88,24 @@
   .sheet .all { display:block; text-align:center; margin-top:12px; font-size:12px; font-weight:700; color:var(--red); text-decoration:underline; text-underline-offset:2px; }
 
   /* picker sheet cards */
-  .pcard { display:flex; align-items:center; gap:10px; border:1.5px solid #e3ded1; border-radius:10px; padding:10px 12px; margin-bottom:8px; background:#fff; }
+  .pcard { display:flex; align-items:center; gap:10px; border:1.5px solid #e3ded1; border-radius:10px; padding:10px 12px; margin-bottom:8px; background:#fff; cursor:pointer; }
+  .pcard:hover { border-color:var(--black); }
   .pcard.sel { border:2px solid var(--red); background:#fdf7f6; }
   .pcard .t { font-size:13.5px; font-weight:800; }
+  .pcard .mi { white-space:nowrap; }
   .pcard .s { font-size:11px; color:var(--muted); margin-top:2px; }
   .pcard .go { margin-left:auto; flex:0 0 auto; background:var(--black); color:#fff; font-size:11px; font-weight:800;
     padding:7px 12px; border-radius:6px; cursor:pointer; border:0; }
+  .badge-cur { display:inline-block; background:#e7f2ea; color:#1f7a3d; font-size:9.5px; font-weight:800;
+    text-transform:uppercase; letter-spacing:.04em; padding:2.5px 7px; border-radius:999px; margin-left:5px; vertical-align:1px; }
+  .psearch { display:block; width:100%; box-sizing:border-box; border:1.5px solid #e3ded1; background:var(--tan);
+    border-radius:8px; padding:10px 12px; font:600 13.5px/1.3 "Montserrat",sans-serif; color:var(--black); margin:0 0 12px;
+    -webkit-appearance:none; appearance:none; }
+  .psearch::placeholder { color:#8a9097; font-weight:400; }
+  .psearch:focus { outline:2px solid var(--red); outline-offset:1px; }
+  .pempty { border:1.5px dashed #e3ded1; border-radius:10px; padding:14px; text-align:center; font-size:12.5px;
+    color:var(--muted); margin-bottom:8px; }
+  .zhid { display:none; }
 
   /* location page (after View Location) */
   .lp { flex:1; padding:16px 14px; overflow:hidden; }
@@ -202,22 +214,28 @@
 
           <!-- picker sheet (after Change) -->
           <div class="sheet hidden" id="sheet-picker">
-            <button class="x" type="button" aria-label="Close" onclick="closePicker()">&times;</button>
+            <button class="x" type="button" aria-label="Close location picker" onclick="closePicker()">&times;</button>
             <div class="grab"></div>
             <p class="st">Nearby Shane&rsquo;s</p>
-            <p class="ss">Pick your shack &mdash; we&rsquo;ll remember it.</p>
-            <div class="pcard sel">
-              <div><div class="t">Edgewood &middot; 1.2 mi</div><div class="s">Atlanta, GA</div></div>
-              <button class="go" onclick="useShack('Edgewood Location')">Use</button>
+            <p class="ss">Select a location &mdash; we&rsquo;ll remember it.</p>
+            <input class="psearch" type="search" id="psearch" placeholder="Search by city or ZIP" aria-label="Search locations" oninput="filterPicker(this.value)" />
+            <div class="pcard sel" role="button" tabindex="0" data-shack="Edgewood Location" onclick="useShack('Edgewood Location')" onkeydown="rowKey(event,'Edgewood Location')">
+              <div><div class="t"><span class="nm">Edgewood</span><span class="badge-cur">Current</span><span class="mi"> &middot; 1.2 mi</span></div><div class="s">Atlanta, GA <span class="zhid">30307</span></div></div>
+              <span class="go">Select</span>
             </div>
-            <div class="pcard">
-              <div><div class="t">Norcross &middot; 8.4 mi</div><div class="s">Norcross, GA</div></div>
-              <button class="go" onclick="useShack('Norcross, GA')">Use</button>
+            <div class="pcard" role="button" tabindex="0" data-shack="Norcross Location" onclick="useShack('Norcross Location')" onkeydown="rowKey(event,'Norcross Location')">
+              <div><div class="t"><span class="nm">Norcross</span><span class="mi"> &middot; 8.4 mi</span></div><div class="s">Norcross, GA <span class="zhid">30092</span></div></div>
+              <span class="go">Select</span>
             </div>
-            <div class="pcard">
-              <div><div class="t">Carrollton &middot; 32 mi</div><div class="s">Carrollton, GA</div></div>
-              <button class="go" onclick="useShack('Carrollton, GA')">Use</button>
+            <div class="pcard" role="button" tabindex="0" data-shack="Carrollton Location" onclick="useShack('Carrollton Location')" onkeydown="rowKey(event,'Carrollton Location')">
+              <div><div class="t"><span class="nm">Carrollton</span><span class="mi"> &middot; 32 mi</span></div><div class="s">Carrollton, GA <span class="zhid">30117</span></div></div>
+              <span class="go">Select</span>
             </div>
+            <div class="pcard" role="button" tabindex="0" data-shack="Douglasville Location" onclick="useShack('Douglasville Location')" onkeydown="rowKey(event,'Douglasville Location')">
+              <div><div class="t"><span class="nm">Douglasville</span><span class="mi"> &middot; 21 mi</span></div><div class="s">Douglasville, GA <span class="zhid">30135</span></div></div>
+              <span class="go">Select</span>
+            </div>
+            <div class="pempty hidden" id="psearch-empty">No shack matches &mdash; try the full locations list.</div>
             <a class="all" href="#">See all 28 locations</a>
           </div>
 
@@ -237,8 +255,10 @@
             shack&rsquo;s page (hours, directions, pickup &amp; delivery). This is the happy path for a first-time visitor.</li>
           <li><b>Change</b> &mdash; opens the <b>same location picker the site already uses</b> (nearest shacks first,
             with search and all locations). Pick any shack and it&rsquo;s saved.</li>
-          <li><b>&times;</b> &mdash; dismisses the suggestion without choosing. It won&rsquo;t nag: it only appears
-            on a first visit, and never again once a shack is confirmed or picked.</li>
+          <li><b>&times;</b> &mdash; dismisses the suggestion without choosing. If you opened the picker with
+            <b>Change</b> instead, closing the picker (the &times; or tapping outside) counts as that same
+            one-time dismissal &mdash; the card won&rsquo;t come back. It only appears on a first visit, and
+            never again once a shack is confirmed, picked, or dismissed.</li>
         </ul>
         <p class="cap"><b>Where it appears</b> &mdash; a small card at the bottom on the first phone visit. After that,
         the black bar shows your shack; <b>tap the underlined name</b> any time to open the nearby picker (2 taps, no
@@ -273,8 +293,10 @@
         chosen, or dismissed, it stays away. Returning customers just see the normal site with their shack at the top.</li>
       <li><b>Nothing new to build for the picker.</b> The <b>Change</b> button opens the picker the desktop
         &ldquo;Change Your Shack&rdquo; button already uses &mdash; it just needs something on the phone to open it.</li>
-      <li><b>Honest suggestion.</b> If we can&rsquo;t detect a location, the card quietly doesn&rsquo;t show &mdash;
-        no wrong guesses, and the Locations page stays one tap away in the menu.</li>
+      <li><b>Honest distances.</b> The mileage in the picker comes from the phone&rsquo;s location so the
+        list can sort nearest-first. If the location can&rsquo;t be detected, the picker quietly drops the
+        &ldquo;Nearby&rdquo; label and the miles &mdash; it just shows search and all locations instead, no
+        wrong guesses. The Locations page stays one tap away in the menu.</li>
     </ul>
   </div>
 
@@ -301,6 +323,7 @@
     sheetSuggest.classList.add('hidden');
     sheetPicker.classList.remove('hidden');
     scrim.classList.remove('hidden');
+    resetSearch();
   }
   function openPickerFromTopbar() {
     if (!sheetSuggest.classList.contains('hidden')) {
@@ -309,6 +332,7 @@
     }
     scrim.classList.remove('hidden');
     sheetPicker.classList.remove('hidden');
+    resetSearch();
   }
   function closePicker() {
     sheetPicker.classList.add('hidden');
@@ -319,6 +343,7 @@
   function useShack(name) {
     document.getElementById('topbar-loc').textContent = name;
     document.getElementById('lp-title').textContent = name;
+    setBadge(name);
     closePicker();
     document.getElementById('toast-text').innerHTML = name + ' is now your shack.';
     toast.classList.remove('hidden');
@@ -337,6 +362,43 @@
     screenHome.classList.remove('hidden');
     document.getElementById('topbar-loc').textContent = 'Edgewood Location';
     document.getElementById('lp-title').textContent = 'Edgewood Location';
+    setBadge('Edgewood Location');
+    resetSearch();
+  }
+  function filterPicker(q) {
+    q = (q || '').trim().toLowerCase();
+    var cards = sheetPicker.querySelectorAll('.pcard');
+    var any = false;
+    for (var i = 0; i < cards.length; i++) {
+      var hit = !q || cards[i].textContent.toLowerCase().indexOf(q) !== -1;
+      cards[i].classList.toggle('hidden', !hit);
+      if (hit) any = true;
+    }
+    document.getElementById('psearch-empty').classList.toggle('hidden', !(q && !any));
+  }
+  function resetSearch() {
+    document.getElementById('psearch').value = '';
+    filterPicker('');
+  }
+  function rowKey(e, name) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); useShack(name); }
+  }
+  function setBadge(name) {
+    var cards = sheetPicker.querySelectorAll('.pcard');
+    for (var i = 0; i < cards.length; i++) {
+      var t = cards[i].querySelector('.t');
+      var nm = t.querySelector('.nm');
+      var old = t.querySelector('.badge-cur');
+      if (old) old.parentNode.removeChild(old);
+      var isCur = cards[i].getAttribute('data-shack') === name;
+      cards[i].classList.toggle('sel', isCur);
+      if (isCur) {
+        var b = document.createElement('span');
+        b.className = 'badge-cur';
+        b.appendChild(document.createTextNode('Current'));
+        nm.parentNode.insertBefore(b, nm.nextSibling);
+      }
+    }
   }
 </script>
 

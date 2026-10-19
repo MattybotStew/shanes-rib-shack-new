@@ -8,7 +8,7 @@
 | When | UX |
 |------|-----|
 | First mobile visit | Bottom sheet: “We think you're near …” → **View Location** or **Change** (Option 3) |
-| Every return visit | Black top bar: tap **underlined shack name** → **Nearby Shane's** picker → **Use** (Option 1) |
+| Every return visit | Black top bar: tap **underlined shack name** → **Nearby Shane's** picker → **Select** (Option 1) |
 
 ## Prototype (this repo)
 
@@ -30,6 +30,8 @@ Reference: `docs/live-wp-find-location-flow.md`
 
 ## Acceptance (prototype)
 
-- [ ] Mobile 390px: first-visit sheet → dismiss → top bar tap → picker → Use → toast + bar label updates
+- [ ] Mobile 390px: first-visit sheet → dismiss → top bar tap → picker → Select → toast + bar label updates
+
+**Review round 2 (2026-10-19, shipped):** picker search + city/ZIP filter · distance miles (phone location, nearest-first) · **Current** badge · whole-row **Select** (replaces Use) · "Select a location" copy · picker × = one-time dismissal · no-location fallback (no "Nearby" claim, search + all locations) · close-button aria-label · short-screen sheet cap (85vh).
 - [ ] `/` without query: Norcross alert + **Change your location** unchanged
 - [ ] Lint, build, Playwright smoke (including shack switcher preview test)
