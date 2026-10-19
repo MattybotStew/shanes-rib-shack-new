@@ -324,7 +324,7 @@ export default function LocationSwitcher() {
                       aria-label={
                         isCurrent ? `Select ${shack.title} (current shack)` : `Select ${shack.title}`
                       }
-                      className="flex w-full items-center gap-3 rounded-[10px] border-[1.5px] border-[#e3ded1] px-3 py-2.5 text-left hover:border-brand-black hover:bg-brand-tan/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
+                      className="group flex w-full items-center gap-3 rounded-[10px] border-[1.5px] border-[#e3ded1] px-3 py-2.5 text-left hover:border-brand-black hover:bg-brand-tan/60 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
                     >
                       <span className="min-w-0 flex-1">
                         <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -347,7 +347,7 @@ export default function LocationSwitcher() {
                           )}
                         </span>
                       </span>
-                      <span className="shrink-0 rounded-[6px] bg-brand-black px-4 py-2 text-xs font-bold uppercase leading-4 text-white">
+                      <span className="shrink-0 rounded-[6px] bg-brand-red px-4 py-2 text-xs font-bold uppercase leading-4 text-white transition-colors group-hover:bg-[#a01b25]">
                         Select
                       </span>
                     </button>
