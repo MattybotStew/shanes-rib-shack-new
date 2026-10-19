@@ -1,0 +1,332 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mobile location switcher — chosen design (Option 3)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;0,800&display=swap" rel="stylesheet" />
+<style>
+  :root { --red:#bb202b; --black:#101820; --gold:#ffc72c; --cream:#efeadc; --tan:#f8f5ec;
+          --green:#1f7a3d; --ink:#2a2f36; --muted:#5a6067; }
+  * { box-sizing: border-box; }
+  body { margin:0; background:#f4f2ec; color:var(--black);
+    font-family:"Montserrat",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif; }
+  .page { width:1200px; margin:0 auto; background:#fff; padding:56px 64px 64px; }
+  .eyebrow { font-size:14px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:var(--red); margin:0 0 14px; }
+  h1 { font-size:46px; line-height:1.06; margin:0 0 18px; letter-spacing:-.01em; text-transform:uppercase; }
+  .lede { font-size:20px; line-height:1.55; margin:0; max-width:920px; color:var(--ink); }
+  .lede b { color:var(--black); }
+  .rule { height:2px; background:var(--cream); margin:36px 0 32px; border:0; }
+  .panel { border:2px solid var(--cream); border-radius:16px; padding:26px 28px 30px; margin-bottom:26px; }
+  .panel h2 { font-size:15px; letter-spacing:.1em; text-transform:uppercase; margin:0 0 4px; }
+  .panel .sub { font-size:17px; margin:0 0 22px; color:var(--muted); }
+  .cols { display:flex; gap:40px; align-items:flex-start; }
+  .notes { flex:1; min-width:0; padding-top:4px; }
+  .cap { font-size:16px; line-height:1.5; color:var(--muted); margin:0 0 12px; }
+  .cap b { color:var(--black); }
+  ul { margin:12px 0 18px; padding-left:22px; font-size:16.5px; line-height:1.55; }
+  li { margin-bottom:9px; }
+  li b { color:var(--black); }
+  table.cost { width:100%; border-collapse:collapse; font-size:16px; }
+  table.cost th, table.cost td { text-align:left; padding:11px 12px; border-bottom:1px solid #e7e3d9; vertical-align:top; }
+  table.cost th { font-size:12px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); }
+  table.cost tr.now td { background:#fbeceb; font-weight:700; }
+  table.cost .n { color:var(--red); font-weight:800; }
+  .foot { font-size:14px; color:#6a7076; margin-top:30px; line-height:1.5; }
+  .btn-replay { display:inline-block; margin-top:14px; background:var(--black); color:#fff; border:0;
+    font:800 13px/1 "Montserrat",sans-serif; letter-spacing:.06em; text-transform:uppercase;
+    padding:12px 20px; border-radius:6px; cursor:pointer; }
+  .btn-replay:hover { background:var(--red); }
+
+  /* ---------- phone mockup (real site design, 390px) ---------- */
+  .phone { width:330px; flex:0 0 auto; border:10px solid #1c1c1c; border-radius:30px; overflow:hidden;
+    background:#fff; box-shadow:0 14px 34px rgba(0,0,0,.16); }
+  .scr { height:640px; background:var(--tan); display:flex; flex-direction:column; position:relative; overflow:hidden; }
+
+  /* live black top bar */
+  .tbar { background:var(--black); color:#fff; padding:10px 12px; display:flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; }
+  .pin { width:14px; height:14px; fill:#fff; flex:0 0 auto; }
+  .tbar .loc { display:flex; align-items:center; gap:5px; min-width:0; }
+  .tbar .loc span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .tbar .ul { text-decoration:underline; text-underline-offset:2px; text-decoration-thickness:1.5px; }
+  .tbar .chev { width:12px; height:12px; fill:none; stroke:#fff; stroke-width:2.6; opacity:.85; flex:0 0 auto; }
+  .tbar .phone-num { margin-left:auto; color:var(--gold); font-weight:700; font-size:11px; flex:0 0 auto; }
+
+  /* real mobile header row (Figma mobile bar) */
+  .whead { background:#fff; height:70px; padding:0 12px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #eee9dd; }
+  .hamb { width:22px; height:17px; display:flex; flex-direction:column; justify-content:space-between; }
+  .hamb i { display:block; height:2.6px; background:var(--black); border-radius:2px; }
+  .whead .logo { display:block; width:58px; height:58px; }
+  .order-stack { color:var(--black); font-size:10.5px; font-weight:700; line-height:1.05; text-align:center; text-transform:uppercase; }
+
+  /* page content skeleton */
+  .content { flex:1; padding:16px 14px; overflow:hidden; }
+  .hero-mini { background:#fff; border:1px solid var(--cream); border-radius:10px; padding:14px; margin-bottom:12px; }
+  .hero-mini .k { font-size:10px; font-weight:800; letter-spacing:.08em; text-transform:uppercase; color:var(--red); margin:0 0 6px; }
+  .hero-mini .t { font-size:16px; font-weight:800; text-transform:uppercase; line-height:1.2; margin:0 0 8px; }
+  .ln { height:8px; background:#e5e0d3; border-radius:4px; margin-bottom:8px; }
+  .ln.w70 { width:70%; } .ln.w45 { width:45%; } .ln.w85 { width:85%; }
+  .btn { background:var(--red); color:#fff; border-radius:6px; text-align:center; font-size:12.5px; font-weight:800; padding:11px 12px; }
+  .btn.dark { background:var(--black); }
+  .ghost { text-align:center; font-size:12.5px; font-weight:800; padding:11px 12px; border-radius:6px; border:2px solid var(--black); color:var(--black); }
+
+  /* scrim + sheets */
+  .scrim { position:absolute; inset:0; background:rgba(16,24,32,.45); }
+  .sheet { position:absolute; left:0; right:0; bottom:0; background:#fff; border-radius:16px 16px 0 0;
+    box-shadow:0 -8px 22px rgba(0,0,0,.2); padding:14px 16px 18px; }
+  .grab { width:38px; height:4px; border-radius:3px; background:#d7d2c6; margin:0 auto 12px; }
+  .sheet .x { position:absolute; top:12px; right:12px; width:26px; height:26px; border-radius:50%;
+    border:0; background:#f1eee5; color:var(--black); font-size:13px; font-weight:800; cursor:pointer; line-height:1; }
+  .sheet .st { display:flex; align-items:center; gap:7px; font-size:16.5px; font-weight:800; line-height:1.25; margin:0 30px 5px 0; }
+  .sheet .st .pin { fill:var(--red); width:17px; height:17px; }
+  .sheet .ss { font-size:13px; color:var(--muted); margin:0 0 14px; }
+  .sheet .row { display:flex; gap:10px; }
+  .sheet .row .btn { flex:1.45; }
+  .sheet .row .ghost { flex:1; }
+  .sheet .all { display:block; text-align:center; margin-top:12px; font-size:12px; font-weight:700; color:var(--red); text-decoration:underline; text-underline-offset:2px; }
+
+  /* picker sheet cards */
+  .pcard { display:flex; align-items:center; gap:10px; border:1.5px solid #e3ded1; border-radius:10px; padding:10px 12px; margin-bottom:8px; background:#fff; }
+  .pcard.sel { border:2px solid var(--red); background:#fdf7f6; }
+  .pcard .t { font-size:13.5px; font-weight:800; }
+  .pcard .s { font-size:11px; color:var(--muted); margin-top:2px; }
+  .pcard .go { margin-left:auto; flex:0 0 auto; background:var(--black); color:#fff; font-size:11px; font-weight:800;
+    padding:7px 12px; border-radius:6px; cursor:pointer; border:0; }
+
+  /* location page (after View Location) */
+  .lp { flex:1; padding:16px 14px; overflow:hidden; }
+  .lp .badge { display:inline-block; background:var(--red); color:#fff; font-size:10px; font-weight:800;
+    letter-spacing:.05em; text-transform:uppercase; padding:4px 9px; border-radius:4px; margin:0 0 10px; }
+  .lp h4 { font-size:19px; font-weight:800; text-transform:uppercase; line-height:1.15; margin:0 0 10px; }
+  .lp .info { font-size:12.5px; color:var(--muted); line-height:1.55; margin:0 0 12px; }
+  .lp .btns { display:flex; flex-direction:column; gap:8px; }
+
+  /* toast */
+  .toast { position:absolute; left:14px; right:14px; bottom:14px; background:var(--black); color:#fff;
+    font-size:12px; font-weight:700; padding:11px 13px; border-radius:8px; display:flex; align-items:center; gap:7px; }
+  .toast .pin { fill:var(--gold); }
+
+  .hidden { display:none !important; }
+
+  @media (max-width:980px) {
+    .page { width:auto; padding:32px 20px 40px; }
+    h1 { font-size:30px; }
+    .lede { font-size:17px; }
+    .cols { display:block; }
+    .phone { margin:0 auto 24px; }
+  }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="pin" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></symbol>
+</svg>
+
+<div class="page">
+
+  <p class="eyebrow">Website review &middot; Find a Shane&rsquo;s &middot; Chosen design</p>
+  <h1>Mobile location switcher</h1>
+  <p class="lede">You picked <b>Option&nbsp;3 &mdash; the first-visit suggestion</b>: when someone new opens the site
+  on their phone, we detect the closest shack and ask them to confirm it. Here it is applied to the real
+  phone design, with your button labels: <b>View Location</b> and <b>Change</b>. The phone below is
+  <b>clickable</b> &mdash; try both buttons and the dismiss &times;.</p>
+
+  <hr class="rule">
+
+  <!-- ================= INTERACTIVE MOCKUP ================= -->
+  <div class="panel">
+    <h2>Try it</h2>
+    <p class="sub">First visit, exactly as the site would show it &mdash; real top bar, real mobile header.</p>
+    <div class="cols">
+
+      <div class="phone">
+        <div class="scr">
+
+          <!-- live black top bar -->
+          <div class="tbar">
+            <svg class="pin"><use href="#pin"/></svg>
+            <span class="loc"><span class="ul" id="topbar-loc">Edgewood Location</span>
+              <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></span>
+            <span class="phone-num">(404) 555-0142</span>
+          </div>
+
+          <!-- real mobile header row -->
+          <div class="whead">
+            <span class="hamb"><i></i><i></i><i></i></span>
+            <img class="logo" src="../public/images/logo-mobile.svg" alt="Shane's Rib Shack" width="58" height="58" />
+            <span class="order-stack">Order<br />Now</span>
+          </div>
+
+          <!-- home page skeleton -->
+          <div class="content" id="screen-home">
+            <div class="hero-mini">
+              <p class="k">Southern BBQ</p>
+              <p class="t">Slow-smoked since 1996</p>
+              <div class="ln w85"></div><div class="ln w70"></div><div class="ln w45"></div>
+              <div style="height:8px"></div>
+              <div class="btn dark">Order Now</div>
+            </div>
+            <div class="hero-mini">
+              <div class="ln w70"></div><div class="ln w85"></div><div class="ln w45"></div>
+            </div>
+          </div>
+
+          <!-- location page skeleton (after View Location) -->
+          <div class="lp hidden" id="screen-lp">
+            <span class="badge">Current shack</span>
+            <h4 id="lp-title">Edgewood Location</h4>
+            <p class="info">123 Edgewood Ave NE<br />Atlanta, GA 30307<br />(404) 555-0142<br /><br />Open today 11am &ndash; 9pm</p>
+            <div class="btns">
+              <div class="btn">Order Pickup</div>
+              <div class="btn dark">Order Delivery</div>
+              <div class="ghost">Get Directions</div>
+            </div>
+          </div>
+
+          <!-- scrim + suggestion sheet -->
+          <div class="scrim" id="scrim"></div>
+
+          <div class="sheet" id="sheet-suggest">
+            <button class="x" type="button" aria-label="Dismiss" onclick="dismissSuggest()">&times;</button>
+            <div class="grab"></div>
+            <p class="st"><svg class="pin"><use href="#pin"/></svg> We think you&rsquo;re near Edgewood</p>
+            <p class="ss">The closest Shane&rsquo;s to your phone.</p>
+            <div class="row">
+              <div class="btn" onclick="viewLocation()">View Location</div>
+              <div class="ghost" onclick="openPicker()">Change</div>
+            </div>
+            <a class="all" href="#">See all locations</a>
+          </div>
+
+          <!-- picker sheet (after Change) -->
+          <div class="sheet hidden" id="sheet-picker">
+            <button class="x" type="button" aria-label="Close" onclick="closePicker()">&times;</button>
+            <div class="grab"></div>
+            <p class="st">Nearby Shane&rsquo;s</p>
+            <p class="ss">Pick your shack &mdash; we&rsquo;ll remember it.</p>
+            <div class="pcard sel">
+              <div><div class="t">Edgewood &middot; 1.2 mi</div><div class="s">Atlanta, GA</div></div>
+              <button class="go" onclick="useShack('Edgewood Location')">Use</button>
+            </div>
+            <div class="pcard">
+              <div><div class="t">Norcross &middot; 8.4 mi</div><div class="s">Norcross, GA</div></div>
+              <button class="go" onclick="useShack('Norcross, GA')">Use</button>
+            </div>
+            <div class="pcard">
+              <div><div class="t">Carrollton &middot; 32 mi</div><div class="s">Carrollton, GA</div></div>
+              <button class="go" onclick="useShack('Carrollton, GA')">Use</button>
+            </div>
+            <a class="all" href="#">See all 28 locations</a>
+          </div>
+
+          <!-- toast after choosing -->
+          <div class="toast hidden" id="toast">
+            <svg class="pin"><use href="#pin"/></svg>
+            <span id="toast-text">We&rsquo;ll remember this as your shack.</span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="notes">
+        <p class="cap" style="margin-top:0"><b>What the buttons do</b></p>
+        <ul>
+          <li><b>View Location</b> &mdash; one tap confirms the suggested shack and takes you straight to that
+            shack&rsquo;s page (hours, directions, pickup &amp; delivery). This is the happy path for a first-time visitor.</li>
+          <li><b>Change</b> &mdash; opens the <b>same location picker the site already uses</b> (nearest shacks first,
+            with search and all locations). Pick any shack and it&rsquo;s saved.</li>
+          <li><b>&times;</b> &mdash; dismisses the suggestion without choosing. It won&rsquo;t nag: it only appears
+            on a first visit, and never again once a shack is confirmed or picked.</li>
+        </ul>
+        <p class="cap"><b>Where it appears</b> &mdash; a small card at the bottom of the screen on the first phone
+        visit, over the normal page. The black bar at the top keeps showing the current shack, and tapping it still
+        opens that shack&rsquo;s page, just like today.</p>
+        <button class="btn-replay" type="button" onclick="reset()">Replay first visit</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ================= TAP COST ================= -->
+  <div class="panel">
+    <h2>What it saves</h2>
+    <table class="cost">
+      <thead>
+        <tr><th>Journey</th><th>Taps</th><th>Typing?</th></tr>
+      </thead>
+      <tbody>
+        <tr class="now"><td>Today: Menu &rarr; Locations &rarr; search &rarr; shack &rarr; View Details</td><td class="n">3&ndash;4</td><td>Yes</td></tr>
+        <tr><td>Confirm the suggested shack &mdash; <b>View Location</b></td><td class="n">1</td><td>No</td></tr>
+        <tr><td>Pick a different shack &mdash; <b>Change</b></td><td class="n">2</td><td>No</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ================= GOOD TO KNOW ================= -->
+  <div class="panel">
+    <h2>Good to know</h2>
+    <ul>
+      <li><b>Once, not always.</b> The suggestion is for first-time visitors &mdash; after a shack is confirmed,
+        chosen, or dismissed, it stays away. Returning customers just see the normal site with their shack at the top.</li>
+      <li><b>Nothing new to build for the picker.</b> The <b>Change</b> button opens the picker the desktop
+        &ldquo;Change Your Shack&rdquo; button already uses &mdash; it just needs something on the phone to open it.</li>
+      <li><b>Honest suggestion.</b> If we can&rsquo;t detect a location, the card quietly doesn&rsquo;t show &mdash;
+        no wrong guesses, and the Locations page stays one tap away in the menu.</li>
+    </ul>
+  </div>
+
+  <p class="foot">Clickable design mockup for review &mdash; not the live site. Checked against the real mobile
+  header and top bar at 390&nbsp;px, 19&nbsp;October&nbsp;2026.</p>
+
+</div>
+
+<script>
+  var scrim = document.getElementById('scrim');
+  var sheetSuggest = document.getElementById('sheet-suggest');
+  var sheetPicker = document.getElementById('sheet-picker');
+  var screenHome = document.getElementById('screen-home');
+  var screenLp = document.getElementById('screen-lp');
+  var toast = document.getElementById('toast');
+
+  function viewLocation() {
+    scrim.classList.add('hidden');
+    sheetSuggest.classList.add('hidden');
+    screenHome.classList.add('hidden');
+    screenLp.classList.remove('hidden');
+  }
+  function openPicker() {
+    sheetSuggest.classList.add('hidden');
+    sheetPicker.classList.remove('hidden');
+  }
+  function closePicker() {
+    sheetPicker.classList.add('hidden');
+    scrim.classList.add('hidden');
+  }
+  function useShack(name) {
+    document.getElementById('topbar-loc').textContent = name;
+    document.getElementById('lp-title').textContent = name;
+    closePicker();
+    document.getElementById('toast-text').innerHTML = name + ' is now your shack.';
+    toast.classList.remove('hidden');
+    setTimeout(function(){ toast.classList.add('hidden'); }, 3000);
+  }
+  function dismissSuggest() {
+    scrim.classList.add('hidden');
+    sheetSuggest.classList.add('hidden');
+  }
+  function reset() {
+    scrim.classList.remove('hidden');
+    sheetSuggest.classList.remove('hidden');
+    sheetPicker.classList.add('hidden');
+    toast.classList.add('hidden');
+    screenLp.classList.add('hidden');
+    screenHome.classList.remove('hidden');
+    document.getElementById('topbar-loc').textContent = 'Edgewood Location';
+    document.getElementById('lp-title').textContent = 'Edgewood Location';
+  }
+</script>
+
+</body>
+</html>

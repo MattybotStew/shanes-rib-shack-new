@@ -346,6 +346,8 @@ Static HTML options for the WP news redesign. **Canonical source:** `docs/design
 ## Find a Shack client page (2026-09-23)
 
 Client one-pager for the live-site mobile gap: **Change Your Shack** is hidden on phones. Canonical HTML: `docs/client-briefs/mobile-find-a-shack.html`. Published copy: `public/find-a-shack/` (page + `assets/`), served at https://mattybotstew.github.io/shanes-rib-shack-new/find-a-shack/ . Edit `docs/` first, copy the HTML to `public/find-a-shack/index.html` and the screenshots into `public/find-a-shack/assets/`, regenerate the PNG, and commit both together. Internal flow notes stay in `docs/live-wp-find-location-flow.md`. This is a live WordPress finding — do not implement the fix in this Next.js repo.
+
+**Chosen design (2026-10-19):** client picked **Option 3** (first-visit auto-suggest) with buttons **View Location** / **Change**. Applied clickable mockup in the real mobile chrome: canonical `docs/client-briefs/mobile-location-switcher.html` → published `public/find-a-shack/switcher.html` (https://mattybotstew.github.io/shanes-rib-shack-new/find-a-shack/switcher.html). Same edit-`docs`-first rule; logo path rewrite `../public/images/` → `../images/` when mirroring. In review with Haley Langer.
 <!-- END:live-wordpress-news-work -->
 
 
