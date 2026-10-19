@@ -128,7 +128,7 @@
     text-decoration: none;
     color: inherit;
   }
-  .lead-story .img { aspect-ratio: 16 / 9; min-height: 0; }
+  .lead-story .img { aspect-ratio: 1900 / 1080; min-height: 0; }
   .lead-story .img img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .lead-story .meta { display: flex; flex-direction: column; justify-content: center; padding: 30px; }
   .lead-story .cat,
@@ -181,7 +181,7 @@
     transition: transform 0.15s ease, box-shadow 0.15s ease;
   }
   .card:hover { transform: translateY(-3px); box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08); }
-  .card .img { aspect-ratio: 16 / 9; overflow: hidden; }
+  .card .img { aspect-ratio: 1900 / 1080; overflow: hidden; }
   .card .img img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .card .meta { padding: 18px; display: flex; flex-direction: column; flex: 1; }
   .card h3 { font-size: 14px; font-weight: 700; text-transform: uppercase; line-height: 1.35; margin: 0 0 8px; flex: 1; }
@@ -224,9 +224,33 @@
     font-size: 12px;
   }
 
+  /* dev notes (mockup only) */
+  .devnotes {
+    max-width: 1230px;
+    margin: 0 auto;
+    padding: 28px 24px 8px;
+  }
+  .devnotes .box {
+    background: var(--cream);
+    border: 1px dashed var(--gray);
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+  .devnotes h2 {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--red);
+    margin: 0 0 8px;
+  }
+  .devnotes ul { margin: 0; padding-left: 18px; }
+  .devnotes li { font-size: 12.5px; line-height: 1.6; color: var(--gray); margin: 0 0 4px; }
+  .devnotes b { color: var(--black); }
+
   @media (max-width: 900px) {
     .lead-story { grid-template-columns: 1fr; }
-    .lead-story .img { min-height: 0; aspect-ratio: 16 / 9; }
+    .lead-story .img { min-height: 0; aspect-ratio: 1900 / 1080; }
     .card-grid { grid-template-columns: 1fr; }
   }
 
@@ -266,7 +290,7 @@
 <body>
 
 <div class="toolbar">
-  <span class="crumb"><a href="index.html">&larr; All mockups</a> · News Landing · A</span>
+  <span class="crumb"><a href="index.html">&larr; All mockups</a> · News Landing · Option 1 (client pick — as-is)</span>
 </div>
 
 <!-- site chrome -->
@@ -421,6 +445,18 @@
     <a href="#" aria-label="Next">→</a>
   </nav>
 </div>
+
+<!-- dev notes (mockup only) -->
+<section class="devnotes">
+  <div class="box">
+    <h2>Dev notes — WordPress</h2>
+    <ul>
+      <li><b>Lead + card images use the post featured image</b>, recommended size <b>1900 × 1080</b> (<code>object-fit: cover</code> in every card slot).</li>
+      <li>Include a <b>mobile image override</b> so editors can supply a different image on phones.</li>
+      <li><b>Excerpts come from the single post&#8217;s excerpt field</b> — same source as the homepage news module.</li>
+    </ul>
+  </div>
+</section>
 
 <footer class="site-footer">Shane&#8217;s Rib Shack &middot; Design mockup — News landing page</footer>
 

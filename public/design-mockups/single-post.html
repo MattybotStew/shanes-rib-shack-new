@@ -88,14 +88,14 @@
   .btn-rewards { border: 1px solid var(--black); color: var(--black); }
   .btn-order { background: var(--black); color: #fff; }
 
-  /* ── 1 · SHORTENED HEADER BANNER ─────────────────────────── */
-  .article-banner {
+  /* ── 1 · SAME HEADER BANNER AS THE NEWS LANDING PAGE ──────── */
+  .page-banner {
     background: var(--black);
     color: #fff;
     padding: 34px 24px 36px;
     text-align: center;
   }
-  .article-banner .eyebrow {
+  .page-banner .eyebrow {
     text-transform: uppercase;
     letter-spacing: 0.08em;
     font-size: 12px;
@@ -103,7 +103,36 @@
     color: var(--gold);
     margin: 0 0 10px;
   }
-  .article-banner .cat {
+  .page-banner h1 {
+    font-size: clamp(26px, 4vw, 46px);
+    line-height: 1.05;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin: 0 0 12px;
+  }
+  .page-banner p.tag {
+    font-size: 15px;
+    line-height: 1.5;
+    color: rgba(255, 255, 255, 0.75);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* ── 2 · 1/3 IMAGE (LEFT) + 2/3 CONTENT (RIGHT) ───────────── */
+  .article-body-wrap {
+    max-width: 1230px;
+    margin: 0 auto;
+    padding: 40px 24px 8px;
+  }
+  .article-layout {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: start;
+  }
+  .article-content { max-width: 760px; }
+
+  .cat-chip {
     display: inline-block;
     background: var(--red);
     color: #fff;
@@ -114,38 +143,13 @@
     border-radius: 4px;
     margin: 0 0 14px;
   }
-  .article-banner h1 {
-    font-size: clamp(22px, 3.4vw, 40px);
+  .article-content h1 {
+    font-size: clamp(22px, 2.6vw, 34px);
     line-height: 1.12;
     font-weight: 800;
     text-transform: uppercase;
-    margin: 0 auto 12px;
-    max-width: 860px;
+    margin: 0 0 20px;
   }
-  .article-banner .meta {
-    display: flex;
-    justify-content: center;
-    gap: 18px;
-    flex-wrap: wrap;
-    font-size: 12.5px;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.7);
-  }
-  .article-banner .meta b { color: #fff; font-weight: 700; }
-
-  /* ── 2 · 2/3 CONTENT + 1/3 IMAGE ─────────────────────────── */
-  .article-body-wrap {
-    max-width: 1230px;
-    margin: 0 auto;
-    padding: 40px 24px 8px;
-  }
-  .article-layout {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 48px;
-    align-items: start;
-  }
-  .article-content { max-width: 700px; }
 
   .share-row {
     display: flex;
@@ -253,11 +257,35 @@
   }
   .related-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
   .rel-card { border: 1px solid var(--cream); border-radius: 12px; overflow: hidden; background: var(--tan); text-decoration: none; color: inherit; }
-  .rel-card .img { aspect-ratio: 16 / 9; overflow: hidden; }
+  .rel-card .img { aspect-ratio: 1900 / 1080; overflow: hidden; }
   .rel-card .img img { width: 100%; height: 100%; object-fit: cover; }
   .rel-card .meta { padding: 16px; }
   .rel-card .cat { font-size: 11px; font-weight: 700; color: var(--red); text-transform: uppercase; margin: 0 0 6px; }
   .rel-card h3 { font-size: 14px; font-weight: 700; text-transform: uppercase; line-height: 1.35; margin: 0; }
+
+  /* dev notes (mockup only) */
+  .devnotes {
+    max-width: 1230px;
+    margin: 0 auto;
+    padding: 28px 24px 8px;
+  }
+  .devnotes .box {
+    background: var(--cream);
+    border: 1px dashed var(--gray);
+    border-radius: 10px;
+    padding: 16px 20px;
+  }
+  .devnotes h2 {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--red);
+    margin: 0 0 8px;
+  }
+  .devnotes ul { margin: 0; padding-left: 18px; }
+  .devnotes li { font-size: 12.5px; line-height: 1.6; color: var(--gray); margin: 0 0 4px; }
+  .devnotes b { color: var(--black); }
 
   .site-footer {
     background: var(--black);
@@ -310,7 +338,7 @@
 <body>
 
 <div class="toolbar">
-  <span class="crumb"><a href="index.html">&larr; All mockups</a> · Single Post · A</span>
+  <span class="crumb"><a href="index.html">&larr; All mockups</a> · Single Post · Option 1 (client pick + revisions)</span>
 </div>
 <header class="site-header">
   <div class="site-header-inner">
@@ -346,25 +374,39 @@
 </header>
 
 
-<!-- 1 · shortened header banner -->
-<section class="article-banner">
-  <p class="eyebrow">Shack News</p>
-  <span class="cat">News</span>
-  <h1>Thank &#8216;QUE, Shaniacs! Join us 8/11/26 for a $6.99 Big Dad and Side</h1>
-  <div class="meta">
-    <span><b>Published:</b> Aug 22, 2026</span>
-    <span><b>Valid:</b> Aug 11, 2026 only</span>
-    <span><b>Read time:</b> 1 min</span>
-  </div>
+<!-- 1 · same header banner as the News landing page -->
+<section class="page-banner">
+  <p class="eyebrow">News &amp; Events</p>
+  <h1>Shack News</h1>
+  <p class="tag">From local happenings to the latest promotions and catering ideas — this is where we share what&#8217;s new.</p>
 </section>
 
-<!-- 2 · 2/3 content + 1/3 image -->
+<!-- 2 · 1/3 image (left) + 2/3 content (right) -->
 <main>
   <div class="article-body-wrap">
     <div class="article-layout">
 
-      <!-- 2/3 content -->
+      <!-- 1/3 image rail (custom field) -->
+      <aside class="article-side">
+        <div class="image-frame">
+          <a data-fancybox="article-img"
+             href="../images/news-events/summer-bbq.jpg"
+             data-caption="Thank 'QUE, Shaniacs! — $6.99 Big Dad + Small Side (8/11/26)">
+            <img src="../images/news-events/summer-bbq.jpg"
+                 alt="Big Dad BBQ Pork Sandwich and a side — $6.99 on August 11, 2026" />
+          </a>
+        </div>
+        <p class="image-hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M8 11h6M11 8v6"/></svg>
+          Click image to view full size
+        </p>
+      </aside>
+
+      <!-- 2/3 content — title lives here, in the article body -->
       <div class="article-content">
+        <span class="cat-chip">News</span>
+        <h1>Thank &#8216;QUE, Shaniacs! Join us 8/11/26 for a $6.99 Big Dad and Side</h1>
+
         <div class="share-row">
           <span class="label">Share</span>
           <a href="#" aria-label="LinkedIn" class="fa-linkedin">in</a>
@@ -380,22 +422,6 @@
         <p>*Valid 8/11/26 only while supplies last at participating locations. Order in-store, online or in-app. No code needed.</p>
         <a class="mid-cta" href="#">Order Ahead — order.shanesribshack.com</a>
       </div>
-
-      <!-- 1/3 image rail -->
-      <aside class="article-side">
-        <div class="image-frame">
-          <a data-fancybox="article-img"
-             href="../images/news-events/summer-bbq.jpg"
-             data-caption="Thank 'QUE, Shaniacs! — $6.99 Big Dad + Small Side (8/11/26)">
-            <img src="../images/news-events/summer-bbq.jpg"
-                 alt="Big Dad BBQ Pork Sandwich and a side — $6.99 on August 11, 2026" />
-          </a>
-        </div>
-        <p class="image-hint">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35M8 11h6M11 8v6"/></svg>
-          Click image to view full size
-        </p>
-      </aside>
 
     </div>
   </div>
@@ -418,6 +444,19 @@
           <div class="meta"><p class="cat">Menu</p><h3>Two New Sauces Just Landed</h3></div>
         </a>
       </div>
+    </div>
+  </section>
+
+  <!-- dev notes -->
+  <section class="devnotes">
+    <div class="box">
+      <h2>Dev notes — WordPress</h2>
+      <ul>
+        <li><b>Banner</b> is the shared News landing banner (eyebrow + &#8220;Shack News&#8221; + tagline). The article <b>title sits in the content column</b>, not the banner.</li>
+        <li><b>Published / expiry / read-time fields are removed</b> — no meta row on the template.</li>
+        <li><b>Left sidebar image is a custom field</b> (its own upload per post), <b>not the featured image</b> — it can differ from the card image. Click opens the full-size file in Fancybox; the rail image always fits its container (<code>object-fit: cover</code>).</li>
+        <li>Related cards use the post <b>featured image</b> at <b>1900 × 1080</b>.</li>
+      </ul>
     </div>
   </section>
 </main>
