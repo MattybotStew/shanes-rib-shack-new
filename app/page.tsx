@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import CateringPromo from "@/components/CateringPromo";
 import GiftCardPromo from "@/components/GiftCardPromo";
 import HomeHero from "@/components/HomeHero";
+import LocationSwitcher from "@/components/LocationSwitcher";
 import RewardsApp from "@/components/RewardsApp";
 import ShackNews from "@/components/ShackNews";
 import SiteFooter from "@/components/SiteFooter";
@@ -21,6 +22,7 @@ export default function Home() {
       <GiftCardPromo />
       <RewardsApp />
       <SiteFooter />
+      <LocationSwitcher />
     </main>
   );
 }
