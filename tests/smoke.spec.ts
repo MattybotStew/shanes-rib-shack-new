@@ -155,9 +155,13 @@ test("shack switcher preview opens picker from top bar", async ({ page, isMobile
   await page.getByRole("button", { name: /Dismiss/i }).click();
   await page.getByRole("button", { name: /Edgewood Location — change shack/i }).click();
 
+  const suggest = page.getByRole("dialog", { name: /Your nearby Shane/i });
+  await expect(suggest).toBeVisible();
+  await expect(suggest.getByRole("button", { name: /^Change$/i })).toBeVisible();
+  await suggest.getByRole("button", { name: /^Change$/i }).click();
+
   const picker = page.getByRole("dialog", { name: /Nearby Shane/i });
   await expect(picker).toBeVisible();
-  await expect(picker.getByText(/Pick your shack/i)).toBeVisible();
   await picker.getByRole("button", { name: /^Order here$/i }).nth(1).click();
   await expect(page).toHaveURL(/\/order\/?$/);
 });

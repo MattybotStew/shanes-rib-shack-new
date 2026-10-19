@@ -36,10 +36,16 @@ function track(event: string, params: Record<string, unknown> = {}) {
   w.dataLayer?.push({ event, ...params });
 }
 
+function shackForSlug(slug: string): Shack {
+  return NEARBY_SHACKS.find((s) => s.slug === slug) ?? SUGGESTED;
+}
+
 export default function LocationSwitcher() {
   const router = useRouter();
   const [phase, setPhase] = useState<"hidden" | "suggest" | "picker">("hidden");
-  const [pickerEntry, setPickerEntry] = useState<ShackPickerSource | "change">("change");
+  const [suggestEntry, setSuggestEntry] = useState<"first_visit" | "everyday">("first_visit");
+  const [featuredShack, setFeaturedShack] = useState<Shack>(SUGGESTED);
+  const [pickerEntry, setPickerEntry] = useState<"change_first" | "change_everyday">("change_first");
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
@@ -54,6 +60,8 @@ export default function LocationSwitcher() {
         return;
       }
 
+      setFeaturedShack(SUGGESTED);
+      setSuggestEntry("first_visit");
       setPhase("suggest");
       track("shack_switcher_shown", { suggested: SUGGESTED.name });
     });
@@ -61,16 +69,18 @@ export default function LocationSwitcher() {
   }, []);
 
   useEffect(() => {
-    function onOpenPicker(e: Event) {
+    function onOpenFromHeader(e: Event) {
       if (!isShackSwitcherPreview()) return;
       const source = (e as CustomEvent<{ source: ShackPickerSource }>).detail?.source ?? "topbar";
-      setPickerEntry(source);
-      setPhase("picker");
-      track("picker_open", { source });
+      const slug = chosenSlugFromStorage() ?? SUGGESTED.slug;
+      setFeaturedShack(shackForSlug(slug));
+      setSuggestEntry("everyday");
+      setPhase("suggest");
+      track("shack_switcher_shown", { source, suggested: shackForSlug(slug).name, everyday: true });
     }
 
-    window.addEventListener(SHACK_PICKER_OPEN, onOpenPicker);
-    return () => window.removeEventListener(SHACK_PICKER_OPEN, onOpenPicker);
+    window.addEventListener(SHACK_PICKER_OPEN, onOpenFromHeader);
+    return () => window.removeEventListener(SHACK_PICKER_OPEN, onOpenFromHeader);
   }, []);
 
   useEffect(() => {
@@ -80,21 +90,23 @@ export default function LocationSwitcher() {
   }, [toast]);
 
   function dismiss() {
-    window.localStorage.setItem(STORAGE_DISMISSED, "1");
-    track("shack_switcher_dismissed");
+    if (suggestEntry === "first_visit") {
+      window.localStorage.setItem(STORAGE_DISMISSED, "1");
+      track("shack_switcher_dismissed");
+    }
     setPhase("hidden");
   }
 
   function orderHereSuggested() {
-    window.localStorage.setItem(STORAGE_CHOSEN, SUGGESTED.slug);
-    dispatchShackChosen(SUGGESTED.slug);
-    track("location_selected", { shack: SUGGESTED.name, source: "switcher", method: "order_here" });
+    window.localStorage.setItem(STORAGE_CHOSEN, featuredShack.slug);
+    dispatchShackChosen(featuredShack.slug);
+    track("location_selected", { shack: featuredShack.name, source: "switcher", method: "order_here" });
     setPhase("hidden");
     router.push("/order/");
   }
 
   function closePicker() {
-    if (pickerEntry === "change") {
+    if (pickerEntry === "change_first") {
       window.localStorage.setItem(STORAGE_DISMISSED, "1");
       track("shack_switcher_dismissed", { via: "picker" });
     }
@@ -118,7 +130,7 @@ export default function LocationSwitcher() {
         <div
           className="fixed inset-0 z-50 bg-brand-black/45"
           aria-hidden="true"
-          onClick={phase === "picker" ? closePicker : dismiss}
+          onClick={phase === "picker" ? closePicker : () => dismiss()}
         />
       )}
 
@@ -138,7 +150,7 @@ export default function LocationSwitcher() {
           </button>
           <div className="mx-auto mb-3 h-1 w-9 rounded-full bg-black/15" aria-hidden="true" />
           <p className="pr-10 text-lg font-extrabold leading-snug text-brand-black">
-            We think you&rsquo;re near {SUGGESTED.name}
+            We think you&rsquo;re near {featuredShack.name}
           </p>
           <p className="mt-1 text-sm text-[#5a6067]">Closest shack to your phone.</p>
           <div className="mt-4 flex gap-3">
@@ -152,7 +164,7 @@ export default function LocationSwitcher() {
             <button
               type="button"
               onClick={() => {
-                setPickerEntry("change");
+                setPickerEntry(suggestEntry === "first_visit" ? "change_first" : "change_everyday");
                 track("picker_open", { source: "change" });
                 setPhase("picker");
               }}
