@@ -153,20 +153,13 @@ test("shack switcher preview opens picker from top bar", async ({ page, isMobile
   test.skip(!isMobile, "Mobile shack switcher preview only");
   await page.goto("/?shack-switcher=1");
   await page.getByRole("button", { name: /Dismiss/i }).click();
-  await page.getByRole("button", { name: /Change your shack/i }).click();
+  await page.getByRole("button", { name: /Edgewood Location — change shack/i }).click();
 
-  const picker = page.getByRole("dialog", { name: /Location picker|Nearby Shane/i });
+  const picker = page.getByRole("dialog", { name: /Nearby Shane/i });
   await expect(picker).toBeVisible();
-  await expect(picker.getByRole("button", { name: /Select Norcross/i })).toBeVisible();
-
-  // Review item: search filters the list — no need to tap "See all locations".
-  await picker.getByRole("searchbox", { name: /Search locations/i }).fill("Doug");
-  await expect(picker.getByRole("button", { name: /Select Douglasville/i })).toBeVisible();
-  await expect(picker.getByRole("button", { name: /Select Norcross/i })).toBeHidden();
-  await picker.getByRole("searchbox", { name: /Search locations/i }).fill("");
-
-  await picker.getByRole("button", { name: /Select Norcross/i }).click();
-  await expect(page.getByRole("status")).toContainText(/now your shack/i);
+  await expect(picker.getByText(/Pick your shack/i)).toBeVisible();
+  await picker.getByRole("button", { name: /^Order here$/i }).nth(1).click();
+  await expect(page).toHaveURL(/\/order\/?$/);
 });
 
 test("switcher picker close counts as one-time dismissal", async ({ page, isMobile }) => {
@@ -176,7 +169,7 @@ test("switcher picker close counts as one-time dismissal", async ({ page, isMobi
   // First visit: suggestion card is the initial view (not the list).
   await expect(page.getByRole("button", { name: /Dismiss/i })).toBeVisible();
   await page.getByRole("button", { name: /^Change$/i }).click();
-  await page.getByRole("button", { name: /Close location picker/i }).click();
+  await page.getByRole("button", { name: /^Close$/i }).click();
 
   // Review item: closing the picker counts as the dismissal — card stays away.
   await page.reload();

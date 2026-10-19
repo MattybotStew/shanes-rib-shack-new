@@ -20,6 +20,12 @@ export function isShackSwitcherPreview(): boolean {
   return new URLSearchParams(window.location.search).get("shack-switcher") === "1";
 }
 
+/** Force the first-visit sheet again (ignores dismiss / chosen) for local review. */
+export function isShackSwitcherReplay(): boolean {
+  if (typeof window === "undefined") return false;
+  return new URLSearchParams(window.location.search).get("replay") === "1";
+}
+
 export function chosenSlugFromStorage(): string | null {
   if (typeof window === "undefined") return null;
   const slug = window.localStorage.getItem(STORAGE_CHOSEN);

@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { asset } from "@/lib/asset";
-import { locationFromPathname, type LocationDetail } from "@/lib/locationData";
+import { EDGEWOOD, locationFromPathname, type LocationDetail } from "@/lib/locationData";
 import {
   dispatchOpenShackPicker,
   isShackSwitcherPreview,
@@ -103,8 +103,7 @@ export default function Header() {
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
-      const preview =
-        pathname === "/" && isShackSwitcherPreview() && !locationFromPathname(pathname);
+      const preview = isShackSwitcherPreview();
       setSwitcherPreview(preview);
       setPreviewShack(preview ? previewShackFromStorage() : null);
     });
@@ -132,9 +131,21 @@ export default function Header() {
         <div className="flex w-full items-center justify-center overflow-hidden bg-[#1A1A1A] px-5 py-3.5 lg:px-[30px]">
           <div className="flex w-full max-w-[1320px] flex-col items-center justify-between gap-3 sm:flex-row sm:gap-5">
             <div className="flex flex-wrap items-center justify-center gap-x-2.5 text-[13px] leading-4 text-white sm:justify-start">
+              {switcherPreview ? (
+                <button
+                  type="button"
+                  aria-label={`${activeLocation.shortName} Location — change shack`}
+                  onClick={() => dispatchOpenShackPicker("topbar")}
+                  className="inline-flex items-center gap-2.5 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold lg:hidden"
+                >
+                  <ShackIcon />
+                  <span className="underline underline-offset-2">{activeLocation.shortName} Location</span>
+                  <TopBarChevron />
+                </button>
+              ) : null}
               <Link
                 href={`/locations/${activeLocation.slug}/`}
-                className="inline-flex items-center gap-2.5 text-white hover:underline"
+                className={`inline-flex items-center gap-2.5 text-white hover:underline ${switcherPreview ? "hidden lg:inline-flex" : ""}`}
               >
                 <ShackIcon />
                 {activeLocation.shortName} Location
@@ -185,28 +196,33 @@ export default function Header() {
           </div>
 
           {/* Mobile default alert — node 6354:11981; preview uses live-style top bar (Option 1) */}
-          {shackSwitcherHomePreview && previewShack ? (
+          {shackSwitcherHomePreview ? (
             <div className="flex w-full items-center justify-center overflow-hidden bg-brand-black px-3 py-2.5 lg:hidden">
-              <div className="flex w-full max-w-[1320px] items-center gap-1.5 text-[12.5px] font-bold leading-4 text-white">
-                <TopBarPinIcon />
-                <button
-                  type="button"
-                  aria-label="Change your shack"
-                  onClick={() => dispatchOpenShackPicker("topbar")}
-                  className="inline-flex min-w-0 max-w-[55%] items-center gap-1 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
-                >
-                  <span className="truncate underline underline-offset-2 decoration-[1.5px]">
-                    {shackTopBarLabel(previewShack)}
-                  </span>
-                  <TopBarChevron />
-                </button>
-                <a
-                  href={previewShack.phoneHref}
-                  className="ml-auto shrink-0 text-[11px] font-bold text-brand-gold hover:underline"
-                >
-                  {previewShack.phone}
-                </a>
-              </div>
+              {(() => {
+                const barShack = previewShack ?? EDGEWOOD;
+                return (
+                  <div className="flex w-full max-w-[1320px] items-center gap-1.5 text-[12.5px] font-bold leading-4 text-white">
+                    <TopBarPinIcon />
+                    <button
+                      type="button"
+                      aria-label={`${shackTopBarLabel(barShack)} — change shack`}
+                      onClick={() => dispatchOpenShackPicker("topbar")}
+                      className="inline-flex min-w-0 max-w-[55%] items-center gap-1 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
+                    >
+                      <span className="truncate underline underline-offset-2 decoration-[1.5px]">
+                        {shackTopBarLabel(barShack)}
+                      </span>
+                      <TopBarChevron />
+                    </button>
+                    <a
+                      href={barShack.phoneHref}
+                      className="ml-auto shrink-0 text-[11px] font-bold text-brand-gold hover:underline"
+                    >
+                      {barShack.phone}
+                    </a>
+                  </div>
+                );
+              })()}
             </div>
           ) : (
             <div className="flex w-full flex-col items-center gap-2.5 bg-brand-black px-2.5 py-[9px] lg:hidden">
@@ -219,12 +235,22 @@ export default function Header() {
                   (770) 416-6606
                 </a>
               </p>
-              <Link
-                href="/locations"
-                className="flex w-full items-center justify-center rounded-[5px] bg-brand-red px-3.5 py-3 text-xs font-bold uppercase leading-none text-white transition-colors hover:bg-[#a01b25]"
-              >
-                Change your location
-              </Link>
+              {switcherPreview ? (
+                <button
+                  type="button"
+                  onClick={() => dispatchOpenShackPicker("alert")}
+                  className="flex w-full items-center justify-center rounded-[5px] bg-brand-red px-3.5 py-3 text-xs font-bold uppercase leading-none text-white transition-colors hover:bg-[#a01b25]"
+                >
+                  Change your location
+                </button>
+              ) : (
+                <Link
+                  href="/locations"
+                  className="flex w-full items-center justify-center rounded-[5px] bg-brand-red px-3.5 py-3 text-xs font-bold uppercase leading-none text-white transition-colors hover:bg-[#a01b25]"
+                >
+                  Change your location
+                </Link>
+              )}
             </div>
           )}
         </>

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import Header from "@/components/Header";
 import HashScroll from "@/components/HashScroll";
+import LocationSwitcher from "@/components/LocationSwitcher";
 import { getMetadataBase } from "@/lib/siteUrl";
 import "./globals.css";
 
@@ -34,6 +35,7 @@ export default function RootLayout({
         <Header />
         <HashScroll />
         {children}
+        <LocationSwitcher />
       </body>
     </html>
   );

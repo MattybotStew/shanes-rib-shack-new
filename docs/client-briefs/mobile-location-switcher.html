@@ -143,7 +143,7 @@
   <h1>Mobile location switcher</h1>
   <p class="lede">You picked <b>Option&nbsp;3 &mdash; the first-visit suggestion</b>, plus <b>Option&nbsp;1 for everyday
   switching</b>: after the first visit, tap the <b>underlined shack name</b> in the black bar to open the same nearby
-  picker. Button labels: <b>View Location</b> and <b>Change</b>. The phone below is <b>clickable</b>.</p>
+  picker. Button labels: <b>Order here</b> and <b>Change</b>. The phone below is <b>clickable</b>.</p>
 
   <hr class="rule">
 
@@ -204,13 +204,12 @@
           <div class="sheet" id="sheet-suggest">
             <button class="x" type="button" aria-label="Dismiss" onclick="dismissSuggest()">&times;</button>
             <div class="grab"></div>
-            <p class="st"><svg class="pin"><use href="#pin"/></svg> We think you&rsquo;re near Edgewood</p>
-            <p class="ss">The closest Shane&rsquo;s to your phone.</p>
+            <p class="st">We think you&rsquo;re near Edgewood</p>
+            <p class="ss">Closest shack to your phone.</p>
             <div class="row">
-              <div class="btn" onclick="viewLocation()">View Location</div>
+              <div class="btn" onclick="orderHere()">Order here</div>
               <div class="ghost" onclick="openPicker()">Change</div>
             </div>
-            <a class="all" href="#">See all locations</a>
           </div>
 
           <!-- picker sheet (after Change) -->
@@ -222,19 +221,19 @@
             <input class="psearch" type="search" id="psearch" placeholder="Search by city or ZIP" aria-label="Search locations" oninput="filterPicker(this.value)" />
             <div class="pcard sel" role="button" tabindex="0" data-shack="Edgewood Location" onclick="useShack('Edgewood Location')" onkeydown="rowKey(event,'Edgewood Location')">
               <div><div class="t"><span class="nm">Edgewood</span><span class="badge-cur">Current</span><span class="mi"> &middot; 1.2 mi</span></div><div class="s">Atlanta, GA <span class="zhid">30307</span></div></div>
-              <span class="go">Select</span>
+              <span class="go">Order here</span>
             </div>
             <div class="pcard" role="button" tabindex="0" data-shack="Norcross Location" onclick="useShack('Norcross Location')" onkeydown="rowKey(event,'Norcross Location')">
               <div><div class="t"><span class="nm">Norcross</span><span class="mi"> &middot; 8.4 mi</span></div><div class="s">Norcross, GA <span class="zhid">30092</span></div></div>
-              <span class="go">Select</span>
+              <span class="go">Order here</span>
             </div>
             <div class="pcard" role="button" tabindex="0" data-shack="Carrollton Location" onclick="useShack('Carrollton Location')" onkeydown="rowKey(event,'Carrollton Location')">
               <div><div class="t"><span class="nm">Carrollton</span><span class="mi"> &middot; 32 mi</span></div><div class="s">Carrollton, GA <span class="zhid">30117</span></div></div>
-              <span class="go">Select</span>
+              <span class="go">Order here</span>
             </div>
             <div class="pcard" role="button" tabindex="0" data-shack="Douglasville Location" onclick="useShack('Douglasville Location')" onkeydown="rowKey(event,'Douglasville Location')">
               <div><div class="t"><span class="nm">Douglasville</span><span class="mi"> &middot; 21 mi</span></div><div class="s">Douglasville, GA <span class="zhid">30135</span></div></div>
-              <span class="go">Select</span>
+              <span class="go">Order here</span>
             </div>
             <div class="pempty hidden" id="psearch-empty">No shack matches &mdash; try the full locations list.</div>
             <a class="all" href="#">See all 28 locations</a>
@@ -252,8 +251,8 @@
       <div class="notes">
         <p class="cap" style="margin-top:0"><b>What the buttons do</b></p>
         <ul>
-          <li><b>View Location</b> &mdash; one tap confirms the suggested shack and takes you straight to that
-            shack&rsquo;s page (hours, directions, pickup &amp; delivery). This is the happy path for a first-time visitor.</li>
+          <li><b>Order here</b> &mdash; one tap confirms the suggested shack and takes you to order (happy path for
+            first-time visitors).</li>
           <li><b>Change</b> &mdash; opens the <b>same location picker the site already uses</b> (nearest shacks first,
             with search and all locations). Pick any shack and it&rsquo;s saved.</li>
           <li><b>&times;</b> &mdash; dismisses the suggestion without choosing. If you opened the picker with
@@ -279,7 +278,7 @@
       </thead>
       <tbody>
         <tr class="now"><td>Today: Menu &rarr; Locations &rarr; search &rarr; shack &rarr; View Details</td><td class="n">3&ndash;4</td><td>Yes</td></tr>
-        <tr><td>Confirm the suggested shack &mdash; <b>View Location</b></td><td class="n">1</td><td>No</td></tr>
+        <tr><td>Confirm the suggested shack &mdash; <b>Order here</b></td><td class="n">1</td><td>No</td></tr>
         <tr><td>Pick a different shack &mdash; <b>Change</b></td><td class="n">2</td><td>No</td></tr>
         <tr><td>Everyday switch &mdash; tap address, then pick</td><td class="n">2</td><td>No</td></tr>
       </tbody>
@@ -314,11 +313,10 @@
   var screenLp = document.getElementById('screen-lp');
   var toast = document.getElementById('toast');
 
-  function viewLocation() {
+  function orderHere() {
     scrim.classList.add('hidden');
     sheetSuggest.classList.add('hidden');
-    screenHome.classList.add('hidden');
-    screenLp.classList.remove('hidden');
+    document.getElementById('topbar-loc').textContent = 'Edgewood Location';
   }
   function openPicker() {
     sheetSuggest.classList.add('hidden');

@@ -7,7 +7,7 @@
 
 | When | UX |
 |------|-----|
-| First mobile visit | Bottom sheet: “We think you're near …” → **View Location** or **Change** (Option 3) |
+| First mobile visit | Bottom sheet: “We think you're near …” → **Order here** or **Change** (Option 3) |
 | Every return visit | Black top bar: tap **underlined shack name** → **Nearby Shane's** picker → **Select** (Option 1) |
 
 ## Prototype (this repo)
