@@ -325,9 +325,10 @@
     resetSearch();
   }
   function openPickerFromTopbar() {
+    sheetSuggest.classList.add('hidden');
+    sheetPicker.classList.remove('hidden');
     scrim.classList.remove('hidden');
-    sheetSuggest.classList.remove('hidden');
-    sheetPicker.classList.add('hidden');
+    resetSearch();
   }
   function closePicker() {
     sheetPicker.classList.add('hidden');

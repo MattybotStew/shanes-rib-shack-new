@@ -1,4 +1,12 @@
 import { expect, test } from "@playwright/test";
+import type { Page } from "@playwright/test";
+
+/** Seed the one-time dismissal so the first-visit shack sheet can't cover unrelated tests. */
+async function skipShackSheet(page: Page) {
+  await page.addInitScript(() => {
+    window.localStorage.setItem("shackSwitcherDismissed", "1");
+  });
+}
 
 const expectedRoutes = [
   { path: "/", title: /Shane's Rib Shack/i, heading: /Welcome to The Original Shack/i },
@@ -97,6 +105,7 @@ test("footer routes render expected destinations", async ({ page }) => {
 test("mobile menu opens and navigates", async ({ page, isMobile }) => {
   test.skip(!isMobile, "Mobile-only header behavior");
 
+  await skipShackSheet(page);
   await page.goto("/");
   await page.getByRole("button", { name: /Open menu/i }).click();
   const mobileNav = page.getByRole("navigation", { name: /Mobile/i });
@@ -106,6 +115,7 @@ test("mobile menu opens and navigates", async ({ page, isMobile }) => {
 });
 
 test("catering form validates invalid contact details", async ({ page }) => {
+  await skipShackSheet(page);
   await page.goto("/catering/");
   const inquiryForm = page.getByRole("region", { name: /Catering inquiry form/i });
 
@@ -128,6 +138,7 @@ test("catering form can submit successfully with mocked endpoint", async ({ page
     });
   });
 
+  await skipShackSheet(page);
   await page.goto("/catering/");
   const inquiryForm = page.getByRole("region", { name: /Catering inquiry form/i });
 
@@ -149,33 +160,55 @@ test("404 page renders branded fallback", async ({ page }) => {
   await expect(page.getByRole("heading", { name: /404|not found/i })).toBeVisible();
 });
 
-test("shack switcher preview opens picker from top bar", async ({ page, isMobile }) => {
-  test.skip(!isMobile, "Mobile shack switcher preview only");
-  await page.goto("/?shack-switcher=1");
+test("shack switcher first-visit sheet shows on a fresh mobile visit", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "Mobile shack switcher only");
+  await page.goto("/?replay=1");
+  await expect(page.getByRole("dialog", { name: /Your nearby Shane/i })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Order here$/i })).toBeVisible();
+  await expect(page.getByRole("button", { name: /^Change$/i })).toBeVisible();
+});
+
+test("shack switcher top bar opens picker from a non-home page", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "Mobile shack switcher only");
+  await page.goto("/menu/");
+  // First visit: dismiss the suggestion card to reveal the top bar.
   await page.getByRole("button", { name: /Dismiss/i }).click();
   await page.getByRole("button", { name: /Edgewood Location — change shack/i }).click();
 
-  const suggest = page.getByRole("dialog", { name: /Your nearby Shane/i });
-  await expect(suggest).toBeVisible();
-  await expect(suggest.getByRole("button", { name: /^Change$/i })).toBeVisible();
-  await suggest.getByRole("button", { name: /^Change$/i }).click();
-
-  const picker = page.getByRole("dialog", { name: /Nearby Shane/i });
+  const picker = page.getByRole("dialog", { name: /Nearby Shane|Shane's locations/i });
   await expect(picker).toBeVisible();
-  await picker.getByRole("button", { name: /^Order here$/i }).nth(1).click();
+  await expect(picker.getByText(/Select a location/i)).toBeVisible();
+  await expect(picker.getByPlaceholder(/Search by city or ZIP/i)).toBeVisible();
+  await picker.getByRole("button", { name: /^Order here$/i }).first().click();
   await expect(page).toHaveURL(/\/order\/?$/);
 });
 
+test("shack switcher picker search filters rows", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "Mobile shack switcher only");
+  await page.goto("/?replay=1");
+  await page.getByRole("button", { name: /^Change$/i }).click();
+  const picker = page.getByRole("dialog", { name: /Nearby Shane|Shane's locations/i });
+  await picker.getByPlaceholder(/Search by city or ZIP/i).fill("zzzzz");
+  await expect(picker.getByText(/No shack matches/i)).toBeVisible();
+});
+
 test("switcher picker close counts as one-time dismissal", async ({ page, isMobile }) => {
-  test.skip(!isMobile, "Mobile shack switcher preview only");
-  await page.goto("/?shack-switcher=1");
+  test.skip(!isMobile, "Mobile shack switcher only");
+  await page.goto("/");
 
   // First visit: suggestion card is the initial view (not the list).
   await expect(page.getByRole("button", { name: /Dismiss/i })).toBeVisible();
   await page.getByRole("button", { name: /^Change$/i }).click();
-  await page.getByRole("button", { name: /^Close$/i }).click();
+  await page.getByRole("button", { name: /Close location picker/i }).click();
 
   // Review item: closing the picker counts as the dismissal — card stays away.
   await page.reload();
   await expect(page.getByRole("button", { name: /Dismiss/i })).toHaveCount(0);
+});
+
+test("shack switcher stays off desktop auto-suggest", async ({ page, isMobile }) => {
+  test.skip(isMobile, "Desktop check");
+  await page.goto("/");
+  await expect(page.getByRole("dialog", { name: /Your nearby Shane/i })).toHaveCount(0);
+  await expect(page.getByRole("button", { name: /Location — change shack/i })).toHaveCount(0);
 });

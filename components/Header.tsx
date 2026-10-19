@@ -7,10 +7,10 @@ import { asset } from "@/lib/asset";
 import { EDGEWOOD, locationFromPathname, type LocationDetail } from "@/lib/locationData";
 import {
   dispatchOpenShackPicker,
-  isShackSwitcherPreview,
-  previewShackFromStorage,
+  selectedShackFromStorage,
   SHACK_CHOSEN,
   shackTopBarLabel,
+  shackTopBarPhone,
 } from "@/lib/shackSwitcherEvents";
 
 const navItems = [
@@ -93,22 +93,17 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
-  const [switcherPreview, setSwitcherPreview] = useState(false);
-  const [previewShack, setPreviewShack] = useState<LocationDetail | null>(null);
+  const [topBarShack, setTopBarShack] = useState<LocationDetail | null>(null);
   const onLocations = isActiveNav(pathname, "/locations");
   const activeLocation = locationFromPathname(pathname);
   const shackCtaLabel = onLocations ? "Change Your Shack" : "Find your shack";
-  const shackSwitcherHomePreview =
-    pathname === "/" && switcherPreview && !activeLocation;
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
-      const preview = isShackSwitcherPreview();
-      setSwitcherPreview(preview);
-      setPreviewShack(preview ? previewShackFromStorage() : null);
+      setTopBarShack(selectedShackFromStorage());
     });
     function onChosen() {
-      setPreviewShack(previewShackFromStorage());
+      setTopBarShack(selectedShackFromStorage());
     }
     window.addEventListener(SHACK_CHOSEN, onChosen);
     return () => {
@@ -124,6 +119,8 @@ export default function Header() {
     setMobileOpen(false);
   }
 
+  const barShack = topBarShack ?? EDGEWOOD;
+
   return (
     <header className="flex w-full flex-col items-center">
       {/* Alert banner — location pages use live top-header pattern */}
@@ -131,21 +128,19 @@ export default function Header() {
         <div className="flex w-full items-center justify-center overflow-hidden bg-[#1A1A1A] px-5 py-3.5 lg:px-[30px]">
           <div className="flex w-full max-w-[1320px] flex-col items-center justify-between gap-3 sm:flex-row sm:gap-5">
             <div className="flex flex-wrap items-center justify-center gap-x-2.5 text-[13px] leading-4 text-white sm:justify-start">
-              {switcherPreview ? (
-                <button
-                  type="button"
-                  aria-label={`${activeLocation.shortName} Location — change shack`}
-                  onClick={() => dispatchOpenShackPicker("topbar")}
-                  className="inline-flex items-center gap-2.5 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold lg:hidden"
-                >
-                  <ShackIcon />
-                  <span className="underline underline-offset-2">{activeLocation.shortName} Location</span>
-                  <TopBarChevron />
-                </button>
-              ) : null}
+              <button
+                type="button"
+                aria-label={`${activeLocation.shortName} Location — change shack`}
+                onClick={() => dispatchOpenShackPicker("topbar")}
+                className="inline-flex items-center gap-2.5 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold lg:hidden"
+              >
+                <ShackIcon />
+                <span className="underline underline-offset-2">{activeLocation.shortName} Location</span>
+                <TopBarChevron />
+              </button>
               <Link
                 href={`/locations/${activeLocation.slug}/`}
-                className={`inline-flex items-center gap-2.5 text-white hover:underline ${switcherPreview ? "hidden lg:inline-flex" : ""}`}
+                className="hidden items-center gap-2.5 text-white hover:underline lg:inline-flex"
               >
                 <ShackIcon />
                 {activeLocation.shortName} Location
@@ -195,64 +190,29 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Mobile default alert — node 6354:11981; preview uses live-style top bar (Option 1) */}
-          {shackSwitcherHomePreview ? (
-            <div className="flex w-full items-center justify-center overflow-hidden bg-brand-black px-3 py-2.5 lg:hidden">
-              {(() => {
-                const barShack = previewShack ?? EDGEWOOD;
-                return (
-                  <div className="flex w-full max-w-[1320px] items-center gap-1.5 text-[12.5px] font-bold leading-4 text-white">
-                    <TopBarPinIcon />
-                    <button
-                      type="button"
-                      aria-label={`${shackTopBarLabel(barShack)} — change shack`}
-                      onClick={() => dispatchOpenShackPicker("topbar")}
-                      className="inline-flex min-w-0 max-w-[55%] items-center gap-1 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
-                    >
-                      <span className="truncate underline underline-offset-2 decoration-[1.5px]">
-                        {shackTopBarLabel(barShack)}
-                      </span>
-                      <TopBarChevron />
-                    </button>
-                    <a
-                      href={barShack.phoneHref}
-                      className="ml-auto shrink-0 text-[11px] font-bold text-brand-gold hover:underline"
-                    >
-                      {barShack.phone}
-                    </a>
-                  </div>
-                );
-              })()}
+          {/* Mobile live-style top bar (Option 1) — tap the shack name to switch */}
+          <div className="flex w-full items-center justify-center overflow-hidden bg-brand-black px-3 py-2.5 lg:hidden">
+            <div className="flex w-full max-w-[1320px] items-center gap-1.5 text-[12.5px] font-bold leading-4 text-white">
+              <TopBarPinIcon />
+              <button
+                type="button"
+                aria-label={`${shackTopBarLabel(barShack)} — change shack`}
+                onClick={() => dispatchOpenShackPicker("topbar")}
+                className="inline-flex min-w-0 max-w-[55%] items-center gap-1 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
+              >
+                <span className="truncate underline underline-offset-2 decoration-[1.5px]">
+                  {shackTopBarLabel(barShack)}
+                </span>
+                <TopBarChevron />
+              </button>
+              <a
+                href={barShack.phoneHref}
+                className="ml-auto shrink-0 text-[11px] font-bold text-brand-gold hover:underline"
+              >
+                {shackTopBarPhone(barShack)}
+              </a>
             </div>
-          ) : (
-            <div className="flex w-full flex-col items-center gap-2.5 bg-brand-black px-2.5 py-[9px] lg:hidden">
-              <p className="w-full text-center text-[13px] font-semibold leading-[1.5] text-white">
-                5770 Peachtree Industrial Blvd Suite 111, Norcross, GA |{" "}
-                <a
-                  href="tel:7704166606"
-                  className="text-brand-gold underline-offset-2 hover:underline"
-                >
-                  (770) 416-6606
-                </a>
-              </p>
-              {switcherPreview ? (
-                <button
-                  type="button"
-                  onClick={() => dispatchOpenShackPicker("alert")}
-                  className="flex w-full items-center justify-center rounded-[5px] bg-brand-red px-3.5 py-3 text-xs font-bold uppercase leading-none text-white transition-colors hover:bg-[#a01b25]"
-                >
-                  Change your location
-                </button>
-              ) : (
-                <Link
-                  href="/locations"
-                  className="flex w-full items-center justify-center rounded-[5px] bg-brand-red px-3.5 py-3 text-xs font-bold uppercase leading-none text-white transition-colors hover:bg-[#a01b25]"
-                >
-                  Change your location
-                </Link>
-              )}
-            </div>
-          )}
+          </div>
         </>
       )}
 
