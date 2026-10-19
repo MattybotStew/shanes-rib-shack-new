@@ -2,9 +2,16 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { asset } from "@/lib/asset";
-import { locationFromPathname } from "@/lib/locationData";
+import { locationFromPathname, type LocationDetail } from "@/lib/locationData";
+import {
+  dispatchOpenShackPicker,
+  isShackSwitcherPreview,
+  previewShackFromStorage,
+  SHACK_CHOSEN,
+  shackTopBarLabel,
+} from "@/lib/shackSwitcherEvents";
 
 const navItems = [
   { label: "Menu", href: "/menu" },
@@ -59,13 +66,57 @@ function PhoneIcon() {
   );
 }
 
+function TopBarChevron() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      className="h-3 w-3 shrink-0 stroke-white opacity-85"
+      fill="none"
+      strokeWidth={2.6}
+      aria-hidden
+    >
+      <path d="M9 6l6 6-6 6" />
+    </svg>
+  );
+}
+
+/** Live-style top bar pin (mock `.tbar` uses white, not the red ShackIcon). */
+function TopBarPinIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 shrink-0 fill-white" aria-hidden>
+      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
+    </svg>
+  );
+}
+
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const [prevPathname, setPrevPathname] = useState(pathname);
+  const [switcherPreview, setSwitcherPreview] = useState(false);
+  const [previewShack, setPreviewShack] = useState<LocationDetail | null>(null);
   const onLocations = isActiveNav(pathname, "/locations");
   const activeLocation = locationFromPathname(pathname);
   const shackCtaLabel = onLocations ? "Change Your Shack" : "Find your shack";
+  const shackSwitcherHomePreview =
+    pathname === "/" && switcherPreview && !activeLocation;
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      const preview =
+        pathname === "/" && isShackSwitcherPreview() && !locationFromPathname(pathname);
+      setSwitcherPreview(preview);
+      setPreviewShack(preview ? previewShackFromStorage() : null);
+    });
+    function onChosen() {
+      setPreviewShack(previewShackFromStorage());
+    }
+    window.addEventListener(SHACK_CHOSEN, onChosen);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener(SHACK_CHOSEN, onChosen);
+    };
+  }, [pathname]);
 
   // Header lives in the root layout — close the drawer on client navigations.
   // Reset state during render (React docs pattern) instead of in an effect.
@@ -133,24 +184,49 @@ export default function Header() {
             </div>
           </div>
 
-          {/* Mobile default alert — node 6354:11981 */}
-          <div className="flex w-full flex-col items-center gap-2.5 bg-brand-black px-2.5 py-[9px] lg:hidden">
-            <p className="w-full text-center text-[13px] font-semibold leading-[1.5] text-white">
-              5770 Peachtree Industrial Blvd Suite 111, Norcross, GA |{" "}
-              <a
-                href="tel:7704166606"
-                className="text-brand-gold underline-offset-2 hover:underline"
+          {/* Mobile default alert — node 6354:11981; preview uses live-style top bar (Option 1) */}
+          {shackSwitcherHomePreview && previewShack ? (
+            <div className="flex w-full items-center justify-center overflow-hidden bg-brand-black px-3 py-2.5 lg:hidden">
+              <div className="flex w-full max-w-[1320px] items-center gap-1.5 text-[12.5px] font-bold leading-4 text-white">
+                <TopBarPinIcon />
+                <button
+                  type="button"
+                  aria-label="Change your shack"
+                  onClick={() => dispatchOpenShackPicker("topbar")}
+                  className="inline-flex min-w-0 max-w-[55%] items-center gap-1 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
+                >
+                  <span className="truncate underline underline-offset-2 decoration-[1.5px]">
+                    {shackTopBarLabel(previewShack)}
+                  </span>
+                  <TopBarChevron />
+                </button>
+                <a
+                  href={previewShack.phoneHref}
+                  className="ml-auto shrink-0 text-[11px] font-bold text-brand-gold hover:underline"
+                >
+                  {previewShack.phone}
+                </a>
+              </div>
+            </div>
+          ) : (
+            <div className="flex w-full flex-col items-center gap-2.5 bg-brand-black px-2.5 py-[9px] lg:hidden">
+              <p className="w-full text-center text-[13px] font-semibold leading-[1.5] text-white">
+                5770 Peachtree Industrial Blvd Suite 111, Norcross, GA |{" "}
+                <a
+                  href="tel:7704166606"
+                  className="text-brand-gold underline-offset-2 hover:underline"
+                >
+                  (770) 416-6606
+                </a>
+              </p>
+              <Link
+                href="/locations"
+                className="flex w-full items-center justify-center rounded-[5px] bg-brand-red px-3.5 py-3 text-xs font-bold uppercase leading-none text-white transition-colors hover:bg-[#a01b25]"
               >
-                (770) 416-6606
-              </a>
-            </p>
-            <Link
-              href="/locations"
-              className="flex w-full items-center justify-center rounded-[5px] bg-brand-red px-3.5 py-3 text-xs font-bold uppercase leading-none text-white transition-colors hover:bg-[#a01b25]"
-            >
-              Change your location
-            </Link>
-          </div>
+                Change your location
+              </Link>
+            </div>
+          )}
         </>
       )}
 

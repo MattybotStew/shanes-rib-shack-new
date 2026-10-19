@@ -148,3 +148,13 @@ test("404 page renders branded fallback", async ({ page }) => {
   expect(response?.status()).toBe(404);
   await expect(page.getByRole("heading", { name: /404|not found/i })).toBeVisible();
 });
+
+test("shack switcher preview opens picker from top bar", async ({ page, isMobile }) => {
+  test.skip(!isMobile, "Mobile shack switcher preview only");
+  await page.goto("/?shack-switcher=1");
+  await page.getByRole("button", { name: /Dismiss/i }).click();
+  await page.getByRole("button", { name: /Change your shack/i }).click();
+  await expect(page.getByRole("dialog", { name: /Nearby Shane/i })).toBeVisible();
+  await page.getByRole("button", { name: /^Use$/i }).nth(1).click();
+  await expect(page.getByRole("status")).toContainText(/now your shack/i);
+});

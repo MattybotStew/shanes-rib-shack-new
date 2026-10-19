@@ -2,34 +2,31 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import {
+  dispatchShackChosen,
+  isShackSwitcherPreview,
+  PREVIEW_NEARBY_SLUGS,
+  SHACK_PICKER_OPEN,
+  STORAGE_CHOSEN,
+  STORAGE_DISMISSED,
+  type ShackPickerSource,
+} from "@/lib/shackSwitcherEvents";
+import { LOCATIONS_BY_SLUG } from "@/lib/locationData";
 
 /**
- * First-visit mobile location switcher (client-chosen recommendation #3).
+ * First-visit mobile location switcher (Option #3) + everyday top-bar picker (Option #1).
  *
- * On a first visit it suggests the closest shack — "We think you're near
- * Edgewood" — with a primary **View Location** button (opens that shack's
- * page) and a **Change** button (opens the nearby-shack picker). It can be
- * dismissed with ×, and once a shack is chosen or dismissed it stays away
- * (localStorage, mirroring the live site's `myShanes` cookie).
- *
- * Preview / review: the switcher only appears with `?shack-switcher=1` on
- * the homepage URL — the default homepage experience is unchanged. Choosing
- * or dismissing still persists (localStorage), mirroring live behavior.
+ * Preview: `?shack-switcher=1` on the homepage. Default homepage is unchanged.
  */
 
 type Shack = { slug: string; name: string; title: string };
 
-const NEARBY_SHACKS: Shack[] = [
-  { slug: "edgewood-atlanta-ga", name: "Edgewood", title: "Edgewood - Atlanta, GA" },
-  { slug: "norcross-ga", name: "Norcross", title: "Norcross, GA" },
-  { slug: "carrollton-ga", name: "Carrollton", title: "Carrollton, GA" },
-  { slug: "douglasville-ga", name: "Douglasville", title: "Douglasville, GA" },
-];
+const NEARBY_SHACKS: Shack[] = PREVIEW_NEARBY_SLUGS.map((slug) => {
+  const loc = LOCATIONS_BY_SLUG[slug];
+  return { slug, name: loc.shortName, title: loc.name };
+});
 
 const SUGGESTED = NEARBY_SHACKS[0];
-
-const STORAGE_CHOSEN = "myShanes";
-const STORAGE_DISMISSED = "shackSwitcherDismissed";
 
 function track(event: string, params: Record<string, unknown> = {}) {
   if (typeof window === "undefined") return;
@@ -47,17 +44,37 @@ function PinIcon({ className = "" }: { className?: string }) {
 
 export default function LocationSwitcher() {
   const [phase, setPhase] = useState<"hidden" | "suggest" | "picker">("hidden");
+  const [pickerEntry, setPickerEntry] = useState<ShackPickerSource | "change">("change");
   const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
     const frame = requestAnimationFrame(() => {
-      const forced = new URLSearchParams(window.location.search).get("shack-switcher") === "1";
-      if (forced) {
-        setPhase("suggest");
-        track("shack_switcher_shown", { suggested: SUGGESTED.name });
+      if (!isShackSwitcherPreview()) return;
+
+      const dismissed = window.localStorage.getItem(STORAGE_DISMISSED) === "1";
+      const chosen = window.localStorage.getItem(STORAGE_CHOSEN);
+      if (dismissed || chosen) {
+        setPhase("hidden");
+        return;
       }
+
+      setPhase("suggest");
+      track("shack_switcher_shown", { suggested: SUGGESTED.name });
     });
     return () => cancelAnimationFrame(frame);
+  }, []);
+
+  useEffect(() => {
+    function onOpenPicker(e: Event) {
+      if (!isShackSwitcherPreview()) return;
+      const source = (e as CustomEvent<{ source: ShackPickerSource }>).detail?.source ?? "topbar";
+      setPickerEntry(source);
+      setPhase("picker");
+      track("picker_open", { source });
+    }
+
+    window.addEventListener(SHACK_PICKER_OPEN, onOpenPicker);
+    return () => window.removeEventListener(SHACK_PICKER_OPEN, onOpenPicker);
   }, []);
 
   useEffect(() => {
@@ -74,11 +91,21 @@ export default function LocationSwitcher() {
 
   function viewLocation() {
     window.localStorage.setItem(STORAGE_CHOSEN, SUGGESTED.slug);
+    dispatchShackChosen(SUGGESTED.slug);
     track("location_selected", { shack: SUGGESTED.name, source: "switcher", method: "nearest" });
+  }
+
+  function closePicker() {
+    if (pickerEntry === "change") {
+      setPhase("suggest");
+    } else {
+      setPhase("hidden");
+    }
   }
 
   function chooseShack(shack: Shack) {
     window.localStorage.setItem(STORAGE_CHOSEN, shack.slug);
+    dispatchShackChosen(shack.slug);
     track("location_selected", { shack: shack.name, source: "switcher", method: "picker" });
     setPhase("hidden");
     setToast(`${shack.name} is now your shack.`);
@@ -88,12 +115,11 @@ export default function LocationSwitcher() {
 
   return (
     <>
-      {/* scrim */}
       {phase !== "hidden" && (
         <div
           className="fixed inset-0 z-50 bg-brand-black/45"
           aria-hidden="true"
-          onClick={phase === "picker" ? () => setPhase("suggest") : dismiss}
+          onClick={phase === "picker" ? closePicker : dismiss}
         />
       )}
 
@@ -128,7 +154,8 @@ export default function LocationSwitcher() {
             <button
               type="button"
               onClick={() => {
-                track("picker_open", { source: "switcher" });
+                setPickerEntry("change");
+                track("picker_open", { source: "change" });
                 setPhase("picker");
               }}
               className="flex-1 rounded-[5px] border-2 border-brand-black px-4 py-3 text-center text-sm font-bold uppercase leading-4 text-brand-black hover:bg-brand-black hover:text-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
@@ -154,7 +181,7 @@ export default function LocationSwitcher() {
           <button
             type="button"
             aria-label="Close"
-            onClick={() => setPhase("suggest")}
+            onClick={closePicker}
             className="absolute right-4 top-4 flex h-8 w-8 items-center justify-center rounded-full bg-brand-tan text-base font-extrabold leading-none text-brand-black hover:bg-cream focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
           >
             ×
