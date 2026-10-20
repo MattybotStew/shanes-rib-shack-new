@@ -1,0 +1,141 @@
+- generic [active] [ref=f1e1]:
+  - link "Skip to content" [ref=f1e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f1e3]:
+    - generic [ref=f1e4]:
+      - paragraph [ref=f1e5]:
+        - text: 5770 Peachtree Industrial Blvd Suite 111, Norcross, GA |
+        - link "(770) 416-6606" [ref=f1e6] [cursor=pointer]:
+          - /url: tel:7704166606
+      - link "Change your location" [ref=f1e7] [cursor=pointer]:
+        - /url: /locations/
+    - generic [ref=f1e9]:
+      - button "Open menu" [ref=f1e10] [cursor=pointer]
+      - link "Shane's Rib Shack home" [ref=f1e12] [cursor=pointer]:
+        - /url: /
+        - img "Shane's Rib Shack" [ref=f1e13]
+      - link [ref=f1e14] [cursor=pointer]:
+        - /url: /order/
+        - generic [ref=f1e15]: OrderNow
+  - main [ref=f1e16]:
+    - region "Welcome" [ref=f1e17]:
+      - generic [ref=f1e18]:
+        - img "Slow-smoked ribs, chopped BBQ pork, and Texas toast from Shane's Rib Shack" [ref=f1e20]
+        - generic [ref=f1e22]:
+          - heading "Welcome to The Original Shack" [level=1] [ref=f1e23]
+          - paragraph [ref=f1e24]: Great food brings people together, and that's what Shane's Rib Shack does best. From slow-smoked baby back ribs to hand-chopped BBQ pork, chicken, burgers, salads, and classic Southern sides, our menu offers something for every appetite. Dine in, take it to go, or make it a regular stop with the people you enjoy most.
+          - generic [ref=f1e25]:
+            - link "Order Now" [ref=f1e26] [cursor=pointer]:
+              - /url: https://order.shanesribshack.com/order
+            - link "Rewards" [ref=f1e27] [cursor=pointer]:
+              - /url: /rewards/
+    - region "Catering" [ref=f1e28]:
+      - generic [ref=f1e30]:
+        - heading "Catering For Every Occasion" [level=2] [ref=f1e31]
+        - paragraph [ref=f1e32]: Feeding a group doesn't have to be complicated. Shane's Rib Shack catering brings slow-smoked BBQ and classic sides prepared fresh at your local Shack, so everything arrives hot and ready to enjoy. Whatever the occasion, we make serving a crowd simple.
+        - generic [ref=f1e33]:
+          - link "Order Now" [ref=f1e34] [cursor=pointer]:
+            - /url: https://www.ezcater.com/brand/shanes-rib-shack?utm_source=shanessite&utm_medium=catering&utm_campaign=online_order
+          - link "View Catering Menu" [ref=f1e35] [cursor=pointer]:
+            - /url: /catering/#catering-menu
+    - region [ref=f1e36]:
+      - generic [ref=f1e37]:
+        - generic [ref=f1e38]:
+          - heading "Latest Shack News" [level=2] [ref=f1e39]
+          - generic [ref=f1e40]:
+            - button "Previous news" [disabled] [ref=f1e41]
+            - button "Next news" [ref=f1e44]
+        - list [ref=f1e48]:
+          - listitem [ref=f1e49]:
+            - img "Shane's Rib Shack 22 year anniversary artwork" [ref=f1e51]
+            - generic [ref=f1e52]:
+              - heading "Cheers to 22 Years!" [level=3] [ref=f1e53]
+              - paragraph [ref=f1e54]: Join us Sunday April 21st to celebrate 22 years at the Original Shane's Rib Shack!
+              - link "Read More" [ref=f1e55] [cursor=pointer]:
+                - /url: https://www.shanesribshack.com/news/24-years-of-shanes-rib-shack/
+          - listitem [ref=f1e56]:
+            - img "Shane's Rib Shack grand prize winner with her new boat" [ref=f1e58]
+            - generic [ref=f1e59]:
+              - heading "2023 Grand Prize Winner Reveal" [level=3] [ref=f1e60]
+              - paragraph [ref=f1e61]: Congratulations to Mrs. Brenda Clark on her BRAND NEW BOAT! See how she took home the top prize.
+              - link "Read More" [ref=f1e62] [cursor=pointer]:
+                - /url: https://www.shanesribshack.com/news/are-you-ready-to-take-on-the-challenge/
+          - listitem [ref=f1e63]:
+            - img "Shane's Rib Shack catering spread for a game day party" [ref=f1e65]
+            - generic [ref=f1e66]:
+              - heading "March Madness Catering" [level=3] [ref=f1e67]
+              - paragraph [ref=f1e68]: Build your BBQ menu bracket and let Shane's feed the whole watch party.
+              - link "Read More" [ref=f1e69] [cursor=pointer]:
+                - /url: https://www.shanesribshack.com/news/march-madness-catering-build-your-bbq-menu-bracket/
+    - region "Gift cards" [ref=f1e71]:
+      - generic [ref=f1e73]:
+        - img "Shane's Rib Shack gift card with BBQ plate" [ref=f1e75]
+        - generic [ref=f1e76]:
+          - heading "Give the Gift of Great Food" [level=2] [ref=f1e77]
+          - paragraph [ref=f1e78]: Shane's Rib Shack gift cards are an easy way to treat friends, family, or coworkers to something they'll actually enjoy. Perfect for birthdays, thank-you gifts, or last-minute surprises, a Shane's gift card lets them choose their favorite BBQ whenever the craving hits.
+          - paragraph [ref=f1e79]: "** Gift cards are also available for purchase in the restaurant!"
+          - link "Shop Gift Cards" [ref=f1e80] [cursor=pointer]:
+            - /url: /gift-cards/
+    - region "Rewards app" [ref=f1e81]:
+      - generic [ref=f1e84]:
+        - heading "Download our rewards app today" [level=2] [ref=f1e85]
+        - paragraph [ref=f1e86]: Earn points with every transaction, save favorites for easy reordering, redeem points for menu items, & more!
+        - generic [ref=f1e87]:
+          - link "Download on the App Store" [ref=f1e88] [cursor=pointer]:
+            - /url: https://apps.apple.com/us/app/shanes-rib-shack-2-0/id6759003661
+          - link [ref=f1e94] [cursor=pointer]:
+            - /url: https://play.google.com/store/apps/details?id=com.tryperdiem.franchise.shanesribshack&hl=en
+            - img "Get it on Google Play" [ref=f1e95]
+        - img "Shane's Rib Shack rewards app on phones" [ref=f1e98]
+    - generic [ref=f1e100]:
+      - generic [ref=f1e102]:
+        - generic [ref=f1e103]:
+          - link "Franchising" [ref=f1e105] [cursor=pointer]:
+            - /url: /franchise/
+          - link "Merchandise" [ref=f1e108] [cursor=pointer]:
+            - /url: /shop/
+          - link "Press Room" [ref=f1e111] [cursor=pointer]:
+            - /url: /news-events/
+          - link "Terms and Conditions of Use" [ref=f1e114] [cursor=pointer]:
+            - /url: /terms/
+          - link "Privacy Policy" [ref=f1e117] [cursor=pointer]:
+            - /url: /privacy/
+        - generic [ref=f1e119]:
+          - link "Cookie and Internet-Based Advertising Policy" [ref=f1e121] [cursor=pointer]:
+            - /url: /privacy/
+          - link "Do Not Sell Or Share My Personal Information" [ref=f1e124] [cursor=pointer]:
+            - /url: /privacy/
+          - link "Accessibility" [ref=f1e127] [cursor=pointer]:
+            - /url: /troubleshooting/
+        - generic [ref=f1e129]:
+          - link "Locations" [ref=f1e131] [cursor=pointer]:
+            - /url: /locations/
+          - link "Cookie Preference Center" [ref=f1e134] [cursor=pointer]:
+            - /url: /privacy/
+          - link "Careers" [ref=f1e137] [cursor=pointer]:
+            - /url: /careers/
+          - link "Supply Chain" [ref=f1e140] [cursor=pointer]:
+            - /url: /contact/
+      - generic [ref=f1e142]:
+        - link "Home" [ref=f1e143] [cursor=pointer]:
+          - /url: /
+          - img "Shane's Rib Shack" [ref=f1e144]
+        - generic [ref=f1e145]:
+          - link "Facebook" [ref=f1e146] [cursor=pointer]:
+            - /url: https://facebook.com/shanesribshack
+          - link "Instagram" [ref=f1e147] [cursor=pointer]:
+            - /url: https://instagram.com/shanesribshack
+          - link "YouTube" [ref=f1e148] [cursor=pointer]:
+            - /url: https://youtube.com/@shanesribshack
+        - paragraph [ref=f1e149]: © 2026 shane's rib shack.
+    - dialog "Your nearby Shane's" [ref=f1e151]:
+      - button "Dismiss" [ref=f1e152]: ×
+      - paragraph [ref=f1e154]: We think you’re near Edgewood
+      - paragraph [ref=f1e157]: The closest Shane’s to your phone.
+      - generic [ref=f1e158]:
+        - link "View Location" [ref=f1e159] [cursor=pointer]:
+          - /url: /locations/edgewood-atlanta-ga/
+        - button "Change" [ref=f1e160]
+      - link "See all locations" [ref=f1e161] [cursor=pointer]:
+        - /url: /locations/
+  - alert [ref=f1e162]

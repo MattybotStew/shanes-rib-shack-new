@@ -1,0 +1,76 @@
+- generic [active] [ref=f3e1]:
+  - generic [ref=f3e3]:
+    - link "← All mockups" [ref=f3e4] [cursor=pointer]:
+      - /url: index.html
+    - text: · Homepage news module · Option 1 styling
+  - banner [ref=f3e5]:
+    - generic [ref=f3e6]:
+      - generic [ref=f3e7]:
+        - link "Shane's Rib Shack home" [ref=f3e8] [cursor=pointer]:
+          - /url: ../
+          - img "Shane's Rib Shack" [ref=f3e9]
+        - link "Find your shack" [ref=f3e10] [cursor=pointer]:
+          - /url: "#"
+      - navigation "Primary" [ref=f3e11]:
+        - link "Menu" [ref=f3e12] [cursor=pointer]:
+          - /url: "#"
+        - link "Catering" [ref=f3e13] [cursor=pointer]:
+          - /url: "#"
+        - link "Locations" [ref=f3e14] [cursor=pointer]:
+          - /url: "#"
+        - link "Our Story" [ref=f3e15] [cursor=pointer]:
+          - /url: "#"
+        - link "News & Events" [ref=f3e16] [cursor=pointer]:
+          - /url: "#"
+        - link "Careers" [ref=f3e17] [cursor=pointer]:
+          - /url: "#"
+        - link "FAQs" [ref=f3e18] [cursor=pointer]:
+          - /url: "#"
+      - generic [ref=f3e19]:
+        - link "Rewards" [ref=f3e20] [cursor=pointer]:
+          - /url: "#"
+        - link "Order Now" [ref=f3e21] [cursor=pointer]:
+          - /url: "#"
+  - generic [ref=f3e23]:
+    - generic [ref=f3e24]:
+      - heading "Latest Shack News" [level=2] [ref=f3e25]
+      - generic [ref=f3e26]:
+        - button "Previous news" [ref=f3e27] [cursor=pointer]
+        - button "Next news" [ref=f3e30] [cursor=pointer]
+    - separator [ref=f3e33]
+    - generic [ref=f3e34]:
+      - link "News Thank ‘QUE, Shaniacs! Join us 8/11/26 for a $6.99 Big Dad and Side Customer appreciation day at the Shack — our signature Big Dad BBQ Pork Sandwich plus a small side for just $6.99. One day only, while supplies last. Read More" [ref=f3e35] [cursor=pointer]:
+        - /url: single-post.html
+        - generic [ref=f3e37]:
+          - paragraph [ref=f3e38]: News
+          - heading "Thank ‘QUE, Shaniacs! Join us 8/11/26 for a $6.99 Big Dad and Side" [level=3] [ref=f3e39]
+          - paragraph [ref=f3e40]: Customer appreciation day at the Shack — our signature Big Dad BBQ Pork Sandwich plus a small side for just $6.99. One day only, while supplies last.
+          - generic [ref=f3e41]: Read More
+      - link "Game Day Build the Ultimate BBQ Tailgate Tray Wings, ribs, and sides that travel — set up your home game-day spread the easy way. Read More" [ref=f3e42] [cursor=pointer]:
+        - /url: single-post.html
+        - generic [ref=f3e44]:
+          - paragraph [ref=f3e45]: Game Day
+          - heading "Build the Ultimate BBQ Tailgate Tray" [level=3] [ref=f3e46]
+          - paragraph [ref=f3e47]: Wings, ribs, and sides that travel — set up your home game-day spread the easy way.
+          - generic [ref=f3e48]: Read More
+      - link "Catering Stress-free Holiday Meals for the Office Thanksgiving, Christmas and everything in between — we bring the smoked meats. Read More" [ref=f3e49] [cursor=pointer]:
+        - /url: single-post.html
+        - generic [ref=f3e51]:
+          - paragraph [ref=f3e52]: Catering
+          - heading "Stress-free Holiday Meals for the Office" [level=3] [ref=f3e53]
+          - paragraph [ref=f3e54]: Thanksgiving, Christmas and everything in between — we bring the smoked meats.
+          - generic [ref=f3e55]: Read More
+    - link "View All News" [ref=f3e57] [cursor=pointer]:
+      - /url: news-landing.html
+  - generic [ref=f3e59]:
+    - heading "Dev notes — WordPress" [level=2] [ref=f3e60]
+    - list [ref=f3e61]:
+      - listitem [ref=f3e62]: "Module placement: homepage section (currently “Latest Shack News”) — heading, prev/next arrows and dashed rule stay; the cards are re-styled to match the News landing cards."
+      - listitem [ref=f3e63]:
+        - text: Card images use the post featured image at 1900 × 1080 (
+        - code [ref=f3e64]: "object-fit: cover"
+        - text: ), same as the landing page. Include a mobile image override so editors can use a different image on phones.
+      - listitem [ref=f3e65]: Excerpts come from the single post’s excerpt field — same source as the landing page cards.
+      - listitem [ref=f3e66]: “View All News” button is optional — links to the News landing page; omit if the client prefers the module to stay carousel-only.
+      - listitem [ref=f3e67]: Card row can keep the existing scroll-snap carousel behavior on all breakpoints; only the card styling changes.
+  - contentinfo [ref=f3e68]: Shane’s Rib Shack · Design mockup — Homepage news module

@@ -5,32 +5,71 @@ export type NewsItem = {
   href: string;
   image: string;
   imageAlt: string;
+  category: string;
+  date: string;
 };
 
+/** Newest posts from the live /news/ archive (shanesribshack.com). */
 export const newsItems: NewsItem[] = [
   {
-    title: "Cheers to 22 Years!",
+    title: "Types of BBQ Sauce: A Guide to Regional Flavors and Styles",
     excerpt:
-      "Join us Sunday April 21st to celebrate 22 years at the Original Shane's Rib Shack!",
-    href: "https://www.shanesribshack.com/news/24-years-of-shanes-rib-shack/",
-    image: "/images/home/news-1.jpg",
-    imageAlt: "Shane's Rib Shack 22 year anniversary artwork",
+      "BBQ fans tend to have strong opinions about sauce. Some swear by a thick, sweet sauce, while others want plenty of vinegar, mustard, or heat.",
+    href: "https://www.shanesribshack.com/news/types-of-bbq-sauce-a-guide-to-regional-flavors-and-styles/",
+    image: "/images/news-events/live-bbq-sauce.jpg",
+    imageAlt: "Types of BBQ Sauce: A Guide to Regional Flavors and Styles",
+    category: "News",
+    date: "Sep 21, 2026",
   },
   {
-    title: "2023 Grand Prize Winner Reveal",
+    title: "Thank ‘QUE, Shaniacs! Join us 8/11/26 for a $6.99 Big Dad and Side",
     excerpt:
-      "Congratulations to Mrs. Brenda Clark on her BRAND NEW BOAT! See how she took home the top prize.",
+      "On August 11, 2026, enjoy the signature Big Dad sandwich plus a small side for $6.99. Southern BBQ at Shane’s has always been about the people.",
+    href: "https://www.shanesribshack.com/news/thank-que-shaniacs-join-us-8-11-26-for-a-6-99-big-dad-and-side/",
+    image: "/images/news-events/live-thank-que.jpg",
+    imageAlt: "Big Dad and side — August 11, 2026 only",
+    category: "News",
+    date: "Aug 22, 2026",
+  },
+  {
+    title: "4th of July BBQ: Let Shane’s Handle the Food This Independence Day",
+    excerpt:
+      "Slow-smoked BBQ for your Fourth of July. Friends and family, fireworks, and a table full of great food — Shane’s handles the spread.",
+    href: "https://www.shanesribshack.com/news/let-shanes-handle-the-bbq-this-4th-of-july/",
+    image: "/images/news-events/live-july-4.png",
+    imageAlt: "Shane’s Rib Shack 4th of July catering spread",
+    category: "News",
+    date: "Jun 9, 2026",
+  },
+  {
+    title: "Are you ready to take on the Challenge?",
+    excerpt:
+      "Happy National BBQ Month, Shaniacs. May is the month to celebrate slow-smoked flavor and Southern hospitality at Shane’s Rib Shack.",
     href: "https://www.shanesribshack.com/news/are-you-ready-to-take-on-the-challenge/",
-    image: "/images/home/news-2.jpg",
-    imageAlt: "Shane's Rib Shack grand prize winner with her new boat",
+    image: "/images/news-events/live-bbq-month.jpg",
+    imageAlt: "National BBQ Month at Shane’s Rib Shack",
+    category: "News",
+    date: "May 5, 2026",
   },
   {
-    title: "March Madness Catering",
+    title: "March Madness Catering: Build Your BBQ Menu Bracket",
     excerpt:
-      "Build your BBQ menu bracket and let Shane's feed the whole watch party.",
+      "When March rolls around, brackets get filled out and TVs stay on the tournament. Let Shane’s feed the whole watch party.",
     href: "https://www.shanesribshack.com/news/march-madness-catering-build-your-bbq-menu-bracket/",
-    image: "/images/home/news-3.jpg",
-    imageAlt: "Shane's Rib Shack catering spread for a game day party",
+    image: "/images/news-events/live-march-madness.png",
+    imageAlt: "March Madness catering from Shane’s Rib Shack",
+    category: "News",
+    date: "Mar 16, 2026",
+  },
+  {
+    title: "24 Years of Shane’s Rib Shack",
+    excerpt:
+      "This year marks 24 years of slow-smoked BBQ, one plate at a time — from Shane Thompson leaving the corporate tie behind in 2002.",
+    href: "https://www.shanesribshack.com/news/24-years-of-shanes-rib-shack/",
+    image: "/images/news-events/live-24-years.png",
+    imageAlt: "24 years of Shane’s Rib Shack",
+    category: "News",
+    date: "Feb 23, 2026",
   },
 ];
 

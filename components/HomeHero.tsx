@@ -14,14 +14,14 @@ function HeroCtas({ stack }: { stack?: boolean }) {
     <div
       className={
         stack
-          ? "flex flex-col items-center gap-3"
+          ? "flex w-full flex-col items-stretch gap-3"
           : "flex flex-wrap items-center gap-3"
       }
     >
-      <Cta href={ORDER_HOME_URL} variant="red">
+      <Cta href={ORDER_HOME_URL} variant="red" className={stack ? "w-full" : ""}>
         Order Now
       </Cta>
-      <Cta href="/rewards" variant="black">
+      <Cta href="/rewards" variant="black" className={stack ? "w-full" : ""}>
         Rewards
       </Cta>
     </div>
@@ -30,49 +30,28 @@ function HeroCtas({ stack }: { stack?: boolean }) {
 
 export default function HomeHero() {
   return (
-    <section className="w-full" aria-label="Welcome">
-      {/* Mobile — MB-Home 6310:5773: photo above copy, stacked */}
-      <div className="flex w-full flex-col lg:hidden">
-        <div className="w-full px-5 pt-5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src={asset("/images/home/hero-shack.jpg")}
-            alt={heroAlt}
-            className="h-[290px] w-full rounded-[12px] object-cover object-[50%_62%]"
-          />
-        </div>
-        <div className="w-full bg-white px-5 pb-10">
-          <div className="flex w-full flex-col items-center gap-[30px] px-[30px] py-10 text-center">
-            <h1 className="w-full text-[32px] font-extrabold uppercase leading-none text-brand-red">
+    <section className="w-full px-5 py-5" aria-label="Welcome">
+      <div className="relative mx-auto w-full max-w-[1320px] overflow-hidden rounded-[12px]">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={asset("/images/home/hero-shack.jpg")}
+          alt={heroAlt}
+          className="absolute inset-0 size-full object-cover object-[50%_55%]"
+        />
+        <div className="relative flex min-h-[720px] flex-col justify-end p-5 sm:min-h-[640px] lg:min-h-[620px] lg:items-center lg:justify-start lg:p-[52px]">
+          <div className="flex w-full flex-col items-center gap-6 rounded-[12px] bg-white/80 px-5 py-10 text-center lg:max-w-[720px] lg:items-start lg:gap-[30px] lg:self-start lg:p-[60px] lg:text-left">
+            <h1 className="w-full text-[32px] font-extrabold uppercase leading-none text-brand-red lg:text-[48px]">
               {headline}
             </h1>
-            <p className="w-full text-base font-semibold leading-[1.3] text-brand-black">
+            <p className="w-full text-base font-semibold leading-[1.3] text-brand-black lg:text-lg lg:leading-[1.5]">
               {body}
             </p>
-            <HeroCtas stack />
-          </div>
-        </div>
-      </div>
-
-      {/* Desktop — DK-Home 6310:5562: white card overlaid on photo */}
-      <div className="hidden w-full flex-col items-center px-5 pb-[70px] pt-5 lg:flex">
-        <div className="relative flex w-full max-w-[1320px] flex-col items-center justify-center overflow-hidden rounded-[12px] px-[100px] py-[120px]">
-          <div className="pointer-events-none absolute inset-0">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={asset("/images/home/hero-shack.jpg")}
-              alt={heroAlt}
-              className="absolute inset-0 size-full object-cover object-[50%_62%]"
-            />
-          </div>
-          <div className="relative flex w-full max-w-[680px] flex-col items-start justify-center gap-[30px] rounded-[12px] bg-white p-[60px]">
-            <h1 className="w-full text-[48px] font-extrabold uppercase leading-none text-brand-red">
-              {headline}
-            </h1>
-            <p className="w-full text-lg font-semibold leading-[1.5] text-brand-black">
-              {body}
-            </p>
-            <HeroCtas />
+            <div className="w-full lg:hidden">
+              <HeroCtas stack />
+            </div>
+            <div className="hidden lg:block">
+              <HeroCtas />
+            </div>
           </div>
         </div>
       </div>

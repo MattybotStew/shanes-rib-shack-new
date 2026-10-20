@@ -153,7 +153,7 @@ export default function Header() {
                 className="inline-flex items-center gap-2.5 text-white hover:underline"
               >
                 <PhoneIcon />
-                {activeLocation.phoneAlert}
+                {shackTopBarPhone(activeLocation)}
               </a>
             </div>
             <div className="flex flex-wrap items-center justify-center gap-2.5 text-[13px] leading-4 text-white">
@@ -175,18 +175,45 @@ export default function Header() {
         </div>
       ) : (
         <>
-          {/* Desktop default alert — catering banner */}
-          <div className="hidden w-full items-center justify-center overflow-hidden bg-brand-black px-5 py-3 lg:flex">
-            <div className="flex w-full max-w-[1320px] items-center justify-start">
-              <p className="flex-1 text-left text-[13px] leading-[1.5] text-white">
-                Catering for offices, parties &amp; events ·{" "}
-                <a
-                  href="tel:7704166606"
-                  className="text-brand-gold underline-offset-2 hover:underline"
+          {/* Desktop default alert — same chrome as location pages, chosen shack */}
+          <div className="hidden w-full items-center justify-center overflow-hidden bg-[#1A1A1A] px-5 py-3.5 lg:flex lg:px-[30px]">
+            <div className="flex w-full max-w-[1320px] items-center justify-between gap-5">
+              <div className="flex min-w-0 items-center gap-x-2.5 text-[13px] leading-4 text-white">
+                <button
+                  type="button"
+                  aria-label={`${shackTopBarLabel(barShack)} — change shack`}
+                  onClick={() => dispatchOpenShackPicker("topbar")}
+                  className="inline-flex items-center gap-2.5 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
                 >
-                  (770) 416-6606
+                  <ShackIcon />
+                  {shackTopBarLabel(barShack)}
+                </button>
+                <span className="text-white/80" aria-hidden>
+                  |
+                </span>
+                <a
+                  href={barShack.phoneHref}
+                  className="inline-flex items-center gap-2.5 text-white hover:underline"
+                >
+                  <PhoneIcon />
+                  {shackTopBarPhone(barShack)}
                 </a>
-              </p>
+              </div>
+              <div className="flex shrink-0 items-center gap-2.5 text-[13px] leading-4 text-white">
+                <span className="rounded-xl bg-brand-red px-2.5 py-0.5 text-[12px] font-bold uppercase text-white">
+                  New!
+                </span>
+                <p>
+                  Shaniacs, we have a new app! Download today in your App Store{" "}
+                  <Link
+                    href="/rewards"
+                    className="ml-2.5 font-bold text-brand-red hover:underline"
+                  >
+                    Learn More
+                    <span aria-hidden>→</span>
+                  </Link>
+                </p>
+              </div>
             </div>
           </div>
 
@@ -282,19 +309,30 @@ export default function Header() {
         <div className="flex h-full w-full items-center justify-between">
           <button
             type="button"
-            className="relative block h-[17px] w-[22px] shrink-0 cursor-pointer"
+            className="relative flex h-[17px] w-[22px] shrink-0 cursor-pointer items-center justify-center"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls="mobile-nav"
             onClick={() => setMobileOpen((o) => !o)}
           >
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src={asset("/images/menu-icon.svg")}
-              alt=""
-              className="absolute inset-0 block size-full"
-              aria-hidden
-            />
+            {mobileOpen ? (
+              <svg viewBox="0 0 22 17" className="block h-[17px] w-[22px]" aria-hidden>
+                <path
+                  d="M2 1.5 L20 15.5 M20 1.5 L2 15.5"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                />
+              </svg>
+            ) : (
+              /* eslint-disable-next-line @next/next/no-img-element */
+              <img
+                src={asset("/images/menu-icon.svg")}
+                alt=""
+                className="absolute inset-0 block size-full"
+                aria-hidden
+              />
+            )}
           </button>
 
           <Link
@@ -311,21 +349,25 @@ export default function Header() {
             />
           </Link>
 
-          <Link
-            href="/order"
-            className="flex shrink-0 items-center justify-center rounded-[5px] text-center text-[10.44px] font-bold uppercase leading-[10.444px] text-brand-black"
-            onClick={() => setMobileOpen(false)}
-          >
-            <span>
-              Order
-              <br />
-              Now
-            </span>
-          </Link>
+          {mobileOpen ? (
+            <span className="w-[22px] shrink-0" aria-hidden />
+          ) : (
+            <Link
+              href="/order"
+              className="flex shrink-0 items-center justify-center rounded-[5px] text-center text-[10.44px] font-bold uppercase leading-[10.444px] text-brand-black"
+              onClick={() => setMobileOpen(false)}
+            >
+              <span>
+                Order
+                <br />
+                Now
+              </span>
+            </Link>
+          )}
         </div>
       </div>
 
-      {/* Mobile nav panel (hamburger open) — not in closed Figma frame; needed for usability */}
+      {/* Mobile drawer — below lg only. Desktop header stays hidden at this breakpoint. */}
       {mobileOpen ? (
         <nav
           id="mobile-nav"
@@ -343,18 +385,18 @@ export default function Header() {
             </Link>
           ))}
           <Link
-            href="/locations"
-            className="mt-3 flex items-center justify-center rounded-[5px] bg-brand-red px-3.5 py-3 text-xs font-bold uppercase text-white"
-            onClick={() => setMobileOpen(false)}
-          >
-            {shackCtaLabel}
-          </Link>
-          <Link
             href="/rewards"
-            className="mt-2 mb-2 flex items-center justify-center rounded-[5px] border border-brand-black px-3.5 py-3 text-xs font-bold uppercase text-brand-black"
+            className="mt-3 flex items-center justify-center rounded-[5px] border border-brand-black px-3.5 py-3 text-xs font-bold uppercase text-brand-black"
             onClick={() => setMobileOpen(false)}
           >
             Rewards
+          </Link>
+          <Link
+            href="/order"
+            className="mt-2 mb-2 flex items-center justify-center rounded-[5px] bg-brand-black px-3.5 py-3 text-xs font-bold uppercase text-white"
+            onClick={() => setMobileOpen(false)}
+          >
+            Order Now
           </Link>
         </nav>
       ) : null}

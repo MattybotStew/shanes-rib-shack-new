@@ -1,0 +1,97 @@
+- generic [active] [ref=f2e1]:
+  - generic [ref=f2e3]:
+    - link "← All mockups" [ref=f2e4] [cursor=pointer]:
+      - /url: index.html
+    - text: · Single Post · Option 1 (client pick + revisions)
+  - banner [ref=f2e5]:
+    - generic [ref=f2e6]:
+      - generic [ref=f2e7]:
+        - link "Shane's Rib Shack home" [ref=f2e8] [cursor=pointer]:
+          - /url: ../
+          - img "Shane's Rib Shack" [ref=f2e9]
+        - link "Find your shack" [ref=f2e10] [cursor=pointer]:
+          - /url: "#"
+      - navigation "Primary" [ref=f2e11]:
+        - link "Menu" [ref=f2e12] [cursor=pointer]:
+          - /url: "#"
+        - link "Catering" [ref=f2e13] [cursor=pointer]:
+          - /url: "#"
+        - link "Locations" [ref=f2e14] [cursor=pointer]:
+          - /url: "#"
+        - link "Our Story" [ref=f2e15] [cursor=pointer]:
+          - /url: "#"
+        - link "News & Events" [ref=f2e16] [cursor=pointer]:
+          - /url: "#"
+        - link "Careers" [ref=f2e17] [cursor=pointer]:
+          - /url: "#"
+        - link "FAQs" [ref=f2e18] [cursor=pointer]:
+          - /url: "#"
+      - generic [ref=f2e19]:
+        - link "Rewards" [ref=f2e20] [cursor=pointer]:
+          - /url: "#"
+        - link "Order Now" [ref=f2e21] [cursor=pointer]:
+          - /url: "#"
+  - generic [ref=f2e22]:
+    - paragraph [ref=f2e23]: News & Events
+    - heading "Shack News" [level=1] [ref=f2e24]
+    - paragraph [ref=f2e25]: From local happenings to the latest promotions and catering ideas — this is where we share what’s new.
+  - main [ref=f2e26]:
+    - generic [ref=f2e28]:
+      - complementary [ref=f2e29]:
+        - link [ref=f2e31] [cursor=pointer]:
+          - /url: ../images/news-events/summer-bbq.jpg
+          - img "Big Dad BBQ Pork Sandwich and a side — $6.99 on August 11, 2026" [ref=f2e32]
+        - paragraph [ref=f2e33]: Click image to view full size
+      - generic [ref=f2e37]:
+        - generic [ref=f2e38]: News
+        - heading "Thank ‘QUE, Shaniacs! Join us 8/11/26 for a $6.99 Big Dad and Side" [level=1] [ref=f2e39]
+        - generic [ref=f2e40]:
+          - generic [ref=f2e41]: Share
+          - link "LinkedIn" [ref=f2e42] [cursor=pointer]:
+            - /url: "#"
+            - text: in
+          - link "Twitter/X" [ref=f2e43] [cursor=pointer]:
+            - /url: "#"
+            - text: ✕
+          - link "Facebook" [ref=f2e44] [cursor=pointer]:
+            - /url: "#"
+            - text: f
+          - link "Copy link" [ref=f2e45] [cursor=pointer]:
+            - /url: "#"
+            - text: 🔗
+        - heading "✨ AUGUST 11th, 2026 — $6.99 Big Dad + Small Side ✨" [level=2] [ref=f2e46]
+        - paragraph [ref=f2e47]: THANK ‘QUE, Shaniacs! At Shane’s Rib Shack, Southern BBQ has always been about more than what’s on the plate — it’s about the people. Whether you’ve stopped in for a quick lunch, picked up dinner, or made us part of your weekend tradition, you’ve become part of our family.
+        - paragraph [ref=f2e48]: We’re humbled by your loyalty, grateful for your stories, and honored to serve a community that feels more like family. See you soon!
+        - paragraph [ref=f2e49]: On August 11th, 2026, enjoy our signature Big Dad BBQ Pork Sandwich with a small side for just $6.99 — slow-smoked, hand-chopped, and piled high, just the way you like it.
+        - paragraph [ref=f2e50]: "*Valid 8/11/26 only while supplies last at participating locations. Order in-store, online or in-app. No code needed."
+        - link "Order Ahead — order.shanesribshack.com" [ref=f2e51] [cursor=pointer]:
+          - /url: "#"
+    - generic [ref=f2e53]:
+      - heading "More from the Shack" [level=2] [ref=f2e54]
+      - generic [ref=f2e55]:
+        - link [ref=f2e56] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=f2e58]:
+            - paragraph [ref=f2e59]: Game Day
+            - heading "Build the Ultimate BBQ Tailgate Tray" [level=3] [ref=f2e60]
+        - link [ref=f2e61] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=f2e63]:
+            - paragraph [ref=f2e64]: Catering
+            - heading "Stress-free Holiday Meals for the Office" [level=3] [ref=f2e65]
+        - link [ref=f2e66] [cursor=pointer]:
+          - /url: "#"
+          - generic [ref=f2e68]:
+            - paragraph [ref=f2e69]: Menu
+            - heading "Two New Sauces Just Landed" [level=3] [ref=f2e70]
+    - generic [ref=f2e72]:
+      - heading "Dev notes — WordPress" [level=2] [ref=f2e73]
+      - list [ref=f2e74]:
+        - listitem [ref=f2e75]: Banner is the shared News landing banner (eyebrow + “Shack News” + tagline). The article title sits in the content column, not the banner.
+        - listitem [ref=f2e76]: Published / expiry / read-time fields are removed — no meta row on the template.
+        - listitem [ref=f2e77]:
+          - text: Left sidebar image is a custom field (its own upload per post), not the featured image — it can differ from the card image. Click opens the full-size file in Fancybox; the rail image always fits its container (
+          - code [ref=f2e78]: "object-fit: cover"
+          - text: ).
+        - listitem [ref=f2e79]: Related cards use the post featured image at 1900 × 1080.
+  - contentinfo [ref=f2e80]: Shane’s Rib Shack · Design mockup — News single post template

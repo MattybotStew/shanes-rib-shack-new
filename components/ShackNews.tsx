@@ -22,10 +22,10 @@ function ArrowButton({
       onClick={onClick}
       disabled={disabled}
       aria-label={direction === "prev" ? "Previous news" : "Next news"}
-      className="flex items-center justify-center rounded-[50px] bg-brand-red p-4 transition-opacity hover:bg-[#a01b25] disabled:cursor-not-allowed disabled:opacity-40"
+      className="flex size-[52px] items-center justify-center rounded-full bg-brand-red transition-opacity hover:bg-[#a01b25] disabled:cursor-not-allowed disabled:opacity-40"
     >
       <span
-        className={`relative block size-6 ${
+        className={`relative block size-5 ${
           direction === "prev" ? "rotate-180" : ""
         }`}
       >
@@ -66,7 +66,7 @@ export default function ShackNews() {
     const el = scroller.current;
     if (!el) return;
     const card = el.querySelector("li");
-    const step = card ? card.clientWidth + 30 : el.clientWidth;
+    const step = card ? card.clientWidth + 24 : el.clientWidth;
     el.scrollBy({
       left: direction === "next" ? step : -step,
       behavior: "smooth",
@@ -75,18 +75,18 @@ export default function ShackNews() {
 
   return (
     <section
-      className="flex w-full flex-col items-center px-5 py-10 lg:py-[100px]"
+      className="flex w-full flex-col items-center bg-brand-tan px-6 py-12 lg:py-[72px]"
       aria-labelledby="shack-news-heading"
     >
-      <div className="flex w-full max-w-[1200px] flex-col gap-5 lg:gap-10">
-        <div className="flex flex-wrap items-center justify-between gap-5">
+      <div className="flex w-full max-w-[1230px] flex-col">
+        <div className="mb-7 flex flex-wrap items-center justify-between gap-4">
           <h2
             id="shack-news-heading"
-            className="text-[32px] font-extrabold uppercase leading-none text-brand-black sm:text-[36px] lg:text-[48px]"
+            className="text-[28px] font-extrabold uppercase leading-none text-brand-black sm:text-[36px] lg:text-[44px]"
           >
             Latest Shack News
           </h2>
-          <div className="flex shrink-0 items-start gap-3">
+          <div className="flex shrink-0 gap-3">
             <ArrowButton
               direction="prev"
               disabled={atStart}
@@ -100,42 +100,60 @@ export default function ShackNews() {
           </div>
         </div>
 
-        <div className={dashedRule} />
+        <div className={`${dashedRule} mb-8`} />
 
         <ul
           ref={scroller}
           onScroll={syncEdges}
-          className="flex snap-x snap-mandatory list-none gap-[30px] overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          className="flex snap-x snap-mandatory list-none gap-6 overflow-x-auto scroll-smooth [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {newsItems.map((item) => (
             <li
               key={item.href}
-              className="flex w-[290px] shrink-0 snap-start flex-col items-stretch gap-[30px] rounded-[12px] bg-brand-red px-[30px] py-5 sm:w-[460px] sm:flex-row sm:items-center sm:gap-5 lg:w-[534px] lg:gap-[30px]"
+              className="w-[min(100%,380px)] shrink-0 snap-start sm:w-[calc((100%-24px)/2)] lg:w-[calc((100%-48px)/3)]"
             >
-              <div className="relative h-[198px] w-full shrink-0 overflow-hidden rounded-[10px] sm:aspect-square sm:h-auto sm:w-[160px] lg:w-[198px]">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={asset(item.image)}
-                  alt={item.imageAlt}
-                  className="absolute inset-0 size-full object-cover"
-                />
-              </div>
-              <div className="flex min-w-0 flex-1 flex-col items-start justify-center gap-6">
-                <h3 className="w-full text-2xl font-semibold uppercase leading-none text-white">
-                  {item.title}
-                </h3>
-                <p className="w-full text-[13px] font-semibold leading-[1.5] text-white">
-                  {item.excerpt}
-                </p>
-                <Cta href={item.href} variant="white">
-                  Read More
-                </Cta>
-              </div>
+              <a
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex h-full flex-col overflow-hidden rounded-[12px] border border-brand-cream bg-white text-brand-black transition-transform duration-150 hover:-translate-y-0.5 hover:shadow-[0_10px_24px_rgba(0,0,0,0.08)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
+              >
+                <div className="aspect-[1900/1080] overflow-hidden">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={asset(item.image)}
+                    alt={item.imageAlt}
+                    className="size-full object-cover"
+                  />
+                </div>
+                <div className="flex flex-1 flex-col p-[18px]">
+                  <p className="mb-2 text-[11px] font-bold uppercase tracking-[0.04em] text-brand-red">
+                    {item.category}
+                    <span className="font-semibold normal-case tracking-normal text-brand-gray">
+                      {" "}
+                      · {item.date}
+                    </span>
+                  </p>
+                  <h3 className="mb-2 flex-1 text-sm font-bold uppercase leading-[1.35]">
+                    {item.title}
+                  </h3>
+                  <p className="mb-4 line-clamp-2 text-[13px] leading-[1.55] text-brand-gray">
+                    {item.excerpt}
+                  </p>
+                  <span className="inline-flex self-start rounded-[5px] bg-brand-red px-4 py-[9px] text-xs font-bold uppercase text-white group-hover:bg-[#a01b25]">
+                    Read More
+                  </span>
+                </div>
+              </a>
             </li>
           ))}
         </ul>
 
-        <div className={dashedRule} />
+        <div className="mt-9 flex justify-center">
+          <Cta href="/news-events/" className="px-7 py-3.5 text-[13px]">
+            View All News
+          </Cta>
+        </div>
       </div>
     </section>
   );

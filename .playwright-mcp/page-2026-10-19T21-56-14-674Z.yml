@@ -1,0 +1,232 @@
+- generic [active] [ref=f1e1]:
+  - link "Skip to content" [ref=f1e2] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f1e3]:
+    - generic [ref=f1e5]:
+      - button "Edgewood Location — change shack" [ref=f1e8]:
+        - generic [ref=f1e9]: Edgewood Location
+      - link "(404) 525-7427" [ref=f1e12] [cursor=pointer]:
+        - /url: tel:+14045257427
+    - generic [ref=f1e14]:
+      - button "Open menu" [ref=f1e15] [cursor=pointer]
+      - link "Shane's Rib Shack home" [ref=f1e17] [cursor=pointer]:
+        - /url: /
+        - img "Shane's Rib Shack" [ref=f1e18]
+      - link [ref=f1e19] [cursor=pointer]:
+        - /url: /order/
+        - generic [ref=f1e20]: OrderNow
+  - main [ref=f1e21]:
+    - region [ref=f1e22]:
+      - heading "Shane's Rib Shack Menu" [level=1] [ref=f1e25]
+      - generic [ref=f1e26]:
+        - generic [ref=f1e27]:
+          - article [ref=f1e28]:
+            - link "Sandwiches — see all" [ref=f1e29] [cursor=pointer]:
+              - /url: /menu/sandwiches/
+              - img "Shane's Rib Shack BBQ sandwiches" [ref=f1e30]
+            - generic [ref=f1e31]:
+              - heading [level=2] [ref=f1e32]:
+                - link "Sandwiches" [ref=f1e33] [cursor=pointer]:
+                  - /url: /menu/sandwiches/
+              - link "See all" [ref=f1e34] [cursor=pointer]:
+                - /url: /menu/sandwiches/
+          - article [ref=f1e35]:
+            - link "Burgers — see all" [ref=f1e36] [cursor=pointer]:
+              - /url: /menu/burgers/
+              - img "Shane's Rib Shack burgers" [ref=f1e37]
+            - generic [ref=f1e38]:
+              - heading [level=2] [ref=f1e39]:
+                - link "Burgers" [ref=f1e40] [cursor=pointer]:
+                  - /url: /menu/burgers/
+              - link "See all" [ref=f1e41] [cursor=pointer]:
+                - /url: /menu/burgers/
+          - article [ref=f1e42]:
+            - link "Shack Baskets — see all" [ref=f1e43] [cursor=pointer]:
+              - /url: /menu/shack-baskets/
+              - img "Shane's Rib Shack baskets with fries" [ref=f1e44]
+            - generic [ref=f1e45]:
+              - heading [level=2] [ref=f1e46]:
+                - link "Shack Baskets" [ref=f1e47] [cursor=pointer]:
+                  - /url: /menu/shack-baskets/
+              - link "See all" [ref=f1e48] [cursor=pointer]:
+                - /url: /menu/shack-baskets/
+          - article [ref=f1e49]:
+            - link "Plates — see all" [ref=f1e50] [cursor=pointer]:
+              - /url: /menu/plates/
+              - img "Shane's Rib Shack BBQ plates" [ref=f1e51]
+            - generic [ref=f1e52]:
+              - heading [level=2] [ref=f1e53]:
+                - link "Plates" [ref=f1e54] [cursor=pointer]:
+                  - /url: /menu/plates/
+              - link "See all" [ref=f1e55] [cursor=pointer]:
+                - /url: /menu/plates/
+          - article [ref=f1e56]:
+            - link "Sides — see all" [ref=f1e57] [cursor=pointer]:
+              - /url: /menu/sides/
+              - img "Shane's Rib Shack Southern sides" [ref=f1e58]
+            - generic [ref=f1e59]:
+              - heading [level=2] [ref=f1e60]:
+                - link "Sides" [ref=f1e61] [cursor=pointer]:
+                  - /url: /menu/sides/
+              - link "See all" [ref=f1e62] [cursor=pointer]:
+                - /url: /menu/sides/
+          - article [ref=f1e63]:
+            - link "Wings & Tenders — see all" [ref=f1e64] [cursor=pointer]:
+              - /url: /menu/wings-tenders/
+              - img "Shane's Rib Shack smoked wings and chicken tenders" [ref=f1e65]
+            - generic [ref=f1e66]:
+              - heading [level=2] [ref=f1e67]:
+                - link "Wings & Tenders" [ref=f1e68] [cursor=pointer]:
+                  - /url: /menu/wings-tenders/
+              - link "See all" [ref=f1e69] [cursor=pointer]:
+                - /url: /menu/wings-tenders/
+        - generic [ref=f1e75]:
+          - paragraph [ref=f1e76]: Crowd favorites
+          - heading "Slow-smoked BBQ, family meals, and game-day ready picks" [level=2] [ref=f1e77]
+          - paragraph [ref=f1e78]: Explore the full menu, then order online for pickup or delivery from your nearest Shack.
+          - link "Order Online" [ref=f1e79] [cursor=pointer]:
+            - /url: /order/
+        - generic [ref=f1e81]:
+          - article [ref=f1e82]:
+            - link "Shack Fries — see all" [ref=f1e83] [cursor=pointer]:
+              - /url: /menu/shack-fries/
+              - img "Shane's Rib Shack loaded fries" [ref=f1e84]
+            - generic [ref=f1e85]:
+              - heading [level=2] [ref=f1e86]:
+                - link "Shack Fries" [ref=f1e87] [cursor=pointer]:
+                  - /url: /menu/shack-fries/
+              - link "See all" [ref=f1e88] [cursor=pointer]:
+                - /url: /menu/shack-fries/
+          - article [ref=f1e89]:
+            - link "Shack Salads — see all" [ref=f1e90] [cursor=pointer]:
+              - /url: /menu/shack-salads/
+              - img "Shane's Rib Shack salads" [ref=f1e91]
+            - generic [ref=f1e92]:
+              - heading [level=2] [ref=f1e93]:
+                - link "Shack Salads" [ref=f1e94] [cursor=pointer]:
+                  - /url: /menu/shack-salads/
+              - link "See all" [ref=f1e95] [cursor=pointer]:
+                - /url: /menu/shack-salads/
+          - article [ref=f1e96]:
+            - link "Family Meals — see all" [ref=f1e97] [cursor=pointer]:
+              - /url: /menu/family-meals/
+              - img "Shane's Rib Shack family meal packs" [ref=f1e98]
+            - generic [ref=f1e99]:
+              - heading [level=2] [ref=f1e100]:
+                - link "Family Meals" [ref=f1e101] [cursor=pointer]:
+                  - /url: /menu/family-meals/
+              - link "See all" [ref=f1e102] [cursor=pointer]:
+                - /url: /menu/family-meals/
+          - article [ref=f1e103]:
+            - link "Kids Menu — see all" [ref=f1e104] [cursor=pointer]:
+              - /url: /menu/kids-menu/
+              - img "Shane's Rib Shack kids meals" [ref=f1e105]
+            - generic [ref=f1e106]:
+              - heading [level=2] [ref=f1e107]:
+                - link "Kids Menu" [ref=f1e108] [cursor=pointer]:
+                  - /url: /menu/kids-menu/
+              - link "See all" [ref=f1e109] [cursor=pointer]:
+                - /url: /menu/kids-menu/
+          - article [ref=f1e110]:
+            - link "Meat Only — see all" [ref=f1e111] [cursor=pointer]:
+              - /url: /menu/meat-only/
+              - img "Shane's Rib Shack meat-only portions" [ref=f1e112]
+            - generic [ref=f1e113]:
+              - heading [level=2] [ref=f1e114]:
+                - link "Meat Only" [ref=f1e115] [cursor=pointer]:
+                  - /url: /menu/meat-only/
+              - link "See all" [ref=f1e116] [cursor=pointer]:
+                - /url: /menu/meat-only/
+          - article [ref=f1e117]:
+            - link "Drinks — see all" [ref=f1e118] [cursor=pointer]:
+              - /url: /menu/drinks/
+              - img "Shane's Rib Shack drinks" [ref=f1e119]
+            - generic [ref=f1e120]:
+              - heading [level=2] [ref=f1e121]:
+                - link "Drinks" [ref=f1e122] [cursor=pointer]:
+                  - /url: /menu/drinks/
+              - link "See all" [ref=f1e123] [cursor=pointer]:
+                - /url: /menu/drinks/
+          - article [ref=f1e124]:
+            - link "Desserts — see all" [ref=f1e125] [cursor=pointer]:
+              - /url: /menu/desserts/
+              - img "Shane's Rib Shack desserts" [ref=f1e126]
+            - generic [ref=f1e127]:
+              - heading [level=2] [ref=f1e128]:
+                - link "Desserts" [ref=f1e129] [cursor=pointer]:
+                  - /url: /menu/desserts/
+              - link "See all" [ref=f1e130] [cursor=pointer]:
+                - /url: /menu/desserts/
+          - article [ref=f1e131]:
+            - link "Gluten Sensitive — see all" [ref=f1e132] [cursor=pointer]:
+              - /url: /menu/gluten-sensitive/
+              - img "Gluten-sensitive options at Shane's Rib Shack" [ref=f1e133]
+            - generic [ref=f1e134]:
+              - heading [level=2] [ref=f1e135]:
+                - link "Gluten Sensitive" [ref=f1e136] [cursor=pointer]:
+                  - /url: /menu/gluten-sensitive/
+              - link "See all" [ref=f1e137] [cursor=pointer]:
+                - /url: /menu/gluten-sensitive/
+          - article [ref=f1e138]:
+            - link "Build Your Own Shack Pack — see all" [ref=f1e139] [cursor=pointer]:
+              - /url: /menu/build-your-own-shack-pack/
+              - img "Build your own Shane's Rib Shack pack" [ref=f1e140]
+            - generic [ref=f1e141]:
+              - heading [level=2] [ref=f1e142]:
+                - link "Build Your Own Shack Pack" [ref=f1e143] [cursor=pointer]:
+                  - /url: /menu/build-your-own-shack-pack/
+              - link "See all" [ref=f1e144] [cursor=pointer]:
+                - /url: /menu/build-your-own-shack-pack/
+    - region "Rewards app" [ref=f1e145]:
+      - generic [ref=f1e148]:
+        - heading "Download our rewards app today" [level=2] [ref=f1e149]
+        - paragraph [ref=f1e150]: Earn points with every transaction, save favorites for easy reordering, redeem points for menu items, & more!
+        - generic [ref=f1e151]:
+          - link "Download on the App Store" [ref=f1e152] [cursor=pointer]:
+            - /url: https://apps.apple.com/us/app/shanes-rib-shack-2-0/id6759003661
+          - link [ref=f1e158] [cursor=pointer]:
+            - /url: https://play.google.com/store/apps/details?id=com.tryperdiem.franchise.shanesribshack&hl=en
+            - img "Get it on Google Play" [ref=f1e159]
+        - img "Shane's Rib Shack rewards app on phones" [ref=f1e162]
+    - generic [ref=f1e164]:
+      - generic [ref=f1e166]:
+        - generic [ref=f1e167]:
+          - link "Franchising" [ref=f1e169] [cursor=pointer]:
+            - /url: /franchise/
+          - link "Merchandise" [ref=f1e172] [cursor=pointer]:
+            - /url: /shop/
+          - link "Press Room" [ref=f1e175] [cursor=pointer]:
+            - /url: /news-events/
+          - link "Terms and Conditions of Use" [ref=f1e178] [cursor=pointer]:
+            - /url: /terms/
+          - link "Privacy Policy" [ref=f1e181] [cursor=pointer]:
+            - /url: /privacy/
+        - generic [ref=f1e183]:
+          - link "Cookie and Internet-Based Advertising Policy" [ref=f1e185] [cursor=pointer]:
+            - /url: /privacy/
+          - link "Do Not Sell Or Share My Personal Information" [ref=f1e188] [cursor=pointer]:
+            - /url: /privacy/
+          - link "Accessibility" [ref=f1e191] [cursor=pointer]:
+            - /url: /troubleshooting/
+        - generic [ref=f1e193]:
+          - link "Locations" [ref=f1e195] [cursor=pointer]:
+            - /url: /locations/
+          - link "Cookie Preference Center" [ref=f1e198] [cursor=pointer]:
+            - /url: /privacy/
+          - link "Careers" [ref=f1e201] [cursor=pointer]:
+            - /url: /careers/
+          - link "Supply Chain" [ref=f1e204] [cursor=pointer]:
+            - /url: /contact/
+      - generic [ref=f1e206]:
+        - link "Home" [ref=f1e207] [cursor=pointer]:
+          - /url: /
+          - img "Shane's Rib Shack" [ref=f1e208]
+        - generic [ref=f1e209]:
+          - link "Facebook" [ref=f1e210] [cursor=pointer]:
+            - /url: https://facebook.com/shanesribshack
+          - link "Instagram" [ref=f1e211] [cursor=pointer]:
+            - /url: https://instagram.com/shanesribshack
+          - link "YouTube" [ref=f1e212] [cursor=pointer]:
+            - /url: https://youtube.com/@shanesribshack
+        - paragraph [ref=f1e213]: © 2026 shane's rib shack.
+  - alert [ref=f1e214]

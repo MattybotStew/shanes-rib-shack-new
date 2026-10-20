@@ -1,0 +1,77 @@
+- generic [ref=e2]:
+  - paragraph [ref=e3]: Website review · Find a Shane’s · Chosen design
+  - heading "Mobile location switcher" [level=1] [ref=e4]
+  - paragraph [ref=e5]: "You picked Option 3 — the first-visit suggestion: when someone new opens the site on their phone, we detect the closest shack and ask them to confirm it. Here it is applied to the real phone design, with your button labels: View Location and Change. The phone below is clickable — try both buttons and the dismiss ×."
+  - separator [ref=e6]
+  - generic [ref=e7]:
+    - heading "Try it" [level=2] [ref=e8]
+    - paragraph [ref=e9]: First visit, exactly as the site would show it — real top bar, real mobile header.
+    - generic [ref=e10]:
+      - generic [ref=e12]:
+        - generic [ref=e13]:
+          - generic [ref=e16]: Edgewood Location
+          - generic [ref=e20]: (404) 555-0142
+        - generic [ref=e21]:
+          - img "Shane's Rib Shack" [ref=e26]
+          - generic [ref=e27]: OrderNow
+        - generic [ref=e29]:
+          - paragraph [ref=e30]: Southern BBQ
+          - paragraph [ref=e31]: Slow-smoked since 1996
+          - generic [ref=e36]: Order Now
+        - generic [ref=e89]:
+          - button "Close" [ref=e90] [cursor=pointer]: ×
+          - paragraph [ref=e92]: Nearby Shane’s
+          - paragraph [ref=e93]: Pick your shack — we’ll remember it.
+          - generic [ref=e94]:
+            - generic [ref=e95]:
+              - generic [ref=e96]: Edgewood · 1.2 mi
+              - generic [ref=e97]: Atlanta, GA
+            - button "Use" [ref=e98] [cursor=pointer]
+          - generic [ref=e99]:
+            - generic [ref=e100]:
+              - generic [ref=e101]: Norcross · 8.4 mi
+              - generic [ref=e102]: Norcross, GA
+            - button "Use" [ref=e103] [cursor=pointer]
+          - generic [ref=e104]:
+            - generic [ref=e105]:
+              - generic [ref=e106]: Carrollton · 32 mi
+              - generic [ref=e107]: Carrollton, GA
+            - button "Use" [ref=e108] [cursor=pointer]
+          - link "See all 28 locations" [ref=e109] [cursor=pointer]:
+            - /url: "#"
+      - generic [ref=e53]:
+        - paragraph [ref=e54]: What the buttons do
+        - list [ref=e55]:
+          - listitem [ref=e56]: View Location — one tap confirms the suggested shack and takes you straight to that shack’s page (hours, directions, pickup & delivery). This is the happy path for a first-time visitor.
+          - listitem [ref=e57]: Change — opens the same location picker the site already uses (nearest shacks first, with search and all locations). Pick any shack and it’s saved.
+          - listitem [ref=e58]: "× — dismisses the suggestion without choosing. It won’t nag: it only appears on a first visit, and never again once a shack is confirmed or picked."
+        - paragraph [ref=e59]: Where it appears — a small card at the bottom of the screen on the first phone visit, over the normal page. The black bar at the top keeps showing the current shack, and tapping it still opens that shack’s page, just like today.
+        - button "Replay first visit" [ref=e60] [cursor=pointer]
+  - generic [ref=e61]:
+    - heading "What it saves" [level=2] [ref=e62]
+    - table [ref=e63]:
+      - rowgroup [ref=e64]:
+        - row [ref=e65]:
+          - columnheader "Journey" [ref=e66]
+          - columnheader "Taps" [ref=e67]
+          - columnheader "Typing?" [ref=e68]
+      - rowgroup [ref=e69]:
+        - row [ref=e70]:
+          - 'cell "Today: Menu → Locations → search → shack → View Details" [ref=e71]'
+          - cell "3–4" [ref=e72]
+          - cell "Yes" [ref=e73]
+        - row [ref=e74]:
+          - cell "Confirm the suggested shack — View Location" [ref=e75]
+          - cell "1" [ref=e76]
+          - cell "No" [ref=e77]
+        - row [ref=e78]:
+          - cell "Pick a different shack — Change" [ref=e79]
+          - cell "2" [ref=e80]
+          - cell "No" [ref=e81]
+  - generic [ref=e82]:
+    - heading "Good to know" [level=2] [ref=e83]
+    - list [ref=e84]:
+      - listitem [ref=e85]: Once, not always. The suggestion is for first-time visitors — after a shack is confirmed, chosen, or dismissed, it stays away. Returning customers just see the normal site with their shack at the top.
+      - listitem [ref=e86]: Nothing new to build for the picker. The Change button opens the picker the desktop “Change Your Shack” button already uses — it just needs something on the phone to open it.
+      - listitem [ref=e87]: Honest suggestion. If we can’t detect a location, the card quietly doesn’t show — no wrong guesses, and the Locations page stays one tap away in the menu.
+  - paragraph [ref=e88]: Clickable design mockup for review — not the live site. Checked against the real mobile header and top bar at 390 px, 19 October 2026.

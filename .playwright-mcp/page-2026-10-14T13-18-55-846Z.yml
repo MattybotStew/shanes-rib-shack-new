@@ -1,0 +1,216 @@
+- generic [active] [ref=f3e1]:
+  - generic [ref=f3e2]:
+    - link "← Written one-pager" [ref=f3e3] [cursor=pointer]:
+      - /url: index.html
+    - generic [ref=f3e4]: Clickable mockups · Find a Shane’s
+    - generic [ref=f3e5]:
+      - button "Play all demos" [ref=f3e6] [cursor=pointer]
+      - button "Reset" [ref=f3e7] [cursor=pointer]
+  - generic [ref=f3e8]:
+    - paragraph [ref=f3e9]: Website review · Find a Shane’s
+    - heading "Switching locations on a phone — clickable" [level=1] [ref=f3e10]
+    - paragraph [ref=f3e11]: The same six options from the written brief, now clickable. Tap any phone to open its picker, tap a shack to choose it, or tap Play all demos to walk through every option in turn.
+    - separator [ref=f3e12]
+    - generic [ref=f3e13]:
+      - heading "What a phone shows today" [level=2] [ref=f3e14]
+      - paragraph [ref=f3e15]: "The red “Change Your Shack” button is hidden on phones, and it isn’t in the menu either. Today: Menu → Locations → search → shack → View Details — 3–4 taps plus typing."
+      - generic [ref=f3e16]:
+        - img "Live mobile top bar showing Edgewood Location and phone number" [ref=f3e18]
+        - list [ref=f3e19]:
+          - listitem [ref=f3e20]: The picker it drives already exists and works — it just has no trigger on mobile.
+          - listitem [ref=f3e21]: The top-bar shack name links to the current shack, it doesn’t switch.
+          - listitem [ref=f3e22]: No map on phones — search controls and the card list only.
+    - generic [ref=f3e23]:
+      - heading "Taps to switch a shack" [level=2] [ref=f3e24]
+      - paragraph [ref=f3e25]: Every option below is measured against what a mobile customer does today.
+      - table [ref=f3e26]:
+        - rowgroup [ref=f3e27]:
+          - row [ref=f3e28]:
+            - columnheader "Journey" [ref=f3e29]
+            - columnheader "Taps" [ref=f3e30]
+            - columnheader "Typing?" [ref=f3e31]
+        - rowgroup [ref=f3e32]:
+          - row [ref=f3e33]:
+            - 'cell "Today: Menu → Locations → search → shack → View Details" [ref=f3e34]'
+            - cell "3–4" [ref=f3e35]
+            - cell "Yes" [ref=f3e36]
+          - row [ref=f3e37]:
+            - cell "Option 1 — tap top-bar location → pick from nearest" [ref=f3e38]
+            - cell "2" [ref=f3e39]
+            - cell "No" [ref=f3e40]
+          - row [ref=f3e41]:
+            - cell "Option 2 — sticky “Ordering from” bar" [ref=f3e42]
+            - cell "1" [ref=f3e43]
+            - cell "No" [ref=f3e44]
+          - row [ref=f3e45]:
+            - cell "Option 3 — confirm the suggested nearby shack" [ref=f3e46]
+            - cell "1–2" [ref=f3e47]
+            - cell "No" [ref=f3e48]
+          - row [ref=f3e49]:
+            - cell "Option 4 — location gate inside Order Now" [ref=f3e50]
+            - cell "1–2" [ref=f3e51]
+            - cell "No" [ref=f3e52]
+          - row [ref=f3e53]:
+            - cell "Option 5 — bottom-sheet picker (search or nearest)" [ref=f3e54]
+            - cell "2" [ref=f3e55]
+            - cell "Optional" [ref=f3e56]
+          - row [ref=f3e57]:
+            - cell "Option 6 — first item in the hamburger menu" [ref=f3e58]
+            - cell "2" [ref=f3e59]
+            - cell "No" [ref=f3e60]
+    - generic [ref=f3e61]:
+      - heading "Six options, best UX first" [level=2] [ref=f3e62]
+      - paragraph [ref=f3e63]: Ranked 1–6 by best UX — not effort. They stack; Option 1 alone fixes the gap. Click a phone to try it.
+      - generic [ref=f3e64]:
+        - generic [ref=f3e65]:
+          - generic [ref=f3e66]:
+            - 'button "Try Option 1: tap the top location to pick a shack" [ref=f3e67] [cursor=pointer]':
+              - generic [ref=f3e68]:
+                - generic [ref=f3e69]: Edgewood Location
+                - generic [ref=f3e80]:
+                  - generic [ref=f3e82]: Nearby Shane’s
+                  - generic [ref=f3e83]: Tap to switch. We’ll remember it.
+                  - generic [ref=f3e84]:
+                    - generic [ref=f3e85]: Use
+                    - generic [ref=f3e86]: Edgewood · 1.2 mi
+                    - generic [ref=f3e87]: 123 Main St, Atlanta GA
+                  - generic [ref=f3e88]:
+                    - generic [ref=f3e89]: Use
+                    - generic [ref=f3e90]: Norcross · 8.4 mi
+                    - generic [ref=f3e91]: 555 Peachtree Pkwy
+            - generic [ref=f3e92]: Tap the phone to try
+          - generic [ref=f3e93]:
+            - generic [ref=f3e94]: Option 1 · Rank 1
+            - heading "Tap the top location → pick a shack" [level=3] [ref=f3e95]
+            - paragraph [ref=f3e96]: Make the shack name (already in the top bar) open the location picker that already exists. Show 4 nearest, one tap to switch. Adds a small chevron and underline so it reads as clickable.
+            - generic [ref=f3e97]:
+              - generic [ref=f3e98]: 2 taps
+              - generic [ref=f3e99]: Low effort
+              - generic [ref=f3e100]: Answers ideas 1, 2 & 3
+            - paragraph [ref=f3e101]: "Why #1: where customers already look, always on screen, 2 taps — and it reuses a picker that already works. Best balance of discoverability and clicks."
+        - generic [ref=f3e102]:
+          - generic [ref=f3e103]:
+            - 'button "Try Option 2: sticky Ordering from bar" [ref=f3e104] [cursor=pointer]':
+              - generic [ref=f3e105]:
+                - generic [ref=f3e106]: Edgewood Location
+                - generic [ref=f3e117]:
+                  - generic [ref=f3e120]: "Ordering from: Edgewood"
+                  - generic [ref=f3e121]: Change
+                - generic [ref=f3e122]:
+                  - generic [ref=f3e124]: Change shack
+                  - generic [ref=f3e125]: Pick a shack to order from.
+                  - generic [ref=f3e126]:
+                    - generic [ref=f3e127]: Norcross · 8.4 mi
+                    - generic [ref=f3e128]: 555 Peachtree Pkwy
+                  - generic [ref=f3e129]:
+                    - generic [ref=f3e130]: Carrollton · 22 mi
+                    - generic [ref=f3e131]: Carrollton, GA
+            - generic [ref=f3e132]: Tap the phone to try
+          - generic [ref=f3e133]:
+            - generic [ref=f3e134]: Option 2 · Rank 2
+            - heading "Persistent “Ordering from” bar" [level=3] [ref=f3e135]
+            - paragraph [ref=f3e136]: "A slim sticky bar at the bottom — “Ordering from: Edgewood · Change” — shows the current shack and switches in one tap, from anywhere on the site. Makes the selection obvious at all times."
+            - generic [ref=f3e137]:
+              - generic [ref=f3e138]: 1 tap
+              - generic [ref=f3e139]: Medium effort
+            - paragraph [ref=f3e140]: "Why #2: the clearest of the six — current shack always visible, switch in 1 tap. Small cost: a persistent bar uses screen space."
+        - generic [ref=f3e141]:
+          - generic [ref=f3e142]:
+            - 'button "Try Option 3: auto-suggest and confirm" [ref=f3e143] [cursor=pointer]':
+              - generic [ref=f3e144]:
+                - generic [ref=f3e145]: Edgewood Location
+                - generic [ref=f3e154]: ✓ Ordering from Edgewood
+                - generic [ref=f3e155]:
+                  - generic [ref=f3e157]: We think you’re near Edgewood
+                  - generic [ref=f3e158]: Closest shack to your phone.
+                  - generic [ref=f3e159]:
+                    - generic [ref=f3e160]: Order here
+                    - generic [ref=f3e161]: Change
+            - generic [ref=f3e162]: Tap the phone to try
+          - generic [ref=f3e163]:
+            - generic [ref=f3e164]: Option 3 · Rank 3
+            - heading "Auto-suggest + one-tap confirm" [level=3] [ref=f3e165]
+            - paragraph [ref=f3e166]: "On the first visit, detect and confirm: “We think you’re near Edgewood — Order here / Change”. Confirming is a single tap; “Change” opens the picker. Removes all hunting for new customers."
+            - generic [ref=f3e167]:
+              - generic [ref=f3e168]: 1–2 taps
+              - generic [ref=f3e169]: Low–medium effort
+            - paragraph [ref=f3e170]: "Why #3: the smoothest first-time experience (1 tap), but only pays off on the first visit — it must be dismissible so it never nags."
+        - generic [ref=f3e171]:
+          - generic [ref=f3e172]:
+            - 'button "Try Option 4: choose a shack at Order Now" [ref=f3e173] [cursor=pointer]':
+              - generic [ref=f3e174]:
+                - generic [ref=f3e175]: ORDERNOW
+                - generic [ref=f3e185]:
+                  - generic [ref=f3e187]: Choose a shack to order from
+                  - generic [ref=f3e188]: Pickup & delivery need a location.
+                  - generic [ref=f3e189]:
+                    - generic [ref=f3e190]: Use
+                    - generic [ref=f3e191]: Edgewood · 1.2 mi
+                  - generic [ref=f3e192]: Norcross · 8.4 mi
+            - generic [ref=f3e194]: Tap the phone to try
+          - generic [ref=f3e195]:
+            - generic [ref=f3e196]: Option 4 · Rank 4
+            - heading "Ask for a shack at checkout" [level=3] [ref=f3e197]
+            - paragraph [ref=f3e198]: When someone taps Order Now without a shack set, ask for it right there — then continue straight to ordering. The choice happens exactly when it matters, so nobody orders from the wrong kitchen.
+            - generic [ref=f3e199]:
+              - generic [ref=f3e200]: 1–2 taps
+              - generic [ref=f3e201]: Medium effort
+            - paragraph [ref=f3e202]: "Why #4: catches people exactly when the choice matters and prevents wrong-shack orders. Narrower: it only appears at ordering."
+        - generic [ref=f3e203]:
+          - generic [ref=f3e204]:
+            - 'button "Try Option 5: bottom-sheet picker" [ref=f3e205] [cursor=pointer]':
+              - generic [ref=f3e206]:
+                - generic [ref=f3e207]: Edgewood Location
+                - generic [ref=f3e215]:
+                  - generic [ref=f3e217]: City, ZIP, or shack name
+                  - generic [ref=f3e220]: Use my current location
+                  - generic [ref=f3e221]:
+                    - generic [ref=f3e222]: Norcross · 8.4 mi
+                    - generic [ref=f3e223]: Norcross, GA
+                  - generic [ref=f3e224]:
+                    - generic [ref=f3e225]: Carrollton · 22 mi
+                    - generic [ref=f3e226]: Carrollton, GA
+            - generic [ref=f3e227]: Tap the phone to try
+          - generic [ref=f3e228]:
+            - generic [ref=f3e229]: Option 5 · Rank 5
+            - heading "Native bottom-sheet picker" [level=3] [ref=f3e230]
+            - paragraph [ref=f3e231]: Turn the existing pop-up picker into a modern bottom sheet with a search field, “Use my current location”, the nearest shacks, and “See all”. Easier to reach with a thumb than a centred pop-up.
+            - generic [ref=f3e232]:
+              - generic [ref=f3e233]: 2 taps
+              - generic [ref=f3e234]: Medium effort
+            - paragraph [ref=f3e235]: "Why #5: a real ergonomic upgrade, but it improves the picker shell rather than adding a way in — best paired with 1 or 2."
+        - generic [ref=f3e236]:
+          - generic [ref=f3e237]:
+            - 'button "Try Option 6: Change Your Shack in the hamburger menu" [ref=f3e238] [cursor=pointer]':
+              - generic [ref=f3e239]:
+                - generic [ref=f3e240]: Edgewood Location
+                - generic [ref=f3e249]:
+                  - generic [ref=f3e250]: Menu
+                  - generic [ref=f3e251]:
+                    - text: Change Your Shack
+                    - generic [ref=f3e252]: "Currently: Edgewood Location"
+                  - generic [ref=f3e253]: Menu
+                  - generic [ref=f3e254]: Catering
+                  - generic [ref=f3e255]: Locations
+                  - generic [ref=f3e256]: Our Story
+            - generic [ref=f3e257]: Tap the phone to try
+          - generic [ref=f3e258]:
+            - generic [ref=f3e259]: Option 6 · Rank 6
+            - heading "Add it to the top of the menu" [level=3] [ref=f3e260]
+            - paragraph [ref=f3e261]: Make “Change Your Shack” the first item in the hamburger menu, with the current shack as a subtitle. The smallest visual change, and a safe fallback if the top bar can’t be repurposed.
+            - generic [ref=f3e262]:
+              - generic [ref=f3e263]: 2 taps
+              - generic [ref=f3e264]: Low effort
+              - generic [ref=f3e265]: Original brief option 2
+            - paragraph [ref=f3e266]: "Why #6: low effort and safe as a fallback, but it hides behind the hamburger — the hardest to discover, and not a standalone fix."
+    - generic [ref=f3e267]:
+      - generic [ref=f3e268]: Recommendation
+      - heading "Start with Option 1, then layer Option 3." [level=3] [ref=f3e269]
+      - paragraph [ref=f3e270]: "Option 1 is the highest return for the least work: the picker already exists, so we only need to point the top-bar location at it and add a chevron + underline. That alone takes switching from 3–4 taps plus typing to 2 taps."
+      - paragraph [ref=f3e271]: "Option 3 then catches new customers before they ever hunt for the menu, and Option 2 (the sticky bar) is the next-best value on ordering pages. Best of all: Option 1 as the everyday switcher, Option 2 on ordering pages, and Option 3 for first visits — with Option 5 as the picker they all open."
+      - paragraph [ref=f3e272]: "Clickable mockups are schematic, not final visual design. Effort labels are relative: Low = a small tweak, Medium = a few days with testing."
+    - paragraph [ref=f3e273]:
+      - text: Companion to the written one-pager (
+      - link "open it" [ref=f3e274] [cursor=pointer]:
+        - /url: index.html
+      - text: ). Behaviour verified against a live 390 px-wide phone screen, 5 October 2026. No live analytics are used — the ranking is a prioritised hypothesis, proven with the metrics in the written brief.
