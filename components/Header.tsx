@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { asset } from "@/lib/asset";
 import { locationFromPathname, type LocationDetail } from "@/lib/locationData";
 import {
@@ -84,13 +84,15 @@ function TopBarChevron({ className = "" }: { className?: string } = {}) {
   );
 }
 
-function AppPromo() {
+function AppPromo({ className = "" }: { className?: string }) {
   return (
-    <div className="flex w-full flex-nowrap items-center justify-start gap-2.5 text-left text-[13px] leading-4 text-white">
-      <span className="shrink-0 rounded-xl bg-brand-red px-2.5 py-0.5 text-[12px] font-bold uppercase text-white">
+    <div
+      className={`flex w-full min-w-0 items-start justify-start gap-2.5 text-left text-[13px] leading-4 text-white ${className}`.trim()}
+    >
+      <span className="mt-0.5 shrink-0 rounded-xl bg-brand-red px-2.5 py-0.5 text-[12px] font-bold uppercase text-white">
         New!
       </span>
-      <p className="whitespace-nowrap text-left">
+      <p className="min-w-0 text-left">
         Shaniacs, we have a new app! Download today in your App Store{" "}
         <Link href="/rewards" className="font-bold text-brand-red hover:underline">
           Learn More
@@ -98,6 +100,40 @@ function AppPromo() {
         </Link>
       </p>
     </div>
+  );
+}
+
+function BlackAlertBar({ locationRow }: { locationRow: ReactNode }) {
+  return (
+    <div className="flex w-full justify-center bg-[#1A1A1A] px-4 py-3 lg:px-[30px] lg:py-3.5">
+      <div className="flex w-full min-w-0 max-w-[1320px] flex-col items-start gap-2.5">
+        {locationRow}
+        <AppPromo />
+      </div>
+    </div>
+  );
+}
+
+const locationPhoneRowClass =
+  "flex w-full min-w-0 flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-center text-[13px] leading-4 text-white lg:grid lg:grid-cols-[minmax(0,1fr)_auto_auto] lg:items-start lg:justify-items-start lg:text-left";
+
+function TopBarLocationLink({
+  href,
+  label,
+  className = "",
+}: {
+  href: string;
+  label: string;
+  className?: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className={`flex min-w-0 w-full max-w-full items-start justify-center gap-2.5 text-white hover:underline lg:justify-start ${className}`.trim()}
+    >
+      <ShackIcon />
+      <span className="min-w-0 break-words">{label}</span>
+    </Link>
   );
 }
 
@@ -137,27 +173,28 @@ export default function Header() {
   const barPhoneHref = barShack ? barShack.phoneHref : UNSET_SHACK_PHONE_HREF;
 
   return (
-    <header className="flex w-full flex-col items-center">
-      {/* Alert banner — location pages use live top-header pattern */}
+    <header className="flex w-full flex-col items-stretch">
       {activeLocation ? (
-        <div className="flex w-full items-center justify-center overflow-hidden bg-[#1A1A1A] px-5 py-3.5 lg:px-[30px]">
-          <div className="flex w-full max-w-[1320px] flex-col items-center justify-between gap-3 sm:flex-row sm:gap-5">
-            <div className="flex flex-wrap items-center justify-center gap-x-2.5 text-[13px] leading-4 text-white sm:justify-start">
+        <BlackAlertBar
+          locationRow={
+            <div className={locationPhoneRowClass}>
               <Link
                 href={`/locations/${activeLocation.slug}/`}
-                className="hidden items-center gap-2.5 text-white hover:underline lg:inline-flex"
+                className="hidden min-w-0 w-full max-w-full items-start gap-2.5 text-white hover:underline lg:flex lg:justify-start"
               >
                 <ShackIcon />
-                {activeLocation.shortName} Location
+                <span className="min-w-0 break-words">{activeLocation.shortName} Location</span>
               </Link>
               <button
                 type="button"
                 aria-label={`${activeLocation.shortName} Location — change shack`}
                 onClick={() => dispatchOpenShackPicker("topbar")}
-                className="inline-flex items-center gap-2.5 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold lg:hidden"
+                className="flex min-w-0 w-full max-w-full items-start justify-center gap-2.5 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold lg:hidden lg:justify-start"
               >
                 <ShackIcon />
-                <span className="underline underline-offset-2">{activeLocation.shortName} Location</span>
+                <span className="min-w-0 break-words underline underline-offset-2">
+                  {activeLocation.shortName} Location
+                </span>
                 <TopBarChevron />
               </button>
               <span className="text-white/80" aria-hidden>
@@ -165,77 +202,35 @@ export default function Header() {
               </span>
               <a
                 href={activeLocation.phoneHref}
-                className="inline-flex items-center gap-2.5 text-white hover:underline"
+                className="inline-flex shrink-0 items-center gap-2.5 text-white hover:underline"
               >
                 <PhoneIcon />
                 {shackTopBarPhone(activeLocation)}
               </a>
             </div>
-            <AppPromo />
-          </div>
-        </div>
+          }
+        />
       ) : (
-        <>
-          {/* Desktop: location + phone on the left, app promo on the right */}
-          <div className="hidden w-full items-center justify-center overflow-hidden bg-[#1A1A1A] px-5 py-3.5 lg:flex lg:px-[30px]">
-            <div className="flex w-full max-w-[1320px] items-center justify-between gap-5">
-              <div className="flex min-w-0 items-center gap-x-2.5 text-[13px] leading-4 text-white">
-                {barShack ? (
-                  <Link
-                    href={`/locations/${barShack.slug}/`}
-                    className="inline-flex items-center gap-2.5 text-white hover:underline"
-                  >
-                    <ShackIcon />
-                    {barLabel}
-                  </Link>
-                ) : (
-                  <Link
-                    href={UNSET_SHACK_HREF}
-                    className="inline-flex items-center gap-2.5 text-white hover:underline"
-                  >
-                    <ShackIcon />
-                    {barLabel}
-                  </Link>
-                )}
-                <span className="text-white/80" aria-hidden>
-                  |
-                </span>
-                <a
-                  href={barPhoneHref}
-                  className="inline-flex items-center gap-2.5 text-white hover:underline"
-                >
-                  <PhoneIcon />
-                  {barPhone}
-                </a>
-              </div>
-              <AppPromo />
-            </div>
-          </div>
-
-          {/* Mobile: stacked location row, then the NEW! app row */}
-          <div className="flex w-full flex-col items-stretch gap-2.5 overflow-hidden bg-[#1A1A1A] px-4 py-3 lg:hidden">
-            <div className="flex flex-wrap items-center justify-center gap-x-2.5 text-[13px] leading-4 text-white">
-              <Link
+        <BlackAlertBar
+          locationRow={
+            <div className={locationPhoneRowClass}>
+              <TopBarLocationLink
                 href={barShack ? `/locations/${barShack.slug}/` : UNSET_SHACK_HREF}
-                className="inline-flex items-center gap-2.5 text-white hover:underline"
-              >
-                <ShackIcon />
-                {barLabel}
-              </Link>
+                label={barLabel}
+              />
               <span className="text-white/80" aria-hidden>
                 |
               </span>
               <a
                 href={barPhoneHref}
-                className="inline-flex items-center gap-2.5 text-white hover:underline"
+                className="inline-flex shrink-0 items-center gap-2.5 text-white hover:underline"
               >
                 <PhoneIcon />
                 {barPhone}
               </a>
             </div>
-            <AppPromo />
-          </div>
-        </>
+          }
+        />
       )}
 
       {/* Desktop header — lg+ */}
