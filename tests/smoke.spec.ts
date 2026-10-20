@@ -168,22 +168,24 @@ test("shack switcher first-visit sheet shows on a fresh mobile visit", async ({ 
   await expect(page.getByRole("button", { name: /^Change$/i })).toBeVisible();
 });
 
-test("mobile top bar name opens the shack picker", async ({ page, isMobile }) => {
+test("mobile top bar name links to the location", async ({ page, isMobile }) => {
   test.skip(!isMobile, "Mobile shack switcher only");
   await page.goto("/menu/");
   await page.getByRole("button", { name: /Dismiss/i }).click();
 
-  await page.getByRole("button", { name: /The Original Location — change shack/i }).click();
-  const picker = page.getByRole("dialog", { name: /Nearby Shane|Shane's locations/i });
-  await expect(picker).toBeVisible();
-  await page.getByRole("button", { name: /Close location picker/i }).click();
+  const original = page.getByRole("link", { name: "The Original Location" });
+  await expect(original).toBeVisible();
+  await expect(original).toHaveAttribute("href", /\/locations\/?$/);
 
   await page.goto("/?replay=1");
   await page.getByRole("button", { name: /^Change$/i }).click();
   await expect(page.getByRole("dialog", { name: /Nearby Shane|Shane's locations/i })).toBeVisible();
   await page.getByRole("button", { name: /^Order here$/i }).first().click();
   await expect(page).toHaveURL(/\/order\/?$/);
-  await expect(page.getByRole("button", { name: /Edgewood Location — change shack/i })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Edgewood Location" })).toHaveAttribute(
+    "href",
+    /\/locations\/edgewood-atlanta-ga\/?$/,
+  );
 });
 
 test("shack switcher picker search filters rows", async ({ page, isMobile }) => {

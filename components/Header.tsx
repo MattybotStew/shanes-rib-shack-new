@@ -84,15 +84,13 @@ function TopBarChevron({ className = "" }: { className?: string } = {}) {
   );
 }
 
-function AppPromo({ centered = false }: { centered?: boolean }) {
+function AppPromo() {
   return (
-    <div
-      className={`flex flex-wrap items-center gap-2.5 text-[13px] leading-4 text-white ${centered ? "justify-center text-center" : ""}`}
-    >
-      <span className="rounded-xl bg-brand-red px-2.5 py-0.5 text-[12px] font-bold uppercase text-white">
+    <div className="flex w-full flex-nowrap items-center justify-start gap-2.5 text-left text-[13px] leading-4 text-white">
+      <span className="shrink-0 rounded-xl bg-brand-red px-2.5 py-0.5 text-[12px] font-bold uppercase text-white">
         New!
       </span>
-      <p className={centered ? "text-center" : ""}>
+      <p className="whitespace-nowrap text-left">
         Shaniacs, we have a new app! Download today in your App Store{" "}
         <Link href="/rewards" className="font-bold text-brand-red hover:underline">
           Learn More
@@ -173,21 +171,7 @@ export default function Header() {
                 {shackTopBarPhone(activeLocation)}
               </a>
             </div>
-            <div className="flex flex-wrap items-center justify-center gap-2.5 text-[13px] leading-4 text-white">
-              <span className="rounded-xl bg-brand-red px-2.5 py-0.5 text-[12px] font-bold uppercase text-white">
-                New!
-              </span>
-              <p className="text-center sm:text-left">
-                Shaniacs, we have a new app! Download today in your App Store{" "}
-                <Link
-                  href="/rewards"
-                  className="ml-2.5 font-bold text-brand-red hover:underline"
-                >
-                  Learn More
-                  <span aria-hidden>→</span>
-                </Link>
-              </p>
-            </div>
+            <AppPromo />
           </div>
         </div>
       ) : (
@@ -229,18 +213,15 @@ export default function Header() {
           </div>
 
           {/* Mobile: stacked location row, then the NEW! app row */}
-          <div className="flex w-full flex-col items-center gap-2.5 overflow-hidden bg-[#1A1A1A] px-4 py-3 lg:hidden">
+          <div className="flex w-full flex-col items-stretch gap-2.5 overflow-hidden bg-[#1A1A1A] px-4 py-3 lg:hidden">
             <div className="flex flex-wrap items-center justify-center gap-x-2.5 text-[13px] leading-4 text-white">
-              <button
-                type="button"
-                aria-label={`${barLabel} — change shack`}
-                onClick={() => dispatchOpenShackPicker("topbar")}
-                className="inline-flex items-center gap-2.5 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
+              <Link
+                href={barShack ? `/locations/${barShack.slug}/` : UNSET_SHACK_HREF}
+                className="inline-flex items-center gap-2.5 text-white hover:underline"
               >
                 <ShackIcon />
-                <span className="underline underline-offset-2">{barLabel}</span>
-                <TopBarChevron />
-              </button>
+                {barLabel}
+              </Link>
               <span className="text-white/80" aria-hidden>
                 |
               </span>
@@ -252,7 +233,7 @@ export default function Header() {
                 {barPhone}
               </a>
             </div>
-            <AppPromo centered />
+            <AppPromo />
           </div>
         </>
       )}
