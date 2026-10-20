@@ -45,14 +45,19 @@
     background:#fff; box-shadow:0 14px 34px rgba(0,0,0,.16); }
   .scr { height:640px; background:var(--tan); display:flex; flex-direction:column; position:relative; overflow:hidden; }
 
-  /* live black top bar */
-  .tbar { background:var(--black); color:#fff; padding:10px 12px; display:flex; align-items:center; gap:6px; font-size:12.5px; font-weight:700; }
+  /* live black top bar — location row + NEW! app row */
+  .tbar-wrap { background:var(--black); color:#fff; padding:12px 14px; display:flex; flex-direction:column; gap:10px; }
+  .tbar-row { display:flex; flex-wrap:wrap; align-items:center; justify-content:center; gap:8px; font-size:13px; line-height:16px; font-weight:700; }
+  .tbar-row a { color:#fff; text-decoration:none; display:inline-flex; align-items:center; gap:8px; }
+  .tbar-row a:hover { text-decoration:underline; }
+  .tbar-row .sep { color:rgba(255,255,255,.8); font-weight:400; }
+  .shack-icon { width:14px; height:11px; flex:0 0 auto; }
+  .phone-icon { width:11px; height:11px; flex:0 0 auto; }
+  .tbar-promo { display:flex; flex-wrap:nowrap; align-items:center; justify-content:flex-start; gap:10px; font-size:13px; line-height:16px; text-align:left; }
+  .tbar-promo .new-pill { flex:0 0 auto; background:var(--red); color:#fff; font-size:12px; font-weight:800; text-transform:uppercase; padding:2px 10px; border-radius:12px; }
+  .tbar-promo p { margin:0; white-space:nowrap; font-size:13px; }
+  .tbar-promo a { color:var(--red); font-weight:700; text-decoration:none; }
   .pin { width:14px; height:14px; fill:#fff; flex:0 0 auto; }
-  .tbar .loc { display:flex; align-items:center; gap:5px; min-width:0; text-align:left; }
-  .tbar .loc span { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-  .tbar .ul { text-decoration:underline; text-underline-offset:2px; text-decoration-thickness:1.5px; }
-  .tbar .chev { width:12px; height:12px; fill:none; stroke:#fff; stroke-width:2.6; opacity:.85; flex:0 0 auto; }
-  .tbar .phone-num { margin-left:auto; color:var(--gold); font-weight:700; font-size:11px; flex:0 0 auto; }
 
   /* real mobile header row (Figma mobile bar) */
   .whead { background:#fff; height:70px; padding:0 12px; display:flex; align-items:center; justify-content:space-between; border-bottom:1px solid #eee9dd; }
@@ -141,9 +146,11 @@
 
   <p class="eyebrow">Website review &middot; Find a Shane&rsquo;s &middot; Chosen design</p>
   <h1>Mobile location switcher</h1>
-  <p class="lede">You picked <b>Option&nbsp;3 &mdash; the first-visit suggestion</b>, plus <b>Option&nbsp;1 for everyday
-  switching</b>: after the first visit, tap the <b>underlined shack name</b> in the black bar to open the same nearby
-  picker. Button labels: <b>Order here</b> and <b>Change</b>. The phone below is <b>clickable</b>.</p>
+  <p class="lede">You picked <b>Option&nbsp;3 &mdash; the first-visit suggestion</b> on mobile, with the <b>live-style black
+  bar</b> (location + phone, then the <b>NEW!</b> app line). Before a shack is saved the name is
+  <b>The Original Location</b> and links to the locations finder. Button labels on the sheet:
+  <b>Order here</b> and <b>Change</b>. Desktop still uses <b>Find your shack</b> for the same picker. The phone mock
+  below is <b>clickable</b>.</p>
 
   <hr class="rule">
 
@@ -157,12 +164,22 @@
         <div class="scr">
 
           <!-- live black top bar -->
-          <div class="tbar">
-            <svg class="pin"><use href="#pin"/></svg>
-            <button type="button" class="loc" style="background:0;border:0;color:inherit;font:inherit;cursor:pointer;padding:0" onclick="openPickerFromTopbar()" aria-label="Change your shack">
-              <span class="ul" id="topbar-loc">Edgewood Location</span>
-              <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg></button>
-            <span class="phone-num">(404) 555-0142</span>
+          <div class="tbar-wrap">
+            <div class="tbar-row">
+              <a href="#" id="topbar-loc-link" onclick="viewBarLocation(event)" aria-label="Location">
+                <svg class="shack-icon" viewBox="0 0 20 16" aria-hidden="true"><path fill="#D7334F" d="M18.82 3.72C19.85 5.41 18.91 7.72 16.98 7.97 16.54 8 11.91 8 11.91 8 11.01 8 10.16 7.59 9.6 6.97 9.04 7.59 8.23 8 7.32 8 2.69 8 2.54 8 2.26 7.97.32 7.72-.62 5.41.44 3.72L2.44.47C2.63.19 2.98 0 3.32 0h12.63c.34 0 .68.19.87.47L18.82 3.72ZM16.54 9c.19 0 .38 0 .56-.03.19-.03.38-.09.56-.13V15c0 .56-.47 1-1 1H2.63c-.56 0-1-.44-1-1V8.88c.16.03.31.06.47.09.19.03.38.06.56.06.31 0 .63-.03.94-.09V12h12V8.91c.28.06.56.09.94.09Z"/></svg>
+                <span id="topbar-loc">The Original Location</span>
+              </a>
+              <span class="sep" aria-hidden="true">|</span>
+              <a href="#" id="topbar-phone-link" onclick="callBarPhone(event)">
+                <svg class="phone-icon" viewBox="0 0 11 11" aria-hidden="true"><path fill="#D7334F" d="M10.59.53C10.83.6 11 .79 11 1.03 11 6.55 6.54 11 1.04 11 .78 11 .59 10.85.52 10.61L.01 8.38c-.03-.24.07-.5.31-.61l2.4-1.03c.21-.09.45-.03.6.14l1.07 1.31c1.67-.8 3.03-2.17 3.8-3.8L6.88 3.33c-.17-.15-.24-.4-.15-.61L7.76.32c.11-.24.36-.36.6-.3L10.59.53Z"/></svg>
+                <span id="topbar-phone">+17708987878</span>
+              </a>
+            </div>
+            <div class="tbar-promo">
+              <span class="new-pill">New!</span>
+              <p>Shaniacs, we have a new app! Download today in your App Store <a href="#">Learn More&rarr;</a></p>
+            </div>
           </div>
 
           <!-- real mobile header row -->
@@ -260,9 +277,9 @@
             one-time dismissal &mdash; the card won&rsquo;t come back. It only appears on a first visit, and
             never again once a shack is confirmed, picked, or dismissed.</li>
         </ul>
-        <p class="cap"><b>Where it appears</b> &mdash; a small card at the bottom on the first phone visit. After that,
-        the black bar shows your shack; <b>tap the underlined name</b> any time to open the nearby picker (2 taps, no
-        typing).</p>
+        <p class="cap"><b>Where it appears</b> &mdash; a bottom sheet on the first phone visit only. After that the black
+        bar shows your shack name (a <b>link</b> to that location page) plus the <b>NEW!</b> line. To change shack on
+        mobile without the sheet: <b>Menu &rarr; Locations &rarr; View Details</b> (same as today&rsquo;s live site).</p>
         <button class="btn-replay" type="button" onclick="reset()">Replay first visit</button>
       </div>
 
@@ -280,7 +297,7 @@
         <tr class="now"><td>Today: Menu &rarr; Locations &rarr; search &rarr; shack &rarr; View Details</td><td class="n">3&ndash;4</td><td>Yes</td></tr>
         <tr><td>Confirm the suggested shack &mdash; <b>Order here</b></td><td class="n">1</td><td>No</td></tr>
         <tr><td>Pick a different shack &mdash; <b>Change</b></td><td class="n">2</td><td>No</td></tr>
-        <tr><td>Everyday switch &mdash; tap address, then pick</td><td class="n">2</td><td>No</td></tr>
+        <tr><td>Everyday switch &mdash; Menu &rarr; Locations &rarr; pick shack</td><td class="n">3</td><td>Optional</td></tr>
       </tbody>
     </table>
   </div>
@@ -300,8 +317,8 @@
     </ul>
   </div>
 
-  <p class="foot">Clickable design mockup for review &mdash; not the live site. Checked against the real mobile
-  header and top bar at 390&nbsp;px, 19&nbsp;October&nbsp;2026.</p>
+  <p class="foot">Clickable design mockup for review &mdash; not the live site. Aligned with the prototype header at
+  390&nbsp;px, 20&nbsp;October&nbsp;2026.</p>
 
 </div>
 
@@ -312,19 +329,32 @@
   var screenHome = document.getElementById('screen-home');
   var screenLp = document.getElementById('screen-lp');
   var toast = document.getElementById('toast');
+  var dismissed = false;
+  var pickerFromFirstVisit = false;
+
+  var SHACK_PHONES = {
+    'Edgewood Location': '+14045257427',
+    'Norcross Location': '+17704166606',
+    'Carrollton Location': '+17708301234',
+    'Douglasville Location': '+17709491234'
+  };
+
+  function setBarShack(name) {
+    var isUnset = name === 'The Original Location';
+    document.getElementById('topbar-loc').textContent = name;
+    document.getElementById('topbar-phone').textContent = isUnset ? '+17708987878' : (SHACK_PHONES[name] || '+17708987878');
+  }
 
   function orderHere() {
+    dismissed = true;
+    pickerFromFirstVisit = false;
     scrim.classList.add('hidden');
     sheetSuggest.classList.add('hidden');
-    document.getElementById('topbar-loc').textContent = 'Edgewood Location';
+    setBarShack('Edgewood Location');
+    showToast('Edgewood is now your shack.');
   }
   function openPicker() {
-    sheetSuggest.classList.add('hidden');
-    sheetPicker.classList.remove('hidden');
-    scrim.classList.remove('hidden');
-    resetSearch();
-  }
-  function openPickerFromTopbar() {
+    pickerFromFirstVisit = true;
     sheetSuggest.classList.add('hidden');
     sheetPicker.classList.remove('hidden');
     scrim.classList.remove('hidden');
@@ -332,35 +362,69 @@
   }
   function closePicker() {
     sheetPicker.classList.add('hidden');
-    if (sheetSuggest.classList.contains('hidden')) {
-      scrim.classList.add('hidden');
+    scrim.classList.add('hidden');
+    if (pickerFromFirstVisit) {
+      dismissed = true;
+      pickerFromFirstVisit = false;
+      showToast('Suggestion dismissed — it won\u2019t show again this visit.');
     }
   }
   function useShack(name) {
-    document.getElementById('topbar-loc').textContent = name;
+    dismissed = true;
+    pickerFromFirstVisit = false;
+    setBarShack(name);
     document.getElementById('lp-title').textContent = name;
     setBadge(name);
-    closePicker();
-    document.getElementById('toast-text').innerHTML = name + ' is now your shack.';
-    toast.classList.remove('hidden');
-    setTimeout(function(){ toast.classList.add('hidden'); }, 3000);
+    closePickerWithoutDismiss();
+    showToast(name + ' is now your shack.');
+  }
+  function closePickerWithoutDismiss() {
+    sheetPicker.classList.add('hidden');
+    scrim.classList.add('hidden');
   }
   function dismissSuggest() {
+    dismissed = true;
     scrim.classList.add('hidden');
     sheetSuggest.classList.add('hidden');
   }
+  function viewBarLocation(e) {
+    e.preventDefault();
+    var label = document.getElementById('topbar-loc').textContent;
+    if (label === 'The Original Location') {
+      showToast('Opens /locations/ (finder).');
+      return;
+    }
+    screenHome.classList.add('hidden');
+    screenLp.classList.remove('hidden');
+    document.getElementById('lp-title').textContent = label;
+  }
+  function callBarPhone(e) {
+    e.preventDefault();
+    showToast('Calls ' + document.getElementById('topbar-phone').textContent);
+  }
+  function showToast(msg) {
+    document.getElementById('toast-text').textContent = msg;
+    toast.classList.remove('hidden');
+    setTimeout(function(){ toast.classList.add('hidden'); }, 2800);
+  }
   function reset() {
+    dismissed = false;
+    pickerFromFirstVisit = false;
     scrim.classList.remove('hidden');
     sheetSuggest.classList.remove('hidden');
     sheetPicker.classList.add('hidden');
     toast.classList.add('hidden');
     screenLp.classList.add('hidden');
     screenHome.classList.remove('hidden');
-    document.getElementById('topbar-loc').textContent = 'Edgewood Location';
+    setBarShack('The Original Location');
     document.getElementById('lp-title').textContent = 'Edgewood Location';
     setBadge('Edgewood Location');
     resetSearch();
   }
+  scrim.addEventListener('click', function() {
+    if (!sheetPicker.classList.contains('hidden')) closePicker();
+    else if (!sheetSuggest.classList.contains('hidden')) dismissSuggest();
+  });
   function filterPicker(q) {
     q = (q || '').trim().toLowerCase();
     var cards = sheetPicker.querySelectorAll('.pcard');
