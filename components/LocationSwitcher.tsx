@@ -84,6 +84,8 @@ export default function LocationSwitcher() {
   const [geoResolved, setGeoResolved] = useState(false);
   const [pickerSession, setPickerSession] = useState(0);
   const [chosenSlug, setChosenSlug] = useState<string | null>(null);
+  const [suggested, setSuggested] = useState<Shack>(SUGGESTED);
+  const [claimNear, setClaimNear] = useState(false);
 
   function openPicker(entry: PickerEntry, source?: string) {
     setPickerEntry(entry);
@@ -115,6 +117,8 @@ export default function LocationSwitcher() {
         return;
       }
 
+      setSuggested(SUGGESTED);
+      setClaimNear(false);
       setPhase("suggest");
       track("shack_switcher_shown", { suggested: SUGGESTED.name });
     });
@@ -139,6 +143,44 @@ export default function LocationSwitcher() {
     window.addEventListener(SHACK_CHOSEN, onChosen);
     return () => window.removeEventListener(SHACK_CHOSEN, onChosen);
   }, []);
+
+  useEffect(() => {
+    if (phase !== "suggest") return;
+
+    let cancelled = false;
+
+    if (!navigator.geolocation) return;
+
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        if (cancelled) return;
+        const origin = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+        let best = SUGGESTED;
+        let bestMiles = Infinity;
+        for (const shack of NEARBY_SHACKS) {
+          const coords = SWITCHER_SHACK_COORDS[shack.slug as (typeof SWITCHER_NEARBY_SLUGS)[number]];
+          if (!coords) continue;
+          const miles = haversineMiles(origin, coords);
+          if (miles < bestMiles) {
+            bestMiles = miles;
+            best = shack;
+          }
+        }
+        setSuggested(best);
+        setClaimNear(true);
+      },
+      () => {
+        if (cancelled) return;
+        setSuggested(SUGGESTED);
+        setClaimNear(false);
+      },
+      { timeout: 8000, maximumAge: 600_000 },
+    );
+
+    return () => {
+      cancelled = true;
+    };
+  }, [phase]);
 
   useEffect(() => {
     if (phase !== "picker") return;
@@ -217,10 +259,10 @@ export default function LocationSwitcher() {
   }
 
   function orderHereSuggested() {
-    window.localStorage.setItem(STORAGE_CHOSEN, SUGGESTED.slug);
-    dispatchShackChosen(SUGGESTED.slug);
-    setChosenSlug(SUGGESTED.slug);
-    track("location_selected", { shack: SUGGESTED.name, source: "switcher", method: "order_here" });
+    window.localStorage.setItem(STORAGE_CHOSEN, suggested.slug);
+    dispatchShackChosen(suggested.slug);
+    setChosenSlug(suggested.slug);
+    track("location_selected", { shack: suggested.name, source: "switcher", method: "order_here" });
     setPhase("hidden");
     router.push("/order/");
   }
@@ -260,7 +302,7 @@ export default function LocationSwitcher() {
       {phase === "suggest" && (
         <div
           role="dialog"
-          aria-label="Your nearby Shane's"
+          aria-label={claimNear ? "Your nearby Shane's" : "Choose your Shane's"}
           className="fixed inset-x-0 bottom-0 z-[60] mx-auto w-full max-w-[520px] max-h-[85vh] rounded-t-[16px] bg-white px-5 pb-[max(1.5rem,env(safe-area-inset-bottom))] pt-4 shadow-[0_-8px_22px_rgba(16,24,32,0.22)]"
         >
           <button
@@ -273,9 +315,11 @@ export default function LocationSwitcher() {
           </button>
           <div className="mx-auto mb-3 h-1 w-9 rounded-full bg-black/15" aria-hidden="true" />
           <p className="pr-10 text-lg font-extrabold leading-snug text-brand-black">
-            We think you&rsquo;re near {SUGGESTED.name}
+            {claimNear ? `We think you\u2019re near ${suggested.name}` : "Shane\u2019s locations"}
           </p>
-          <p className="mt-1 text-sm text-[#5a6067]">Closest shack to your phone.</p>
+          <p className="mt-1 text-sm text-[#5a6067]">
+            {claimNear ? "Closest shack to your phone." : "Select a location \u2014 we\u2019ll remember it."}
+          </p>
           <div className="mt-4 flex gap-3">
             <button
               type="button"

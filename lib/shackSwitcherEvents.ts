@@ -1,4 +1,14 @@
-import { EDGEWOOD, LOCATIONS_BY_SLUG, type LocationDetail } from "@/lib/locationData";
+import { LOCATIONS_BY_SLUG, type LocationDetail } from "@/lib/locationData";
+
+/** Live homepage top bar before a shack is stored. */
+export const UNSET_SHACK_LABEL = "The Original Location";
+/**
+ * Live unset label links to `/locations/the-original/`.
+ * This prototype has no that detail route, so the finder is the closest page.
+ */
+export const UNSET_SHACK_HREF = "/locations/";
+export const UNSET_SHACK_PHONE = "+17708987878";
+export const UNSET_SHACK_PHONE_HREF = "tel:+17708987878";
 
 export const SHACK_PICKER_OPEN = "shack-picker-open";
 export const SHACK_CHOSEN = "shack-chosen";
@@ -51,9 +61,9 @@ export function chosenSlugFromStorage(): string | null {
   return slug && LOCATIONS_BY_SLUG[slug] ? slug : null;
 }
 
-export function selectedShackFromStorage(): LocationDetail {
+export function selectedShackFromStorage(): LocationDetail | null {
   const slug = chosenSlugFromStorage();
-  return slug ? LOCATIONS_BY_SLUG[slug] : EDGEWOOD;
+  return slug ? LOCATIONS_BY_SLUG[slug] : null;
 }
 
 export function shackTopBarLabel(loc: LocationDetail): string {

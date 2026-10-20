@@ -163,24 +163,27 @@ test("404 page renders branded fallback", async ({ page }) => {
 test("shack switcher first-visit sheet shows on a fresh mobile visit", async ({ page, isMobile }) => {
   test.skip(!isMobile, "Mobile shack switcher only");
   await page.goto("/?replay=1");
-  await expect(page.getByRole("dialog", { name: /Your nearby Shane/i })).toBeVisible();
+  await expect(page.getByRole("dialog", { name: /Your nearby Shane|Choose your Shane/i })).toBeVisible();
   await expect(page.getByRole("button", { name: /^Order here$/i })).toBeVisible();
   await expect(page.getByRole("button", { name: /^Change$/i })).toBeVisible();
 });
 
-test("shack switcher top bar opens picker from a non-home page", async ({ page, isMobile }) => {
+test("mobile top bar name opens the shack picker", async ({ page, isMobile }) => {
   test.skip(!isMobile, "Mobile shack switcher only");
   await page.goto("/menu/");
-  // First visit: dismiss the suggestion card to reveal the top bar.
   await page.getByRole("button", { name: /Dismiss/i }).click();
-  await page.getByRole("button", { name: /Edgewood Location — change shack/i }).click();
 
+  await page.getByRole("button", { name: /The Original Location — change shack/i }).click();
   const picker = page.getByRole("dialog", { name: /Nearby Shane|Shane's locations/i });
   await expect(picker).toBeVisible();
-  await expect(picker.getByText(/Select a location/i)).toBeVisible();
-  await expect(picker.getByPlaceholder(/Search by city or ZIP/i)).toBeVisible();
-  await picker.getByRole("button", { name: /^Order here$/i }).first().click();
+  await page.getByRole("button", { name: /Close location picker/i }).click();
+
+  await page.goto("/?replay=1");
+  await page.getByRole("button", { name: /^Change$/i }).click();
+  await expect(page.getByRole("dialog", { name: /Nearby Shane|Shane's locations/i })).toBeVisible();
+  await page.getByRole("button", { name: /^Order here$/i }).first().click();
   await expect(page).toHaveURL(/\/order\/?$/);
+  await expect(page.getByRole("button", { name: /Edgewood Location — change shack/i })).toBeVisible();
 });
 
 test("shack switcher picker search filters rows", async ({ page, isMobile }) => {
@@ -209,6 +212,6 @@ test("switcher picker close counts as one-time dismissal", async ({ page, isMobi
 test("shack switcher stays off desktop auto-suggest", async ({ page, isMobile }) => {
   test.skip(isMobile, "Desktop check");
   await page.goto("/");
-  await expect(page.getByRole("dialog", { name: /Your nearby Shane/i })).toHaveCount(0);
+  await expect(page.getByRole("dialog", { name: /Your nearby Shane|Choose your Shane/i })).toHaveCount(0);
   await expect(page.getByRole("button", { name: /Location — change shack/i })).toHaveCount(0);
 });

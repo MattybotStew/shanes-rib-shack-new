@@ -4,13 +4,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { asset } from "@/lib/asset";
-import { EDGEWOOD, locationFromPathname, type LocationDetail } from "@/lib/locationData";
+import { locationFromPathname, type LocationDetail } from "@/lib/locationData";
 import {
   dispatchOpenShackPicker,
   selectedShackFromStorage,
   SHACK_CHOSEN,
   shackTopBarLabel,
   shackTopBarPhone,
+  UNSET_SHACK_HREF,
+  UNSET_SHACK_LABEL,
+  UNSET_SHACK_PHONE,
+  UNSET_SHACK_PHONE_HREF,
 } from "@/lib/shackSwitcherEvents";
 
 const navItems = [
@@ -66,11 +70,11 @@ function PhoneIcon() {
   );
 }
 
-function TopBarChevron() {
+function TopBarChevron({ className = "" }: { className?: string } = {}) {
   return (
     <svg
       viewBox="0 0 24 24"
-      className="h-3 w-3 shrink-0 stroke-white opacity-85"
+      className={`h-3 w-3 shrink-0 stroke-white opacity-85 ${className}`.trim()}
       fill="none"
       strokeWidth={2.6}
       aria-hidden
@@ -80,12 +84,22 @@ function TopBarChevron() {
   );
 }
 
-/** Live-style top bar pin (mock `.tbar` uses white, not the red ShackIcon). */
-function TopBarPinIcon() {
+function AppPromo({ centered = false }: { centered?: boolean }) {
   return (
-    <svg viewBox="0 0 24 24" className="h-3.5 w-3.5 shrink-0 fill-white" aria-hidden>
-      <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z" />
-    </svg>
+    <div
+      className={`flex flex-wrap items-center gap-2.5 text-[13px] leading-4 text-white ${centered ? "justify-center text-center" : ""}`}
+    >
+      <span className="rounded-xl bg-brand-red px-2.5 py-0.5 text-[12px] font-bold uppercase text-white">
+        New!
+      </span>
+      <p className={centered ? "text-center" : ""}>
+        Shaniacs, we have a new app! Download today in your App Store{" "}
+        <Link href="/rewards" className="font-bold text-brand-red hover:underline">
+          Learn More
+          <span aria-hidden>→</span>
+        </Link>
+      </p>
+    </div>
   );
 }
 
@@ -119,7 +133,10 @@ export default function Header() {
     setMobileOpen(false);
   }
 
-  const barShack = topBarShack ?? EDGEWOOD;
+  const barShack = topBarShack;
+  const barLabel = barShack ? shackTopBarLabel(barShack) : UNSET_SHACK_LABEL;
+  const barPhone = barShack ? barShack.phoneAlert : UNSET_SHACK_PHONE;
+  const barPhoneHref = barShack ? barShack.phoneHref : UNSET_SHACK_PHONE_HREF;
 
   return (
     <header className="flex w-full flex-col items-center">
@@ -128,6 +145,13 @@ export default function Header() {
         <div className="flex w-full items-center justify-center overflow-hidden bg-[#1A1A1A] px-5 py-3.5 lg:px-[30px]">
           <div className="flex w-full max-w-[1320px] flex-col items-center justify-between gap-3 sm:flex-row sm:gap-5">
             <div className="flex flex-wrap items-center justify-center gap-x-2.5 text-[13px] leading-4 text-white sm:justify-start">
+              <Link
+                href={`/locations/${activeLocation.slug}/`}
+                className="hidden items-center gap-2.5 text-white hover:underline lg:inline-flex"
+              >
+                <ShackIcon />
+                {activeLocation.shortName} Location
+              </Link>
               <button
                 type="button"
                 aria-label={`${activeLocation.shortName} Location — change shack`}
@@ -138,13 +162,6 @@ export default function Header() {
                 <span className="underline underline-offset-2">{activeLocation.shortName} Location</span>
                 <TopBarChevron />
               </button>
-              <Link
-                href={`/locations/${activeLocation.slug}/`}
-                className="hidden items-center gap-2.5 text-white hover:underline lg:inline-flex"
-              >
-                <ShackIcon />
-                {activeLocation.shortName} Location
-              </Link>
               <span className="text-white/80" aria-hidden>
                 |
               </span>
@@ -175,70 +192,67 @@ export default function Header() {
         </div>
       ) : (
         <>
-          {/* Desktop default alert — same chrome as location pages, chosen shack */}
+          {/* Desktop: location + phone on the left, app promo on the right */}
           <div className="hidden w-full items-center justify-center overflow-hidden bg-[#1A1A1A] px-5 py-3.5 lg:flex lg:px-[30px]">
             <div className="flex w-full max-w-[1320px] items-center justify-between gap-5">
               <div className="flex min-w-0 items-center gap-x-2.5 text-[13px] leading-4 text-white">
-                <button
-                  type="button"
-                  aria-label={`${shackTopBarLabel(barShack)} — change shack`}
-                  onClick={() => dispatchOpenShackPicker("topbar")}
-                  className="inline-flex items-center gap-2.5 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
-                >
-                  <ShackIcon />
-                  {shackTopBarLabel(barShack)}
-                </button>
+                {barShack ? (
+                  <Link
+                    href={`/locations/${barShack.slug}/`}
+                    className="inline-flex items-center gap-2.5 text-white hover:underline"
+                  >
+                    <ShackIcon />
+                    {barLabel}
+                  </Link>
+                ) : (
+                  <Link
+                    href={UNSET_SHACK_HREF}
+                    className="inline-flex items-center gap-2.5 text-white hover:underline"
+                  >
+                    <ShackIcon />
+                    {barLabel}
+                  </Link>
+                )}
                 <span className="text-white/80" aria-hidden>
                   |
                 </span>
                 <a
-                  href={barShack.phoneHref}
+                  href={barPhoneHref}
                   className="inline-flex items-center gap-2.5 text-white hover:underline"
                 >
                   <PhoneIcon />
-                  {shackTopBarPhone(barShack)}
+                  {barPhone}
                 </a>
               </div>
-              <div className="flex shrink-0 items-center gap-2.5 text-[13px] leading-4 text-white">
-                <span className="rounded-xl bg-brand-red px-2.5 py-0.5 text-[12px] font-bold uppercase text-white">
-                  New!
-                </span>
-                <p>
-                  Shaniacs, we have a new app! Download today in your App Store{" "}
-                  <Link
-                    href="/rewards"
-                    className="ml-2.5 font-bold text-brand-red hover:underline"
-                  >
-                    Learn More
-                    <span aria-hidden>→</span>
-                  </Link>
-                </p>
-              </div>
+              <AppPromo />
             </div>
           </div>
 
-          {/* Mobile live-style top bar (Option 1) — tap the shack name to switch */}
-          <div className="flex w-full items-center justify-center overflow-hidden bg-brand-black px-3 py-2.5 lg:hidden">
-            <div className="flex w-full max-w-[1320px] items-center gap-1.5 text-[12.5px] font-bold leading-4 text-white">
-              <TopBarPinIcon />
+          {/* Mobile: stacked location row, then the NEW! app row */}
+          <div className="flex w-full flex-col items-center gap-2.5 overflow-hidden bg-[#1A1A1A] px-4 py-3 lg:hidden">
+            <div className="flex flex-wrap items-center justify-center gap-x-2.5 text-[13px] leading-4 text-white">
               <button
                 type="button"
-                aria-label={`${shackTopBarLabel(barShack)} — change shack`}
+                aria-label={`${barLabel} — change shack`}
                 onClick={() => dispatchOpenShackPicker("topbar")}
-                className="inline-flex min-w-0 max-w-[55%] items-center gap-1 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
+                className="inline-flex items-center gap-2.5 text-white hover:text-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-gold"
               >
-                <span className="truncate underline underline-offset-2 decoration-[1.5px]">
-                  {shackTopBarLabel(barShack)}
-                </span>
+                <ShackIcon />
+                <span className="underline underline-offset-2">{barLabel}</span>
                 <TopBarChevron />
               </button>
+              <span className="text-white/80" aria-hidden>
+                |
+              </span>
               <a
-                href={barShack.phoneHref}
-                className="ml-auto shrink-0 text-[11px] font-bold text-brand-gold hover:underline"
+                href={barPhoneHref}
+                className="inline-flex items-center gap-2.5 text-white hover:underline"
               >
-                {shackTopBarPhone(barShack)}
+                <PhoneIcon />
+                {barPhone}
               </a>
             </div>
+            <AppPromo centered />
           </div>
         </>
       )}
@@ -259,12 +273,13 @@ export default function Header() {
                 className="block size-full object-contain object-left"
               />
             </Link>
-            <Link
-              href="/locations"
-              className="flex items-center justify-center rounded-[5px] bg-brand-red px-3.5 py-3 text-xs font-bold uppercase leading-none text-white transition-colors hover:bg-[#a01b25]"
+            <button
+              type="button"
+              onClick={() => dispatchOpenShackPicker("topbar")}
+              className="flex items-center justify-center rounded-[5px] bg-brand-red px-3.5 py-3 text-xs font-bold uppercase leading-none text-white transition-colors hover:bg-[#a01b25] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-gold"
             >
               {shackCtaLabel}
-            </Link>
+            </button>
           </div>
 
           <nav className="flex items-center" aria-label="Primary">

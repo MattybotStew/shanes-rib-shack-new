@@ -1,12 +1,16 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import LocationOrderConfirm, {
   type OrderFulfillment,
 } from "@/components/LocationOrderConfirm";
 import { asset } from "@/lib/asset";
 import type { LocationDetail } from "@/lib/locationData";
+import {
+  dispatchShackChosen,
+  STORAGE_CHOSEN,
+} from "@/lib/shackSwitcherEvents";
 
 function BriefcaseIcon() {
   return (
@@ -45,9 +49,15 @@ const ctaBase =
 
 /** Location detail hero — matches live Edgewood card chrome + CTAs. */
 export default function LocationHero({ location }: { location: LocationDetail }) {
-  const [isMyShack, setIsMyShack] = useState(false);
+  const [isMyShack, setIsMyShack] = useState(true);
   const [confirmFulfillment, setConfirmFulfillment] =
     useState<OrderFulfillment | null>(null);
+
+  // Live: View Details / a detail-page visit writes myShanes so the top bar follows.
+  useEffect(() => {
+    window.localStorage.setItem(STORAGE_CHOSEN, location.slug);
+    dispatchShackChosen(location.slug);
+  }, [location.slug]);
 
   return (
     <section className="relative w-full bg-white">
